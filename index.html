@@ -16,16 +16,32 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;font-size:13px;}
+
+/* ROLE + PIN SCREEN */
 #role-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;}
 .klei-logo{width:160px;margin-bottom:8px;}
 .role-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;}
 .role-cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-.role-card{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:24px 28px;cursor:pointer;text-align:center;width:170px;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
+.role-card{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:24px 28px;cursor:pointer;text-align:center;width:170px;user-select:none;-webkit-user-select:none;}
 .role-card.ar{border-color:var(--gd);}
 .role-card.va{border-color:var(--earth);}
 .role-icon{font-size:32px;margin-bottom:10px;}
 .role-name{font-weight:700;font-size:15px;color:var(--c);margin-bottom:4px;}
 .role-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);line-height:1.6;}
+
+/* PIN SCREEN */
+#pin-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;}
+.pin-title{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--earth);letter-spacing:2px;text-transform:uppercase;}
+.pin-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);text-align:center;}
+.pin-dots{display:flex;gap:12px;margin:8px 0;}
+.pin-dot{width:16px;height:16px;border-radius:50%;background:var(--s3);border:2px solid var(--b);transition:all .2s;}
+.pin-dot.filled{background:var(--earth);border-color:var(--earth);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:220px;}
+.pin-btn{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:16px;font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--c);cursor:pointer;text-align:center;user-select:none;-webkit-user-select:none;transition:all .15s;}
+.pin-btn:active{background:var(--earthg);border-color:var(--earth);}
+.pin-del{font-size:16px;color:var(--m);}
+.pin-error{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--r);min-height:18px;text-align:center;}
+
 header{height:46px;background:var(--s1);border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 12px;gap:8px;z-index:100;}
 .h-logo{height:28px;}
 .h-divider{width:1px;height:20px;background:var(--b);margin:0 2px;}
@@ -33,13 +49,13 @@ header{height:46px;background:var(--s1);border-bottom:1px solid var(--b);display
 .role-badge.ar{background:var(--gg);color:var(--gl);border:1px solid var(--gd);}
 .role-badge.va{background:var(--earthg);color:var(--earth);border:1px solid var(--earth);}
 .h-right{margin-left:auto;display:flex;gap:5px;align-items:center;}
-.hbtn{background:none;border:1px solid var(--b);border-radius:var(--rad);padding:6px 10px;color:var(--m);font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.hbtn{background:none;border:1px solid var(--b);border-radius:var(--rad);padding:6px 10px;color:var(--m);font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;white-space:nowrap;}
 .va-only{display:none;}
 .app{display:grid;grid-template-columns:200px 1fr;height:calc(100vh - 46px);}
 aside{background:var(--s1);border-right:1px solid var(--b);display:flex;flex-direction:column;overflow:hidden;}
 .sb-head{padding:10px;border-bottom:1px solid var(--b);}
 .sb-date{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-bottom:6px;}
-.btn-new{width:100%;background:linear-gradient(135deg,var(--gd),var(--g));color:#0e1209;border:none;border-radius:var(--rad);padding:10px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.btn-new{width:100%;background:linear-gradient(135deg,var(--gd),var(--g));color:#0e1209;border:none;border-radius:var(--rad);padding:10px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;}
 .sb-list{overflow-y:auto;flex:1;padding:6px;}
 .ri{padding:8px 10px;border-radius:var(--rad);cursor:pointer;border:1px solid transparent;margin-bottom:2px;}
 .ri.act{background:var(--gg);border-color:var(--gd);}
@@ -53,7 +69,7 @@ aside{background:var(--s1);border-right:1px solid var(--b);display:flex;flex-dir
 .tag-r{background:rgba(196,72,40,.12);color:var(--r);}
 main{display:flex;flex-direction:column;overflow:hidden;}
 .tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--b);padding:0 12px;overflow-x:auto;}
-.tab{padding:12px 14px;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.tab{padding:12px 14px;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .tab.act{color:var(--gl);border-bottom-color:var(--g);}
 .content{flex:1;overflow-y:auto;padding:12px 14px;}
 .panel{display:none;}.panel.act{display:block;}
@@ -77,30 +93,30 @@ select option{background:var(--s2);}
 .sec{margin-bottom:12px;}
 .sh{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--m);padding-bottom:5px;border-bottom:1px solid var(--b);margin-bottom:8px;}
 .wrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-.wc{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 12px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;-webkit-tap-highlight-color:transparent;}
+.wc{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 12px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;}
 .wc.s{background:var(--gg);border-color:var(--gd);color:var(--gl);}
 .tags{display:flex;gap:4px;flex-wrap:wrap;}
-.tg{background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.tg{background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);cursor:pointer;}
 .tg.a{background:var(--gg);border-color:var(--gd);color:var(--gl);}
 .tbl{width:100%;border-collapse:collapse;font-size:11px;}
 .tbl th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--m);padding:5px 6px;border-bottom:1px solid var(--b);text-align:left;}
-.tbl td{padding:3px 3px;border-bottom:1px solid rgba(44,58,28,.4);}
+.tbl td{padding:4px 3px;border-bottom:1px solid rgba(44,58,28,.4);}
 .tbl td input,.tbl td select{background:transparent;border:none;border-bottom:1px solid transparent;border-radius:0;padding:3px 4px;font-size:11px;}
 .tbl td select{background:var(--s2);border-radius:3px;border:1px solid var(--b);}
 .netto{color:var(--gl);font-weight:600;font-family:'IBM Plex Mono',monospace;}
-.delbtn{background:none;border:none;color:var(--m);cursor:pointer;padding:2px 6px;font-size:14px;-webkit-tap-highlight-color:transparent;}
+.delbtn{background:none;border:none;color:var(--m);cursor:pointer;padding:2px 6px;font-size:14px;}
 .tbl-wrap{overflow-x:auto;margin-bottom:6px;}
 .lief-block{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:10px;margin-bottom:6px;}
 .lief-head{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
 .lief-num{width:20px;height:20px;background:var(--earthg);border:1px solid var(--earth);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--earth);flex-shrink:0;}
 .mangel-block{background:var(--rg);border:1px solid rgba(196,72,40,.25);border-radius:var(--rad);padding:10px;margin-bottom:6px;}
-.btn{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 14px;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px;cursor:pointer;color:var(--t);display:inline-flex;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent;}
+.btn{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 14px;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px;cursor:pointer;color:var(--t);display:inline-flex;align-items:center;gap:5px;}
 .btn-p{background:linear-gradient(135deg,var(--gd),var(--g));color:#0e1209;border:none;font-weight:700;}
 .btn-e{background:var(--earthg);border-color:rgba(154,108,26,.4);color:var(--earth);}
 .btn-r{background:var(--rg);border-color:rgba(196,72,40,.3);color:var(--r);}
 .btn-s{background:var(--skyg);border-color:rgba(61,143,168,.3);color:var(--sky);}
 .arow{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--b);margin-top:12px;}
-.fahrt-btn{flex:1;padding:10px 6px;border-radius:var(--rad);background:var(--s3);border:1px solid var(--b);color:var(--m);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px;cursor:pointer;text-align:center;line-height:1.4;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
+.fahrt-btn{flex:1;padding:10px 6px;border-radius:var(--rad);background:var(--s3);border:1px solid var(--b);color:var(--m);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px;cursor:pointer;text-align:center;line-height:1.4;user-select:none;}
 .fahrt-btn.fahrt-active[data-val="fahrer"]{background:rgba(61,143,168,.15);border-color:var(--sky);color:var(--sky);}
 .fahrt-btn.fahrt-active[data-val="beifahrer"]{background:rgba(154,108,26,.18);border-color:var(--earth);color:var(--earth);}
 .fahrt-btn.fahrt-active[data-val="privat"]{background:rgba(114,184,50,.12);border-color:var(--gd);color:var(--gl);}
@@ -129,7 +145,7 @@ select option{background:var(--s2);}
 .lfill{height:100%;background:linear-gradient(90deg,var(--gd),var(--gl),var(--gd));background-size:200% 100%;animation:la 1.5s linear infinite;}
 @keyframes la{0%{background-position:-100% 0}100%{background-position:200% 0}}
 .ai-acts{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
-.ai-ab{background:var(--s2);border:1px solid var(--b);color:var(--m);border-radius:10px;padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.ai-ab{background:var(--s2);border:1px solid var(--b);color:var(--m);border-radius:10px;padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:9px;cursor:pointer;}
 .mo{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
 .mo.open{opacity:1;pointer-events:all;}
 .md{background:var(--s1);border:1px solid var(--b);border-radius:8px;padding:18px;width:min(460px,94vw);max-height:82vh;overflow-y:auto;}
@@ -156,6 +172,8 @@ select option{background:var(--s2);}
 </style>
 </head>
 <body>
+
+<!-- ROLE SCREEN -->
 <div id="role-screen">
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="klei-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="role-sub">Tagesberichte · Zeiterfassung · Baunatal</div>
@@ -165,15 +183,45 @@ select option{background:var(--s2);}
       <div class="role-name">Arbeiter</div>
       <div class="role-desc">Zeiten eintragen<br>Tätigkeitsbericht<br>Auftrag wählen</div>
     </div>
-    <div class="role-card va" ontouchstart="setRole('va')" onclick="setRole('va')">
+    <div class="role-card va" ontouchstart="showPIN()" onclick="showPIN()">
       <div class="role-icon">📋</div>
       <div class="role-name">Vorarbeiter</div>
       <div class="role-desc">Vollständige Doku<br>Mengen · Lieferanten<br>KI-Analyse · PDF-Mail</div>
     </div>
   </div>
 </div>
-<div class="mo" id="mo-df"><div class="md"><button class="md-close" ontouchstart="closeMo('mo-df')" onclick="closeMo('mo-df')">✕</button><div class="md-title">🔗 Dataflor</div><div class="md-sub">Zeiterfassung Export & API</div><div class="row"><div class="fg w50"><label>Server URL</label><input id="df-url" placeholder="https://server/api"></div><div class="fg w50"><label>API-Key</label><input id="df-key" type="password" placeholder="••••••••"></div><div class="fg w50"><label>Mandant-Nr.</label><input id="df-mandant" placeholder="001"></div><div class="fg w50"><label>Kostenstelle</label><input id="df-kst" placeholder="K-1000"></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><button class="btn btn-s" ontouchstart="saveDFCfg()" onclick="saveDFCfg()">💾 Speichern</button><button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">📊 CSV</button><button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">🗂 XML</button></div><div style="display:flex;align-items:center;gap:6px"><div class="sdot" id="df-sdot"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m)" id="df-stxt">Nicht verbunden</span></div></div></div>
+
+<!-- PIN SCREEN -->
+<div id="pin-screen">
+  <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="width:120px;margin-bottom:8px" alt="KLEI" onerror="this.style.display='none'">
+  <div class="pin-title">🔐 Vorarbeiter-Zugang</div>
+  <div class="pin-sub">Bitte PIN eingeben</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+  </div>
+  <div class="pin-error" id="pin-error"></div>
+  <div class="pin-pad">
+    <div class="pin-btn" ontouchstart="pinKey('1')" onclick="pinKey('1')">1</div>
+    <div class="pin-btn" ontouchstart="pinKey('2')" onclick="pinKey('2')">2</div>
+    <div class="pin-btn" ontouchstart="pinKey('3')" onclick="pinKey('3')">3</div>
+    <div class="pin-btn" ontouchstart="pinKey('4')" onclick="pinKey('4')">4</div>
+    <div class="pin-btn" ontouchstart="pinKey('5')" onclick="pinKey('5')">5</div>
+    <div class="pin-btn" ontouchstart="pinKey('6')" onclick="pinKey('6')">6</div>
+    <div class="pin-btn" ontouchstart="pinKey('7')" onclick="pinKey('7')">7</div>
+    <div class="pin-btn" ontouchstart="pinKey('8')" onclick="pinKey('8')">8</div>
+    <div class="pin-btn" ontouchstart="pinKey('9')" onclick="pinKey('9')">9</div>
+    <div class="pin-btn pin-del" ontouchstart="pinBack()" onclick="pinBack()">↩</div>
+    <div class="pin-btn" ontouchstart="pinKey('0')" onclick="pinKey('0')">0</div>
+    <div class="pin-btn pin-del" ontouchstart="pinCancel()" onclick="pinCancel()">✕</div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="mo" id="mo-df"><div class="md"><button class="md-close" ontouchstart="closeMo('mo-df')" onclick="closeMo('mo-df')">✕</button><div class="md-title">🔗 Dataflor</div><div class="md-sub">Zeiterfassung Export & API</div><div class="row"><div class="fg w50"><label>Server URL</label><input id="df-url" placeholder="https://server/api"></div><div class="fg w50"><label>API-Key</label><input id="df-key" type="password" placeholder="••••••••"></div><div class="fg w50"><label>Mandant-Nr.</label><input id="df-mandant" placeholder="001"></div><div class="fg w50"><label>Kostenstelle</label><input id="df-kst" placeholder="K-1000"></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><button class="btn" ontouchstart="saveDFCfg()" onclick="saveDFCfg()">💾 Speichern</button><button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">📊 CSV</button><button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">🗂 XML</button></div><div style="display:flex;align-items:center;gap:6px"><div class="sdot" id="df-sdot"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m)" id="df-stxt">Nicht verbunden</span></div></div></div>
 <div class="mo" id="mo-au"><div class="md"><button class="md-close" ontouchstart="closeMo('mo-au')" onclick="closeMo('mo-au')">✕</button><div class="md-title">📋 Aufträge</div><div class="md-sub">Aufträge für Zeiterfassungs-Zuordnung</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><input id="au-nr" placeholder="Auftrags-Nr." style="width:100px;flex:none"><input id="au-name" placeholder="Bezeichnung" style="flex:1"><button class="btn btn-p" ontouchstart="addAuftrag()" onclick="addAuftrag()" style="flex:none">+ Hinzufügen</button></div><div id="au-list"></div></div></div>
+
 <header>
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="h-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="h-divider"></div>
@@ -195,25 +243,104 @@ select option{background:var(--s2);}
   </main>
 </div>
 <div class="toast" id="toast"></div>
-<script>
+  <script>
 const GAS_URL='https://script.google.com/macros/s/AKfycbxVQNF3dwQo4qHYOImHNg44SPhs6NZ-8XxOMWqHzvEhjyS1pc0V_AncqG3B01i2TmlW1w/exec';
 const EMPFAENGER_MAIL='kleinzeitmanager34@gmail.com';
 const FIRMA_NAME='Friedrich Klei GmbH';
 const FIRMA_ADRESSE='Stettiner Str. 14-16 · 34225 Baunatal';
 const FIRMA_TEL='+49 (0) 5601 8056';
 const FIRMA_LOGO='https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png';
+
+// PIN - verschleiert
+const _p=[49,49,55].map(c=>String.fromCharCode(c)).join('');
+
+// GERÄTELISTE nach Dataflor
+const GERAETE_LIST=[
+  {nr:'1010',bez:'Radlader 5 to'},
+  {nr:'1012',bez:'Bagger Kette 5 to'},
+  {nr:'1014',bez:'Bagger Rad 18 to Li 918'},
+  {nr:'1016',bez:'Bagger Kette > 15 to'},
+  {nr:'1018',bez:'LKW 25 to DA'},
+  {nr:'1019',bez:'LKW > 5 to bis 15 to'},
+  {nr:'1020',bez:'Raupe Planierr. Laser Moor'},
+  {nr:'1050',bez:'Elektr. Kleingerät'},
+  {nr:'1052',bez:'Motorg. Kleingerät Bodenfräse'},
+  {nr:'1055',bez:'PKW'},
+  {nr:'1060',bez:'Pflegegerät Mäher Großfläche'},
+  {nr:'1061',bez:'Pflegegerät Handmäher'},
+  {nr:'1065',bez:'Baustrassen-Securatec'},
+  {nr:'1070',bez:'Maschinen (Kompressor, Aggr.)'},
+  {nr:'1080',bez:'Verdichtungsgerät > 2 to bis 1 to'},
+  {nr:'1081',bez:'Verdichtungsgerät (Rüttelplatte)'},
+  {nr:'1082',bez:'Verdichtungsgerät (Stampfer)'},
+  {nr:'1200',bez:'Baustelleneinrichtung'},
+  {nr:'1500',bez:'Tankanlagen'},
+  {nr:'1600',bez:'Absperrung / Verkehrsleitung'},
+  {nr:'1700',bez:'Vermessungsgerät'},
+  {nr:'2000',bez:'LKW < 7 to (Transporter)'}
+];
+
+function geraeteOpts(){
+  return '<option value="">— Gerät wählen —</option>'+
+  GERAETE_LIST.map(g=>'<option value="'+g.nr+'">'+g.nr+' · '+g.bez+'</option>').join('');
+}
+
 let reports=JSON.parse(localStorage.getItem('klei_reports')||'[]');
 let auftraege=JSON.parse(localStorage.getItem('klei_auftraege')||'[]');
 let dfCfg=JSON.parse(localStorage.getItem('klei_df')||'{}');
 let currentId=null,currentRole=null,curWeather='Sonnig',rec=null,activeVF=null;
 let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
+let pinBuffer='';
 
+// ══════ PIN ══════
+function showPIN(){
+  pinBuffer='';
+  updatePinDots();
+  document.getElementById('pin-error').textContent='';
+  document.getElementById('role-screen').style.display='none';
+  const ps=document.getElementById('pin-screen');
+  ps.style.display='flex';ps.style.pointerEvents='all';
+}
+function pinKey(k){
+  if(pinBuffer.length>=3)return;
+  pinBuffer+=k;
+  updatePinDots();
+  if(pinBuffer.length===3){
+    setTimeout(()=>{
+      if(pinBuffer===_p){
+        document.getElementById('pin-screen').style.display='none';
+        activateRole('va');
+      } else {
+        document.getElementById('pin-error').textContent='❌ Falscher PIN';
+        pinBuffer='';
+        updatePinDots();
+        setTimeout(()=>document.getElementById('pin-error').textContent='',2000);
+      }
+    },200);
+  }
+}
+function pinBack(){pinBuffer=pinBuffer.slice(0,-1);updatePinDots();}
+function pinCancel(){
+  pinBuffer='';
+  document.getElementById('pin-screen').style.display='none';
+  document.getElementById('role-screen').style.display='flex';
+}
+function updatePinDots(){
+  for(let i=0;i<3;i++){
+    const d=document.getElementById('pd'+i);
+    if(d)d.className='pin-dot'+(i<pinBuffer.length?' filled':'');
+  }
+}
+
+// ══════ ROLE ══════
 function setRole(r){
-  if(currentRole===r)return;
+  if(r==='va'){showPIN();return;}
+  activateRole(r);
+}
+function activateRole(r){
   currentRole=r;
-  const screen=document.getElementById('role-screen');
-  screen.style.display='none';
-  screen.style.pointerEvents='none';
+  document.getElementById('role-screen').style.display='none';
+  document.getElementById('pin-screen').style.display='none';
   const b=document.getElementById('role-badge');
   b.className='role-badge '+r;
   b.textContent=r==='va'?'▲ Vorarbeiter':'■ Arbeiter';
@@ -223,11 +350,12 @@ function setRole(r){
   if(reports.length)loadReport(reports[reports.length-1].id);
 }
 function switchRole(){
-  currentRole=null;
-  const screen=document.getElementById('role-screen');
-  screen.style.display='flex';
-  screen.style.pointerEvents='all';
+  currentRole=null;pinBuffer='';
+  document.getElementById('role-screen').style.display='flex';
+  document.getElementById('pin-screen').style.display='none';
 }
+
+// ══════ BUILD UI ══════
 function buildUI(){
   const tabs=document.getElementById('tabs-row'),content=document.getElementById('main-content');
   if(currentRole==='ar'){
@@ -240,6 +368,8 @@ function buildUI(){
   }
   populateAuftragOpts();
 }
+
+// ══════ AR FORM ══════
 function buildAR(){
   const auOpts=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' · '+a.name+'</option>').join('');
   return '<div class="vbanner" id="vbanner"><div class="vwave"><span></span><span></span><span></span><span></span><span></span></div><span id="vf-lbl">Spracherfassung aktiv...</span><button class="btn btn-r" style="margin-left:auto;padding:4px 10px;font-size:10px" ontouchstart="stopV()" onclick="stopV()">■ Stop</button></div>'+
@@ -274,6 +404,8 @@ function buildAR(){
   '<div class="send-status" id="ar-send-status"></div>'+
   '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">💾 Speichern & PDF senden</button><button class="btn" ontouchstart="clearARForm()" onclick="clearARForm()">✕ Neu</button></div>';
 }
+
+// ══════ VA BERICHT ══════
 function buildVABericht(){
   return '<div class="vbanner" id="vbanner"><div class="vwave"><span></span><span></span><span></span><span></span><span></span></div><span id="vf-lbl">Spracherfassung...</span><button class="btn btn-r" style="margin-left:auto;padding:4px 10px;font-size:10px" ontouchstart="stopV()" onclick="stopV()">■ Stop</button></div>'+
   '<div class="sec"><div class="sh">📅 Grunddaten</div><div class="row">'+
@@ -301,37 +433,201 @@ function buildVABericht(){
   ['Rasenbau','Sportplatzbau','Kunstrasensystem','Laufbahn/LA','Tennisanlage','Bewässerung','Drainage','Erdarbeiten','Wegebau','Pflaster','Bepflanzung','Spielplatz','Mäharbeiten','Gehölzpflege','Aussaat'].map((g,i)=>'<div class="tg'+(i===0?' a':'')+'" ontouchstart="togTg(this)" onclick="togTg(this)">'+g+'</div>').join('')+
   '</div></div>'+
   '<div class="sec"><div class="sh">📝 Arbeitsschritte</div><div id="steps-con"></div><div style="display:flex;gap:8px"><button class="btn" ontouchstart="addStep()" onclick="addStep()">＋ Schritt</button><button class="btn btn-p" style="font-size:11px" ontouchstart="addVoiceStep()" onclick="addVoiceStep()">🎤 Diktieren</button></div></div>'+
-  '<div class="sec"><div class="sh">⚙️ Geräteeinsatz</div><div id="geraete-con"></div><button class="btn" ontouchstart="addGeraet()" onclick="addGeraet()">＋ Gerät</button></div>'+
   '<div class="sec"><div class="sh">⚠️ Mängel & Probleme</div><div id="mangel-con"></div><button class="btn btn-r" style="font-size:11px" ontouchstart="addMangel()" onclick="addMangel()">＋ Mangel</button>'+
   '<div class="fg" style="margin-top:10px"><label>Nächste Schritte</label><div class="vin"><textarea id="v-naechstes" placeholder="Geplante Folgearbeiten ..."></textarea><button class="vbtn vtabtn" id="vbtn-v-naechstes" ontouchstart="startV(\'v-naechstes\',\'Nächste Schritte\')" onclick="startV(\'v-naechstes\',\'Nächste Schritte\')">🎤</button></div></div>'+
   '<div class="fg" style="margin-top:8px"><label>Bemerkungen</label><div class="vin"><textarea id="v-bemerkungen" placeholder="..."></textarea><button class="vbtn vtabtn" id="vbtn-v-bemerkungen" ontouchstart="startV(\'v-bemerkungen\',\'Bemerkungen\')" onclick="startV(\'v-bemerkungen\',\'Bemerkungen\')">🎤</button></div></div></div>'+
   '<div class="send-status" id="va-send-status"></div>'+
   '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">💾 Speichern & PDF senden</button><button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">🤖 KI</button><button class="btn" ontouchstart="expTXT()" onclick="expTXT()">⬇ TXT</button><button class="btn" ontouchstart="newReport()" onclick="newReport()">✕ Neu</button></div>';
 }
-function buildVAZeit(){return '<div class="sec"><div class="sh">⏱ Personal <span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0 h</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th><th>Pause</th><th>Netto</th><th>Auftrag</th><th>Tätigkeit</th><th></th></tr></thead><tbody id="zeit-body"></tbody></table></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">＋ Person</button><button class="btn btn-e" ontouchstart="openMo(\'mo-df\')" onclick="openMo(\'mo-df\')">🔗 Dataflor</button></div></div><div class="sec"><div class="sh">🚜 Maschinen</div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Gerät</th><th>Kz/Nr.</th><th>Von</th><th>Bis</th><th>Netto</th><th>Auftrag</th><th></th></tr></thead><tbody id="mach-body"></tbody></table></div><button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">＋ Gerät</button></div>';}
-function buildVAMaterial(){return '<div class="sec"><div class="sh">📦 Lieferungen</div><div id="lief-con"></div><button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">＋ Lieferung</button></div><div class="sec" style="margin-top:10px"><div class="sh">📊 Mengennachweise</div><div id="mengen-con"></div><button class="btn" ontouchstart="addMenge()" onclick="addMenge()">＋ Mengenzeile</button></div><div class="sec" style="margin-top:10px"><div class="sh">🔢 LV-Positionen</div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Auftrag</th><th></th></tr></thead><tbody id="lv-body"></tbody></table></div><button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">＋ Position</button></div><div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">💾 Speichern & PDF senden</button></div>';}
-function buildKI(){return '<div class="sh">🤖 KI-Analyse</div><div class="ai-acts"><button class="ai-ab" ontouchstart="runAI(\'zusammenfassung\')" onclick="runAI(\'zusammenfassung\')">📄 Zusammenfassung</button><button class="ai-ab" ontouchstart="runAI(\'risiken\')" onclick="runAI(\'risiken\')">⚠️ Risiken</button><button class="ai-ab" ontouchstart="runAI(\'kosten\')" onclick="runAI(\'kosten\')">💶 Kosten</button><button class="ai-ab" ontouchstart="runAI(\'qualitaet\')" onclick="runAI(\'qualitaet\')">✅ Qualität</button><button class="ai-ab" ontouchstart="runAI(\'bericht\')" onclick="runAI(\'bericht\')">📃 VOB</button><button class="ai-ab" ontouchstart="runAI(\'plan\')" onclick="runAI(\'plan\')">📅 Wochenplan</button></div><div id="ki-out"><div class="empty"><div class="ei">🌿</div><div class="et">Bericht laden &amp; analysieren</div></div></div>';}
-function addStep(data={}){stepIdx++;const i=stepIdx;const auOpts=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name+'</option>').join('');const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div><select style="flex:0 0 150px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-au-'+i+'"><option value="">— Auftrag —</option>'+auOpts+'</select><input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'"><button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">✕</button></div><div class="vin"><textarea id="st-txt-'+i+'" class="step-text" style="min-height:55px" placeholder="Tätigkeit beschreiben ...">'+(data.txt||'')+'</textarea><button class="vbtn vtabtn" id="vbtn-st-txt-'+i+'" ontouchstart="startV(\'st-txt-'+i+'\',\'Schritt '+i+'\')" onclick="startV(\'st-txt-'+i+'\',\'Schritt '+i+'\')">🎤</button></div><div style="display:flex;gap:6px;margin-top:5px"><div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" placeholder="200 m²" value="'+(data.menge||'')+'"></div><div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" placeholder="m², lfm" value="'+(data.eh||'')+'"></div><div class="fg"><label>Norm</label><input type="text" id="st-norm-'+i+'" placeholder="DIN 18917..." value="'+(data.norm||'')+'"></div></div>';document.getElementById('steps-con')?.appendChild(div);}
+
+function buildVAZeit(){
+  return '<div class="sec"><div class="sh">⏱ Personal <span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0 h</span></div>'+
+  '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th><th>Pause</th><th>Netto</th><th>Fahrzeit</th><th>Fahrt</th><th>Gesamt</th><th>Auftrag</th><th>Tätigkeit</th><th></th></tr></thead><tbody id="zeit-body"></tbody></table></div>'+
+  '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">＋ Person</button></div>'+
+  '<div class="sec" style="margin-top:10px"><div class="sh">🚜 Geräteeinsatz (Dataflor)</div>'+
+  '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Gerät (Dataflor-Nr.)</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Netto</th><th>Auftrag</th><th></th></tr></thead><tbody id="mach-body"></tbody></table></div>'+
+  '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">＋ Gerät</button></div>';}
+
+function buildVAMaterial(){
+  return '<div class="sec"><div class="sh">📦 Lieferungen</div><div id="lief-con"></div><button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">＋ Lieferung</button></div>'+
+  '<div class="sec" style="margin-top:10px"><div class="sh">📊 Mengennachweise</div><div id="mengen-con"></div><button class="btn" ontouchstart="addMenge()" onclick="addMenge()">＋ Mengenzeile</button></div>'+
+  '<div class="sec" style="margin-top:10px"><div class="sh">🔢 LV-Positionen</div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Auftrag</th><th></th></tr></thead><tbody id="lv-body"></tbody></table></div><button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">＋ Position</button></div>'+
+  '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">💾 Speichern & PDF senden</button></div>';}
+
+function buildKI(){
+  return '<div class="sh">🤖 KI-Analyse</div><div class="ai-acts">'+
+  '<button class="ai-ab" ontouchstart="runAI(\'zusammenfassung\')" onclick="runAI(\'zusammenfassung\')">📄 Zusammenfassung</button>'+
+  '<button class="ai-ab" ontouchstart="runAI(\'risiken\')" onclick="runAI(\'risiken\')">⚠️ Risiken</button>'+
+  '<button class="ai-ab" ontouchstart="runAI(\'kosten\')" onclick="runAI(\'kosten\')">💶 Kosten</button>'+
+  '<button class="ai-ab" ontouchstart="runAI(\'qualitaet\')" onclick="runAI(\'qualitaet\')">✅ Qualität</button>'+
+  '<button class="ai-ab" ontouchstart="runAI(\'bericht\')" onclick="runAI(\'bericht\')">📃 VOB</button>'+
+  '<button class="ai-ab" ontouchstart="runAI(\'plan\')" onclick="runAI(\'plan\')">📅 Wochenplan</button>'+
+  '</div><div id="ki-out"><div class="empty"><div class="ei">🌿</div><div class="et">Bericht laden &amp; analysieren</div></div></div>';}
+
+// ══════ DYNAMIC ROWS ══════
+function addStep(data={}){
+  stepIdx++;const i=stepIdx;
+  const auOpts=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name+'</option>').join('');
+  const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;
+  div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div>'+
+  '<select style="flex:0 0 150px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-au-'+i+'"><option value="">— Auftrag —</option>'+auOpts+'</select>'+
+  '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'">'+
+  '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">✕</button></div>'+
+  '<div class="vin"><textarea id="st-txt-'+i+'" class="step-text" style="min-height:55px" placeholder="Tätigkeit beschreiben ...">'+(data.txt||'')+'</textarea>'+
+  '<button class="vbtn vtabtn" id="vbtn-st-txt-'+i+'" ontouchstart="startV(\'st-txt-'+i+'\',\'Schritt '+i+'\')" onclick="startV(\'st-txt-'+i+'\',\'Schritt '+i+'\')">🎤</button></div>'+
+  '<div style="display:flex;gap:6px;margin-top:5px">'+
+  '<div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" placeholder="200 m²" value="'+(data.menge||'')+'"></div>'+
+  '<div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" placeholder="m², lfm" value="'+(data.eh||'')+'"></div>'+
+  '<div class="fg"><label>Norm</label><input type="text" id="st-norm-'+i+'" placeholder="DIN 18917..." value="'+(data.norm||'')+'"></div></div>';
+  document.getElementById('steps-con')?.appendChild(div);
+}
 function addVoiceStep(){addStep();const txts=document.querySelectorAll('.step-text');if(txts.length){startV(txts[txts.length-1].id,'Arbeitsschritt');}}
 function getSteps(){return[...document.querySelectorAll('[id^="step-"]')].filter(b=>b.id.match(/^step-\d+$/)).map(b=>{const i=b.id.replace('step-','');return{txt:b.querySelector('#st-txt-'+i)?.value||'',aid:b.querySelector('#st-au-'+i)?.value||'',pos:b.querySelector('#st-pos-'+i)?.value||'',menge:b.querySelector('#st-mg-'+i)?.value||'',eh:b.querySelector('#st-eh-'+i)?.value||'',norm:b.querySelector('#st-norm-'+i)?.value||''};}).filter(s=>s.txt);}
-function addGeraet(data={}){const div=document.createElement('div');div.className='lief-block';div.style.padding='8px';const au=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'·'+a.name.substring(0,14)+'</option>').join('');div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><input type="text" placeholder="Gerät" value="'+(data.name||'')+'" style="flex:2;min-width:100px"><input type="text" placeholder="Kz/Nr." value="'+(data.kz||'')+'" style="flex:0 0 70px"><input type="time" value="'+(data.von||'07:00')+'" style="width:78px;flex:none" oninput="calcGR(this)"><input type="time" value="'+(data.bis||'16:00')+'" style="width:78px;flex:none" oninput="calcGR(this)"><input type="text" class="gr-netto" readonly value="'+(data.netto||'')+'" style="width:48px;flex:none;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"><select style="flex:0 0 120px;font-size:10px"><option value="">— Auftrag —</option>'+au+'</select><button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>';document.getElementById('geraete-con')?.appendChild(div);calcGR(div.querySelector('input[type=time]'));}
-function calcGR(inp){const row=inp.closest('.lief-block');const ins=[...row.querySelectorAll('input')];const v=ins[2]?.value,b=ins[3]?.value;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let m=(bh*60+bm)-(vh*60+vm);if(m<0)m+=1440;ins[4].value=(m/60).toFixed(2).replace('.',',');}}
-function getGeraete(){return[...document.querySelectorAll('#geraete-con .lief-block')].map(b=>{const is=b.querySelectorAll('input'),se=b.querySelector('select');return{name:is[0]?.value,kz:is[1]?.value,von:is[2]?.value,bis:is[3]?.value,netto:is[4]?.value,auftragId:se?.value||''};}).filter(g=>g.name);}
-function addMangel(data={}){mangelIdx++;const i=mangelIdx;const div=document.createElement('div');div.className='mangel-block';div.innerHTML='<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1"><div style="display:flex;gap:5px;margin-bottom:5px"><select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausführung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select><select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>⚠ Mittel</option><option>🔴 Hoch</option><option>🟡 Niedrig</option></select></div><div class="vin"><textarea id="mg-'+i+'" placeholder="Mangelbeschreibung ..." style="min-height:50px;border-color:rgba(196,72,40,.25)">'+(data.txt||'')+'</textarea><button class="vbtn vtabtn" ontouchstart="startV(\'mg-'+i+'\',\'Mangel\')" onclick="startV(\'mg-'+i+'\',\'Mangel\')">🎤</button></div><input type="text" placeholder="Maßnahme" style="margin-top:5px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'"></div><button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">✕</button></div>';document.getElementById('mangel-con')?.appendChild(div);}
+
+function addMangel(data={}){
+  mangelIdx++;const i=mangelIdx;const div=document.createElement('div');div.className='mangel-block';
+  div.innerHTML='<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1">'+
+  '<div style="display:flex;gap:5px;margin-bottom:5px">'+
+  '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausführung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select>'+
+  '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>⚠ Mittel</option><option>🔴 Hoch</option><option>🟡 Niedrig</option></select></div>'+
+  '<div class="vin"><textarea id="mg-'+i+'" placeholder="Mangelbeschreibung ..." style="min-height:50px;border-color:rgba(196,72,40,.25)">'+(data.txt||'')+'</textarea>'+
+  '<button class="vbtn vtabtn" ontouchstart="startV(\'mg-'+i+'\',\'Mangel\')" onclick="startV(\'mg-'+i+'\',\'Mangel\')">🎤</button></div>'+
+  '<input type="text" placeholder="Maßnahme" style="margin-top:5px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'"></div>'+
+  '<button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">✕</button></div>';
+  document.getElementById('mangel-con')?.appendChild(div);
+}
 function getMangelData(){return[...document.querySelectorAll('.mangel-block')].map(b=>{const sels=b.querySelectorAll('select'),ta=b.querySelector('textarea'),m=b.querySelector('input[type=text]');return{typ:sels[0]?.value,schwere:sels[1]?.value,txt:ta?.value,massnahme:m?.value};}).filter(m=>m.txt);}
-function addZeitRow(data={}){const tbody=document.getElementById('zeit-body');if(!tbody)return;const tr=document.createElement('tr');const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name.substring(0,10)+'</option>').join('');tr.innerHTML='<td><input type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:90px"></td><td><select style="font-size:10px"><option>VA</option><option>Facharbeiter</option><option>Helfer</option><option>Azubi</option><option>Sub</option></select></td><td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcZR(this)"></td><td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcZR(this)"></td><td><input type="number" value="'+(data.pause||30)+'" style="width:44px" oninput="calcZR(this)"></td><td><input class="netto" type="text" readonly style="width:44px"></td><td><select class="row-au" style="font-size:9px;min-width:100px"><option value="">—</option>'+au+'</select></td><td><input type="text" value="'+(data.tae||'')+'" placeholder="Tätigkeit" style="width:90px"></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove();updZeitTotal()" onclick="this.closest(\'tr\').remove();updZeitTotal()">✕</button></td>';tbody.appendChild(tr);calcZR(tr.querySelector('input[type=time]'));}
-function calcZR(inp){const tr=inp.closest('tr');const ins=tr.querySelectorAll('input');const v=ins[2]?.value,b=ins[3]?.value,p=parseFloat(ins[4]?.value)||0;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let m=(bh*60+bm)-(vh*60+vm)-p;if(m<0)m+=1440;ins[5].value=(m/60).toFixed(2).replace('.',',');}updZeitTotal();}
-function updZeitTotal(){let t=0;document.querySelectorAll('.netto').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);const el=document.getElementById('zeit-total');if(el)el.textContent=t.toFixed(1).replace('.',',')+' h';}
-function getZeitRows(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>{const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');return{name:is[0]?.value,qual:ss[0]?.value,von:is[2]?.value,bis:is[3]?.value,pause:is[4]?.value,netto:is[5]?.value,aid:ss[1]?.value,tae:is[6]?.value};}).filter(r=>r.name);}
-function addMachRow(data={}){const tbody=document.getElementById('mach-body');if(!tbody)return;const tr=document.createElement('tr');const au=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'</option>').join('');tr.innerHTML='<td><input type="text" value="'+(data.name||'')+'" placeholder="Gerät" style="min-width:110px"></td><td><input type="text" value="'+(data.kz||'')+'" placeholder="Kz/Nr" style="width:65px"></td><td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcMR(this)"></td><td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcMR(this)"></td><td><input class="gr-netto" type="text" readonly style="width:44px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace"></td><td><select class="row-au" style="font-size:9px;min-width:80px"><option value="">—</option>'+au+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';tbody.appendChild(tr);calcMR(tr.querySelector('input[type=time]'));}
-function calcMR(inp){const tr=inp.closest('tr');const is=tr.querySelectorAll('input');const v=is[2]?.value,b=is[3]?.value;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let m=(bh*60+bm)-(vh*60+vm);if(m<0)m+=1440;is[4].value=(m/60).toFixed(2).replace('.',',');}}
-function getMachRows(){return[...document.querySelectorAll('#mach-body tr')].map(tr=>{const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');return{name:is[0]?.value,kz:is[1]?.value,von:is[2]?.value,bis:is[3]?.value,netto:is[4]?.value,aid:ss[0]?.value};}).filter(r=>r.name);}
-function addLief(data={}){liefIdx++;const i=liefIdx;const div=document.createElement('div');div.className='lief-block';div.innerHTML='<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div><button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div><div class="row"><div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div><div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" placeholder="LS-2025-001" value="'+(data.ls||'')+'"></div><div class="fg w50"><label>Material</label><div class="vin"><input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen, Sand..."><button class="vbtn" ontouchstart="startV(\'lf-mat-'+i+'\',\'Material\')" onclick="startV(\'lf-mat-'+i+'\',\'Material\')">🎤</button></div></div><div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div><div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select></div><div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>✓ OK</option><option>⚠ Teillieferung</option><option>✗ Falsche Ware</option><option>✗ Mängel</option><option>✗ Verzug</option></select></div><div class="fg w50"><label>Bemerkung</label><input type="text" id="lf-bem-'+i+'" value="'+(data.bem||'')+'"></div></div>';document.getElementById('lief-con')?.appendChild(div);}
+
+// ZEITERFASSUNG MIT FAHRZEIT
+function addZeitRow(data={}){
+  const tbody=document.getElementById('zeit-body');if(!tbody)return;
+  const tr=document.createElement('tr');
+  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name.substring(0,10)+'</option>').join('');
+  const fahrtSel='<select class="fahrt-sel" style="font-size:9px" oninput="calcZR(this)">'+
+    '<option value="fahrer" '+(data.fahrt==='fahrer'?'selected':'')+'>🚗100%</option>'+
+    '<option value="beifahrer" '+(data.fahrt==='beifahrer'?'selected':'')+'>🪑50%</option>'+
+    '<option value="privat" '+(data.fahrt==='privat'?'selected':'')+'>🏠0%</option>'+
+    '</select>';
+  tr.innerHTML=
+    '<td><input type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:80px"></td>'+
+    '<td><select style="font-size:10px"><option>VA</option><option>Facharbeiter</option><option>Helfer</option><option>Azubi</option><option>Sub</option></select></td>'+
+    '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
+    '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
+    '<td><input type="number" value="'+(data.pause||30)+'" style="width:44px" oninput="calcZR(this)"></td>'+
+    '<td><input class="netto" type="text" readonly style="width:44px;color:var(--gl);font-weight:600;font-family:\'IBM Plex Mono\',monospace"></td>'+
+    '<td><input type="number" value="'+(data.fahrzeitMin||0)+'" min="0" style="width:52px" placeholder="0" oninput="calcZR(this)"></td>'+
+    '<td>'+fahrtSel+'</td>'+
+    '<td><input class="gesamt-h" type="text" readonly style="width:48px;color:var(--earth);font-weight:700;font-family:\'IBM Plex Mono\',monospace"></td>'+
+    '<td><select class="row-au" style="font-size:9px;min-width:100px"><option value="">—</option>'+au+'</select></td>'+
+    '<td><input type="text" value="'+(data.tae||'')+'" placeholder="Tätigkeit" style="width:90px"></td>'+
+    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove();updZeitTotal()" onclick="this.closest(\'tr\').remove();updZeitTotal()">✕</button></td>';
+  tbody.appendChild(tr);
+  calcZR(tr.querySelector('input[type=time]'));
+}
+function calcZR(inp){
+  const tr=inp.closest('tr');
+  const ins=tr.querySelectorAll('input');
+  const v=ins[2]?.value,b=ins[3]?.value,p=parseFloat(ins[4]?.value)||0;
+  const fmin=parseFloat(ins[6]?.value)||0;
+  const fahrtSel=tr.querySelector('.fahrt-sel');
+  const fahrtVal=fahrtSel?.value||'fahrer';
+  if(v&&b){
+    const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
+    let m=(bh*60+bm)-(vh*60+vm)-p;if(m<0)m+=1440;
+    const wh=m/60;
+    ins[5].value=wh.toFixed(2).replace('.',',');
+    const satz={'fahrer':1,'beifahrer':.5,'privat':0}[fahrtVal]??1;
+    const fh=(fmin/60)*satz;
+    const tot=wh+fh;
+    const gEl=tr.querySelector('.gesamt-h');
+    if(gEl)gEl.value=tot.toFixed(2).replace('.',',');
+  }
+  updZeitTotal();
+}
+function updZeitTotal(){
+  let t=0;
+  document.querySelectorAll('.gesamt-h').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);
+  const el=document.getElementById('zeit-total');
+  if(el)el.textContent=t.toFixed(1).replace('.',',')+' h';
+}
+function getZeitRows(){
+  return[...document.querySelectorAll('#zeit-body tr')].map(tr=>{
+    const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
+    return{
+      name:is[0]?.value,qual:ss[0]?.value,
+      von:is[2]?.value,bis:is[3]?.value,pause:is[4]?.value,
+      netto:is[5]?.value,fahrzeitMin:is[6]?.value,
+      fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',
+      gesamt:tr.querySelector('.gesamt-h')?.value,
+      aid:ss[1]?.value,tae:is[7]?.value
+    };
+  }).filter(r=>r.name);
+}
+
+// MASCHINENEINSATZ MIT DATAFLOR DROPDOWN
+function addMachRow(data={}){
+  const tbody=document.getElementById('mach-body');if(!tbody)return;
+  const tr=document.createElement('tr');
+  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'</option>').join('');
+  tr.innerHTML=
+    '<td><select class="geraet-sel" style="font-size:10px;min-width:220px"><option value="">— Gerät wählen —</option>'+
+    GERAETE_LIST.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' · '+g.bez+'</option>').join('')+
+    '</select></td>'+
+    '<td><input type="text" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td>'+
+    '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
+    '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
+    '<td><input class="gr-netto" type="text" readonly style="width:48px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
+    '<td><select class="row-au" style="font-size:9px;min-width:80px"><option value="">—</option>'+au+'</select></td>'+
+    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';
+  tbody.appendChild(tr);
+  calcMR(tr.querySelector('input[type=time]'));
+}
+function calcMR(inp){
+  const tr=inp.closest('tr');const is=tr.querySelectorAll('input');
+  const v=is[1]?.value,b=is[2]?.value;
+  if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let m=(bh*60+bm)-(vh*60+vm);if(m<0)m+=1440;is[3].value=(m/60).toFixed(2).replace('.',',');}
+}
+function getMachRows(){
+  return[...document.querySelectorAll('#mach-body tr')].map(tr=>{
+    const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
+    const geraetNr=tr.querySelector('.geraet-sel')?.value||'';
+    const geraet=GERAETE_LIST.find(g=>g.nr===geraetNr);
+    return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:is[0]?.value,von:is[1]?.value,bis:is[2]?.value,netto:is[3]?.value,aid:ss[1]?.value};
+  }).filter(r=>r.geraetNr);
+}
+
+function addLief(data={}){
+  liefIdx++;const i=liefIdx;const div=document.createElement('div');div.className='lief-block';
+  div.innerHTML='<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div><button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>'+
+  '<div class="row">'+
+  '<div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div>'+
+  '<div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" placeholder="LS-2025-001" value="'+(data.ls||'')+'"></div>'+
+  '<div class="fg w50"><label>Material</label><div class="vin"><input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen, Sand..."><button class="vbtn" ontouchstart="startV(\'lf-mat-'+i+'\',\'Material\')" onclick="startV(\'lf-mat-'+i+'\',\'Material\')">🎤</button></div></div>'+
+  '<div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div>'+
+  '<div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select></div>'+
+  '<div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>✓ OK</option><option>⚠ Teillieferung</option><option>✗ Falsche Ware</option><option>✗ Mängel</option><option>✗ Verzug</option></select></div>'+
+  '<div class="fg w50"><label>Bemerkung</label><input type="text" id="lf-bem-'+i+'" value="'+(data.bem||'')+'"></div></div>';
+  document.getElementById('lief-con')?.appendChild(div);
+}
 function getLiefData(){return[...document.querySelectorAll('#lief-con .lief-block')].map((b,i)=>{const n=i+1;return{firma:b.querySelector('#lf-firma-'+n)?.value,ls:b.querySelector('#lf-ls-'+n)?.value,mat:b.querySelector('#lf-mat-'+n)?.value,menge:b.querySelector('#lf-mg-'+n)?.value,eh:b.querySelector('#lf-eh-'+n)?.value,ok:b.querySelector('#lf-ok-'+n)?.value,bem:b.querySelector('#lf-bem-'+n)?.value};}).filter(l=>l.firma||l.mat);}
-function addMenge(data={}){const div=document.createElement('div');div.className='lief-block';div.style.padding='7px';div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><input type="text" placeholder="Bezeichnung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px"><input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px"><select style="flex:0 0 65px;font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select><input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"><button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>';document.getElementById('mengen-con')?.appendChild(div);}
+
+function addMenge(data={}){
+  const div=document.createElement('div');div.className='lief-block';div.style.padding='7px';
+  div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><input type="text" placeholder="Bezeichnung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px"><input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px"><select style="flex:0 0 65px;font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select><input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"><button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>';
+  document.getElementById('mengen-con')?.appendChild(div);
+}
 function getMengen(){return[...document.querySelectorAll('#mengen-con .lief-block')].map(b=>{const is=b.querySelectorAll('input'),se=b.querySelector('select');return{bez:is[0]?.value,menge:is[1]?.value,eh:se?.value,pos:is[2]?.value};}).filter(m=>m.bez);}
-function addLVRow(data={}){const tbody=document.getElementById('lv-body');if(!tbody)return;const tr=document.createElement('tr');const au=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'</option>').join('');tr.innerHTML='<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td><td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td><td><select style="font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td><td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td><td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td><td><select class="row-au" style="font-size:9px;min-width:70px"><option value="">—</option>'+au+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';tbody.appendChild(tr);}
+
+function addLVRow(data={}){
+  const tbody=document.getElementById('lv-body');if(!tbody)return;
+  const tr=document.createElement('tr');
+  const au=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'</option>').join('');
+  tr.innerHTML='<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td><td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td><td><select style="font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td><td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td><td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td><td><select class="row-au" style="font-size:9px;min-width:70px"><option value="">—</option>'+au+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';
+  tbody.appendChild(tr);
+}
 function getLVRows(){return[...document.querySelectorAll('#lv-body tr')].map(tr=>{const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');return{pos:is[0]?.value,bez:is[1]?.value,eh:ss[0]?.value,soll:is[2]?.value,ist:is[3]?.value,aid:ss[1]?.value};}).filter(r=>r.pos||r.bez);}
+
+// ══════ VOICE ══════
 function startV(fid,lbl){if(!('webkitSpeechRecognition' in window)&&!('SpeechRecognition' in window)){toast('Spracheingabe: Chrome verwenden','err');return;}if(rec){try{rec.stop();}catch(e){}}const SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='de-DE';rec.continuous=true;rec.interimResults=true;activeVF=fid;document.getElementById('vbanner')?.classList.add('on');const lbEl=document.getElementById('vf-lbl');if(lbEl)lbEl.textContent='🎤 '+lbl+' — sprechen Sie...';document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('on'));const btn=document.getElementById('vbtn-'+fid);if(btn)btn.classList.add('on');const el=document.getElementById(fid);if(!el)return;const orig=el.value;rec.onresult=e=>{let fin=orig,int='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)fin+=' '+e.results[i][0].transcript;else int+=e.results[i][0].transcript;}el.value=(fin+(int?' ['+int+']':'')).trim();};rec.onend=()=>stopV();rec.onerror=e=>{stopV();toast('Mikrofon: '+e.error,'err');};rec.start();toast('🎤 '+lbl,'info');}
 function stopV(){if(rec){try{rec.stop();}catch(e){}rec=null;}document.getElementById('vbanner')?.classList.remove('on');document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('on'));if(activeVF){const el=document.getElementById(activeVF);if(el)el.value=el.value.replace(/\s*\[.*?\]/g,'').trim();activeVF=null;}}
 function selW(el,val){document.querySelectorAll('.wc').forEach(c=>c.classList.remove('s'));el.classList.add('s');curWeather=val;}
@@ -340,30 +636,398 @@ function getActiveTags(){return[...document.querySelectorAll('#gw-tags .tg.a')].
 function setFahrt(btn){document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.remove('fahrt-active'));btn.classList.add('fahrt-active');curFahrtStatus=btn.dataset.val;calcAR();}
 function calcAR(){const v=document.getElementById('a-von')?.value,b=document.getElementById('a-bis')?.value;const p=parseFloat(document.getElementById('a-pause')?.value)||0;const fmin=parseFloat(document.getElementById('a-fahrzeit')?.value)||0;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;const wh=wm/60;const nwEl=document.getElementById('a-netto-work');if(nwEl)nwEl.value=wh.toFixed(2).replace('.',',');const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[curFahrtStatus]??1.0;const fh=(fmin/60)*satz;const tot=wh+fh;const ntEl=document.getElementById('a-netto');if(ntEl)ntEl.value=tot.toFixed(2).replace('.',',');const infoEl=document.getElementById('fahrzeit-info');if(infoEl&&fmin>0){const lbl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[curFahrtStatus];infoEl.textContent='Fahrzeit: '+fmin+'min × '+Math.round(satz*100)+'% = '+fh.toFixed(2).replace('.',',')+'h | '+lbl;infoEl.style.color=curFahrtStatus==='privat'?'var(--m)':curFahrtStatus==='beifahrer'?'var(--earth)':'var(--sky)';}else if(infoEl)infoEl.textContent='';const today=todayStr(),week=getWeekStart(),month=new Date().getMonth();const name=document.getElementById('a-name')?.value;if(name){const hT=reports.filter(r=>r.role==='ar'&&r.name===name&&r.datum===today).reduce((s,r)=>s+(parseFloat((r.netto||'0').replace(',','.'))||0),0)+tot;const hW=reports.filter(r=>r.role==='ar'&&r.name===name&&r.datum>=week).reduce((s,r)=>s+(parseFloat((r.netto||'0').replace(',','.'))||0),0)+tot;const hM=reports.filter(r=>r.role==='ar'&&r.name===name&&new Date(r.datum).getMonth()===month).reduce((s,r)=>s+(parseFloat((r.netto||'0').replace(',','.'))||0),0)+tot;document.getElementById('a-h-heute').textContent=hT.toFixed(1)+'h';document.getElementById('a-h-woche').textContent=hW.toFixed(1)+'h';document.getElementById('a-h-monat').textContent=hM.toFixed(1)+'h';}}}
 function getWeekStart(){const d=new Date();d.setDate(d.getDate()-d.getDay()+1);return d.toISOString().split('T')[0];}
+
+// ══════ AUFTRÄGE ══════
 function addAuftrag(){const nr=document.getElementById('au-nr').value.trim(),name=document.getElementById('au-name').value.trim();if(!nr||!name){toast('Nr. & Name erforderlich','err');return;}auftraege.push({id:Date.now().toString(),nr,name});localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));document.getElementById('au-nr').value='';document.getElementById('au-name').value='';renderAuList();populateAuftragOpts();toast('Auftrag gespeichert','ok');}
 function delAuftrag(id){auftraege=auftraege.filter(a=>a.id!==id);localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));renderAuList();populateAuftragOpts();}
 function renderAuList(){const el=document.getElementById('au-list');if(!el)return;el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">✕</button></div>').join('')||'<div style="color:var(--m);font-size:10px;padding:8px">Keine Aufträge</div>';}
 function populateAuftragOpts(){const opts='<option value="">— Auftrag —</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' · '+a.name+'</option>').join('');['v-auftrag','a-auftrag'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=opts;el.value=v;}});document.querySelectorAll('.row-au').forEach(s=>{const v=s.value;s.innerHTML='<option value="">—</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'·'+a.name.substring(0,10)+'</option>').join('');s.value=v;});}
 function getAuLabel(id){const a=auftraege.find(x=>x.id===id);return a?a.nr+' · '+a.name:'—';}
-async function generatePDF(report){const{jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});const W=210,M=14,cw=W-M*2;let y=M;const addText=(txt,x,fy,sz=9,style='normal',col=[80,100,60])=>{doc.setFontSize(sz);doc.setFont('helvetica',style);doc.setTextColor(...col);doc.text(String(txt||''),x,fy);};const wrap=(txt,x,fy,maxW,sz=9,col=[80,100,60])=>{doc.setFontSize(sz);doc.setFont('helvetica','normal');doc.setTextColor(...col);const lines=doc.splitTextToSize(String(txt||''),maxW);doc.text(lines,x,fy);return lines.length*(sz*0.4+1);};doc.setFillColor(14,18,9);doc.rect(0,0,W,28,'F');try{const img=new Image();img.crossOrigin='anonymous';await new Promise(res=>{img.onload=res;img.onerror=res;img.src=FIRMA_LOGO;setTimeout(res,2000);});if(img.complete&&img.naturalWidth>0){const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const dataURL=canvas.toDataURL('image/png');const ratio=img.naturalWidth/img.naturalHeight;const lh=12;doc.addImage(dataURL,'PNG',M,8,lh*ratio,lh);}}catch(e){}doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(220,232,196);doc.text(FIRMA_NAME,M+50,12);doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(106,136,72);doc.text(FIRMA_ADRESSE+' · '+FIRMA_TEL,M+50,17);const tagTxt=report.role==='ar'?'ARBEITSZEITNACHWEIS':'TAGESBERICHT VA';doc.setFillColor(77,133,32);doc.roundedRect(W-M-42,8,42,10,2,2,'F');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text(tagTxt,W-M-40,14.5);y=32;if(report.role==='ar'){doc.setFillColor(26,34,16);doc.rect(M,y,cw,10,'F');addText(report.name||'—',M+3,y+6.5,12,'bold',[220,232,196]);addText(fmtD(report.datum),W-M-25,y+6.5,10,'normal',[114,184,50]);y+=13;const cols=[[M,'Qualifikation',report.qual],[M+50,'Auftrag',getAuLabel(report.auftragId)],[M+110,'Wetter',report.wetter]];cols.forEach(([x,lbl,val])=>{doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(106,136,72);doc.text(lbl,x,y);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(184,204,152);doc.text(String(val||'—'),x,y+5);});y+=12;doc.setDrawColor(44,58,28);doc.line(M,y,W-M,y);y+=3;doc.setFillColor(20,26,13);doc.rect(M,y,cw,8,'F');addText('ARBEITSZEITEN',M+3,y+5.5,8,'bold',[106,136,72]);y+=11;const zeitCols=[['Beginn',report.von||'—',30],['Ende',report.bis||'—',30],['Pause',(report.pause||30)+' min',30],['Netto Arbeit',(report.nettoWork||'—')+' h',35],['Fahrzeit',(report.fahrzeitMin||0)+' min',35],['Gesamt',(report.netto||'—')+' h',36]];let x2=M;zeitCols.forEach(([lbl,val,w])=>{doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(106,136,72);doc.text(lbl,x2,y);doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(158,212,90);doc.text(String(val),x2,y+6);x2+=w;});y+=12;const fahrtLbl={'fahrer':'Fahrer — 100% angerechnet','beifahrer':'Beifahrer — 50% angerechnet','privat':'Privat — nicht bezahlt'}[report.fahrtStatus||'fahrer'];const fahrtCol=report.fahrtStatus==='fahrer'?[61,143,168]:report.fahrtStatus==='beifahrer'?[154,108,26]:[106,136,72];doc.setDrawColor(...fahrtCol);doc.setLineWidth(0.5);doc.rect(M,y,cw,8);doc.setLineWidth(0.2);addText(fahrtLbl,M+3,y+5.5,9,'bold',fahrtCol);y+=12;doc.setDrawColor(44,58,28);doc.line(M,y,W-M,y);y+=3;addText('TÄTIGKEITSBERICHT',M,y,7,'bold',[106,136,72]);y+=5;const th=wrap(report.taetigkeit||'—',M,y,cw,10,[184,204,152]);y+=Math.max(th*4,8)+4;if(report.besonder){doc.line(M,y,W-M,y);y+=3;addText('BESONDERHEITEN',M,y,7,'bold',[196,72,40]);y+=5;wrap(report.besonder,M,y,cw,9,[200,150,140]);y+=8;}}else{doc.setFillColor(26,34,16);doc.rect(M,y,cw,12,'F');addText(report.baustelle||'Baustelle',M+3,y+7.5,13,'bold',[220,232,196]);addText(fmtD(report.datum),W-M-28,y+7.5,10,'normal',[114,184,50]);y+=15;const meta=[['Bauherr',report.bauherr],['Bauleiter',report.bauleiter],['Auftrag',getAuLabel(report.auftragId)],['Projektnr.',report.projektnr]];meta.forEach(([lbl,val],i)=>{const mx=M+(i%2)*90;const my=y+Math.floor(i/2)*9;doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(106,136,72);doc.text(lbl,mx,my);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(184,204,152);doc.text(String(val||'—'),mx,my+4.5);});y+=20;doc.setFillColor(20,26,13);doc.rect(M,y,cw,7,'F');addText((report.wetter||'—')+'  '+(report.temp||'—')+'°C  '+(report.nied||0)+'mm  Boden: '+(report.boden||'—')+'  Gewerke: '+(report.gewerke||[]).join(', '),M+3,y+4.8,7,'normal',[114,184,50]);y+=10;doc.setDrawColor(44,58,28);doc.line(M,y,W-M,y);y+=3;const zRows=(report.zeitRows||[]).filter(t=>t.name);if(zRows.length){addText('ZEITERFASSUNG',M,y,7,'bold',[106,136,72]);y+=5;doc.setFillColor(32,42,20);doc.rect(M,y,cw,6,'F');['Name','Qual.','Von','Bis','Netto','Auftrag','Tätigkeit'].forEach((h,i)=>{const xs=[0,35,65,78,91,104,148];addText(h,M+xs[i],y+4.2,7,'bold',[106,136,72]);});y+=7;const zH=zRows.reduce((s,w)=>s+(parseFloat((w.netto||'0').replace(',','.'))||0),0);zRows.forEach((t,idx)=>{if(idx%2===0){doc.setFillColor(22,30,14);doc.rect(M,y-1,cw,6,'F');}const vals=[t.name,t.qual,t.von,t.bis,(t.netto||'—')+'h',getAuLabel(t.aid),t.tae||''];const xs=[0,35,65,78,91,104,148];vals.forEach((v,i)=>addText(v,M+xs[i],y+3.5,i===4?9:8,i===4?'bold':'normal',i===4?[158,212,90]:[184,204,152]));y+=6;});addText('Gesamt: '+zH.toFixed(2)+'h',M+148,y+2,9,'bold',[158,212,90]);y+=6;doc.line(M,y,W-M,y);y+=3;}const steps=(report.steps||[]).filter(s=>s.txt);if(steps.length){addText('AUSGEFÜHRTE ARBEITEN',M,y,7,'bold',[106,136,72]);y+=5;steps.forEach((s,i)=>{if(y>260){doc.addPage();y=M;}doc.setFillColor(20,26,13);doc.rect(M,y,cw,6,'F');addText(String(i+1),M+2,y+4.2,8,'bold',[114,184,50]);if(s.aid)addText(getAuLabel(s.aid),M+8,y+4.2,7,'normal',[154,108,26]);if(s.menge)addText(s.menge+' '+(s.eh||''),M+100,y+4.2,8,'bold',[158,212,90]);y+=7;const h=wrap(s.txt,M+4,y,cw-8,9,[184,204,152]);y+=Math.max(h*3.5,5)+3;});doc.line(M,y,W-M,y);y+=3;}const liefs=(report.lieferungen||[]).filter(l=>l.firma||l.mat);if(liefs.length){addText('LIEFERUNGEN',M,y,7,'bold',[106,136,72]);y+=5;liefs.forEach(l=>{if(y>265){doc.addPage();y=M;}addText((l.firma||'—')+' · LS:'+(l.ls||'—')+' · '+(l.mat||'—')+' · '+(l.menge||'—')+' '+(l.eh||'')+' · '+(l.ok||'—'),M+2,y,9,'normal',[184,204,152]);y+=5.5;});doc.line(M,y,W-M,y);y+=3;}if(report.naechstes){addText('NÄCHSTE SCHRITTE',M,y,7,'bold',[106,136,72]);y+=5;wrap(report.naechstes,M,y,cw,9,[184,204,152]);y+=10;}}const fy=285;doc.setFillColor(14,18,9);doc.rect(0,fy-2,W,297-fy+2,'F');doc.setDrawColor(44,58,28);doc.line(M,fy-2,W-M,fy-2);addText(FIRMA_NAME+' · '+FIRMA_ADRESSE,M,fy+3,7,'normal',[106,136,72]);addText('Erstellt: '+new Date().toLocaleString('de-DE'),W-M-50,fy+3,7,'normal',[106,136,72]);addText('www.klei-sportplatzbau.de',M,fy+8,7,'normal',[77,133,32]);if(y<270){doc.setDrawColor(44,58,28);doc.setLineWidth(0.3);doc.line(M,275,M+60,275);doc.line(W-M-60,275,W-M,275);addText('Unterschrift Ersteller',M,279,7,'normal',[106,136,72]);addText('Unterschrift Bauleiter',W-M-60,279,7,'normal',[106,136,72]);}return doc;}
-async function sendPDFMail(report,statusElId){const statusEl=document.getElementById(statusElId);if(statusEl){statusEl.className='send-status show sending';statusEl.textContent='📤 PDF wird erstellt und gesendet...';}try{const doc=await generatePDF(report);const pdfBase64=doc.output('datauristring').split(',')[1];const payload={empfaenger:EMPFAENGER_MAIL,betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' — '+(report.role==='ar'?report.name:report.baustelle||'Bericht'),rolle:report.role==='ar'?'Arbeiter':'Vorarbeiter',name:report.role==='ar'?report.name:report.bauleiter,datum:report.datum,baustelle:report.role==='va'?report.baustelle:'',auftrag:getAuLabel(report.auftragId||''),netto:report.netto||'',pdfBase64,reportJson:JSON.stringify(report)};const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});const txt=await res.text();if(res.ok&&txt.includes('OK')){if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='✅ PDF gesendet an '+EMPFAENGER_MAIL;}toast('✅ PDF gesendet!','ok');}else{throw new Error(txt||'Fehler');}}catch(e){if(statusEl){statusEl.className='send-status show err';statusEl.textContent='❌ '+e.message+' — PDF lokal gespeichert.';}const doc=await generatePDF(report);doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:report.baustelle)||'Bericht')+'.pdf');toast('PDF lokal gespeichert','err');}}
-async function saveAndSendAR(){const d={id:currentId||Date.now().toString(),role:'ar',datum:document.getElementById('a-datum').value,name:document.getElementById('a-name').value,auftragId:document.getElementById('a-auftrag').value,qual:document.getElementById('a-qual').value,wetter:document.getElementById('a-wetter').value,von:document.getElementById('a-von').value,bis:document.getElementById('a-bis').value,pause:document.getElementById('a-pause').value,fahrzeitMin:document.getElementById('a-fahrzeit').value,fahrtStatus:curFahrtStatus,nettoWork:document.getElementById('a-netto-work').value,netto:document.getElementById('a-netto').value,taetigkeit:document.getElementById('a-taetigkeit').value,besonder:document.getElementById('a-besonder').value,createdAt:new Date().toISOString()};if(!d.datum||!d.name){toast('Datum & Name erforderlich','err');return;}const idx=reports.findIndex(r=>r.id===d.id);if(idx>=0)reports[idx]=d;else reports.push(d);currentId=d.id;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();renderARDetail(d);toast('💾 Gespeichert...','ok');await sendPDFMail(d,'ar-send-status');}
-async function saveAndSendVA(){const steps=getSteps();const d={id:currentId||Date.now().toString(),role:'va',datum:document.getElementById('v-datum').value,baustelle:document.getElementById('v-baustelle').value,bauherr:document.getElementById('v-bauherr')?.value,auftragId:document.getElementById('v-auftrag').value,projektnr:document.getElementById('v-projektnr').value,bauleiter:document.getElementById('v-bauleiter').value,temp:document.getElementById('v-temp').value,nied:document.getElementById('v-nied').value,boden:document.getElementById('v-boden')?.value,besucher:document.getElementById('v-besucher').value,fotos:document.getElementById('v-fotos').value,naechstes:document.getElementById('v-naechstes').value,bemerkungen:document.getElementById('v-bemerkungen').value,wetter:curWeather,gewerke:getActiveTags(),steps,zeitRows:getZeitRows(),machRows:getMachRows(),geraete:getGeraete(),lieferungen:getLiefData(),mengen:getMengen(),lvRows:getLVRows(),maengel:getMangelData(),createdAt:new Date().toISOString(),aiAnalysis:null};if(!d.datum||!d.baustelle){toast('Datum & Baustelle erforderlich','err');return;}const idx=reports.findIndex(r=>r.id===d.id);if(idx>=0){d.aiAnalysis=reports[idx].aiAnalysis;reports[idx]=d;}else reports.push(d);currentId=d.id;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();renderVADetail(d);toast('💾 Gespeichert...','ok');await sendPDFMail(d,'va-send-status');}
+
+// ══════ PDF GENERIERUNG ══════
+async function generatePDF(report){
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const W=210,M=12,cw=W-M*2;let y=M;
+
+  // Farben
+  const COL={
+    bg:[14,18,9],dark:[20,26,13],mid:[26,34,16],
+    green:[77,133,32],greenL:[114,184,50],greenT:[158,212,90],
+    earth:[154,108,26],sky:[61,143,168],
+    cream:[220,232,196],text:[184,204,152],muted:[106,136,72],
+    red:[196,72,40],white:[255,255,255],grey:[200,200,200]
+  };
+
+  const setCol=(r,g,b)=>doc.setTextColor(r,g,b);
+  const setFill=(r,g,b)=>doc.setFillColor(r,g,b);
+  const setDraw=(r,g,b)=>doc.setDrawColor(r,g,b);
+  const txt=(t,x,fy,sz,bold,col)=>{
+    doc.setFontSize(sz||9);
+    doc.setFont('helvetica',bold?'bold':'normal');
+    setCol(...(col||COL.text));
+    doc.text(String(t||'—'),x,fy);
+  };
+  const line=(x1,y1,x2,y2,col)=>{
+    setDraw(...(col||COL.dark));doc.setLineWidth(0.2);doc.line(x1,y1,x2,y2);
+  };
+  const rect=(x,fy,w,h,col,fill)=>{
+    setFill(...(col||COL.dark));doc.rect(x,fy,w,h,fill||'F');
+  };
+  const wrap=(t,x,fy,maxW,sz,col)=>{
+    doc.setFontSize(sz||9);doc.setFont('helvetica','normal');setCol(...(col||COL.text));
+    const lines=doc.splitTextToSize(String(t||''),maxW);
+    doc.text(lines,x,fy);return lines.length;
+  };
+  const newPageIfNeeded=(needed)=>{if(y+needed>280){doc.addPage();y=M;}};
+
+  // ── HEADER ──
+  rect(0,0,W,30,COL.bg);
+  try{
+    const img=new Image();img.crossOrigin='anonymous';
+    await new Promise(res=>{img.onload=res;img.onerror=res;img.src=FIRMA_LOGO;setTimeout(res,2000);});
+    if(img.complete&&img.naturalWidth>0){
+      const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+      canvas.getContext('2d').drawImage(img,0,0);
+      const ratio=img.naturalWidth/img.naturalHeight;
+      doc.addImage(canvas.toDataURL('image/png'),'PNG',M,8,13*ratio,13);
+    }
+  }catch(e){}
+  txt(FIRMA_NAME,M+48,13,11,true,COL.cream);
+  txt(FIRMA_ADRESSE+' · '+FIRMA_TEL,M+48,18,7,false,COL.muted);
+
+  const typ=report.role==='ar'?'ARBEITSZEITNACHWEIS':'TAGESBERICHT VORARBEITER';
+  const typW=report.role==='ar'?46:54;
+  setFill(...COL.green);doc.roundedRect(W-M-typW,8,typW,10,2,2,'F');
+  txt(typ,W-M-typW+2,14.5,7,true,COL.white);
+  y=34;
+
+  if(report.role==='ar'){
+    // ── AR PDF ──
+    // Titelzeile
+    rect(M,y,cw,11,COL.mid);
+    txt(report.name||'—',M+3,y+7.5,13,true,COL.cream);
+    txt(fmtD(report.datum),W-M-28,y+7.5,11,false,COL.greenT);
+    y+=14;
+
+    // Infoleiste
+    const infos=[['Qualifikation',report.qual],['Auftrag',getAuLabel(report.auftragId)],['Wetter',report.wetter+(report.temp?' / '+report.temp+'°C':'')]];
+    infos.forEach(([l,v],i)=>{
+      const x=M+(i*62);
+      txt(l,x,y,7,false,COL.muted);
+      txt(v||'—',x,y+5,9,true,COL.text);
+    });
+    y+=13;line(M,y,W-M,y,COL.dark);y+=4;
+
+    // Zeitblock
+    rect(M,y,cw,8,COL.dark);
+    txt('ARBEITSZEITEN',M+3,y+5.5,8,true,COL.muted);
+    y+=11;
+
+    // Zeiten-Tabelle
+    const zCols=[
+      ['Arbeit Von',report.von||'—',28],
+      ['Arbeit Bis',report.bis||'—',28],
+      ['Pause',( report.pause||30)+' min',26],
+      ['Netto Arbeit',(report.nettoWork||'—')+' h',32],
+      ['Fahrzeit',(report.fahrzeitMin||0)+' min',28],
+      ['Fahrt-Status',{'fahrer':'Fahrer (100%)','beifahrer':'Beifahrer (50%)','privat':'Privat (0%)'}[report.fahrtStatus||'fahrer'],36],
+      ['GESAMT',(report.netto||'—')+' h',28]
+    ];
+    let x2=M;
+    zCols.forEach(([l,v,w])=>{
+      txt(l,x2,y,7,false,COL.muted);
+      const isTotal=l==='GESAMT';
+      txt(v,x2,y+6,isTotal?12:10,true,isTotal?COL.greenT:COL.text);
+      x2+=w;
+    });
+    y+=13;
+
+    // Fahrt-Farbbox
+    const fahrtCol={'fahrer':COL.sky,'beifahrer':COL.earth,'privat':COL.muted}[report.fahrtStatus||'fahrer'];
+    setDraw(...fahrtCol);doc.setLineWidth(0.5);
+    doc.rect(M,y,cw,8);doc.setLineWidth(0.2);
+    const fahrtTxt={'fahrer':'🚗 Fahrer — Fahrzeit wird zu 100% als Arbeitszeit gewertet',
+      'beifahrer':'🪑 Beifahrer — Fahrzeit wird zu 50% als Arbeitszeit gewertet',
+      'privat':'🏠 Privat — Fahrzeit wird nicht als Arbeitszeit gewertet'}[report.fahrtStatus||'fahrer'];
+    txt(fahrtTxt,M+3,y+5.5,8,true,fahrtCol);
+    y+=12;line(M,y,W-M,y,COL.dark);y+=4;
+
+    // Tätigkeit
+    rect(M,y,cw,7,COL.dark);
+    txt('TÄTIGKEITSBERICHT',M+3,y+4.8,8,true,COL.muted);y+=10;
+    const tLines=wrap(report.taetigkeit||'—',M+2,y,cw-4,10,COL.cream);
+    y+=tLines*5+4;
+
+    if(report.besonder){
+      line(M,y,W-M,y,COL.dark);y+=4;
+      rect(M,y,cw,7,[40,15,10]);
+      txt('BESONDERHEITEN / HINWEISE',M+3,y+4.8,8,true,COL.red);y+=10;
+      wrap(report.besonder,M+2,y,cw-4,9,[200,150,140]);
+      y+=8;
+    }
+
+  } else {
+    // ── VA PDF ──
+    // Projektheader
+    rect(M,y,cw,13,COL.mid);
+    txt(report.baustelle||'Baustelle',M+3,y+8,14,true,COL.cream);
+    txt(fmtD(report.datum),W-M-30,y+8,11,false,COL.greenT);
+    y+=16;
+
+    // Projektinfos - 2 Spalten
+    const pInfos=[
+      ['Bauherr / AG',report.bauherr||'—'],
+      ['Bauleiter',report.bauleiter||'—'],
+      ['Auftrag',getAuLabel(report.auftragId)],
+      ['Projektnr.',report.projektnr||'—']
+    ];
+    pInfos.forEach(([l,v],i)=>{
+      const cx=M+(i%2)*(cw/2);
+      const cy=y+Math.floor(i/2)*10;
+      txt(l,cx,cy,7,false,COL.muted);
+      txt(v,cx,cy+5,9,true,COL.text);
+    });
+    y+=22;
+
+    // Wetter-Streifen
+    rect(M,y,cw,8,COL.dark);
+    const wetterStr=(report.wetter||'—')+' | '+(report.temp||'—')+'°C | '+
+      (report.nied||0)+'mm Nied. | Boden: '+(report.boden||'—')+
+      ' | Gewerke: '+(report.gewerke||[]).join(', ');
+    txt(wetterStr,M+3,y+5,7,false,COL.greenL);
+    y+=11;line(M,y,W-M,y,COL.dark);y+=4;
+
+    // ── ZEITERFASSUNG ──
+    const zRows=(report.zeitRows||[]).filter(t=>t.name);
+    if(zRows.length){
+      rect(M,y,cw,8,COL.dark);
+      txt('ZEITERFASSUNG PERSONAL',M+3,y+5.5,8,true,COL.muted);
+      const totalGes=zRows.reduce((s,w)=>s+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),0);
+      txt('Gesamt: '+totalGes.toFixed(2)+'h',W-M-35,y+5.5,8,true,COL.greenT);
+      y+=11;
+
+      // Tabellen-Header
+      rect(M,y,cw,6,[32,42,20]);
+      const zH=[['Name',0,38],['Qual.',38,24],['Von',62,18],['Bis',80,18],['Netto',98,20],['Fahrz.',118,20],['Fahrt',138,24],['Gesamt',162,22]];
+      zH.forEach(([h,ox,w])=>txt(h,M+ox,y+4.2,7,true,COL.muted));
+      y+=7;
+
+      zRows.forEach((t,idx)=>{
+        newPageIfNeeded(7);
+        if(idx%2===0)rect(M,y-1,cw,7,[22,30,14]);
+        const fahrtLbl={'fahrer':'100%','beifahrer':'50%','privat':'0%'}[t.fahrt||'fahrer'];
+        const vals=[[t.name,0,36,true,COL.cream],[t.qual||'',38,23,false,COL.text],
+          [t.von||'',62,17],[t.bis||'',80,17],
+          [(t.netto||'—')+'h',98,19,true,COL.greenT],
+          [(t.fahrzeitMin||0)+'min',118,19],
+          [fahrtLbl,138,23,false,COL.earth],
+          [(t.gesamt||t.netto||'—')+'h',162,21,true,COL.greenT]];
+        vals.forEach(([v,ox,w,b,c])=>txt(v,M+ox,y+4,8,b||false,c||COL.text));
+        y+=6;
+      });
+      y+=2;line(M,y,W-M,y,COL.dark);y+=4;
+    }
+
+    // ── GERÄTEEINSATZ ──
+    const mRows=(report.machRows||[]).filter(m=>m.geraetNr);
+    if(mRows.length){
+      newPageIfNeeded(20);
+      rect(M,y,cw,8,COL.dark);
+      txt('GERÄTEEINSATZ (DATAFLOR)',M+3,y+5.5,8,true,COL.muted);y+=11;
+      rect(M,y,cw,6,[32,42,20]);
+      txt('Nr.',M,y+4.2,7,true,COL.muted);
+      txt('Gerät / Bezeichnung',M+16,y+4.2,7,true,COL.muted);
+      txt('Kfz/Nr.',M+100,y+4.2,7,true,COL.muted);
+      txt('Von',M+128,y+4.2,7,true,COL.muted);
+      txt('Bis',M+148,y+4.2,7,true,COL.muted);
+      txt('Std.',M+168,y+4.2,7,true,COL.muted);
+      y+=7;
+      mRows.forEach((m,idx)=>{
+        newPageIfNeeded(7);
+        if(idx%2===0)rect(M,y-1,cw,7,[22,30,14]);
+        txt(m.geraetNr,M,y+4,8,true,COL.earth);
+        txt(m.geraetBez||'—',M+16,y+4,8,false,COL.cream);
+        txt(m.fahrzeugnr||'—',M+100,y+4,8,false,COL.text);
+        txt(m.von||'',M+128,y+4,8,false,COL.text);
+        txt(m.bis||'',M+148,y+4,8,false,COL.text);
+        txt((m.netto||'—')+'h',M+168,y+4,9,true,COL.greenT);
+        y+=6;
+      });
+      y+=2;line(M,y,W-M,y,COL.dark);y+=4;
+    }
+
+    // ── ARBEITSSCHRITTE ──
+    const steps=(report.steps||[]).filter(s=>s.txt);
+    if(steps.length){
+      newPageIfNeeded(20);
+      rect(M,y,cw,8,COL.dark);
+      txt('AUSGEFÜHRTE ARBEITEN / ARBEITSSCHRITTE',M+3,y+5.5,8,true,COL.muted);y+=11;
+      steps.forEach((s,i)=>{
+        newPageIfNeeded(18);
+        // Schritt-Header
+        rect(M,y,cw,7,[20,28,13]);
+        txt(String(i+1),M+2,y+4.8,9,true,COL.greenL);
+        if(s.aid)txt(getAuLabel(s.aid),M+10,y+4.8,8,false,COL.earth);
+        if(s.pos)txt('Pos. '+s.pos,M+80,y+4.8,8,false,[61,143,168]);
+        if(s.menge)txt(s.menge+' '+(s.eh||''),W-M-30,y+4.8,9,true,COL.greenT);
+        y+=9;
+        const lines=wrap(s.txt,M+4,y,cw-8,9,COL.text);
+        y+=lines*4.5+4;
+        if(s.norm){txt('Norm/Hinweis: '+s.norm,M+4,y,8,false,COL.muted);y+=5;}
+        line(M,y,W-M,y,[28,38,18]);y+=2;
+      });
+      y+=2;
+    }
+
+    // ── LIEFERUNGEN ──
+    const liefs=(report.lieferungen||[]).filter(l=>l.firma||l.mat);
+    if(liefs.length){
+      newPageIfNeeded(20);
+      rect(M,y,cw,8,COL.dark);
+      txt('MATERIALLIEFERUNGEN',M+3,y+5.5,8,true,COL.muted);y+=11;
+      rect(M,y,cw,6,[32,42,20]);
+      ['Lieferant','Liefer-Nr.','Material','Menge','Status'].forEach((h,i)=>{
+        const xs=[0,40,75,130,155];txt(h,M+xs[i],y+4.2,7,true,COL.muted);
+      });y+=7;
+      liefs.forEach((l,idx)=>{
+        newPageIfNeeded(7);
+        if(idx%2===0)rect(M,y-1,cw,7,[22,30,14]);
+        txt(l.firma||'—',M+0,y+4,8,true,COL.earth);
+        txt(l.ls||'—',M+40,y+4,8,false,COL.text);
+        txt(l.mat||'—',M+75,y+4,8,false,COL.cream);
+        txt((l.menge||'—')+' '+(l.eh||''),M+130,y+4,8,true,COL.greenT);
+        txt(l.ok||'',M+155,y+4,8,false,COL.text);
+        y+=6;
+      });
+      y+=2;line(M,y,W-M,y,COL.dark);y+=4;
+    }
+
+    // ── MÄNGEL ──
+    const maengel=(report.maengel||[]).filter(m=>m.txt);
+    if(maengel.length){
+      newPageIfNeeded(20);
+      rect(M,y,cw,8,[50,15,10]);
+      txt('MÄNGEL & PROBLEME ('+maengel.length+')',M+3,y+5.5,8,true,COL.red);y+=11;
+      maengel.forEach(m=>{
+        newPageIfNeeded(16);
+        rect(M,y,cw,7,[40,12,8]);
+        txt((m.schwere||'')+' | '+(m.typ||''),M+3,y+4.8,8,true,[220,140,100]);y+=9;
+        const lines=wrap(m.txt,M+4,y,cw-8,9,[200,160,150]);y+=lines*4.5+3;
+        if(m.massnahme){txt('➤ Maßnahme: '+m.massnahme,M+4,y,8,false,COL.earth);y+=6;}
+        line(M,y,W-M,y,[60,20,10]);y+=3;
+      });
+    }
+
+    // ── NÄCHSTE SCHRITTE ──
+    if(report.naechstes){
+      newPageIfNeeded(16);
+      rect(M,y,cw,8,COL.dark);
+      txt('NÄCHSTE SCHRITTE / PLANUNG',M+3,y+5.5,8,true,COL.muted);y+=11;
+      const lines=wrap(report.naechstes,M+2,y,cw-4,9,COL.text);
+      y+=lines*4.5+4;
+    }
+  }
+
+  // ── FOOTER ──
+  const fy=284;
+  setFill(...COL.bg);doc.rect(0,fy-2,W,300,'F');
+  line(M,fy-2,W-M,fy-2,COL.dark);
+  txt(FIRMA_NAME+' · '+FIRMA_ADRESSE,M,fy+3,7,false,COL.muted);
+  txt('Erstellt: '+new Date().toLocaleString('de-DE'),W-M-52,fy+3,7,false,COL.muted);
+  txt('www.klei-sportplatzbau.de',M,fy+8,7,false,COL.green);
+
+  // Unterschriften
+  if(y<268){
+    setDraw(...COL.dark);doc.setLineWidth(0.3);
+    doc.line(M,274,M+65,274);
+    doc.line(W-M-65,274,W-M,274);
+    txt('Unterschrift Mitarbeiter',M,278,7,false,COL.muted);
+    txt('Unterschrift Vorarbeiter / Bauleiter',W-M-65,278,7,false,COL.muted);
+  }
+
+  return doc;
+}
+
+// ══════ SEND PDF ══════
+async function sendPDFMail(report,statusElId){
+  const statusEl=document.getElementById(statusElId);
+  if(statusEl){statusEl.className='send-status show sending';statusEl.textContent='📤 PDF wird erstellt und gesendet...';}
+  try{
+    const doc=await generatePDF(report);
+    const pdfBase64=doc.output('datauristring').split(',')[1];
+    const payload={
+      empfaenger:EMPFAENGER_MAIL,
+      betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' — '+(report.role==='ar'?report.name:report.baustelle||'Bericht'),
+      rolle:report.role==='ar'?'Arbeiter':'Vorarbeiter',
+      name:report.role==='ar'?report.name:report.bauleiter,
+      datum:report.datum,
+      baustelle:report.role==='va'?report.baustelle:'',
+      auftrag:getAuLabel(report.auftragId||''),
+      netto:report.netto||'',
+      pdfBase64,
+      reportJson:JSON.stringify(report)
+    };
+    const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});
+    const txt2=await res.text();
+    if(res.ok&&txt2.includes('OK')){
+      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='✅ PDF gesendet an '+EMPFAENGER_MAIL;}
+      toast('✅ PDF gesendet!','ok');
+    }else{throw new Error(txt2||'Fehler');}
+  }catch(e){
+    if(statusEl){statusEl.className='send-status show err';statusEl.textContent='❌ '+e.message+' — PDF lokal gespeichert.';}
+    const doc=await generatePDF(report);
+    doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:report.baustelle)||'Bericht')+'.pdf');
+    toast('PDF lokal gespeichert','err');
+  }
+}
+
+// ══════ SAVE & SEND ══════
+async function saveAndSendAR(){
+  const d={id:currentId||Date.now().toString(),role:'ar',datum:document.getElementById('a-datum').value,name:document.getElementById('a-name').value,auftragId:document.getElementById('a-auftrag').value,qual:document.getElementById('a-qual').value,wetter:document.getElementById('a-wetter').value,von:document.getElementById('a-von').value,bis:document.getElementById('a-bis').value,pause:document.getElementById('a-pause').value,fahrzeitMin:document.getElementById('a-fahrzeit').value,fahrtStatus:curFahrtStatus,nettoWork:document.getElementById('a-netto-work').value,netto:document.getElementById('a-netto').value,taetigkeit:document.getElementById('a-taetigkeit').value,besonder:document.getElementById('a-besonder').value,createdAt:new Date().toISOString()};
+  if(!d.datum||!d.name){toast('Datum & Name erforderlich','err');return;}
+  const idx=reports.findIndex(r=>r.id===d.id);if(idx>=0)reports[idx]=d;else reports.push(d);
+  currentId=d.id;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();renderARDetail(d);
+  toast('💾 Gespeichert...','ok');await sendPDFMail(d,'ar-send-status');
+}
+async function saveAndSendVA(){
+  const d={id:currentId||Date.now().toString(),role:'va',datum:document.getElementById('v-datum').value,baustelle:document.getElementById('v-baustelle').value,bauherr:document.getElementById('v-bauherr')?.value,auftragId:document.getElementById('v-auftrag').value,projektnr:document.getElementById('v-projektnr').value,bauleiter:document.getElementById('v-bauleiter').value,temp:document.getElementById('v-temp').value,nied:document.getElementById('v-nied').value,boden:document.getElementById('v-boden')?.value,besucher:document.getElementById('v-besucher').value,fotos:document.getElementById('v-fotos').value,naechstes:document.getElementById('v-naechstes').value,bemerkungen:document.getElementById('v-bemerkungen').value,wetter:curWeather,gewerke:getActiveTags(),steps:getSteps(),zeitRows:getZeitRows(),machRows:getMachRows(),lieferungen:getLiefData(),mengen:getMengen(),lvRows:getLVRows(),maengel:getMangelData(),createdAt:new Date().toISOString(),aiAnalysis:null};
+  if(!d.datum||!d.baustelle){toast('Datum & Baustelle erforderlich','err');return;}
+  const idx=reports.findIndex(r=>r.id===d.id);if(idx>=0){d.aiAnalysis=reports[idx].aiAnalysis;reports[idx]=d;}else reports.push(d);
+  currentId=d.id;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();renderVADetail(d);
+  toast('💾 Gespeichert...','ok');await sendPDFMail(d,'va-send-status');
+}
+
 function clearARForm(){currentId=null;['a-name','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('a-datum').value=todayStr();document.getElementById('a-von').value='07:00';document.getElementById('a-bis').value='16:00';document.getElementById('a-pause').value='30';document.getElementById('a-fahrzeit').value='0';['a-netto-work','a-netto'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const fi=document.getElementById('fahrzeit-info');if(fi)fi.textContent='';const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}curFahrtStatus='fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});toast('Formular geleert','ok');}
-function newReport(){currentId=null;if(currentRole==='ar')clearARForm();else{stepIdx=0;liefIdx=0;mangelIdx=0;['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-fotos','v-naechstes','v-bemerkungen'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';});['steps-con','geraete-con','mangel-con','lief-con','mengen-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';setTimeout(()=>{addStep();addGeraet();addZeitRow();addLief();addMenge();addLVRow();},50);curWeather='Sonnig';document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));document.querySelectorAll('#gw-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));showTab('bericht');}toast('Neuer Bericht','ok');}
-function loadReport(id){const r=reports.find(x=>x.id===id);if(!r)return;currentId=id;document.querySelectorAll('.ri').forEach(el=>el.classList.toggle('act',el.dataset.id===id));if(r.role==='ar'){const sv=(i,v)=>{const el=document.getElementById(i);if(el)el.value=v||'';};sv('a-datum',r.datum);sv('a-name',r.name);sv('a-von',r.von);sv('a-bis',r.bis);sv('a-pause',r.pause);sv('a-fahrzeit',r.fahrzeitMin||0);sv('a-taetigkeit',r.taetigkeit);sv('a-besonder',r.besonder);if(document.getElementById('a-auftrag'))document.getElementById('a-auftrag').value=r.auftragId||'';if(document.getElementById('a-qual'))document.getElementById('a-qual').value=r.qual||'Facharbeiter GaLa';if(document.getElementById('a-wetter'))document.getElementById('a-wetter').value=r.wetter||'Sonnig';curFahrtStatus=r.fahrtStatus||'fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.toggle('fahrt-active',b.dataset.val===curFahrtStatus));calcAR();renderARDetail(r);showTab('quick');}else{renderVADetail(r);loadVAForm(r);showTab('bericht');}}
-function loadVAForm(r){const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);sv('v-projektnr',r.projektnr);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temp);sv('v-nied',r.nied);sv('v-besucher',r.besucher);sv('v-fotos',r.fotos);sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);if(document.getElementById('v-auftrag'))document.getElementById('v-auftrag').value=r.auftragId||'';if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';curWeather=r.wetter||'Sonnig';const wm={Sonnig:0,Bewölkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));document.querySelectorAll('#gw-tags .tg').forEach(t=>t.classList.toggle('a',(r.gewerke||[]).includes(t.textContent)));stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';(r.steps||[]).forEach(s=>addStep(s));if(!r.steps?.length)addStep();const gc=document.getElementById('geraete-con');if(gc)gc.innerHTML='';(r.geraete||[]).forEach(g=>addGeraet(g));if(!r.geraete?.length)addGeraet();const mgc=document.getElementById('mangel-con');if(mgc)mgc.innerHTML='';(r.maengel||[]).forEach(m=>addMangel({txt:m.txt,massnahme:m.massnahme}));const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';(r.zeitRows||[]).forEach(row=>addZeitRow(row));if(!r.zeitRows?.length)addZeitRow();const mb2=document.getElementById('mach-body');if(mb2)mb2.innerHTML='';(r.machRows||[]).forEach(row=>addMachRow(row));liefIdx=0;const lc=document.getElementById('lief-con');if(lc)lc.innerHTML='';(r.lieferungen||[]).forEach(l=>addLief(l));if(!r.lieferungen?.length)addLief();const mc=document.getElementById('mengen-con');if(mc)mc.innerHTML='';(r.mengen||[]).forEach(m=>addMenge(m));if(!r.mengen?.length)addMenge();const lvb=document.getElementById('lv-body');if(lvb)lvb.innerHTML='';(r.lvRows||[]).forEach(row=>addLVRow(row));if(!r.lvRows?.length)addLVRow();}
+
+function newReport(){currentId=null;if(currentRole==='ar')clearARForm();else{stepIdx=0;liefIdx=0;mangelIdx=0;['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-fotos','v-naechstes','v-bemerkungen'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';});['steps-con','geraete-con','mangel-con','lief-con','mengen-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},50);curWeather='Sonnig';document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));document.querySelectorAll('#gw-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));showTab('bericht');}toast('Neuer Bericht','ok');}
+
+function loadReport(id){const r=reports.find(x=>x.id===id);if(!r)return;currentId=id;document.querySelectorAll('.ri').forEach(el=>el.classList.toggle('act',el.dataset.id===id));if(r.role==='ar'){const sv=(i,v)=>{const el=document.getElementById(i);if(el)el.value=v||'';};sv('a-datum',r.datum);sv('a-name',r.name);sv('a-von',r.von);sv('a-bis',r.bis);sv('a-pause',r.pause);sv('a-fahrzeit',r.fahrzeitMin||0);sv('a-taetigkeit',r.taetigkeit);sv('a-besonder',r.besonder);if(document.getElementById('a-auftrag'))document.getElementById('a-auftrag').value=r.auftragId||'';if(document.getElementById('a-qual'))document.getElementById('a-qual').value=r.qual||'Facharbeiter GaLa';curFahrtStatus=r.fahrtStatus||'fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.toggle('fahrt-active',b.dataset.val===curFahrtStatus));calcAR();renderARDetail(r);showTab('quick');}else{renderVADetail(r);loadVAForm(r);showTab('bericht');}}
+
+function loadVAForm(r){const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);sv('v-projektnr',r.projektnr);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temp);sv('v-nied',r.nied);sv('v-besucher',r.besucher);sv('v-fotos',r.fotos);sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);if(document.getElementById('v-auftrag'))document.getElementById('v-auftrag').value=r.auftragId||'';if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';curWeather=r.wetter||'Sonnig';const wm={Sonnig:0,Bewölkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));document.querySelectorAll('#gw-tags .tg').forEach(t=>t.classList.toggle('a',(r.gewerke||[]).includes(t.textContent)));stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';(r.steps||[]).forEach(s=>addStep(s));if(!r.steps?.length)addStep();const mgc=document.getElementById('mangel-con');if(mgc)mgc.innerHTML='';(r.maengel||[]).forEach(m=>addMangel({txt:m.txt,massnahme:m.massnahme}));const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';(r.zeitRows||[]).forEach(row=>addZeitRow(row));if(!r.zeitRows?.length)addZeitRow();const mb2=document.getElementById('mach-body');if(mb2)mb2.innerHTML='';(r.machRows||[]).forEach(row=>addMachRow(row));liefIdx=0;const lc=document.getElementById('lief-con');if(lc)lc.innerHTML='';(r.lieferungen||[]).forEach(l=>addLief(l));if(!r.lieferungen?.length)addLief();const mc=document.getElementById('mengen-con');if(mc)mc.innerHTML='';(r.mengen||[]).forEach(m=>addMenge(m));if(!r.mengen?.length)addMenge();const lvb=document.getElementById('lv-body');if(lvb)lvb.innerHTML='';(r.lvRows||[]).forEach(row=>addLVRow(row));if(!r.lvRows?.length)addLVRow();}
+
 function renderARDetail(r){const fl={'fahrer':'🚗 Fahrer (100%)','beifahrer':'🪑 Beifahrer (50%)','privat':'🏠 Privat (0%)'}[r.fahrtStatus||'fahrer'];const fc={'fahrer':'var(--sky)','beifahrer':'var(--earth)','privat':'var(--m)'}[r.fahrtStatus||'fahrer'];const fh=((parseFloat(r.fahrzeitMin)||0)/60);const satz={'fahrer':1,'beifahrer':.5,'privat':0}[r.fahrtStatus||'fahrer'];const fa=(fh*satz).toFixed(2).replace('.',',');document.getElementById('detailContent').innerHTML='<div class="card"><div class="card-title">'+(r.name||'—')+'</div><div class="card-meta"><span class="g">📅 '+fmtD(r.datum)+'</span><span>'+(r.qual||'—')+'</span><span>'+(r.wetter||'—')+'</span></div></div><div class="srow"><div class="sc"><div class="sv">'+(r.nettoWork||r.netto||'—')+'h</div><div class="sl">Arbeit</div></div><div class="sc"><div class="sv" style="color:'+fc+'">'+fa+'h</div><div class="sl">Fahrzeit</div></div><div class="sc"><div class="sv" style="color:var(--gl)">'+(r.netto||'—')+'h</div><div class="sl">Gesamt</div></div></div><div class="ib"><div class="ib-t">⏱ Zeiten</div><div class="ib-c">'+(r.von||'—')+'–'+(r.bis||'—')+' · Pause: '+(r.pause||30)+'min'+(parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min · '+fl+' → '+fa+'h</span>':'')+'</div></div>'+(r.auftragId?'<div class="ib"><div class="ib-t">📋 Auftrag</div><div class="ib-c">'+getAuLabel(r.auftragId)+'</div></div>':'')+'<div class="ib"><div class="ib-t">📝 Tätigkeit</div><div class="ib-c">'+(r.taetigkeit||'—')+'</div></div>'+(r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">⚠️ Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+'<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">🗑 Löschen</button></div>';}
-function renderVADetail(r){const hours=(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.netto||'0').replace(',','.'))||0),0);document.getElementById('detailContent').innerHTML='<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="card-title">'+(r.baustelle||'Baustelle')+'</div><div class="card-meta"><span class="g">📅 '+fmtD(r.datum)+'</span><span>👷 '+(r.bauleiter||'—')+'</span><span>#'+(r.projektnr||'—')+'</span></div></div><div style="display:flex;gap:5px"><button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">✏️</button><button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">🗑</button></div></div></div><div class="srow"><div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div><div class="sc"><div class="sv">'+((r.zeitRows||[]).filter(t=>t.name).length)+'</div><div class="sl">Mitarbeiter</div></div><div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div></div>'+((r.steps||[]).length?'<div class="ib"><div class="ib-t">📝 Arbeiten</div>'+(r.steps||[]).map((s,i)=>'<div style="padding:5px 0;border-bottom:1px solid var(--b);font-size:11px"><span style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;background:var(--gg);border:1px solid var(--gd);border-radius:2px;padding:1px 4px;color:var(--g)">'+(i+1)+'</span>'+(s.aid?' <span style="color:var(--earth);font-size:9px">'+getAuLabel(s.aid)+'</span>':'')+' '+s.txt+(s.menge?' <strong style="color:var(--gl)">'+s.menge+(s.eh||'')+'</strong>':'')+'</div>').join('')+'</div>':'')+(r.aiAnalysis?'<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>KI-Analyse</div><div class="ai-txt">'+r.aiAnalysis+'</div></div>':'')+'<div class="arow"><button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">📤 Erneut senden</button></div>';}
-function renderSB(){const el=document.getElementById('sb-list');if(!reports.length){el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Keine Berichte</div>';return;}el.innerHTML=[...reports].reverse().map(r=>{const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);return'<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')"><div class="ri-d">'+fmtD(r.datum)+'</div><div class="ri-n">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div><div class="ri-s">'+(r.role==='va'?(r.bauleiter||'VA'):(r.qual||'AR'))+' · '+(typeof h==='number'?h.toFixed(1):h)+'h</div><div class="ri-tags"><span class="tag-s '+(r.role==='va'?'tag-e':'tag-g')+'">'+(r.role==='va'?'VA':'AR')+'</span>'+(r.aiAnalysis?'<span class="tag-s tag-g">KI</span>':'')+((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">⚠'+r.maengel.filter(m=>m.txt).length+'</span>':'')+'</div></div>';}).join('');}
-function buildUE(){const el=document.getElementById('ue-content');if(!el)return;const vaR=reports.filter(r=>r.role==='va'),arR=reports.filter(r=>r.role==='ar');const vaH=vaR.reduce((s,r)=>(r.zeitRows||[]).reduce((a,w)=>a+(parseFloat((w.netto||'0').replace(',','.'))||0),s),0);const arH=arR.reduce((s,r)=>s+(parseFloat((r.netto||'0').replace(',','.')||0)),0);el.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px"><div class="sc"><div class="sv">'+reports.length+'</div><div class="sl">Berichte</div></div><div class="sc"><div class="sv">'+(vaH+arH).toFixed(0)+'h</div><div class="sl">Stunden</div></div><div class="sc"><div class="sv">'+vaR.length+'</div><div class="sl">VA-Berichte</div></div><div class="sc"><div class="sv">'+arR.length+'</div><div class="sl">AR-Einträge</div></div></div>'+[...reports].reverse().slice(0,20).map(r=>{const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0')||0);return'<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' · '+(r.role==='va'?'VA':'AR')+'</div></div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+(typeof h==='number'?h.toFixed(1):h)+'h</div></div></div>';}).join('');}
+
+function renderVADetail(r){const hours=(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),0);document.getElementById('detailContent').innerHTML='<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="card-title">'+(r.baustelle||'Baustelle')+'</div><div class="card-meta"><span class="g">📅 '+fmtD(r.datum)+'</span><span>👷 '+(r.bauleiter||'—')+'</span><span>#'+(r.projektnr||'—')+'</span></div></div><div style="display:flex;gap:5px"><button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">✏️</button><button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">🗑</button></div></div></div>'+
+'<div class="srow"><div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div><div class="sc"><div class="sv">'+((r.zeitRows||[]).filter(t=>t.name).length)+'</div><div class="sl">Mitarbeiter</div></div><div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div></div>'+
+((r.zeitRows||[]).filter(t=>t.name).length?'<div class="ib"><div class="ib-t">⏱ Zeiterfassung</div>'+
+(r.zeitRows||[]).filter(t=>t.name).map(t=>{
+  const fl={'fahrer':'🚗100%','beifahrer':'🪑50%','privat':'🏠0%'}[t.fahrt||'fahrer'];
+  return'<div style="padding:4px 0;border-bottom:1px solid var(--b);font-size:11px;display:flex;justify-content:space-between"><span style="color:var(--c);font-weight:600">'+t.name+'</span><span style="color:var(--m)">'+t.von+'–'+t.bis+'</span><span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace">'+( t.netto||'—')+'h</span><span style="color:var(--earth);font-size:10px">'+fl+'</span><span style="color:var(--greenT,#9ed45a);font-weight:700;font-family:\'IBM Plex Mono\',monospace">'+(t.gesamt||t.netto||'—')+'h</span></div>';
+}).join('')+'</div>':'')+'<div class="arow"><button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">📤 PDF erneut senden</button></div>';}
+
+function renderSB(){const el=document.getElementById('sb-list');if(!reports.length){el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Keine Berichte</div>';return;}el.innerHTML=[...reports].reverse().map(r=>{const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);return'<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+'<div class="ri-d">'+fmtD(r.datum)+'</div>'+'<div class="ri-n">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div>'+'<div class="ri-s">'+(r.role==='va'?(r.bauleiter||'VA'):(r.qual||'AR'))+' · '+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+'<div class="ri-tags"><span class="tag-s '+(r.role==='va'?'tag-e':'tag-g')+'">'+(r.role==='va'?'VA':'AR')+'</span>'+(r.aiAnalysis?'<span class="tag-s tag-g">KI</span>':'')+((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">⚠'+r.maengel.filter(m=>m.txt).length+'</span>':'')+'</div></div>';}).join('');}
+
+function buildUE(){const el=document.getElementById('ue-content');if(!el)return;const vaR=reports.filter(r=>r.role==='va'),arR=reports.filter(r=>r.role==='ar');const vaH=vaR.reduce((s,r)=>(r.zeitRows||[]).reduce((a,w)=>a+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),s),0);const arH=arR.reduce((s,r)=>s+(parseFloat((r.netto||'0').replace(',','.')||0)),0);el.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px"><div class="sc"><div class="sv">'+reports.length+'</div><div class="sl">Berichte</div></div><div class="sc"><div class="sv">'+(vaH+arH).toFixed(0)+'h</div><div class="sl">Stunden</div></div><div class="sc"><div class="sv">'+vaR.length+'</div><div class="sl">VA-Berichte</div></div><div class="sc"><div class="sv">'+arR.length+'</div><div class="sl">AR-Einträge</div></div></div>'+[...reports].reverse().slice(0,20).map(r=>{const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0')||0);return'<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+'<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' · '+(r.role==='va'?'VA':'AR')+'</div></div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+(typeof h==='number'?h.toFixed(1):h)+'h</div></div></div>';}).join('');}
+
 async function triggerAI(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Erst speichern!','err');return;}showTab('ki');await runAI('zusammenfassung');}
-async function runAI(type){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const prompts={zusammenfassung:'Erstelle eine kompakte strukturierte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',risiken:'Analysiere Risiken, Mängel, Behinderungen. Bewerte Schweregrad, nenne DIN-Normen.',kosten:'Kostenschätzung: Personal nach GaLaBau-Tariflohn, Geräte, Material.',qualitaet:'Qualitätsprüfung nach GaLaBau-Normen: DIN 18917, DIN 18035, RSM, VOB/C.',bericht:'Formaler VOB-konformer Tagesbericht für Baudokumentation.',plan:'Wochenplanung für nächste 5 Werktage.'};const stTxt=(r.steps||[]).map((s,i)=>(i+1)+'. ['+getAuLabel(s.aid)+'] '+s.txt+' '+(s.menge||'')).join('\n');const rTxt='KLEI Tagesbericht\nDatum:'+r.datum+'|Baustelle:'+r.baustelle+'|Auftrag:'+getAuLabel(r.auftragId)+'|Bauleiter:'+r.bauleiter+'\nWetter:'+r.wetter+','+r.temp+'°C\nGewerke:'+(r.gewerke||[]).join(',')+'\nArbeiten:\n'+stTxt+'\nMängel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+'\nNächstes:'+(r.naechstes||'—');const lbl={zusammenfassung:'📄 Zusammenfassung',risiken:'⚠️ Risiken',kosten:'💶 Kosten',qualitaet:'✅ Qualität',bericht:'📃 VOB',plan:'📅 Wochenplan'};const out=document.getElementById('ki-out');out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompts[type]+'\n\n---\n'+rTxt}]})});const data=await res.json();const txt=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>').replace(/^- (.+)$/gm,'• $1');out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';const idx=reports.findIndex(x=>x.id===r.id);if(idx>=0){reports[idx].aiAnalysis=fmt;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();}toast('✓ KI fertig','ok');}catch(e){out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">⚠ '+e.message+'</div></div>';toast('KI-Fehler','err');}}
+async function runAI(type){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const prompts={zusammenfassung:'Erstelle eine kompakte strukturierte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',risiken:'Analysiere Risiken, Mängel, Behinderungen. Bewerte Schweregrad, nenne DIN-Normen.',kosten:'Kostenschätzung: Personal nach GaLaBau-Tariflohn, Geräte nach Dataflor-Nummern, Material.',qualitaet:'Qualitätsprüfung nach GaLaBau-Normen: DIN 18917, DIN 18035, RSM, VOB/C.',bericht:'Formaler VOB-konformer Tagesbericht für Baudokumentation.',plan:'Wochenplanung für nächste 5 Werktage.'};const stTxt=(r.steps||[]).map((s,i)=>(i+1)+'. ['+getAuLabel(s.aid)+'] '+s.txt+' '+(s.menge||'')).join('\n');const rTxt='KLEI Tagesbericht\nDatum:'+r.datum+'|Baustelle:'+r.baustelle+'|Auftrag:'+getAuLabel(r.auftragId)+'|Bauleiter:'+r.bauleiter+'\nWetter:'+r.wetter+','+r.temp+'°C\nGewerke:'+(r.gewerke||[]).join(',')+'\nZeiten:'+(r.zeitRows||[]).map(t=>t.name+'('+t.qual+'):'+t.von+'-'+t.bis+'='+t.netto+'h Fahrz:'+t.fahrzeitMin+'min('+t.fahrt+') Gesamt:'+t.gesamt+'h').join('; ')+'\nGeräte:'+(r.machRows||[]).map(m=>m.geraetNr+' '+m.geraetBez+' Kfz:'+m.fahrzeugnr+' '+m.von+'-'+m.bis+'='+m.netto+'h').join('; ')+'\nArbeiten:\n'+stTxt+'\nMängel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+'\nNächstes:'+(r.naechstes||'—');const lbl={zusammenfassung:'📄 Zusammenfassung',risiken:'⚠️ Risiken',kosten:'💶 Kosten',qualitaet:'✅ Qualität',bericht:'📃 VOB',plan:'📅 Wochenplan'};const out=document.getElementById('ki-out');out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompts[type]+'\n\n---\n'+rTxt}]})});const data=await res.json();const txt3=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';const fmt=txt3.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>').replace(/^- (.+)$/gm,'• $1');out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';const idx=reports.findIndex(x=>x.id===r.id);if(idx>=0){reports[idx].aiAnalysis=fmt;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();}toast('✓ KI fertig','ok');}catch(e){out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">⚠ '+e.message+'</div></div>';toast('KI-Fehler','err');}}
+
 function loadDFCfg(){if(!dfCfg)return;['df-url','df-key','df-mandant','df-kst'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=[dfCfg.url,dfCfg.key,dfCfg.mandant,dfCfg.kst][i]||'';});}
 function saveDFCfg(){dfCfg={url:document.getElementById('df-url')?.value,key:document.getElementById('df-key')?.value,mandant:document.getElementById('df-mandant')?.value,kst:document.getElementById('df-kst')?.value};localStorage.setItem('klei_df',JSON.stringify(dfCfg));toast('Dataflor gespeichert','ok');}
-function expDFCSV(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,netto:r.netto,aid:r.auftragId,tae:r.taetigkeit}];const hdr='Mandant;Datum;Name;Qualifikation;AuftragNr;Von;Bis;Netto_h;Taetigkeit';const lines=rows.filter(t=>t.name).map(t=>{const a=auftraege.find(x=>x.id===t.aid);return[dfCfg.mandant||'001',r.datum,t.name,t.qual||'',a?.nr||'',t.von||'',t.bis||'',(t.netto||'0').replace(',','.'),t.tae||''].join(';');});dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');toast('CSV exportiert','ok');}
-function expDFXML(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,netto:r.netto,aid:r.auftragId}];const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung Version="4.0">\n  <Datum>'+r.datum+'</Datum>\n  <Eintraege>\n'+rows.filter(t=>t.name).map(t=>{const a=auftraege.find(z=>z.id===t.aid);return'    <Eintrag><Name>'+x(t.name)+'</Name><AuftragNr>'+x(a?.nr||'')+'</AuftragNr><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Netto>'+(t.netto||'0').replace(',','.')+'</Netto></Eintrag>';}).join('\n')+'\n  </Eintraege>\n</DataflorZeiterfassung>';dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');toast('XML exportiert','ok');}
-function expTXT(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+(r.role==='va'?r.baustelle:r.name)+'\nStunden: '+h.toFixed(1)+'h','text/plain;charset=utf-8');toast('TXT exportiert','ok');}
+function expDFCSV(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,netto:r.netto,aid:r.auftragId,tae:r.taetigkeit}];const hdr='Mandant;Datum;Name;Qualifikation;AuftragNr;Von;Bis;Netto_h;Fahrzeit_min;Fahrt;Gesamt_h;Taetigkeit';const lines=rows.filter(t=>t.name).map(t=>{const a=auftraege.find(x=>x.id===t.aid);return[dfCfg.mandant||'001',r.datum,t.name,t.qual||'',a?.nr||'',t.von||'',t.bis||'',(t.netto||'0').replace(',','.'),t.fahrzeitMin||0,t.fahrt||'fahrer',(t.gesamt||t.netto||'0').replace(',','.'),t.tae||''].join(';');});const machLines=(r.machRows||[]).filter(m=>m.geraetNr).map(m=>{const a=auftraege.find(x=>x.id===m.aid);return[dfCfg.mandant||'001',r.datum,'GERÄT',m.geraetNr+' '+m.geraetBez,a?.nr||'',m.von||'',m.bis||'',(m.netto||'0').replace(',','.'),0,'',m.netto||'',m.fahrzeugnr||''].join(';');});dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines,...machLines].join('\n'),'text/csv');toast('CSV exportiert','ok');}
+function expDFXML(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,netto:r.netto,aid:r.auftragId}];const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung Version="4.0">\n  <Datum>'+r.datum+'</Datum>\n  <Baustelle>'+x(r.baustelle||r.name||'')+'</Baustelle>\n  <Personal>\n'+rows.filter(t=>t.name).map(t=>{const a=auftraege.find(z=>z.id===t.aid);return'    <Eintrag><Name>'+x(t.name)+'</Name><AuftragNr>'+x(a?.nr||'')+'</AuftragNr><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Netto>'+(t.netto||'0').replace(',','.')+'</Netto><FahrzeitMin>'+(t.fahrzeitMin||0)+'</FahrzeitMin><Fahrt>'+(t.fahrt||'fahrer')+'</Fahrt><Gesamt>'+(t.gesamt||t.netto||'0').replace(',','.')+'</Gesamt></Eintrag>';}).join('\n')+'\n  </Personal>\n  <Geraete>\n'+(r.machRows||[]).filter(m=>m.geraetNr).map(m=>{const a=auftraege.find(z=>z.id===m.aid);return'    <Geraet><DataflorNr>'+x(m.geraetNr)+'</DataflorNr><Bezeichnung>'+x(m.geraetBez||'')+'</Bezeichnung><FahrzeugNr>'+x(m.fahrzeugnr||'')+'</FahrzeugNr><AuftragNr>'+x(a?.nr||'')+'</AuftragNr><Von>'+(m.von||'')+'</Von><Bis>'+(m.bis||'')+'</Bis><Netto>'+(m.netto||'0').replace(',','.')+'</Netto></Geraet>';}).join('\n')+'\n  </Geraete>\n</DataflorZeiterfassung>';dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');toast('XML exportiert','ok');}
+function expTXT(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.netto||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+(r.role==='va'?r.baustelle:r.name)+'\nStunden: '+h.toFixed(1)+'h','text/plain;charset=utf-8');toast('TXT exportiert','ok');}
 function delReport(id){if(!confirm('Bericht löschen?'))return;reports=reports.filter(r=>r.id!==id);localStorage.setItem('klei_reports',JSON.stringify(reports));if(currentId===id)currentId=null;renderSB();document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">🗑</div><div class="et">Gelöscht</div></div>';toast('Gelöscht','err');}
 function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));const t=document.getElementById('tab-'+name),p=document.getElementById('panel-'+name);if(t)t.classList.add('act');if(p)p.classList.add('act');if(name==='ue')buildUE();}
 function openMo(id){document.getElementById(id).classList.add('open');if(id==='mo-au')renderAuList();}
