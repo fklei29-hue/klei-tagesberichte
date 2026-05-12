@@ -67,25 +67,17 @@ main{display:flex;flex-direction:column;overflow:hidden;}
 .tab.act{color:var(--gl);border-bottom-color:var(--g);}
 .content{flex:1;overflow-y:auto;padding:12px 14px;}
 .panel{display:none;}.panel.act{display:block;}
-
-/* VOICE */
-.vbar{background:rgba(196,72,40,.15);border:1px solid rgba(196,72,40,.4);border-radius:var(--rad);padding:10px 14px;margin-bottom:10px;display:none;align-items:center;gap:10px;}
+.vbar{background:rgba(196,72,40,.15);border:1px solid rgba(196,72,40,.4);border-radius:var(--rad);padding:10px 14px;margin-bottom:10px;display:none;align-items:center;gap:10px;position:sticky;top:0;z-index:50;}
 .vbar.on{display:flex;}
 .vwave{display:flex;gap:3px;align-items:center;}
 .vwave span{display:inline-block;width:3px;border-radius:2px;background:var(--r);animation:wv .7s ease-in-out infinite;}
 .vwave span:nth-child(1){height:6px}.vwave span:nth-child(2){height:12px;animation-delay:.1s}.vwave span:nth-child(3){height:8px;animation-delay:.2s}.vwave span:nth-child(4){height:14px;animation-delay:.3s}.vwave span:nth-child(5){height:6px;animation-delay:.4s}
 @keyframes wv{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1.2)}}
 .vbar-lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--r);flex:1;}
-.vbar-stop{background:var(--r);color:white;border:none;border-radius:var(--rad);padding:6px 12px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;}
-
-/* MIC BUTTON */
-.mic-btn{display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--b);border-radius:20px;padding:6px 12px;font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none;margin-top:6px;}
-.mic-btn:hover,.mic-btn:active{border-color:var(--g);color:var(--gl);}
-.mic-btn.on{background:rgba(196,72,40,.15);border-color:var(--r);color:var(--r);animation:mpulse 1.5s infinite;}
-@keyframes mpulse{0%,100%{opacity:1}50%{opacity:.6}}
-.mic-icon{font-size:14px;}
-
-/* FORM */
+.vbar-stop{background:var(--r);color:white;border:none;border-radius:var(--rad);padding:6px 14px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:11px;cursor:pointer;}
+.mic-btn{display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--b);border-radius:20px;padding:7px 14px;font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none;margin-top:6px;}
+.mic-btn:active{border-color:var(--g);color:var(--gl);}
+.mic-btn.on{background:rgba(196,72,40,.15);border-color:var(--r);color:var(--r);}
 .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
 .fg{display:flex;flex-direction:column;gap:4px;flex:1;min-width:90px;}
 .fg.w100{flex:0 0 100%;}.fg.w50{flex:0 0 calc(50% - 4px);}.fg.w33{flex:0 0 calc(33.33% - 6px);}.fg.w25{flex:0 0 calc(25% - 6px);}
@@ -167,16 +159,13 @@ select option{background:var(--s2);}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.ok{border-left:2px solid var(--g);}.toast.err{border-left:2px solid var(--r);}.toast.info{border-left:2px solid var(--sky);}
 .div{border:none;border-top:1px solid var(--b);margin:10px 0;}
-
-/* MITARBEITER ZUWEISUNG AN SCHRITT */
 .ma-zuweisung{margin-top:8px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:8px;}
 .ma-zuw-title{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--m);margin-bottom:6px;}
-.ma-check-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(44,58,28,.3);}
+.ma-check-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(44,58,28,.3);}
 .ma-check-row:last-child{border-bottom:none;}
-.ma-check-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--g);flex-shrink:0;}
+.ma-check-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--g);flex-shrink:0;}
 .ma-name{font-size:12px;color:var(--t);flex:1;}
-.ma-h{width:70px;font-size:11px;background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--gl);font-family:'IBM Plex Mono',monospace;text-align:right;}
-
+.ma-h{width:70px;font-size:11px;background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:4px 6px;color:var(--gl);font-family:'IBM Plex Mono',monospace;text-align:right;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--b);border-radius:2px;}
@@ -184,7 +173,6 @@ select option{background:var(--s2);}
 </style>
 </head>
 <body>
-
 <div id="role-screen">
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="klei-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="role-sub">Tagesberichte · Zeiterfassung · Baunatal</div>
@@ -201,10 +189,9 @@ select option{background:var(--s2);}
     </div>
   </div>
 </div>
-
 <div id="pin-screen">
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="width:120px;margin-bottom:8px" alt="KLEI" onerror="this.style.display='none'">
-  <div class="pin-title">🔐 Vorarbeiter-Zugang</div>
+  <div class="pin-title">Vorarbeiter-Zugang</div>
   <div class="pin-sub">Bitte PIN eingeben</div>
   <div class="pin-dots">
     <div class="pin-dot" id="pd0"></div>
@@ -222,61 +209,57 @@ select option{background:var(--s2);}
     <div class="pin-btn" ontouchstart="pinKey('7')" onclick="pinKey('7')">7</div>
     <div class="pin-btn" ontouchstart="pinKey('8')" onclick="pinKey('8')">8</div>
     <div class="pin-btn" ontouchstart="pinKey('9')" onclick="pinKey('9')">9</div>
-    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinBack()" onclick="pinBack()">↩</div>
+    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinBack()" onclick="pinBack()">&#x21A9;</div>
     <div class="pin-btn" ontouchstart="pinKey('0')" onclick="pinKey('0')">0</div>
-    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinCancel()" onclick="pinCancel()">✕</div>
+    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinCancel()" onclick="pinCancel()">&#x2715;</div>
   </div>
 </div>
-
 <div class="mo" id="mo-df">
   <div class="md">
-    <button class="md-close" ontouchstart="closeMo('mo-df')" onclick="closeMo('mo-df')">✕</button>
-    <div class="md-title">🔗 Dataflor</div>
-    <div class="md-sub">Zeiterfassung Export & API</div>
+    <button class="md-close" ontouchstart="closeMo('mo-df')" onclick="closeMo('mo-df')">&#x2715;</button>
+    <div class="md-title">Dataflor Schnittstelle</div>
+    <div class="md-sub">Zeiterfassung Export und API</div>
     <div class="row">
       <div class="fg w50"><label>Server URL</label><input id="df-url" placeholder="https://server/api"></div>
-      <div class="fg w50"><label>API-Key</label><input id="df-key" type="password" placeholder="••••••••"></div>
+      <div class="fg w50"><label>API-Key</label><input id="df-key" type="password" placeholder=""></div>
       <div class="fg w50"><label>Mandant-Nr.</label><input id="df-mandant" placeholder="001"></div>
       <div class="fg w50"><label>Kostenstelle</label><input id="df-kst" placeholder="K-1000"></div>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-      <button class="btn" ontouchstart="saveDFCfg()" onclick="saveDFCfg()">💾 Speichern</button>
-      <button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">📊 CSV</button>
-      <button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">🗂 XML</button>
+      <button class="btn" ontouchstart="saveDFCfg()" onclick="saveDFCfg()">Speichern</button>
+      <button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">CSV Export</button>
+      <button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">XML Export</button>
     </div>
   </div>
 </div>
-
 <div class="mo" id="mo-au">
   <div class="md">
-    <button class="md-close" ontouchstart="closeMo('mo-au')" onclick="closeMo('mo-au')">✕</button>
-    <div class="md-title">📋 Aufträge</div>
-    <div class="md-sub">Aufträge für Zeiterfassungs-Zuordnung</div>
+    <button class="md-close" ontouchstart="closeMo('mo-au')" onclick="closeMo('mo-au')">&#x2715;</button>
+    <div class="md-title">Auftraege verwalten</div>
+    <div class="md-sub">Auftraege fuer Zeiterfassungs-Zuordnung</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
       <input id="au-nr" placeholder="Auftrags-Nr." style="width:100px;flex:none">
       <input id="au-name" placeholder="Bezeichnung" style="flex:1">
-      <button class="btn btn-p" ontouchstart="addAuftrag()" onclick="addAuftrag()" style="flex:none">+ Hinzufügen</button>
+      <button class="btn btn-p" ontouchstart="addAuftrag()" onclick="addAuftrag()" style="flex:none">+ Hinzufuegen</button>
     </div>
     <div id="au-list"></div>
   </div>
 </div>
-
 <header>
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="h-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="h-divider"></div>
   <span class="role-badge" id="role-badge"></span>
   <div class="h-right">
-    <button class="hbtn" ontouchstart="switchRole()" onclick="switchRole()">⇄ Rolle</button>
-    <button class="hbtn va-only" ontouchstart="openMo('mo-au')" onclick="openMo('mo-au')">📋 Aufträge</button>
-    <button class="hbtn va-only" ontouchstart="openMo('mo-df')" onclick="openMo('mo-df')">🔗 Dataflor</button>
+    <button class="hbtn" ontouchstart="switchRole()" onclick="switchRole()">Rolle wechseln</button>
+    <button class="hbtn va-only" ontouchstart="openMo('mo-au')" onclick="openMo('mo-au')">Auftraege</button>
+    <button class="hbtn va-only" ontouchstart="openMo('mo-df')" onclick="openMo('mo-df')">Dataflor</button>
   </div>
 </header>
-
 <div class="app">
   <aside>
     <div class="sb-head">
       <div class="sb-date" id="sb-date"></div>
-      <button class="btn-new" ontouchstart="newReport()" onclick="newReport()">＋ Neuer Bericht</button>
+      <button class="btn-new" ontouchstart="newReport()" onclick="newReport()">+ Neuer Bericht</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </aside>
@@ -286,13 +269,13 @@ select option{background:var(--s2);}
   </main>
 </div>
 <div class="toast" id="toast"></div>
-
-<script>
+  <script>
 const GAS_URL='https://script.google.com/macros/s/AKfycbxVQNF3dwQo4qHYOImHNg44SPhs6NZ-8XxOMWqHzvEhjyS1pc0V_AncqG3B01i2TmlW1w/exec';
 const EMPFAENGER_MAIL='kleinzeitmanager34@gmail.com';
 const FIRMA_NAME='Friedrich Klei GmbH';
-const FIRMA_ADRESSE='Stettiner Str. 14-16 · 34225 Baunatal';
+const FIRMA_ADRESSE='Stettiner Str. 14-16 - 34225 Baunatal';
 const FIRMA_TEL='+49 (0) 5601 8056';
+const FIRMA_WEB='www.klei-sportplatzbau.de';
 const FIRMA_LOGO='https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png';
 const _p=[49,49,55].map(c=>String.fromCharCode(c)).join('');
 
@@ -300,14 +283,14 @@ const GERAETE=[
   {nr:'1010',bez:'Radlader 5 to'},{nr:'1012',bez:'Bagger Kette 5 to'},
   {nr:'1014',bez:'Bagger Rad 18 to Li 918'},{nr:'1016',bez:'Bagger Kette > 15 to'},
   {nr:'1018',bez:'LKW 25 to DA'},{nr:'1019',bez:'LKW > 5 to bis 15 to'},
-  {nr:'1020',bez:'Raupe Planierr. Laser Moor'},{nr:'1050',bez:'Elektr. Kleingerät'},
-  {nr:'1052',bez:'Motorg. Kleingerät Bodenfräse'},{nr:'1055',bez:'PKW'},
-  {nr:'1060',bez:'Pflegegerät Mäher Großfläche'},{nr:'1061',bez:'Pflegegerät Handmäher'},
+  {nr:'1020',bez:'Raupe Planierr. Laser Moor'},{nr:'1050',bez:'Elektr. Kleingeraet'},
+  {nr:'1052',bez:'Motorg. Kleingeraet Bodenfraese'},{nr:'1055',bez:'PKW'},
+  {nr:'1060',bez:'Pflegegeraet Maeher Grossflaeche'},{nr:'1061',bez:'Pflegegeraet Handmaeher'},
   {nr:'1065',bez:'Baustrassen-Securatec'},{nr:'1070',bez:'Maschinen (Kompressor, Aggr.)'},
-  {nr:'1080',bez:'Verdichtungsgerät > 2 to bis 1 to'},{nr:'1081',bez:'Verdichtungsgerät (Rüttelplatte)'},
-  {nr:'1082',bez:'Verdichtungsgerät (Stampfer)'},{nr:'1200',bez:'Baustelleneinrichtung'},
+  {nr:'1080',bez:'Verdichtungsgeraet > 2 to bis 1 to'},{nr:'1081',bez:'Verdichtungsgeraet (Ruettelplatte)'},
+  {nr:'1082',bez:'Verdichtungsgeraet (Stampfer)'},{nr:'1200',bez:'Baustelleneinrichtung'},
   {nr:'1500',bez:'Tankanlagen'},{nr:'1600',bez:'Absperrung / Verkehrsleitung'},
-  {nr:'1700',bez:'Vermessungsgerät'},{nr:'2000',bez:'LKW < 7 to (Transporter)'}
+  {nr:'1700',bez:'Vermessungsgeraet'},{nr:'2000',bez:'LKW < 7 to (Transporter)'}
 ];
 
 let reports=JSON.parse(localStorage.getItem('klei_reports')||'[]');
@@ -317,78 +300,95 @@ let currentId=null,currentRole=null,curWeather='Sonnig';
 let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
 let pinBuffer='';
 
-// ══════ VOICE ENGINE ══════
-// Unterstützt iPad, iPhone, Android
+// ══════ VOICE ENGINE - funktioniert auf iPad, iPhone, Android ══════
 let voiceActive=false;
 let voiceTarget=null;
-let voiceLabel='';
 let recognition=null;
 
-function startVoice(targetId, label){
-  voiceTarget=targetId;
-  voiceLabel=label;
+function startVoice(targetId,label){
   const el=document.getElementById(targetId);
   if(!el){toast('Feld nicht gefunden','err');return;}
 
-  // Prüfe ob SpeechRecognition verfügbar
+  // Wenn bereits aktiv fuer dieses Feld -> stoppen
+  if(voiceActive&&voiceTarget===targetId){stopVoice();return;}
+  if(voiceActive)stopVoice();
+
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){
+    toast('Spracheingabe: Bitte Chrome oder Safari 15+ verwenden','err');
+    return;
+  }
 
-  if(SR){
-    // Chrome, Edge, Android Chrome, Safari 14.1+
-    if(recognition){try{recognition.stop();}catch(e){}}
-    recognition=new SR();
-    recognition.lang='de-DE';
-    recognition.continuous=true;
-    recognition.interimResults=true;
-    recognition.maxAlternatives=1;
+  voiceTarget=targetId;
+  voiceActive=true;
 
-    const originalVal=el.value;
-    let finalTranscript=originalVal;
+  if(recognition){try{recognition.stop();}catch(e){}}
+  recognition=new SR();
+  recognition.lang='de-DE';
+  recognition.continuous=true;
+  recognition.interimResults=true;
+  recognition.maxAlternatives=1;
 
-    recognition.onstart=()=>{
-      voiceActive=true;
-      showVoiceBanner(label);
-      // Button hervorheben
-      document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));
-      const btn=document.querySelector('[data-mic="'+targetId+'"]');
-      if(btn)btn.classList.add('on');
-    };
-    recognition.onresult=(e)=>{
-      let interim='';
-      finalTranscript=originalVal;
-      for(let i=e.resultIndex;i<e.results.length;i++){
-        if(e.results[i].isFinal)finalTranscript+=' '+e.results[i][0].transcript;
-        else interim+=e.results[i][0].transcript;
+  // WICHTIG: Bestehenden Text merken - neuer Text wird ADDIERT, nie ueberschrieben
+  const existingText=el.value?el.value.trim()+' ':'';
+  let addedFinal='';
+  let lastSavedFinal='';
+
+  showVoiceBanner(label);
+  highlightMicBtn(targetId,true);
+
+  recognition.onstart=()=>{
+    toast('Mikrofon aktiv - sprechen Sie...','info');
+  };
+
+  recognition.onresult=(e)=>{
+    let newFinalParts='';
+    let interimText='';
+
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal){
+        newFinalParts+=e.results[i][0].transcript+' ';
+      }else{
+        interimText+=e.results[i][0].transcript;
       }
-      el.value=(finalTranscript+(interim?' ['+interim+']':'')).trim();
-    };
-    recognition.onend=()=>{
-      // Interim entfernen
-      if(el.value)el.value=el.value.replace(/\s*\[.*?\]/g,'').trim();
-      stopVoice();
-    };
-    recognition.onerror=(e)=>{
-      if(e.error==='not-allowed'){
-        toast('Mikrofon-Zugriff verweigert — bitte in Browser-Einstellungen erlauben','err');
-      } else if(e.error==='no-speech'){
-        toast('Kein Ton erkannt — bitte nochmal versuchen','info');
-      } else {
-        toast('Sprachfehler: '+e.error,'err');
-      }
-      stopVoice();
-    };
-
-    try{
-      recognition.start();
-      toast('🎤 '+label+' — sprechen Sie jetzt...','info');
-    }catch(e){
-      toast('Spracheingabe konnte nicht gestartet werden','err');
-      stopVoice();
     }
 
-  } else {
-    // Fallback für ältere Browser: natives prompt
-    toast('Spracheingabe nicht verfügbar — bitte Chrome oder Safari 15+ verwenden','err');
+    // Neuen finalen Text sammeln
+    if(newFinalParts){
+      addedFinal+=newFinalParts;
+      lastSavedFinal=addedFinal;
+    }
+
+    // Anzeige: bisheriger Text + neuer finaler Text + aktueller interim (in Klammern)
+    const display=(existingText+addedFinal+(interimText?'('+interimText+')':'')).trim();
+    el.value=display;
+  };
+
+  recognition.onend=()=>{
+    // Sauber abschliessen ohne interim
+    el.value=(existingText+(lastSavedFinal||addedFinal)).trim();
+    voiceActive=false;
+    hideVoiceBanner();
+    highlightMicBtn(targetId,false);
+    recognition=null;
+  };
+
+  recognition.onerror=(e)=>{
+    if(e.error==='not-allowed'){
+      toast('Mikrofon verweigert - bitte in Browser-Einstellungen erlauben','err');
+    }else if(e.error==='no-speech'){
+      // Kein Fehler zeigen - einfach weiterlaufen lassen
+    }else if(e.error!=='aborted'){
+      toast('Sprachfehler: '+e.error,'err');
+    }
+    stopVoice();
+  };
+
+  try{
+    recognition.start();
+  }catch(e){
+    toast('Mikrofon konnte nicht gestartet werden','err');
+    stopVoice();
   }
 }
 
@@ -400,37 +400,47 @@ function stopVoice(){
   }
   hideVoiceBanner();
   document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));
+  voiceTarget=null;
 }
 
 function showVoiceBanner(label){
-  let bar=document.getElementById('vbar');
+  let bar=document.getElementById('vbar-global');
   if(!bar){
     bar=document.createElement('div');
-    bar.id='vbar';bar.className='vbar';
-    bar.innerHTML='<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>'+
-      '<div class="vbar-lbl" id="vbar-lbl">🎤 '+label+'</div>'+
-      '<button class="vbar-stop" ontouchstart="stopVoice()" onclick="stopVoice()">■ Stop</button>';
-    document.body.appendChild(bar);
+    bar.id='vbar-global';
+    bar.className='vbar';
+    bar.innerHTML=
+      '<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>'+
+      '<div class="vbar-lbl" id="vbar-lbl-text">Spracheingabe aktiv...</div>'+
+      '<button class="vbar-stop" ontouchstart="stopVoice()" onclick="stopVoice()">STOP</button>';
+    // Ans Ende des content-Bereichs haengen
+    const content=document.getElementById('main-content');
+    if(content)content.prepend(bar);
+    else document.body.appendChild(bar);
   }
   bar.classList.add('on');
-  const lbl=document.getElementById('vbar-lbl');
-  if(lbl)lbl.textContent='🎤 '+label+' — sprechen Sie...';
+  const lbl=document.getElementById('vbar-lbl-text');
+  if(lbl)lbl.textContent=label+' - sprechen Sie jetzt...';
 }
 
 function hideVoiceBanner(){
-  const bar=document.getElementById('vbar');
+  const bar=document.getElementById('vbar-global');
   if(bar)bar.classList.remove('on');
 }
 
-function micBtn(targetId, label){
-  // Wenn gerade aktiv für dasselbe Feld → stoppen
-  if(voiceActive&&voiceTarget===targetId){stopVoice();return;}
-  if(voiceActive)stopVoice();
-  setTimeout(()=>startVoice(targetId,label),100);
+function highlightMicBtn(targetId,on){
+  document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));
+  if(on){
+    const btn=document.querySelector('[data-mic="'+targetId+'"]');
+    if(btn)btn.classList.add('on');
+  }
 }
 
 function mkMic(targetId,label){
-  return '<button class="mic-btn" data-mic="'+targetId+'" ontouchstart="micBtn(\''+targetId+'\',\''+label+'\')" onclick="micBtn(\''+targetId+'\',\''+label+'\')"><span class="mic-icon">🎤</span>'+label+' diktieren</button>';
+  return '<button class="mic-btn" data-mic="'+targetId+'" '+
+    'ontouchstart="startVoice(\''+targetId+'\',\''+label+'\')" '+
+    'onclick="startVoice(\''+targetId+'\',\''+label+'\')">'+
+    '&#127908; '+label+' diktieren</button>';
 }
 
 // ══════ PIN ══════
@@ -450,9 +460,9 @@ function pinKey(k){
         document.getElementById('pin-screen').style.display='none';
         activateRole('va');
       }else{
-        document.getElementById('pin-error').textContent='❌ Falscher PIN';
+        document.getElementById('pin-error').textContent='Falscher PIN - bitte erneut versuchen';
         pinBuffer='';updatePinDots();
-        setTimeout(()=>document.getElementById('pin-error').textContent='',2000);
+        setTimeout(()=>document.getElementById('pin-error').textContent='',2500);
       }
     },200);
   }
@@ -478,7 +488,7 @@ function activateRole(r){
   document.getElementById('pin-screen').style.display='none';
   const b=document.getElementById('role-badge');
   b.className='role-badge '+r;
-  b.textContent=r==='va'?'▲ Vorarbeiter':'■ Arbeiter';
+  b.textContent=r==='va'?'Vorarbeiter':'Arbeiter';
   document.querySelectorAll('.va-only').forEach(el=>el.style.display=r==='va'?'':'none');
   buildUI();renderSB();updateSBDate();loadDFCfg();
   if(r==='ar'){setTimeout(()=>{const d=document.getElementById('a-datum');if(d)d.value=todayStr();calcAR();},100);}
@@ -495,24 +505,24 @@ function buildUI(){
   const tabs=document.getElementById('tabs-row'),content=document.getElementById('main-content');
   if(currentRole==='ar'){
     tabs.innerHTML=
-      '<div class="tab act" id="tab-quick" ontouchstart="showTab(\'quick\')" onclick="showTab(\'quick\')">⏱ Zeiterfassung</div>'+
-      '<div class="tab" id="tab-details" ontouchstart="showTab(\'details\')" onclick="showTab(\'details\')">📋 Details</div>';
+      '<div class="tab act" id="tab-quick" ontouchstart="showTab(\'quick\')" onclick="showTab(\'quick\')">Zeiterfassung</div>'+
+      '<div class="tab" id="tab-details" ontouchstart="showTab(\'details\')" onclick="showTab(\'details\')">Details</div>';
     content.innerHTML=
       '<div class="panel act" id="panel-quick">'+buildAR()+'</div>'+
-      '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">📋</div><div class="et">Bericht wählen</div></div></div></div>';
+      '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">&#128203;</div><div class="et">Bericht waehlen</div></div></div></div>';
   }else{
     tabs.innerHTML=
-      '<div class="tab act" id="tab-bericht" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">📝 Bericht</div>'+
-      '<div class="tab" id="tab-zeit" ontouchstart="showTab(\'zeit\')" onclick="showTab(\'zeit\')">⏱ Zeiten</div>'+
-      '<div class="tab" id="tab-material" ontouchstart="showTab(\'material\')" onclick="showTab(\'material\')">📦 Material</div>'+
-      '<div class="tab" id="tab-details" ontouchstart="showTab(\'details\')" onclick="showTab(\'details\')">📋 Details</div>'+
-      '<div class="tab" id="tab-ki" ontouchstart="showTab(\'ki\')" onclick="showTab(\'ki\')">🤖 KI</div>'+
-      '<div class="tab" id="tab-ue" ontouchstart="showTab(\'ue\')" onclick="showTab(\'ue\')">📊 Übersicht</div>';
+      '<div class="tab act" id="tab-bericht" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">Bericht</div>'+
+      '<div class="tab" id="tab-zeit" ontouchstart="showTab(\'zeit\')" onclick="showTab(\'zeit\')">Zeiten</div>'+
+      '<div class="tab" id="tab-material" ontouchstart="showTab(\'material\')" onclick="showTab(\'material\')">Material</div>'+
+      '<div class="tab" id="tab-details" ontouchstart="showTab(\'details\')" onclick="showTab(\'details\')">Details</div>'+
+      '<div class="tab" id="tab-ki" ontouchstart="showTab(\'ki\')" onclick="showTab(\'ki\')">KI</div>'+
+      '<div class="tab" id="tab-ue" ontouchstart="showTab(\'ue\')" onclick="showTab(\'ue\')">Uebersicht</div>';
     content.innerHTML=
       '<div class="panel act" id="panel-bericht">'+buildVABericht()+'</div>'+
       '<div class="panel" id="panel-zeit">'+buildVAZeit()+'</div>'+
       '<div class="panel" id="panel-material">'+buildVAMaterial()+'</div>'+
-      '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">📋</div><div class="et">Bericht wählen</div></div></div></div>'+
+      '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">&#128203;</div><div class="et">Bericht waehlen</div></div></div></div>'+
       '<div class="panel" id="panel-ki">'+buildKI()+'</div>'+
       '<div class="panel" id="panel-ue"><div id="ue-content"></div></div>';
     setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();const d=document.getElementById('v-datum');if(d)d.value=todayStr();},100);
@@ -522,293 +532,247 @@ function buildUI(){
 
 // ══════ AR FORM ══════
 function buildAR(){
-  const auOpts=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' · '+a.name+'</option>').join('');
-  return `
-  <div class="qsec">
-    <div class="qsec-t">📅 Einsatz</div>
-    <div class="row">
-      <div class="fg w33"><label>Datum</label><input type="date" id="a-datum"></div>
-      <div class="fg w33"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name"></div>
-      <div class="fg w33"><label>Auftrag</label><select id="a-auftrag"><option value="">— Auftrag —</option>${auOpts}</select></div>
-      <div class="fg w50"><label>Qualifikation</label><select id="a-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option></select></div>
-      <div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewölkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>
-    </div>
-  </div>
-  <div class="qsec">
-    <div class="qsec-t">⏱ Arbeitszeiten</div>
-    <div class="row">
-      <div class="fg w25"><label>Beginn</label><input type="time" id="a-von" value="07:00" oninput="calcAR()"></div>
-      <div class="fg w25"><label>Ende</label><input type="time" id="a-bis" value="16:00" oninput="calcAR()"></div>
-      <div class="fg w25"><label>Pause (min)</label><input type="number" id="a-pause" value="30" oninput="calcAR()"></div>
-      <div class="fg w25"><label>Netto Arbeit</label><input type="text" id="a-netto-work" readonly style="color:var(--gl);font-weight:700;font-family:'IBM Plex Mono',monospace"></div>
-    </div>
-    <div class="row">
-      <div class="fg w25"><label>Fahrzeit (min)</label><input type="number" id="a-fahrzeit" value="0" min="0" oninput="calcAR()"></div>
-      <div class="fg" style="flex:2">
-        <label>Fahrt-Status</label>
-        <div style="display:flex;gap:6px;margin-top:4px">
-          <button type="button" class="fahrt-btn fahrt-active" data-val="fahrer" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">🚗 Fahrer<br><span style="font-size:9px;opacity:.7">100%</span></button>
-          <button type="button" class="fahrt-btn" data-val="beifahrer" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">🪑 Beifahrer<br><span style="font-size:9px;opacity:.7">50%</span></button>
-          <button type="button" class="fahrt-btn" data-val="privat" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">🏠 Privat<br><span style="font-size:9px;opacity:.7">0%</span></button>
-        </div>
-      </div>
-      <div class="fg w25"><label>Netto gesamt</label><input type="text" id="a-netto" readonly style="color:var(--gl);font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:15px"></div>
-    </div>
-    <div id="fahrzeit-info" style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-top:3px;min-height:14px"></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
-      <div class="sc"><div class="sv" id="a-h-heute">—</div><div class="sl">Heute</div></div>
-      <div class="sc"><div class="sv" id="a-h-woche">—</div><div class="sl">Diese Woche</div></div>
-      <div class="sc"><div class="sv" id="a-h-monat">—</div><div class="sl">Dieser Monat</div></div>
-    </div>
-  </div>
-  <div class="qsec">
-    <div class="qsec-t">📝 Tätigkeitsbericht</div>
-    <textarea id="a-taetigkeit" placeholder="Was wurde heute gemacht?"></textarea>
-    ${mkMic('a-taetigkeit','Tätigkeitsbericht')}
-  </div>
-  <div class="qsec">
-    <div class="qsec-t">⚠️ Besonderheiten (optional)</div>
-    <input type="text" id="a-besonder" placeholder="z.B. Materialengpass, Maschinenpanne ...">
-    ${mkMic('a-besonder','Besonderheiten')}
-  </div>
-  <div class="send-status" id="ar-send-status"></div>
-  <div class="arow">
-    <button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">💾 Speichern & PDF senden</button>
-    <button class="btn" ontouchstart="clearARForm()" onclick="clearARForm()">✕ Neu</button>
-  </div>`;
+  const auOpts=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name+'</option>').join('');
+  return '<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
+    '<div class="fg w33"><label>Datum</label><input type="date" id="a-datum"></div>'+
+    '<div class="fg w33"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name"></div>'+
+    '<div class="fg w33"><label>Auftrag</label><select id="a-auftrag"><option value="">- Auftrag -</option>'+auOpts+'</select></div>'+
+    '<div class="fg w50"><label>Qualifikation</label><select id="a-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option></select></div>'+
+    '<div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>'+
+    '</div></div>'+
+    '<div class="qsec"><div class="qsec-t">Arbeitszeiten</div>'+
+    '<div class="row">'+
+    '<div class="fg w25"><label>Beginn</label><input type="time" id="a-von" value="07:00" oninput="calcAR()"></div>'+
+    '<div class="fg w25"><label>Ende</label><input type="time" id="a-bis" value="16:00" oninput="calcAR()"></div>'+
+    '<div class="fg w25"><label>Pause (min)</label><input type="number" id="a-pause" value="30" oninput="calcAR()"></div>'+
+    '<div class="fg w25"><label>Netto Arbeit</label><input type="text" id="a-netto-work" readonly style="color:var(--gl);font-weight:700;font-family:\'IBM Plex Mono\',monospace"></div>'+
+    '</div><div class="row">'+
+    '<div class="fg w25"><label>Fahrzeit (min)</label><input type="number" id="a-fahrzeit" value="0" min="0" oninput="calcAR()"></div>'+
+    '<div class="fg" style="flex:2"><label>Fahrt-Status</label><div style="display:flex;gap:6px;margin-top:4px">'+
+    '<button type="button" class="fahrt-btn fahrt-active" data-val="fahrer" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">Fahrer<br><span style="font-size:9px;opacity:.7">100%</span></button>'+
+    '<button type="button" class="fahrt-btn" data-val="beifahrer" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">Beifahrer<br><span style="font-size:9px;opacity:.7">50%</span></button>'+
+    '<button type="button" class="fahrt-btn" data-val="privat" ontouchstart="setFahrt(this)" onclick="setFahrt(this)">Privat<br><span style="font-size:9px;opacity:.7">0%</span></button>'+
+    '</div></div>'+
+    '<div class="fg w25"><label>Netto gesamt</label><input type="text" id="a-netto" readonly style="color:var(--gl);font-weight:700;font-family:\'IBM Plex Mono\',monospace;font-size:15px"></div>'+
+    '</div><div id="fahrzeit-info" style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:3px;min-height:14px"></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">'+
+    '<div class="sc"><div class="sv" id="a-h-heute">-</div><div class="sl">Heute</div></div>'+
+    '<div class="sc"><div class="sv" id="a-h-woche">-</div><div class="sl">Diese Woche</div></div>'+
+    '<div class="sc"><div class="sv" id="a-h-monat">-</div><div class="sl">Dieser Monat</div></div>'+
+    '</div></div>'+
+    '<div class="qsec"><div class="qsec-t">Taetigkeitsbericht</div>'+
+    '<textarea id="a-taetigkeit" placeholder="Was wurde heute gemacht?"></textarea>'+
+    mkMic('a-taetigkeit','Taetigkeitsbericht')+
+    '</div>'+
+    '<div class="qsec"><div class="qsec-t">Besonderheiten (optional)</div>'+
+    '<input type="text" id="a-besonder" placeholder="z.B. Materialengpass, Maschinenpanne ...">'+
+    mkMic('a-besonder','Besonderheiten')+
+    '</div>'+
+    '<div class="send-status" id="ar-send-status"></div>'+
+    '<div class="arow">'+
+    '<button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">Speichern und PDF senden</button>'+
+    '<button class="btn" ontouchstart="clearARForm()" onclick="clearARForm()">Neu</button>'+
+    '</div>';
 }
 
-// ══════ VA BERICHT ══════
+// ══════ VA FORMS ══════
 function buildVABericht(){
-  return `
-  <div class="sec">
-    <div class="sh">📅 Grunddaten</div>
-    <div class="row">
-      <div class="fg w25"><label>Datum</label><input type="date" id="v-datum"></div>
-      <div class="fg w25"><label>Auftrag</label><select id="v-auftrag"><option value="">— Auftrag —</option></select></div>
-      <div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="2025-042"></div>
-      <div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>
-      <div class="fg w50"><label>Baustelle / Objekt</label>
-        <input type="text" id="v-baustelle" placeholder="Sportanlage, Park ...">
-        ${mkMic('v-baustelle','Baustelle')}
-      </div>
-      <div class="fg w50"><label>Bauherr / AG</label>
-        <input type="text" id="v-bauherr" placeholder="Gemeinde Musterstadt ...">
-        ${mkMic('v-bauherr','Bauherr')}
-      </div>
-      <div class="fg w33"><label>Temperatur (°C)</label><input type="number" id="v-temp" placeholder="18"></div>
-      <div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>
-      <div class="fg w33"><label>Besucher / Abnahmen</label><input type="text" id="v-besucher" placeholder="Bauherr, TÜV ..."></div>
-    </div>
-    <div class="wrow" id="v-wrow">
-      <div class="wc s" ontouchstart="selW(this,'Sonnig')" onclick="selW(this,'Sonnig')">☀️ Sonnig</div>
-      <div class="wc" ontouchstart="selW(this,'Bewölkt')" onclick="selW(this,'Bewölkt')">⛅ Bewölkt</div>
-      <div class="wc" ontouchstart="selW(this,'Regen')" onclick="selW(this,'Regen')">🌧 Regen</div>
-      <div class="wc" ontouchstart="selW(this,'Frost/Eis')" onclick="selW(this,'Frost/Eis')">🌡 Frost</div>
-      <div class="wc" ontouchstart="selW(this,'Sturm')" onclick="selW(this,'Sturm')">💨 Sturm</div>
-      <div class="wc" ontouchstart="selW(this,'Schnee')" onclick="selW(this,'Schnee')">❄️ Schnee</div>
-    </div>
-    <div class="row">
-      <div class="fg w50"><label>Bodenzustand</label>
-        <select id="v-boden"><option>Trocken</option><option>Feucht</option><option>Nass</option><option>Gefroren</option><option>Wassersättigung</option></select>
-      </div>
-      <div class="fg w50"><label>Fotos (Anzahl/Hinweis)</label><input type="text" id="v-fotos" placeholder="z.B. 8 Fotos hochgeladen"></div>
-    </div>
-  </div>
-  <div class="sec">
-    <div class="sh">🌿 Gewerk / Leistungsphase</div>
-    <div class="tags" id="gw-tags">
-      ${['Rasenbau','Sportplatzbau','Kunstrasensystem','Laufbahn/LA','Tennisanlage','Bewässerung','Drainage','Erdarbeiten','Wegebau','Pflaster','Bepflanzung','Spielplatz','Mäharbeiten','Gehölzpflege','Aussaat'].map((g,i)=>'<div class="tg'+(i===0?' a':'')+'" ontouchstart="togTg(this)" onclick="togTg(this)">'+g+'</div>').join('')}
-    </div>
-  </div>
-  <div class="sec">
-    <div class="sh">📝 Tagebuch / Arbeitsschritte</div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">
-      💡 Mitarbeiter aus Zeiterfassung (Tab "Zeiten") werden automatisch zur Auswahl angezeigt
-    </div>
-    <div id="steps-con"></div>
-    <div style="display:flex;gap:8px;margin-top:6px">
-      <button class="btn" ontouchstart="addStep()" onclick="addStep()">＋ Schritt hinzufügen</button>
-    </div>
-  </div>
-  <div class="sec">
-    <div class="sh">⚠️ Mängel & Probleme</div>
-    <div id="mangel-con"></div>
-    <button class="btn btn-r" style="font-size:11px" ontouchstart="addMangel()" onclick="addMangel()">＋ Mangel / Problem</button>
-    <div class="fg" style="margin-top:10px">
-      <label>Nächste Schritte / Morgen</label>
-      <textarea id="v-naechstes" placeholder="Geplante Folgearbeiten ..."></textarea>
-      ${mkMic('v-naechstes','Nächste Schritte')}
-    </div>
-    <div class="fg" style="margin-top:8px">
-      <label>Bemerkungen</label>
-      <textarea id="v-bemerkungen" placeholder="..."></textarea>
-      ${mkMic('v-bemerkungen','Bemerkungen')}
-    </div>
-  </div>
-  <div class="send-status" id="va-send-status"></div>
-  <div class="arow">
-    <button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">💾 Speichern & PDF senden</button>
-    <button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">🤖 KI</button>
-    <button class="btn" ontouchstart="expTXT()" onclick="expTXT()">⬇ TXT</button>
-    <button class="btn" ontouchstart="newReport()" onclick="newReport()">✕ Neu</button>
-  </div>`;
+  return '<div class="sec"><div class="sh">Grunddaten</div><div class="row">'+
+    '<div class="fg w25"><label>Datum</label><input type="date" id="v-datum"></div>'+
+    '<div class="fg w25"><label>Auftrag</label><select id="v-auftrag"><option value="">- Auftrag -</option></select></div>'+
+    '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="2025-042"></div>'+
+    '<div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>'+
+    '<div class="fg w50"><label>Baustelle / Objekt</label>'+
+    '<input type="text" id="v-baustelle" placeholder="Sportanlage, Park ...">'+
+    mkMic('v-baustelle','Baustelle')+
+    '</div>'+
+    '<div class="fg w50"><label>Bauherr / AG</label>'+
+    '<input type="text" id="v-bauherr" placeholder="Gemeinde Musterstadt ...">'+
+    mkMic('v-bauherr','Bauherr')+
+    '</div>'+
+    '<div class="fg w33"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
+    '<div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>'+
+    '<div class="fg w33"><label>Besucher / Abnahmen</label><input type="text" id="v-besucher" placeholder="Bauherr, TUeV ..."></div>'+
+    '</div>'+
+    '<div class="wrow" id="v-wrow">'+
+    '<div class="wc s" ontouchstart="selW(this,\'Sonnig\')" onclick="selW(this,\'Sonnig\')">Sonnig</div>'+
+    '<div class="wc" ontouchstart="selW(this,\'Bewoelkt\')" onclick="selW(this,\'Bewoelkt\')">Bewoelkt</div>'+
+    '<div class="wc" ontouchstart="selW(this,\'Regen\')" onclick="selW(this,\'Regen\')">Regen</div>'+
+    '<div class="wc" ontouchstart="selW(this,\'Frost/Eis\')" onclick="selW(this,\'Frost/Eis\')">Frost</div>'+
+    '<div class="wc" ontouchstart="selW(this,\'Sturm\')" onclick="selW(this,\'Sturm\')">Sturm</div>'+
+    '<div class="wc" ontouchstart="selW(this,\'Schnee\')" onclick="selW(this,\'Schnee\')">Schnee</div>'+
+    '</div>'+
+    '<div class="row">'+
+    '<div class="fg w50"><label>Bodenzustand</label><select id="v-boden"><option>Trocken</option><option>Feucht</option><option>Nass</option><option>Gefroren</option><option>Wassersaettigung</option></select></div>'+
+    '<div class="fg w50"><label>Fotos (Anzahl/Hinweis)</label><input type="text" id="v-fotos" placeholder="z.B. 8 Fotos hochgeladen"></div>'+
+    '</div></div>'+
+    '<div class="sec"><div class="sh">Gewerk / Leistungsphase</div>'+
+    '<div class="tags" id="gw-tags">'+
+    ['Rasenbau','Sportplatzbau','Kunstrasensystem','Laufbahn/LA','Tennisanlage','Bewaesserung','Drainage','Erdarbeiten','Wegebau','Pflaster','Bepflanzung','Spielplatz','Maeharbeiten','Gehoelzpflege','Aussaat'].map((g,i)=>'<div class="tg'+(i===0?' a':'')+'" ontouchstart="togTg(this)" onclick="togTg(this)">'+g+'</div>').join('')+
+    '</div></div>'+
+    '<div class="sec"><div class="sh">Tagebuch / Arbeitsschritte</div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Mitarbeiter aus Zeiterfassung (Tab Zeiten) werden automatisch zur Auswahl angezeigt</div>'+
+    '<div id="steps-con"></div>'+
+    '<button class="btn" ontouchstart="addStep()" onclick="addStep()">+ Schritt hinzufuegen</button>'+
+    '</div>'+
+    '<div class="sec"><div class="sh">Maengel und Probleme</div>'+
+    '<div id="mangel-con"></div>'+
+    '<button class="btn btn-r" style="font-size:11px" ontouchstart="addMangel()" onclick="addMangel()">+ Mangel / Problem</button>'+
+    '<div class="fg" style="margin-top:10px"><label>Naechste Schritte / Morgen</label>'+
+    '<textarea id="v-naechstes" placeholder="Geplante Folgearbeiten ..."></textarea>'+
+    mkMic('v-naechstes','Naechste Schritte')+
+    '</div>'+
+    '<div class="fg" style="margin-top:8px"><label>Bemerkungen</label>'+
+    '<textarea id="v-bemerkungen" placeholder="..."></textarea>'+
+    mkMic('v-bemerkungen','Bemerkungen')+
+    '</div></div>'+
+    '<div class="send-status" id="va-send-status"></div>'+
+    '<div class="arow">'+
+    '<button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button>'+
+    '<button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">KI Analyse</button>'+
+    '<button class="btn" ontouchstart="expTXT()" onclick="expTXT()">TXT Export</button>'+
+    '<button class="btn" ontouchstart="newReport()" onclick="newReport()">Neu</button>'+
+    '</div>';
 }
 
 function buildVAZeit(){
-  return `
-  <div class="sec">
-    <div class="sh">⏱ Personal-Zeiterfassung
-      <span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:'IBM Plex Mono',monospace;font-size:10px">0,0 h gesamt</span>
-    </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">
-      Fahrzeit: Arbeit = Von-Bis-Pause | Gesamt = Arbeit + Fahrzeit×Satz
-    </div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr>
-          <th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th>
-          <th>Pause</th><th>Arbeit</th><th>Fahrt-Status</th>
-          <th>Fahrzeit</th><th>Fahrtanteil</th><th>GESAMT</th>
-          <th>Auftrag</th><th>Tätigkeit</th><th></th>
-        </tr></thead>
-        <tbody id="zeit-body"></tbody>
-      </table>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">＋ Person</button>
-      <button class="btn btn-e" ontouchstart="openMo('mo-df')" onclick="openMo('mo-df')">🔗 Dataflor</button>
-    </div>
-  </div>
-  <div class="sec">
-    <div class="sh">🚜 Geräteeinsatz (Dataflor-Nummern)</div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th>Gerät (Dataflor)</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Std.</th><th>Auftrag</th><th></th></tr></thead>
-        <tbody id="mach-body"></tbody>
-      </table>
-    </div>
-    <button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">＋ Gerät</button>
-  </div>`;
+  return '<div class="sec"><div class="sh">Personal-Zeiterfassung '+
+    '<span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0 h gesamt</span></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Formel: Arbeit = Von-Bis-Pause | Gesamt = Arbeit + Fahrzeit x Satz</div>'+
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
+    '<th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th>'+
+    '<th>Pause</th><th>Arbeit</th><th>Fahrt-Status</th>'+
+    '<th>Fahrzeit</th><th>Fahrtanteil</th><th>GESAMT</th>'+
+    '<th>Auftrag</th><th>Taetigkeit</th><th></th>'+
+    '</tr></thead><tbody id="zeit-body"></tbody></table></div>'+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
+    '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">+ Person</button>'+
+    '<button class="btn btn-e" ontouchstart="openMo(\'mo-df\')" onclick="openMo(\'mo-df\')">Dataflor Export</button>'+
+    '</div></div>'+
+    '<div class="sec"><div class="sh">Geraeteeinsatz (Dataflor-Nummern)</div>'+
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
+    '<th>Geraet (Dataflor)</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Std.</th><th>Auftrag</th><th></th>'+
+    '</tr></thead><tbody id="mach-body"></tbody></table></div>'+
+    '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">+ Geraet</button></div>';
 }
 
 function buildVAMaterial(){
-  return `
-  <div class="sec">
-    <div class="sh">📦 Materiallieferungen & Lieferanten</div>
-    <div id="lief-con"></div>
-    <button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">＋ Lieferung</button>
-  </div>
-  <div class="sec" style="margin-top:12px">
-    <div class="sh">📊 Mengennachweise</div>
-    <div id="mengen-con"></div>
-    <button class="btn" ontouchstart="addMenge()" onclick="addMenge()">＋ Mengenzeile</button>
-  </div>
-  <div class="sec" style="margin-top:12px">
-    <div class="sh">🔢 LV-Positionen (ausgeführt)</div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Auftrag</th><th></th></tr></thead>
-        <tbody id="lv-body"></tbody>
-      </table>
-    </div>
-    <button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">＋ Position</button>
-  </div>
-  <div class="arow">
-    <button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">💾 Speichern & PDF senden</button>
-  </div>`;
+  return '<div class="sec"><div class="sh">Materiallieferungen und Lieferanten</div>'+
+    '<div id="lief-con"></div>'+
+    '<button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">+ Lieferung</button></div>'+
+    '<div class="sec" style="margin-top:12px"><div class="sh">Mengennachweise</div>'+
+    '<div id="mengen-con"></div>'+
+    '<button class="btn" ontouchstart="addMenge()" onclick="addMenge()">+ Mengenzeile</button></div>'+
+    '<div class="sec" style="margin-top:12px"><div class="sh">LV-Positionen (ausgefuehrt)</div>'+
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
+    '<th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Auftrag</th><th></th>'+
+    '</tr></thead><tbody id="lv-body"></tbody></table></div>'+
+    '<button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">+ Position</button></div>'+
+    '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
 }
 
 function buildKI(){
-  return `
-  <div class="sh">🤖 KI-Analyse (Claude AI)</div>
-  <div class="ai-acts">
-    <button class="ai-ab" ontouchstart="runAI('zusammenfassung')" onclick="runAI('zusammenfassung')">📄 Zusammenfassung</button>
-    <button class="ai-ab" ontouchstart="runAI('risiken')" onclick="runAI('risiken')">⚠️ Risiken</button>
-    <button class="ai-ab" ontouchstart="runAI('kosten')" onclick="runAI('kosten')">💶 Kosten</button>
-    <button class="ai-ab" ontouchstart="runAI('qualitaet')" onclick="runAI('qualitaet')">✅ Qualität DIN</button>
-    <button class="ai-ab" ontouchstart="runAI('bericht')" onclick="runAI('bericht')">📃 VOB-Bericht</button>
-    <button class="ai-ab" ontouchstart="runAI('plan')" onclick="runAI('plan')">📅 Wochenplanung</button>
-  </div>
-  <div id="ki-out"><div class="empty"><div class="ei">🌿</div><div class="et">Bericht laden &amp; analysieren</div></div></div>`;
+  return '<div class="sh">KI-Analyse (Claude AI)</div>'+
+    '<div class="ai-acts">'+
+    '<button class="ai-ab" ontouchstart="runAI(\'zusammenfassung\')" onclick="runAI(\'zusammenfassung\')">Zusammenfassung</button>'+
+    '<button class="ai-ab" ontouchstart="runAI(\'risiken\')" onclick="runAI(\'risiken\')">Risiken</button>'+
+    '<button class="ai-ab" ontouchstart="runAI(\'kosten\')" onclick="runAI(\'kosten\')">Kosten</button>'+
+    '<button class="ai-ab" ontouchstart="runAI(\'qualitaet\')" onclick="runAI(\'qualitaet\')">Qualitaet DIN</button>'+
+    '<button class="ai-ab" ontouchstart="runAI(\'bericht\')" onclick="runAI(\'bericht\')">VOB-Bericht</button>'+
+    '<button class="ai-ab" ontouchstart="runAI(\'plan\')" onclick="runAI(\'plan\')">Wochenplanung</button>'+
+    '</div>'+
+    '<div id="ki-out"><div class="empty"><div class="ei">&#127807;</div><div class="et">Bericht laden und analysieren</div></div></div>';
 }
 
 // ══════ ARBEITSSCHRITTE MIT MA-ZUWEISUNG ══════
 function addStep(data={}){
   stepIdx++;const i=stepIdx;
-  const auOpts=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name+'</option>').join('');
-  // Hole aktuelle Mitarbeiter aus Zeiterfassung
+  const auOpts=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+' - '+a.name+'</option>').join('');
   const maRows=getZeitRowsSimple();
-  const maChecks=maRows.length>0?
-    '<div class="ma-zuweisung">'+
-    '<div class="ma-zuw-title">👷 Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
-    maRows.map(ma=>{
-      const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);
-      const stunden=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';
-      return '<div class="ma-check-row">'+
-        '<input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')">'+
-        '<span class="ma-name">'+ma.name+' <span style="color:var(--m);font-size:10px">('+ma.qual+')</span></span>'+
-        '<input type="number" class="ma-h" data-name="'+ma.name+'" placeholder="Std." value="'+stunden+'" min="0" step="0.5" oninput="updateStepMA('+i+')" style="'+(checked?'':'opacity:.4')+'">';
-    }).join('')+
-    '</div>'
-  :'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px">💡 Erst Mitarbeiter im Tab "Zeiten" eintragen</div>';
+  let maHtml='';
+  if(maRows.length>0){
+    maHtml='<div class="ma-zuweisung">'+
+      '<div class="ma-zuw-title">Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
+      maRows.map(ma=>{
+        const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);
+        const stunden=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';
+        return '<div class="ma-check-row">'+
+          '<input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')">'+
+          '<span class="ma-name">'+ma.name+' <span style="color:var(--m);font-size:10px">('+ma.qual+')</span></span>'+
+          '<input type="number" class="ma-h" data-name="'+ma.name+'" placeholder="Std." value="'+stunden+'" min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';
+      }).join('')+
+      '</div>';
+  }else{
+    maHtml='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
+  }
 
   const div=document.createElement('div');
   div.className='lief-block';div.id='step-'+i;
   div.innerHTML=
     '<div class="lief-head">'+
     '<div class="lief-num">'+i+'</div>'+
-    '<select style="flex:0 0 160px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-au-'+i+'"><option value="">— Auftrag —</option>'+auOpts+'</select>'+
+    '<select style="flex:0 0 160px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-au-'+i+'"><option value="">- Auftrag -</option>'+auOpts+'</select>'+
     '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'">'+
-    '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">✕</button>'+
+    '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button>'+
     '</div>'+
-    '<textarea id="st-txt-'+i+'" class="step-text" style="min-height:60px;margin-bottom:4px" placeholder="Tätigkeit beschreiben ...">'+(data.txt||'')+'</textarea>'+
+    '<textarea id="st-txt-'+i+'" class="step-text" style="min-height:60px;margin-bottom:4px" placeholder="Taetigkeit beschreiben ...">'+(data.txt||'')+'</textarea>'+
     mkMic('st-txt-'+i,'Arbeitsschritt '+i)+
     '<div style="display:flex;gap:6px;margin-top:8px">'+
-    '<div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" placeholder="200 m²" value="'+(data.menge||'')+'"></div>'+
-    '<div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" placeholder="m², lfm" value="'+(data.eh||'')+'"></div>'+
+    '<div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" placeholder="200 m2" value="'+(data.menge||'')+'"></div>'+
+    '<div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" placeholder="m2, lfm" value="'+(data.eh||'')+'"></div>'+
     '</div>'+
-    maChecks;
+    maHtml;
   document.getElementById('steps-con')?.appendChild(div);
 }
 
 function updateStepMA(idx){
-  // Checkboxen und Stunden synchronisieren
   const block=document.getElementById('step-'+idx);
   if(!block)return;
   block.querySelectorAll('.ma-cb').forEach(cb=>{
-    const name=cb.dataset.name;
-    const hInput=block.querySelector('.ma-h[data-name="'+name+'"]');
+    const hInput=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
     if(hInput)hInput.style.opacity=cb.checked?'1':'0.4';
   });
 }
 
 function refreshStepMAs(){
-  // Nach dem Ändern der Zeitliste alle Schritt-MAs neu aufbauen
   const stepBlocks=document.querySelectorAll('[id^="step-"]');
   if(!stepBlocks.length)return;
   const maRows=getZeitRowsSimple();
   stepBlocks.forEach(block=>{
     const idx=block.id.replace('step-','');
     let zone=block.querySelector('.ma-zuweisung');
-    if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}
-    if(maRows.length===0){
-      zone.innerHTML='<div class="ma-zuw-title">👷 Mitarbeiter zuweisen</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Erst Mitarbeiter im Tab "Zeiten" eintragen</div>';
-      return;
-    }
-    // Bestehende Auswahl merken
+    const noMAMsg=block.querySelector('[data-no-ma]');
     const checked={};
     block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});
     const stunden={};
     block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});
-    zone.innerHTML='<div class="ma-zuw-title">👷 Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
+
+    if(maRows.length===0){
+      if(zone)zone.remove();
+      if(!noMAMsg){
+        const msg=document.createElement('div');
+        msg.setAttribute('data-no-ma','1');
+        msg.style.cssText='font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px';
+        msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';
+        block.appendChild(msg);
+      }
+      return;
+    }
+
+    if(noMAMsg)noMAMsg.remove();
+    if(!zone){
+      zone=document.createElement('div');
+      zone.className='ma-zuweisung';
+      block.appendChild(zone);
+    }
+    zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
       maRows.map(ma=>{
         const isChecked=checked[ma.name]||false;
         const h=stunden[ma.name]||'';
         return '<div class="ma-check-row">'+
           '<input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(isChecked?'checked':'')+' onchange="updateStepMA('+idx+')">'+
           '<span class="ma-name">'+ma.name+' <span style="color:var(--m);font-size:10px">('+ma.qual+')</span></span>'+
-          '<input type="number" class="ma-h" data-name="'+ma.name+'" placeholder="Std." value="'+h+'" min="0" step="0.5" oninput="updateStepMA('+idx+')" style="'+(isChecked?'':'opacity:.4')+'">';
+          '<input type="number" class="ma-h" data-name="'+ma.name+'" placeholder="Std." value="'+h+'" min="0" step="0.5" style="opacity:'+(isChecked?'1':'0.4')+'" oninput="updateStepMA('+idx+')">';
       }).join('');
   });
 }
@@ -818,9 +782,8 @@ function getStepMAs(idx){
   if(!block)return[];
   const result=[];
   block.querySelectorAll('.ma-cb:checked').forEach(cb=>{
-    const name=cb.dataset.name;
-    const hInput=block.querySelector('.ma-h[data-name="'+name+'"]');
-    result.push({name,stunden:hInput?.value||''});
+    const hInput=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
+    result.push({name:cb.dataset.name,stunden:hInput?.value||''});
   });
   return result;
 }
@@ -841,7 +804,6 @@ function getSteps(){
 
 // ══════ ZEITERFASSUNG ══════
 function getZeitRowsSimple(){
-  // Nur Namen+Qualifikation für Dropdown
   return[...document.querySelectorAll('#zeit-body tr')].map(tr=>{
     const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
     return{name:is[0]?.value,qual:ss[0]?.value};
@@ -851,12 +813,11 @@ function getZeitRowsSimple(){
 function addZeitRow(data={}){
   const tbody=document.getElementById('zeit-body');if(!tbody)return;
   const tr=document.createElement('tr');
-  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'·'+a.name.substring(0,10)+'</option>').join('');
-  const fahrtSel=
-    '<select class="fahrt-sel" style="font-size:10px" onchange="calcZR(this)">'+
-    '<option value="fahrer" '+(data.fahrt==='fahrer'?'selected':'')+'>🚗 Fahrer 100%</option>'+
-    '<option value="beifahrer" '+(data.fahrt==='beifahrer'?'selected':'')+'>🪑 Beif. 50%</option>'+
-    '<option value="privat" '+(data.fahrt==='privat'?'selected':'')+'>🏠 Privat 0%</option>'+
+  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+' - '+a.name.substring(0,10)+'</option>').join('');
+  const fahrtSel='<select class="fahrt-sel" style="font-size:10px" onchange="calcZR(this)">'+
+    '<option value="fahrer" '+(data.fahrt==='fahrer'?'selected':'')+'>Fahrer 100%</option>'+
+    '<option value="beifahrer" '+(data.fahrt==='beifahrer'?'selected':'')+'>Beifahrer 50%</option>'+
+    '<option value="privat" '+(data.fahrt==='privat'?'selected':'')+'>Privat 0%</option>'+
     '</select>';
   tr.innerHTML=
     '<td><input type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:80px" oninput="refreshStepMAs()"></td>'+
@@ -864,15 +825,17 @@ function addZeitRow(data={}){
     '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
     '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
     '<td><input type="number" value="'+(data.pause||30)+'" style="width:44px" oninput="calcZR(this)"></td>'+
-    '<td><input class="netto-arbeit" type="text" readonly style="width:48px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
+    '<td><input class="netto-arbeit" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
     '<td>'+fahrtSel+'</td>'+
-    '<td><input type="number" value="'+(data.fahrzeitMin||0)+'" min="0" style="width:50px" placeholder="0" oninput="calcZR(this)"></td>'+
-    '<td><input class="fahrt-anteil" type="text" readonly style="width:44px;color:var(--earth);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
-    '<td><input class="gesamt-h" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;font-size:12px"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:100px"><option value="">—</option>'+au+'</select></td>'+
-    '<td><input type="text" value="'+(data.tae||'')+'" placeholder="Tätigkeit" style="width:90px"></td>'+
-    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()" onclick="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()">✕</button></td>';
+    '<td><input type="number" value="'+(data.fahrzeitMin||0)+'" min="0" style="width:52px" placeholder="0" oninput="calcZR(this)"></td>'+
+    '<td><input class="fahrt-anteil" type="text" readonly style="width:48px;color:var(--earth);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
+    '<td><input class="gesamt-h" type="text" readonly style="width:56px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;font-size:12px"></td>'+
+    '<td><select class="row-au" style="font-size:9px;min-width:100px"><option value="">-</option>'+au+'</select></td>'+
+    '<td><input type="text" value="'+(data.tae||'')+'" placeholder="Taetigkeit" style="width:90px"></td>'+
+    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()" onclick="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()">&#x2715;</button></td>';
   tbody.appendChild(tr);
+  // Qualifikation setzen falls vorhanden
+  if(data.qual){const sel=tr.querySelector('select');if(sel){for(let o of sel.options){if(o.value===data.qual||o.text===data.qual){sel.value=o.value;break;}}}}
   calcZR(tr.querySelector('input[type=time]'));
   setTimeout(refreshStepMAs,50);
 }
@@ -885,22 +848,15 @@ function calcZR(inp){
   const fahrzeitMin=parseFloat(is[7]?.value)||0;
   const fahrtSel=tr.querySelector('.fahrt-sel');
   const fahrtVal=fahrtSel?.value||'fahrer';
-
   if(v&&b){
-    const[vh,vm]=v.split(':').map(Number);
-    const[bh,bm]=b.split(':').map(Number);
+    const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
     let arbMin=(bh*60+bm)-(vh*60+vm)-pause;
     if(arbMin<0)arbMin+=1440;
     const arbH=arbMin/60;
-    // Netto Arbeit
     if(is[5])is[5].value=arbH.toFixed(2).replace('.',',');
-
-    // Fahrzeit-Anteil
     const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[fahrtVal]??1.0;
     const fahrtH=(fahrzeitMin/60)*satz;
     if(is[8])is[8].value=fahrtH.toFixed(2).replace('.',',');
-
-    // Gesamt = Arbeit + Fahrtanteil
     const gesamt=arbH+fahrtH;
     const gEl=tr.querySelector('.gesamt-h');
     if(gEl)gEl.value=gesamt.toFixed(2).replace('.',',');
@@ -931,21 +887,20 @@ function getZeitRows(){
   }).filter(r=>r.name);
 }
 
-// MASCHINEN
 function addMachRow(data={}){
   const tbody=document.getElementById('mach-body');if(!tbody)return;
   const tr=document.createElement('tr');
   const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'</option>').join('');
   tr.innerHTML=
-    '<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">— Gerät wählen —</option>'+
-    GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' · '+g.bez+'</option>').join('')+
+    '<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet waehlen -</option>'+
+    GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+
     '</select></td>'+
     '<td><input type="text" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td>'+
     '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
     '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
-    '<td><input class="gr-netto" type="text" readonly style="width:48px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:80px"><option value="">—</option>'+au+'</select></td>'+
-    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';
+    '<td><input class="gr-netto" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
+    '<td><select class="row-au" style="font-size:9px;min-width:80px"><option value="">-</option>'+au+'</select></td>'+
+    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
   tbody.appendChild(tr);
   calcMR(tr.querySelector('input[type=time]'));
 }
@@ -969,14 +924,14 @@ function getMachRows(){
   }).filter(r=>r.geraetNr);
 }
 
-// LIEFERUNGEN
 function addLief(data={}){
   liefIdx++;const i=liefIdx;
   const div=document.createElement('div');div.className='lief-block';
   div.innerHTML=
-    '<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div>'+
-    '<button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>'+
-    '<div class="row">'+
+    '<div class="lief-head">'+
+    '<div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div>'+
+    '<button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button>'+
+    '</div><div class="row">'+
     '<div class="fg w50"><label>Lieferant / Firma</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div>'+
     '<div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" placeholder="LS-2025-001" value="'+(data.ls||'')+'"></div>'+
     '<div class="fg w50"><label>Material / Produkt</label>'+
@@ -984,8 +939,8 @@ function addLief(data={}){
     mkMic('lf-mat-'+i,'Material')+
     '</div>'+
     '<div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div>'+
-    '<div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option><option>l</option></select></div>'+
-    '<div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>✓ OK</option><option>⚠ Teillieferung</option><option>✗ Falsche Ware</option><option>✗ Mängel</option><option>✗ Verzug</option></select></div>'+
+    '<div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option><option>l</option></select></div>'+
+    '<div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>OK</option><option>Teillieferung</option><option>Falsche Ware</option><option>Maengel</option><option>Verzug</option></select></div>'+
     '<div class="fg w50"><label>Bemerkung</label><input type="text" id="lf-bem-'+i+'" value="'+(data.bem||'')+'"></div>'+
     '</div>';
   document.getElementById('lief-con')?.appendChild(div);
@@ -1003,9 +958,9 @@ function addMenge(data={}){
   div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">'+
     '<input type="text" placeholder="Bezeichnung / Leistung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px">'+
     '<input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px">'+
-    '<select style="flex:0 0 65px;font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select>'+
+    '<select style="flex:0 0 65px;font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select>'+
     '<input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px">'+
-    '<button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">✕</button></div>';
+    '<button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div>';
   document.getElementById('mengen-con')?.appendChild(div);
 }
 
@@ -1023,11 +978,11 @@ function addLVRow(data={}){
   tr.innerHTML=
     '<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td>'+
     '<td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td>'+
-    '<td><select style="font-size:10px"><option>m²</option><option>m³</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td>'+
+    '<td><select style="font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td>'+
     '<td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td>'+
     '<td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:70px"><option value="">—</option>'+au+'</select></td>'+
-    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">✕</button></td>';
+    '<td><select class="row-au" style="font-size:9px;min-width:70px"><option value="">-</option>'+au+'</select></td>'+
+    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
   tbody.appendChild(tr);
 }
 
@@ -1045,14 +1000,14 @@ function addMangel(data={}){
     '<div style="display:flex;gap:8px;align-items:flex-start">'+
     '<div style="flex:1">'+
     '<div style="display:flex;gap:5px;margin-bottom:6px">'+
-    '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausführung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select>'+
-    '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>⚠ Mittel</option><option>🔴 Hoch</option><option>🟡 Niedrig</option></select>'+
+    '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausfuehrung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select>'+
+    '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mittel</option><option>Hoch</option><option>Niedrig</option></select>'+
     '</div>'+
     '<textarea id="mg-'+i+'" placeholder="Mangelbeschreibung ..." style="min-height:50px;border-color:rgba(196,72,40,.25)">'+(data.txt||'')+'</textarea>'+
     mkMic('mg-'+i,'Mangel')+
-    '<input type="text" placeholder="Maßnahme / Verantwortlich" style="margin-top:6px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'">'+
+    '<input type="text" placeholder="Massnahme / Verantwortlich" style="margin-top:6px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'">'+
     '</div>'+
-    '<button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">✕</button>'+
+    '<button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">&#x2715;</button>'+
     '</div>';
   document.getElementById('mangel-con')?.appendChild(div);
 }
@@ -1064,13 +1019,11 @@ function getMangelData(){
   }).filter(m=>m.txt);
 }
 
-// WEATHER / TAGS
 function selW(el,val){document.querySelectorAll('.wc').forEach(c=>c.classList.remove('s'));el.classList.add('s');curWeather=val;}
 function togTg(el){el.classList.toggle('a');}
 function getActiveTags(){return[...document.querySelectorAll('#gw-tags .tg.a')].map(t=>t.textContent);}
 function setFahrt(btn){document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.remove('fahrt-active'));btn.classList.add('fahrt-active');curFahrtStatus=btn.dataset.val;calcAR();}
 
-// AR CALC
 function calcAR(){
   const v=document.getElementById('a-von')?.value,b=document.getElementById('a-bis')?.value;
   const p=parseFloat(document.getElementById('a-pause')?.value)||0;
@@ -1087,7 +1040,7 @@ function calcAR(){
     const infoEl=document.getElementById('fahrzeit-info');
     if(infoEl&&fmin>0){
       const lbl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[curFahrtStatus];
-      infoEl.textContent='Fahrzeit: '+fmin+'min × '+Math.round(satz*100)+'% = '+fh.toFixed(2).replace('.',',')+'h | '+lbl;
+      infoEl.textContent='Fahrzeit: '+fmin+'min x '+Math.round(satz*100)+'% = '+fh.toFixed(2).replace('.',',')+'h | '+lbl;
       infoEl.style.color=curFahrtStatus==='privat'?'var(--m)':curFahrtStatus==='beifahrer'?'var(--earth)':'var(--sky)';
     }else if(infoEl)infoEl.textContent='';
     const today=todayStr(),week=getWeekStart(),month=new Date().getMonth();
@@ -1104,257 +1057,340 @@ function calcAR(){
 }
 function getWeekStart(){const d=new Date();d.setDate(d.getDate()-d.getDay()+1);return d.toISOString().split('T')[0];}
 
-// AUFTRÄGE
-function addAuftrag(){const nr=document.getElementById('au-nr').value.trim(),name=document.getElementById('au-name').value.trim();if(!nr||!name){toast('Nr. & Name erforderlich','err');return;}auftraege.push({id:Date.now().toString(),nr,name});localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));document.getElementById('au-nr').value='';document.getElementById('au-name').value='';renderAuList();populateAuftragOpts();toast('Auftrag gespeichert','ok');}
+function addAuftrag(){const nr=document.getElementById('au-nr').value.trim(),name=document.getElementById('au-name').value.trim();if(!nr||!name){toast('Nr. und Name erforderlich','err');return;}auftraege.push({id:Date.now().toString(),nr,name});localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));document.getElementById('au-nr').value='';document.getElementById('au-name').value='';renderAuList();populateAuftragOpts();toast('Auftrag gespeichert','ok');}
 function delAuftrag(id){auftraege=auftraege.filter(a=>a.id!==id);localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));renderAuList();populateAuftragOpts();}
-function renderAuList(){const el=document.getElementById('au-list');if(!el)return;el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">✕</button></div>').join('')||'<div style="color:var(--m);font-size:10px;padding:8px">Keine Aufträge</div>';}
-function populateAuftragOpts(){const opts='<option value="">— Auftrag —</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' · '+a.name+'</option>').join('');['v-auftrag','a-auftrag'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=opts;el.value=v;}});document.querySelectorAll('.row-au').forEach(s=>{const v=s.value;s.innerHTML='<option value="">—</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'·'+a.name.substring(0,10)+'</option>').join('');s.value=v;});}
-function getAuLabel(id){const a=auftraege.find(x=>x.id===id);return a?a.nr+' · '+a.name:'—';}
+function renderAuList(){const el=document.getElementById('au-list');if(!el)return;el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">&#x2715;</button></div>').join('')||'<div style="color:var(--m);font-size:10px;padding:8px">Keine Auftraege</div>';}
+function populateAuftragOpts(){const opts='<option value="">- Auftrag -</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name+'</option>').join('');['v-auftrag','a-auftrag'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=opts;el.value=v;}});document.querySelectorAll('.row-au').forEach(s=>{const v=s.value;s.innerHTML='<option value="">-</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name.substring(0,10)+'</option>').join('');s.value=v;});}
+function getAuLabel(id){const a=auftraege.find(x=>x.id===id);return a?a.nr+' - '+a.name:'--';}
 
-// ══════ PDF GENERIERUNG - WEISSES LAYOUT ══════
+// ══════ PDF - WEISSES LAYOUT MIT LOGO FIX ══════
+async function loadLogoAsBase64(){
+  return new Promise((resolve)=>{
+    const img=new Image();
+    img.crossOrigin='anonymous';
+    const tryLoad=(src)=>{
+      img.onload=()=>{
+        try{
+          const canvas=document.createElement('canvas');
+          canvas.width=img.naturalWidth||300;
+          canvas.height=img.naturalHeight||100;
+          const ctx=canvas.getContext('2d');
+          ctx.drawImage(img,0,0);
+          const data=canvas.toDataURL('image/png');
+          resolve({data,w:img.naturalWidth,h:img.naturalHeight});
+        }catch(e){resolve(null);}
+      };
+      img.onerror=()=>resolve(null);
+      img.src=src;
+      setTimeout(()=>resolve(null),3000);
+    };
+    tryLoad(FIRMA_LOGO+'?_='+Date.now());
+  });
+}
+
 async function generatePDF(report){
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const W=210,M=15,cw=W-M*2;
   let y=M;
 
-  // Farben für weißes Layout
+  // Farben - weisses professionelles Layout
   const C={
-    black:[0,0,0],
-    dunkel:[30,30,30],
-    grau:[80,80,80],
-    hellgrau:[140,140,140],
-    rahmen:[200,200,200],
-    heller:[240,240,240],
-    gruen:[50,120,20],
-    gruenDunkel:[30,80,10],
-    rot:[180,50,20],
-    orange:[180,100,20],
-    blau:[40,100,160],
+    schwarz:[0,0,0],
+    dunkel:[25,25,25],
+    grau:[90,90,90],
+    hellgrau:[150,150,150],
+    sehrHell:[245,245,245],
+    rahmen:[210,210,210],
+    gruen:[45,115,20],
+    gruenHell:[60,140,25],
+    rot:[175,45,20],
+    orange:[175,95,15],
+    blau:[35,95,155],
     weiss:[255,255,255]
   };
 
-  const T=(txt,x,fy,sz,bold,col)=>{
+  // Hilfsfunktionen - ALLE Sonderzeichen/Emojis werden entfernt
+  const clean=(txt)=>{
+    return String(txt||'')
+      .replace(/[^\x20-\x7E\xC0-\xFF]/g,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+  };
+
+  const T=(txt,x,fy,sz,bold,col,align)=>{
     doc.setFontSize(sz||10);
     doc.setFont('helvetica',bold?'bold':'normal');
     doc.setTextColor(...(col||C.dunkel));
-    doc.text(String(txt||''),x,fy);
+    const c=clean(txt);
+    if(align){doc.text(c,x,fy,{align});}
+    else{doc.text(c,x,fy);}
   };
+
   const W2=(txt,x,fy,maxW,sz,col)=>{
-    doc.setFontSize(sz||10);doc.setFont('helvetica','normal');
+    doc.setFontSize(sz||10);
+    doc.setFont('helvetica','normal');
     doc.setTextColor(...(col||C.dunkel));
-    const lines=doc.splitTextToSize(String(txt||''),maxW);
+    const c=clean(txt);
+    const lines=doc.splitTextToSize(c,maxW);
     doc.text(lines,x,fy);
     return lines.length;
   };
+
   const LINE=(x1,y1,x2,y2,col,lw)=>{
     doc.setDrawColor(...(col||C.rahmen));
     doc.setLineWidth(lw||0.3);
     doc.line(x1,y1,x2,y2);
   };
+
   const RECT=(x,fy,w,h,fill,stroke)=>{
     if(fill){doc.setFillColor(...fill);doc.rect(x,fy,w,h,'F');}
     if(stroke){doc.setDrawColor(...stroke);doc.setLineWidth(0.3);doc.rect(x,fy,w,h,'S');}
   };
+
   const newPage=()=>{doc.addPage();y=M;};
-  const needPage=(h)=>{if(y+h>282){newPage();}};
+  const needPage=(h)=>{if(y+h>280){newPage();}};
 
-  // ── HEADER mit weißem Hintergrund ──
+  // ── HEADER ──
   // Logo laden
-  try{
-    const img=new Image();img.crossOrigin='anonymous';
-    await new Promise(res=>{img.onload=res;img.onerror=res;img.src=FIRMA_LOGO;setTimeout(res,2000);});
-    if(img.complete&&img.naturalWidth>0){
-      const canvas=document.createElement('canvas');
-      canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
-      canvas.getContext('2d').drawImage(img,0,0);
-      const ratio=img.naturalWidth/img.naturalHeight;
-      const logoH=16;const logoW=logoH*ratio;
-      doc.addImage(canvas.toDataURL('image/png'),'PNG',M,y,logoW,logoH);
-    }
-  }catch(e){}
+  const logo=await loadLogoAsBase64();
+  if(logo&&logo.data){
+    const ratio=logo.w/logo.h;
+    const logoH=16;
+    const logoW=Math.min(logoH*ratio,55);
+    doc.addImage(logo.data,'PNG',M,y,logoW,logoH);
+  }else{
+    // Fallback: Firmenname als gruener Text
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...C.gruen);
+    doc.text('KLEI',M,y+12);
+  }
 
-  // Firmenname rechts oben
-  T(FIRMA_NAME,W-M,y+6,11,true,C.dunkel);
+  // Firmeninfo rechts
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...C.dunkel);
+  doc.text(FIRMA_NAME,W-M,y+7,{align:'right'});
   doc.setFont('helvetica','normal');
-  doc.setFontSize(8);doc.setTextColor(...C.grau);
-  doc.text(FIRMA_ADRESSE,W-M,y+11,{align:'right'});
-  doc.text(FIRMA_TEL+' · www.klei-sportplatzbau.de',W-M,y+15,{align:'right'});
+  doc.setFontSize(8);
+  doc.setTextColor(...C.grau);
+  doc.text(FIRMA_ADRESSE,W-M,y+12,{align:'right'});
+  doc.text(FIRMA_TEL+' - '+FIRMA_WEB,W-M,y+17,{align:'right'});
   y+=22;
 
-  // Trennlinie unter Header
+  // Gruene Trennlinie
   LINE(M,y,W-M,y,C.gruen,0.8);
-  y+=4;
+  y+=5;
 
-  // Dokumenttyp-Badge
+  // Dokumenttyp - gruener Banner
   const typ=report.role==='ar'?'ARBEITSZEITNACHWEIS':'TAGESBERICHT VORARBEITER';
-  RECT(M,y,cw,8,C.gruen);
-  T(typ,M+4,y+5.5,9,true,C.weiss);
-  T(fmtD(report.datum),W-M-4,y+5.5,9,false,C.weiss);
-  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(...C.weiss);
-  doc.text(fmtD(report.datum),W-M-4,y+5.5,{align:'right'});
-  y+=12;
+  RECT(M,y,cw,9,C.gruen);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  doc.setTextColor(...C.weiss);
+  doc.text(typ,M+4,y+6);
+  // Datum rechts - NUR Datum, keine Uhrzeit
+  doc.text(fmtD(report.datum),W-M-4,y+6,{align:'right'});
+  y+=14;
 
   if(report.role==='ar'){
     // ══ ARBEITSZEITNACHWEIS ══
 
-    // Name + Datum
-    T(report.name||'—',M,y,16,true,C.dunkel);
-    y+=8;
-    LINE(M,y,W-M,y,C.rahmen);y+=5;
+    // Name gross
+    T(report.name||'--',M,y,18,true,C.dunkel);
+    y+=9;
+    LINE(M,y,W-M,y,C.rahmen,0.5);y+=6;
 
-    // Info-Zeile
-    const infos=[['Qualifikation',report.qual||'—'],['Auftrag',getAuLabel(report.auftragId)],['Wetter',report.wetter+(report.temp?' · '+report.temp+'°C':'')]];
-    infos.forEach(([l,v],i)=>{
-      const x=M+(i*62);
-      T(l,x,y,7,false,C.hellgrau);
-      T(v,x,y+5,9,true,C.dunkel);
+    // Info-Zeile: Qual / Auftrag / Wetter
+    const infos=[
+      ['Qualifikation',clean(report.qual||'--')],
+      ['Auftrag',clean(getAuLabel(report.auftragId))],
+      ['Wetter',clean((report.wetter||'--')+(report.temp?' / '+report.temp+' Grad C':''))]
+    ];
+    infos.forEach(([lbl,val],i)=>{
+      const x=M+(i*65);
+      T(lbl,x,y,7,false,C.hellgrau);
+      T(val,x,y+5,9,true,C.dunkel);
     });
-    y+=13;LINE(M,y,W-M,y,C.rahmen);y+=6;
+    y+=13;LINE(M,y,W-M,y,C.rahmen,0.3);y+=6;
 
-    // Zeiten-Überschrift
+    // Arbeitszeiten Ueberschrift
     T('ARBEITSZEITEN',M,y,8,true,C.gruen);
     y+=6;
 
-    // Zeiten-Tabelle - weißer Hintergrund, klare Struktur
-    const zHeaders=['Arbeit Von','Arbeit Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
-    const zVals=[
-      report.von||'—',
-      report.bis||'—',
-      (report.pause||30)+' min',
-      (report.nettoWork||'—')+' h',
-      (report.fahrzeitMin||0)+' min',
-      {'fahrer':'Fahrer (100%)','beifahrer':'Beifahrer (50%)','privat':'Privat (0%)'}[report.fahrtStatus||'fahrer'],
-      (report.netto||'—')+' h'
-    ];
-    const zWidths=[24,24,22,26,22,34,24];
-    let x2=M;
-    // Header-Zeile
-    RECT(M,y,cw,6,C.heller);
+    // Tabelle Arbeitszeiten
+    RECT(M,y,cw,6,C.sehrHell);
     LINE(M,y,W-M,y,C.rahmen);
-    zHeaders.forEach((h,i)=>{T(h,x2+1,y+4.2,7,false,C.grau);x2+=zWidths[i];});
-    y+=6;
-    // Werte-Zeile
-    LINE(M,y,W-M,y,C.rahmen);
-    x2=M;
-    zVals.forEach((v,i)=>{
-      const isBold=i===6;
-      const col=i===6?C.gruen:i===5?C.blau:C.dunkel;
-      T(v,x2+1,y+5,i===6?11:9,isBold,col);
-      x2+=zWidths[i];
-    });
-    y+=8;
-    LINE(M,y,W-M,y,C.rahmen);y+=6;
+    const zHdr=['Arbeit Von','Arbeit Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
+    const zW=[25,25,22,27,22,36,25];
+    let xz=M+1;
+    zHdr.forEach((h,i)=>{T(h,xz,y+4.2,7,false,C.grau);xz+=zW[i];});
+    y+=6;LINE(M,y,W-M,y,C.rahmen);
 
-    // Fahrt-Erklärung
-    const fahrtTxt={'fahrer':'🚗 Fahrer: Fahrzeit wird vollständig (100%) als Arbeitszeit angerechnet.',
-      'beifahrer':'🪑 Beifahrer: Fahrzeit wird zu 50% als Arbeitszeit angerechnet.',
-      'privat':'🏠 Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet.'}[report.fahrtStatus||'fahrer'];
-    RECT(M,y,cw,7,C.heller);
-    LINE(M,y,M+2,y+7,{'fahrer':C.blau,'beifahrer':C.orange,'privat':C.grau}[report.fahrtStatus||'fahrer'],2);
-    T(fahrtTxt,M+5,y+4.8,8,false,C.grau);
+    const fahrtLabel={
+      'fahrer':'Fahrer (100%)',
+      'beifahrer':'Beifahrer (50%)',
+      'privat':'Privat (0%)'
+    }[report.fahrtStatus||'fahrer'];
+
+    const zVals=[
+      report.von||'--',
+      report.bis||'--',
+      (report.pause||30)+' min',
+      (report.nettoWork||'--')+' h',
+      (report.fahrzeitMin||0)+' min',
+      fahrtLabel,
+      (report.netto||'--')+' h'
+    ];
+    xz=M+1;
+    zVals.forEach((v,i)=>{
+      const isGesamt=(i===6);
+      const col=isGesamt?C.gruen:i===5?C.blau:C.dunkel;
+      T(clean(v),xz,y+5.5,isGesamt?11:9,isGesamt,col);
+      xz+=zW[i];
+    });
+    y+=8;LINE(M,y,W-M,y,C.rahmen);y+=5;
+
+    // Fahrt Erklaerung - OHNE Emojis
+    const fahrtErk={
+      'fahrer':'Fahrer: Fahrzeit wird vollstaendig (100%) als Arbeitszeit angerechnet.',
+      'beifahrer':'Beifahrer: Fahrzeit wird zur Haelfte (50%) als Arbeitszeit angerechnet.',
+      'privat':'Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet (0%).'
+    }[report.fahrtStatus||'fahrer'];
+    const fahrtLineCol={
+      'fahrer':C.blau,
+      'beifahrer':C.orange,
+      'privat':C.hellgrau
+    }[report.fahrtStatus||'fahrer'];
+
+    RECT(M,y,cw,7,C.sehrHell);
+    doc.setDrawColor(...fahrtLineCol);
+    doc.setLineWidth(2);
+    doc.line(M,y,M,y+7);
+    doc.setLineWidth(0.3);
+    T(fahrtErk,M+4,y+5,8,false,C.grau);
     y+=11;LINE(M,y,W-M,y,C.rahmen);y+=6;
 
-    // Tätigkeit
-    T('TÄTIGKEITSBERICHT',M,y,8,true,C.gruen);y+=6;
-    const tLines=W2(report.taetigkeit||'—',M,y,cw,10,C.dunkel);
+    // Taetigkeitsbericht
+    T('TAELIGKEITSBERICHT',M,y,8,true,C.gruen);y+=6;
+    const tLines=W2(report.taetigkeit||'--',M,y,cw,10,C.dunkel);
     y+=tLines*5+4;
 
-    if(report.besonder){
+    if(report.besonder&&report.besonder.trim()){
       LINE(M,y,W-M,y,C.rahmen);y+=5;
       T('BESONDERHEITEN / HINWEISE',M,y,8,true,C.rot);y+=5;
       W2(report.besonder,M,y,cw,9,C.dunkel);y+=8;
     }
 
-  } else {
+  }else{
     // ══ VORARBEITER TAGESBERICHT ══
 
-    // Projekt-Header
-    T(report.baustelle||'Baustelle',M,y,16,true,C.dunkel);
-    y+=8;
-    LINE(M,y,W-M,y,C.rahmen);y+=5;
+    // Projektname gross
+    T(report.baustelle||'Baustelle',M,y,17,true,C.dunkel);
+    y+=9;
+    LINE(M,y,W-M,y,C.rahmen,0.5);y+=5;
 
     // Projektinfos 2-spaltig
     const pInfo=[
-      ['Bauherr / AG',report.bauherr||'—'],
-      ['Bauleiter / Vorarbeiter',report.bauleiter||'—'],
-      ['Auftrag',getAuLabel(report.auftragId)],
-      ['Projektnummer',report.projektnr||'—']
+      ['Bauherr / AG',clean(report.bauherr||'--')],
+      ['Bauleiter / Vorarbeiter',clean(report.bauleiter||'--')],
+      ['Auftrag',clean(getAuLabel(report.auftragId))],
+      ['Projektnummer',clean(report.projektnr||'--')]
     ];
-    pInfo.forEach(([l,v],i)=>{
+    pInfo.forEach(([lbl,val],i)=>{
       const cx=M+(i%2)*(cw/2);
       const cy=y+Math.floor(i/2)*10;
-      T(l,cx,cy,7,false,C.hellgrau);
-      T(v,cx,cy+5,9,true,C.dunkel);
+      T(lbl,cx,cy,7,false,C.hellgrau);
+      T(val,cx,cy+5,9,true,C.dunkel);
     });
     y+=22;
 
-    // Wetter-Zeile
-    RECT(M,y,cw,7,C.heller);
-    LINE(M,y,W-M,y,C.rahmen);
-    LINE(M,y+7,W-M,y+7,C.rahmen);
-    const wetterStr=(report.wetter||'—')+' · '+(report.temp||'—')+'°C · '+(report.nied||0)+'mm Niederschlag · Boden: '+(report.boden||'—')+' · Gewerke: '+(report.gewerke||[]).join(', ');
-    T(wetterStr,M+3,y+4.8,8,false,C.grau);
+    // Wetter Streifen
+    RECT(M,y,cw,7,C.sehrHell);
+    LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
+    const wetterStr=clean(
+      (report.wetter||'--')+' - '+
+      (report.temp||'--')+' Grad C - '+
+      (report.nied||0)+' mm Niederschlag - Boden: '+
+      (report.boden||'--')+' - Gewerke: '+
+      (report.gewerke||[]).join(', ')
+    );
+    T(wetterStr,M+3,y+5,8,false,C.grau);
     y+=12;
 
     // ── ZEITERFASSUNG ──
     const zRows=(report.zeitRows||[]).filter(t=>t.name);
     if(zRows.length){
-      needPage(20);
+      needPage(25);
       T('ZEITERFASSUNG PERSONAL',M,y,9,true,C.gruen);
       const totalGes=zRows.reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0);
       doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);
       doc.text('Gesamt: '+totalGes.toFixed(2)+'h',W-M,y,{align:'right'});
       y+=7;
 
-      // Tabellen-Header
-      RECT(M,y,cw,6,C.heller);
+      // Tabellen Header
+      RECT(M,y,cw,6,C.sehrHell);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      const zH=[['Name',0,32],['Qual.',32,20],['Von',52,16],['Bis',68,16],['Pause',84,16],['Arbeit',100,20],['Fahrt',120,24],['Fahrzt.',144,20],['Anteil',164,20],['GESAMT',184,22]];
-      zH.forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      const zHdr2=[
+        ['Name',0,30],['Qual.',30,20],['Von',50,17],['Bis',67,17],
+        ['Pause',84,16],['Arbeit',100,20],['Fahrt-Status',120,26],
+        ['Fahrzt.',146,19],['Anteil',165,20],['GESAMT',185,21]
+      ];
+      zHdr2.forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
       y+=7;
 
       zRows.forEach((t,idx)=>{
         needPage(8);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        const fahrtLbl={'fahrer':'Fahrer','beifahrer':'Beifahrer','privat':'Privat'}[t.fahrt||'fahrer'];
-        const fahrtCol={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[t.fahrt||'fahrer'];
-        const vals=[
-          [t.name,0,true,C.dunkel],[t.qual||'',32,false,C.grau],
-          [t.von||'',52],[t.bis||'',68],
-          [(t.pause||30)+'min',84,false,C.grau],
-          [(t.nettoArbeit||'—')+'h',100,true,C.dunkel],
-          [fahrtLbl,120,false,fahrtCol],
-          [(t.fahrzeitMin||0)+'min',144,false,C.grau],
-          [(t.fahrtAnteil||'0,00')+'h',164,false,fahrtCol],
-          [(t.gesamt||t.nettoArbeit||'—')+'h',184,true,C.gruen]
+        const fl={
+          'fahrer':'Fahrer',
+          'beifahrer':'Beifahrer',
+          'privat':'Privat'
+        }[t.fahrt||'fahrer'];
+        const fc={
+          'fahrer':C.blau,
+          'beifahrer':C.orange,
+          'privat':C.hellgrau
+        }[t.fahrt||'fahrer'];
+        const zVals2=[
+          [clean(t.name),0,true,C.dunkel],
+          [clean(t.qual||''),30,false,C.grau],
+          [clean(t.von||''),50,false,C.dunkel],
+          [clean(t.bis||''),67,false,C.dunkel],
+          [clean((t.pause||30)+'min'),84,false,C.grau],
+          [clean((t.nettoArbeit||'--')+'h'),100,true,C.dunkel],
+          [clean(fl),120,false,fc],
+          [clean((t.fahrzeitMin||0)+'min'),146,false,C.grau],
+          [clean((t.fahrtAnteil||'0,00')+'h'),165,false,fc],
+          [clean((t.gesamt||t.nettoArbeit||'--')+'h'),185,true,C.gruen]
         ];
-        vals.forEach(([v,ox,b,c])=>T(v,M+ox,y+4.5,8,b||false,c||C.dunkel));
+        zVals2.forEach(([v,ox,b,c])=>T(v,M+ox,y+4.5,8,b||false,c||C.dunkel));
         y+=7;
       });
       y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
     }
 
-    // ── GERÄTEEINSATZ ──
+    // ── GERAETEEINSATZ ──
     const mRows=(report.machRows||[]).filter(m=>m.geraetNr);
     if(mRows.length){
-      needPage(20);
-      T('GERÄTEEINSATZ (DATAFLOR-NUMMERN)',M,y,9,true,C.gruen);y+=7;
-      RECT(M,y,cw,6,C.heller);
+      needPage(22);
+      T('GERAETEEINSATZ (DATAFLOR-NUMMERN)',M,y,9,true,C.gruen);y+=7;
+      RECT(M,y,cw,6,C.sehrHell);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Dataflor-Nr.',0,18],['Gerät / Bezeichnung',18,70],['Fahrzeugnr.',88,26],['Von',114,18],['Bis',132,18],['Stunden',150,22]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      [['Dataflor-Nr.',0,18],['Geraet / Bezeichnung',18,74],['Fahrzeugnr.',92,28],['Von',120,18],['Bis',138,18],['Stunden',156,22]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
       y+=7;
       mRows.forEach((m,idx)=>{
         needPage(8);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        T(m.geraetNr,M+0,y+4.5,8,true,C.gruen);
-        T(m.geraetBez||'—',M+18,y+4.5,8,false,C.dunkel);
-        T(m.fahrzeugnr||'—',M+88,y+4.5,8,false,C.grau);
-        T(m.von||'',M+114,y+4.5,8,false,C.dunkel);
-        T(m.bis||'',M+132,y+4.5,8,false,C.dunkel);
-        T((m.netto||'—')+'h',M+150,y+4.5,9,true,C.gruen);
+        T(clean(m.geraetNr),M+0,y+4.5,8,true,C.gruen);
+        T(clean(m.geraetBez||'--'),M+18,y+4.5,8,false,C.dunkel);
+        T(clean(m.fahrzeugnr||'--'),M+92,y+4.5,8,false,C.grau);
+        T(clean(m.von||''),M+120,y+4.5,8,false,C.dunkel);
+        T(clean(m.bis||''),M+138,y+4.5,8,false,C.dunkel);
+        T(clean((m.netto||'--')+'h'),M+156,y+4.5,9,true,C.gruen);
         y+=7;
       });
       y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
@@ -1364,16 +1400,26 @@ async function generatePDF(report){
     const steps=(report.steps||[]).filter(s=>s.txt);
     if(steps.length){
       needPage(20);
-      T('AUSGEFÜHRTE ARBEITEN / ARBEITSSCHRITTE',M,y,9,true,C.gruen);y+=8;
+      T('AUSGEFUEHRTE ARBEITEN / ARBEITSSCHRITTE',M,y,9,true,C.gruen);y+=8;
       steps.forEach((s,i)=>{
-        needPage(20);
-        // Schritt-Header
-        RECT(M,y,cw,7,C.heller);
+        needPage(22);
+        // Schritt Header
+        RECT(M,y,cw,7,C.sehrHell);
         LINE(M,y,W-M,y,C.rahmen);
-        T(String(i+1)+'.',M+2,y+5,10,true,C.gruen);
-        if(s.aid)T(getAuLabel(s.aid),M+12,y+5,8,false,C.dunkel);
-        if(s.pos){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);doc.text('Pos. '+s.pos,M+90,y+5);}
-        if(s.menge){doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);doc.text(s.menge+' '+(s.eh||''),W-M-4,y+5,{align:'right'});}
+        doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+        doc.text(String(i+1)+'.',M+2,y+5);
+        if(s.aid){
+          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.dunkel);
+          doc.text(clean(getAuLabel(s.aid)),M+12,y+5);
+        }
+        if(s.pos){
+          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);
+          doc.text('Pos. '+clean(s.pos),M+90,y+5);
+        }
+        if(s.menge){
+          doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);
+          doc.text(clean(s.menge)+' '+clean(s.eh||''),W-M-4,y+5,{align:'right'});
+        }
         LINE(M,y+7,W-M,y+7,C.rahmen);
         y+=10;
 
@@ -1381,12 +1427,13 @@ async function generatePDF(report){
         const lines=W2(s.txt,M+3,y,cw-6,9,C.dunkel);
         y+=lines*5+3;
 
-        // Mitarbeiter-Zuweisung
+        // Mitarbeiter
         if(s.mitarbeiter&&s.mitarbeiter.length>0){
-          T('Mitarbeiter: '+s.mitarbeiter.map(m=>m.name+(m.stunden?' ('+m.stunden+'h)':'')).join(', '),M+3,y,8,false,C.grau);
+          const maStr='Mitarbeiter: '+s.mitarbeiter.map(m=>clean(m.name)+(m.stunden?' ('+m.stunden+'h)':'')).join(', ');
+          T(maStr,M+3,y,8,false,C.grau);
           y+=5;
         }
-        LINE(M,y,W-M,y,[220,220,220]);y+=4;
+        LINE(M,y,W-M,y,[225,225,225],0.2);y+=4;
       });
       y+=2;
     }
@@ -1394,64 +1441,68 @@ async function generatePDF(report){
     // ── LIEFERUNGEN ──
     const liefs=(report.lieferungen||[]).filter(l=>l.firma||l.mat);
     if(liefs.length){
-      needPage(20);
+      needPage(22);
       T('MATERIALLIEFERUNGEN',M,y,9,true,C.gruen);y+=7;
-      RECT(M,y,cw,6,C.heller);
+      RECT(M,y,cw,6,C.sehrHell);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Lieferant',0,38],['Liefer-Nr.',38,28],['Material',66,52],['Menge',118,22],['Status',140,30]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      [['Lieferant',0,36],['Liefer-Nr.',36,28],['Material',64,54],['Menge',118,22],['Status',140,30]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
       y+=7;
       liefs.forEach((l,idx)=>{
         needPage(7);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        T(l.firma||'—',M+0,y+4.5,8,true,C.dunkel);
-        T(l.ls||'—',M+38,y+4.5,8,false,C.grau);
-        T(l.mat||'—',M+66,y+4.5,8,false,C.dunkel);
-        T((l.menge||'—')+' '+(l.eh||''),M+118,y+4.5,8,true,C.gruen);
-        T(l.ok||'',M+140,y+4.5,8,false,l.ok?.includes('✓')?C.gruen:C.rot);
+        T(clean(l.firma||'--'),M+0,y+4.5,8,true,C.dunkel);
+        T(clean(l.ls||'--'),M+36,y+4.5,8,false,C.grau);
+        T(clean(l.mat||'--'),M+64,y+4.5,8,false,C.dunkel);
+        T(clean((l.menge||'--')+' '+(l.eh||'')),M+118,y+4.5,8,true,C.gruen);
+        const okCol=l.ok&&l.ok.includes('OK')?C.gruen:C.rot;
+        T(clean(l.ok||''),M+140,y+4.5,8,false,okCol);
         y+=7;
       });
       y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
     }
 
-    // ── MÄNGEL ──
+    // ── MAENGEL ──
     const maengel=(report.maengel||[]).filter(m=>m.txt);
     if(maengel.length){
       needPage(20);
-      RECT(M,y,cw,7,[255,245,245]);
-      LINE(M,y,M+2,y+7,C.rot,2);
-      T('MÄNGEL & PROBLEME ('+maengel.length+')',M+5,y+5,9,true,C.rot);
+      RECT(M,y,cw,7,[255,248,248]);
+      doc.setDrawColor(...C.rot);doc.setLineWidth(2);
+      doc.line(M,y,M,y+7);doc.setLineWidth(0.3);
+      T('MAENGEL UND PROBLEME ('+maengel.length+')',M+5,y+5,9,true,C.rot);
       LINE(M,y+7,W-M,y+7,C.rahmen);y+=11;
       maengel.forEach(m=>{
         needPage(16);
-        T((m.schwere||'')+'  '+( m.typ||''),M,y,8,true,C.rot);y+=5;
+        T(clean((m.schwere||'')+' - '+(m.typ||'')),M,y,8,true,C.rot);y+=5;
         const lines=W2(m.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+2;
-        if(m.massnahme){T('→ Maßnahme: '+m.massnahme,M+3,y,8,false,C.orange);y+=5;}
-        LINE(M,y,W-M,y,[230,200,200]);y+=4;
+        if(m.massnahme&&m.massnahme.trim()){
+          T('Massnahme: '+clean(m.massnahme),M+3,y,8,false,C.orange);y+=5;
+        }
+        LINE(M,y,W-M,y,[230,200,200],0.2);y+=4;
       });
     }
 
-    // ── NÄCHSTE SCHRITTE ──
-    if(report.naechstes){
+    // ── NAECHSTE SCHRITTE ──
+    if(report.naechstes&&report.naechstes.trim()){
       needPage(16);
-      T('NÄCHSTE SCHRITTE / PLANUNG',M,y,9,true,C.gruen);y+=6;
-      const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);y+=lines*5+4;
+      T('NAECHSTE SCHRITTE / PLANUNG',M,y,9,true,C.gruen);y+=6;
+      const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);
+      y+=lines*5+4;
     }
   }
 
   // ── FOOTER ──
-  LINE(M,285,W-M,285,C.gruen,0.5);
-  T(FIRMA_NAME+' · '+FIRMA_ADRESSE+' · '+FIRMA_TEL,M,289,7,false,C.grau);
-  T('Erstellt: '+new Date().toLocaleString('de-DE'),W-M,289,7,false,C.grau);
+  LINE(M,284,W-M,284,C.gruen,0.5);
   doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);
-  doc.text('Erstellt: '+new Date().toLocaleString('de-DE'),W-M,289,{align:'right'});
+  doc.text(FIRMA_NAME+' - '+FIRMA_ADRESSE+' - '+FIRMA_TEL,M,288);
+  doc.text('Erstellt: '+new Date().toLocaleDateString('de-DE')+' '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),W-M,288,{align:'right'});
 
   // Unterschriften
-  if(y<270){
-    LINE(M,276,M+65,276,C.rahmen);
-    LINE(W-M-65,276,W-M,276,C.rahmen);
-    T('Unterschrift Mitarbeiter',M,280,7,false,C.hellgrau);
-    T('Unterschrift Bauleiter / Vorarbeiter',W-M-65,280,7,false,C.hellgrau);
+  if(y<268){
+    LINE(M,274,M+65,274,C.rahmen);
+    LINE(W-M-65,274,W-M,274,C.rahmen);
+    T('Unterschrift Mitarbeiter',M,278,7,false,C.hellgrau);
+    T('Unterschrift Bauleiter / Vorarbeiter',W-M-65,278,7,false,C.hellgrau);
   }
 
   return doc;
@@ -1460,19 +1511,22 @@ async function generatePDF(report){
 // ══════ SEND PDF ══════
 async function sendPDFMail(report,statusElId){
   const statusEl=document.getElementById(statusElId);
-  if(statusEl){statusEl.className='send-status show sending';statusEl.textContent='📤 PDF wird erstellt und gesendet...';}
+  if(statusEl){statusEl.className='send-status show sending';statusEl.textContent='PDF wird erstellt und gesendet...';}
   try{
     const doc=await generatePDF(report);
     const pdfBase64=doc.output('datauristring').split(',')[1];
+    const totalH=report.role==='ar'?
+      parseFloat((report.netto||'0').replace(',','.'))||0:
+      (report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0);
     const payload={
       empfaenger:EMPFAENGER_MAIL,
-      betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' — '+(report.role==='ar'?report.name:report.baustelle||'Bericht'),
+      betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' - '+(report.role==='ar'?report.name:report.baustelle||'Bericht'),
       rolle:report.role==='ar'?'Arbeiter':'Vorarbeiter',
       name:report.role==='ar'?report.name:report.bauleiter,
       datum:report.datum,
       baustelle:report.role==='va'?report.baustelle:'',
       auftrag:getAuLabel(report.auftragId||''),
-      netto:report.role==='ar'?report.netto:String((report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0).toFixed(2)),
+      netto:totalH.toFixed(2),
       wetter:report.wetter||'',
       pdfBase64,
       reportJson:JSON.stringify(report)
@@ -1480,18 +1534,18 @@ async function sendPDFMail(report,statusElId){
     const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});
     const txt=await res.text();
     if(res.ok&&txt.includes('OK')){
-      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='✅ PDF gesendet an '+EMPFAENGER_MAIL;}
-      toast('✅ PDF gesendet!','ok');
-    }else{throw new Error(txt||'Fehler');}
+      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='PDF erfolgreich gesendet an '+EMPFAENGER_MAIL;}
+      toast('PDF gesendet!','ok');
+    }else{throw new Error(txt||'Unbekannter Fehler');}
   }catch(e){
-    if(statusEl){statusEl.className='send-status show err';statusEl.textContent='❌ '+e.message+' — PDF wird lokal gespeichert.';}
+    if(statusEl){statusEl.className='send-status show err';statusEl.textContent='Fehler: '+e.message+' - PDF wird lokal gespeichert.';}
     const doc=await generatePDF(report);
     doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:report.baustelle)||'Bericht')+'.pdf');
     toast('PDF lokal gespeichert','err');
   }
 }
 
-// ══════ SAVE & SEND ══════
+// ══════ SAVE AND SEND ══════
 async function saveAndSendAR(){
   const d={
     id:currentId||Date.now().toString(),role:'ar',
@@ -1511,13 +1565,13 @@ async function saveAndSendAR(){
     besonder:document.getElementById('a-besonder').value,
     createdAt:new Date().toISOString()
   };
-  if(!d.datum||!d.name){toast('Datum & Name erforderlich','err');return;}
+  if(!d.datum||!d.name){toast('Datum und Name erforderlich','err');return;}
   const idx=reports.findIndex(r=>r.id===d.id);
   if(idx>=0)reports[idx]=d;else reports.push(d);
   currentId=d.id;
   localStorage.setItem('klei_reports',JSON.stringify(reports));
   renderSB();renderARDetail(d);
-  toast('💾 Gespeichert...','ok');
+  toast('Gespeichert...','ok');
   await sendPDFMail(d,'ar-send-status');
 }
 
@@ -1549,18 +1603,18 @@ async function saveAndSendVA(){
     createdAt:new Date().toISOString(),
     aiAnalysis:null
   };
-  if(!d.datum||!d.baustelle){toast('Datum & Baustelle erforderlich','err');return;}
+  if(!d.datum||!d.baustelle){toast('Datum und Baustelle erforderlich','err');return;}
   const idx=reports.findIndex(r=>r.id===d.id);
   if(idx>=0){d.aiAnalysis=reports[idx].aiAnalysis;reports[idx]=d;}else reports.push(d);
   currentId=d.id;
   localStorage.setItem('klei_reports',JSON.stringify(reports));
   renderSB();renderVADetail(d);
-  toast('💾 Gespeichert...','ok');
+  toast('Gespeichert...','ok');
   await sendPDFMail(d,'va-send-status');
 }
 
 function clearARForm(){
-  currentId=null;
+  currentId=null;stopVoice();
   ['a-name','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('a-datum').value=todayStr();
   document.getElementById('a-von').value='07:00';
@@ -1580,13 +1634,15 @@ function newReport(){
   if(currentRole==='ar'){clearARForm();}
   else{
     stepIdx=0;liefIdx=0;mangelIdx=0;
-    ['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-fotos','v-naechstes','v-bemerkungen'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';});
+    ['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-fotos','v-naechstes','v-bemerkungen'].forEach(id=>{
+      const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';
+    });
     ['steps-con','mangel-con','lief-con','mengen-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
     const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';
     const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';
     const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';
     const st=document.getElementById('va-send-status');if(st){st.className='send-status';st.textContent='';}
-    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},50);
+    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},60);
     curWeather='Sonnig';
     document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));
     document.querySelectorAll('#gw-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
@@ -1623,7 +1679,7 @@ function loadVAForm(r){
   if(document.getElementById('v-auftrag'))document.getElementById('v-auftrag').value=r.auftragId||'';
   if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';
   curWeather=r.wetter||'Sonnig';
-  const wm={Sonnig:0,Bewölkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
+  const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
   document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));
   document.querySelectorAll('#gw-tags .tg').forEach(t=>t.classList.toggle('a',(r.gewerke||[]).includes(t.textContent)));
   stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';
@@ -1644,26 +1700,26 @@ function loadVAForm(r){
 }
 
 function renderARDetail(r){
-  const fl={'fahrer':'🚗 Fahrer (100%)','beifahrer':'🪑 Beifahrer (50%)','privat':'🏠 Privat (0%)'}[r.fahrtStatus||'fahrer'];
+  const fl={'fahrer':'Fahrer (100%)','beifahrer':'Beifahrer (50%)','privat':'Privat (0%)'}[r.fahrtStatus||'fahrer'];
   const fc={'fahrer':'var(--sky)','beifahrer':'var(--earth)','privat':'var(--m)'}[r.fahrtStatus||'fahrer'];
   const fh=((parseFloat(r.fahrzeitMin)||0)/60);
   const satz={'fahrer':1,'beifahrer':.5,'privat':0}[r.fahrtStatus||'fahrer'];
   const fa=(fh*satz).toFixed(2).replace('.',',');
   document.getElementById('detailContent').innerHTML=
-    '<div class="card"><div class="card-title">'+(r.name||'—')+'</div>'+
-    '<div class="card-meta"><span class="g">📅 '+fmtD(r.datum)+'</span><span>'+(r.qual||'—')+'</span><span>'+(r.wetter||'—')+'</span></div></div>'+
+    '<div class="card"><div class="card-title">'+(r.name||'--')+'</div>'+
+    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.qual||'--')+'</span><span>'+(r.wetter||'--')+'</span></div></div>'+
     '<div class="srow">'+
-    '<div class="sc"><div class="sv">'+(r.nettoWork||r.netto||'—')+'h</div><div class="sl">Arbeit</div></div>'+
+    '<div class="sc"><div class="sv">'+(r.nettoWork||r.netto||'--')+'h</div><div class="sl">Arbeit</div></div>'+
     '<div class="sc"><div class="sv" style="color:'+fc+'">'+fa+'h</div><div class="sl">Fahrzeit</div></div>'+
-    '<div class="sc"><div class="sv" style="color:var(--gl)">'+(r.netto||'—')+'h</div><div class="sl">Gesamt</div></div>'+
+    '<div class="sc"><div class="sv" style="color:var(--gl)">'+(r.netto||'--')+'h</div><div class="sl">Gesamt</div></div>'+
     '</div>'+
-    '<div class="ib"><div class="ib-t">⏱ Zeiten</div><div class="ib-c">'+(r.von||'—')+'–'+(r.bis||'—')+' · Pause: '+(r.pause||30)+'min'+
-    (parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min · '+fl+' → '+fa+'h</span>':'')+
+    '<div class="ib"><div class="ib-t">Zeiten</div><div class="ib-c">'+(r.von||'--')+' bis '+(r.bis||'--')+' - Pause: '+(r.pause||30)+'min'+
+    (parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min - '+fl+' - '+fa+'h angerechnet</span>':'')+
     '</div></div>'+
-    (r.auftragId?'<div class="ib"><div class="ib-t">📋 Auftrag</div><div class="ib-c">'+getAuLabel(r.auftragId)+'</div></div>':'')+
-    '<div class="ib"><div class="ib-t">📝 Tätigkeit</div><div class="ib-c">'+(r.taetigkeit||'—')+'</div></div>'+
-    (r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">⚠️ Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+
-    '<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">🗑 Löschen</button></div>';
+    (r.auftragId?'<div class="ib"><div class="ib-t">Auftrag</div><div class="ib-c">'+getAuLabel(r.auftragId)+'</div></div>':'')+
+    '<div class="ib"><div class="ib-t">Taetigkeit</div><div class="ib-c">'+(r.taetigkeit||'--')+'</div></div>'+
+    (r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+
+    '<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button></div>';
 }
 
 function renderVADetail(r){
@@ -1671,10 +1727,10 @@ function renderVADetail(r){
   document.getElementById('detailContent').innerHTML=
     '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start">'+
     '<div><div class="card-title">'+(r.baustelle||'Baustelle')+'</div>'+
-    '<div class="card-meta"><span class="g">📅 '+fmtD(r.datum)+'</span><span>👷 '+(r.bauleiter||'—')+'</span><span>#'+(r.projektnr||'—')+'</span></div></div>'+
+    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.bauleiter||'--')+'</span><span>#'+(r.projektnr||'--')+'</span></div></div>'+
     '<div style="display:flex;gap:5px">'+
-    '<button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">✏️</button>'+
-    '<button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">🗑</button>'+
+    '<button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">Bearbeiten</button>'+
+    '<button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button>'+
     '</div></div></div>'+
     '<div class="srow">'+
     '<div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div>'+
@@ -1682,19 +1738,19 @@ function renderVADetail(r){
     '<div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div>'+
     '</div>'+
     ((r.zeitRows||[]).filter(t=>t.name).length?
-      '<div class="ib"><div class="ib-t">⏱ Zeiterfassung</div>'+
+      '<div class="ib"><div class="ib-t">Zeiterfassung</div>'+
       (r.zeitRows||[]).filter(t=>t.name).map(t=>{
-        const fl={'fahrer':'🚗100%','beifahrer':'🪑50%','privat':'🏠0%'}[t.fahrt||'fahrer'];
+        const fl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[t.fahrt||'fahrer'];
         const fc={'fahrer':'var(--sky)','beifahrer':'var(--earth)','privat':'var(--m)'}[t.fahrt||'fahrer'];
         return '<div style="padding:4px 0;border-bottom:1px solid var(--b);font-size:11px;display:flex;justify-content:space-between;align-items:center">'+
           '<span style="color:var(--c);font-weight:600;flex:1">'+t.name+'</span>'+
-          '<span style="color:var(--m);width:90px">'+t.von+'–'+t.bis+'</span>'+
-          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;width:50px">'+(t.nettoArbeit||'—')+'h</span>'+
-          '<span style="color:'+fc+';width:50px;font-size:10px">'+fl+'</span>'+
-          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;width:55px">'+(t.gesamt||t.nettoArbeit||'—')+'h</span>'+
+          '<span style="color:var(--m);width:90px">'+t.von+' - '+t.bis+'</span>'+
+          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;width:50px">'+(t.nettoArbeit||'--')+'h</span>'+
+          '<span style="color:'+fc+';width:60px;font-size:10px">'+fl+'</span>'+
+          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;width:55px">'+(t.gesamt||t.nettoArbeit||'--')+'h</span>'+
           '</div>';
       }).join('')+'</div>':'')+'<div class="arow">'+
-    '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">📤 PDF erneut senden</button>'+
+    '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">PDF erneut senden</button>'+
     '</div>';
 }
 
@@ -1706,11 +1762,11 @@ function renderSB(){
     return '<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
       '<div class="ri-d">'+fmtD(r.datum)+'</div>'+
       '<div class="ri-n">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div>'+
-      '<div class="ri-s">'+(r.role==='va'?(r.bauleiter||'VA'):(r.qual||'AR'))+' · '+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+
+      '<div class="ri-s">'+(r.role==='va'?(r.bauleiter||'VA'):(r.qual||'AR'))+' - '+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+
       '<div class="ri-tags">'+
       '<span class="tag-s '+(r.role==='va'?'tag-e':'tag-g')+'">'+(r.role==='va'?'VA':'AR')+'</span>'+
       (r.aiAnalysis?'<span class="tag-s tag-g">KI</span>':'')+
-      ((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">⚠'+r.maengel.filter(m=>m.txt).length+'</span>':'')+
+      ((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">Maengel '+r.maengel.filter(m=>m.txt).length+'</span>':'')+
       '</div></div>';
   }).join('');
 }
@@ -1725,118 +1781,12 @@ function buildUE(){
     '<div class="sc"><div class="sv">'+reports.length+'</div><div class="sl">Berichte</div></div>'+
     '<div class="sc"><div class="sv">'+(vaH+arH).toFixed(0)+'h</div><div class="sl">Stunden</div></div>'+
     '<div class="sc"><div class="sv">'+vaR.length+'</div><div class="sl">VA-Berichte</div></div>'+
-    '<div class="sc"><div class="sv">'+arR.length+'</div><div class="sl">AR-Einträge</div></div>'+
+    '<div class="sc"><div class="sv">'+arR.length+'</div><div class="sl">AR-Eintraege</div></div>'+
     '</div>'+
     [...reports].reverse().slice(0,20).map(r=>{
       const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0')||0);
       return '<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
         '<div style="display:flex;justify-content:space-between;align-items:center">'+
         '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div>'+
-        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' · '+(r.role==='va'?'VA':'AR')+'</div></div>'+
-        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+
-        '</div></div>';
-    }).join('');
-}
+        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' - '+(r.role==='va'?'VA':'AR')+'</div>
 
-async function triggerAI(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Erst speichern!','err');return;}showTab('ki');await runAI('zusammenfassung');}
-async function runAI(type){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const prompts={
-    zusammenfassung:'Erstelle eine kompakte strukturierte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',
-    risiken:'Analysiere Risiken, Mängel, Behinderungen. Bewerte Schweregrad, nenne DIN-Normen.',
-    kosten:'Kostenschätzung: Personal nach GaLaBau-Tariflohn, Geräte, Material.',
-    qualitaet:'Qualitätsprüfung nach DIN 18917, DIN 18035, RSM, VOB/C.',
-    bericht:'Formaler VOB-konformer Tagesbericht für Baudokumentation.',
-    plan:'Wochenplanung für nächste 5 Werktage.'
-  };
-  const stTxt=(r.steps||[]).map((s,i)=>(i+1)+'. ['+getAuLabel(s.aid)+'] '+s.txt+' '+(s.menge||'')+
-    (s.mitarbeiter?.length?' MA: '+s.mitarbeiter.map(m=>m.name+(m.stunden?'('+m.stunden+'h)':'')).join(', '):'')
-  ).join('\n');
-  const rTxt='KLEI Tagesbericht\nDatum:'+r.datum+'|Baustelle:'+r.baustelle+'|Auftrag:'+getAuLabel(r.auftragId)+'|Bauleiter:'+r.bauleiter+
-    '\nWetter:'+r.wetter+','+r.temp+'°C\nGewerke:'+(r.gewerke||[]).join(',')+
-    '\nZeiten:'+(r.zeitRows||[]).map(t=>t.name+'('+t.qual+'):'+t.von+'-'+t.bis+' Arbeit:'+t.nettoArbeit+'h Fahrt:'+t.fahrzeitMin+'min('+t.fahrt+') Gesamt:'+t.gesamt+'h').join('; ')+
-    '\nGeräte:'+(r.machRows||[]).map(m=>m.geraetNr+' '+m.geraetBez+' Kfz:'+m.fahrzeugnr+' '+m.von+'-'+m.bis+'='+m.netto+'h').join('; ')+
-    '\nArbeiten:\n'+stTxt+
-    '\nMängel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+
-    '\nNächstes:'+(r.naechstes||'—');
-  const lbl={zusammenfassung:'📄 Zusammenfassung',risiken:'⚠️ Risiken',kosten:'💶 Kosten',qualitaet:'✅ Qualität',bericht:'📃 VOB-Bericht',plan:'📅 Wochenplanung'};
-  const out=document.getElementById('ki-out');
-  out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompts[type]+'\n\n---\n'+rTxt}]})});
-    const data=await res.json();
-    const txt=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';
-    const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>').replace(/^- (.+)$/gm,'• $1');
-    out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';
-    const idx=reports.findIndex(x=>x.id===r.id);
-    if(idx>=0){reports[idx].aiAnalysis=fmt;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();}
-    toast('✓ KI fertig','ok');
-  }catch(e){
-    out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">⚠ '+e.message+'</div></div>';
-    toast('KI-Fehler','err');
-  }
-}
-
-function loadDFCfg(){if(!dfCfg)return;['df-url','df-key','df-mandant','df-kst'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=[dfCfg.url,dfCfg.key,dfCfg.mandant,dfCfg.kst][i]||'';});}
-function saveDFCfg(){dfCfg={url:document.getElementById('df-url')?.value,key:document.getElementById('df-key')?.value,mandant:document.getElementById('df-mandant')?.value,kst:document.getElementById('df-kst')?.value};localStorage.setItem('klei_df',JSON.stringify(dfCfg));toast('Dataflor gespeichert','ok');}
-
-function expDFCSV(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,nettoArbeit:r.nettoWork,fahrt:r.fahrtStatus,fahrzeitMin:r.fahrzeitMin,gesamt:r.netto,aid:r.auftragId,tae:r.taetigkeit}];
-  const hdr='Mandant;Datum;Name;Qual;AuftragNr;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h;Taetigkeit';
-  const lines=rows.filter(t=>t.name).map(t=>{const a=auftraege.find(x=>x.id===t.aid);return[dfCfg.mandant||'001',r.datum,t.name,t.qual||'',a?.nr||'',t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.'),t.tae||''].join(';');});
-  dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');
-  toast('CSV exportiert','ok');
-}
-
-function expDFXML(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,nettoArbeit:r.nettoWork,fahrt:r.fahrtStatus,fahrzeitMin:r.fahrzeitMin,gesamt:r.netto,aid:r.auftragId}];
-  const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung Version="4.0">\n  <Datum>'+r.datum+'</Datum>\n  <Baustelle>'+x(r.baustelle||r.name||'')+'</Baustelle>\n  <Personal>\n'+
-    rows.filter(t=>t.name).map(t=>{const a=auftraege.find(z=>z.id===t.aid);return '    <Eintrag><Name>'+x(t.name)+'</Name><AuftragNr>'+x(a?.nr||'')+'</AuftragNr><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Arbeit>'+(t.nettoArbeit||'0').replace(',','.')+'</Arbeit><Fahrt>'+(t.fahrt||'fahrer')+'</Fahrt><FahrzeitMin>'+(t.fahrzeitMin||0)+'</FahrzeitMin><Gesamt>'+(t.gesamt||'0').replace(',','.')+'</Gesamt></Eintrag>';}).join('\n')+
-    '\n  </Personal>\n  <Geraete>\n'+
-    (r.machRows||[]).filter(m=>m.geraetNr).map(m=>{const a=auftraege.find(z=>z.id===m.aid);return '    <Geraet><DataflorNr>'+x(m.geraetNr)+'</DataflorNr><Bez>'+x(m.geraetBez||'')+'</Bez><FzNr>'+x(m.fahrzeugnr||'')+'</FzNr><AuftragNr>'+x(a?.nr||'')+'</AuftragNr><Von>'+(m.von||'')+'</Von><Bis>'+(m.bis||'')+'</Bis><Netto>'+(m.netto||'0').replace(',','.')+'</Netto></Geraet>';}).join('\n')+
-    '\n  </Geraete>\n</DataflorZeiterfassung>';
-  dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');
-  toast('XML exportiert','ok');
-}
-
-function expTXT(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
-  dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+(r.role==='va'?r.baustelle:r.name)+'\nStunden: '+h.toFixed(2)+'h','text/plain;charset=utf-8');
-  toast('TXT exportiert','ok');
-}
-
-function delReport(id){
-  if(!confirm('Bericht löschen?'))return;
-  reports=reports.filter(r=>r.id!==id);
-  localStorage.setItem('klei_reports',JSON.stringify(reports));
-  if(currentId===id)currentId=null;
-  renderSB();
-  document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">🗑</div><div class="et">Gelöscht</div></div>';
-  toast('Gelöscht','err');
-}
-
-function showTab(name){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
-  const t=document.getElementById('tab-'+name),p=document.getElementById('panel-'+name);
-  if(t)t.classList.add('act');if(p)p.classList.add('act');
-  if(name==='ue')buildUE();
-  if(name==='bericht')setTimeout(refreshStepMAs,100);
-}
-
-function openMo(id){document.getElementById(id).classList.add('open');if(id==='mo-au')renderAuList();}
-function closeMo(id){document.getElementById(id).classList.remove('open');}
-document.addEventListener('touchstart',e=>{const mo=e.target.closest('.mo');if(mo&&e.target===mo)mo.classList.remove('open');},{passive:true});
-
-function todayStr(){return new Date().toISOString().split('T')[0];}
-function fmtD(d){if(!d)return'—';const p=d.split('-');return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d;}
-function dlFile(name,content,type){const b=new Blob([content],{type});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);}
-function toast(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className='toast '+type+' show';setTimeout(()=>el.classList.remove('show'),3000);}
-function updateSBDate(){const el=document.getElementById('sb-date');if(el)el.textContent=new Date().toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'});}
-</script>
-</body>
-</html>
