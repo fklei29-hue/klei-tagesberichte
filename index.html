@@ -92,7 +92,7 @@ select option{background:var(--s2);}
 .wc{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 12px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;user-select:none;}
 .wc.s{background:var(--gg);border-color:var(--gd);color:var(--gl);}
 .tags{display:flex;gap:4px;flex-wrap:wrap;}
-.tg{background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);cursor:pointer;user-select:none;}
+.tg{background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);cursor:pointer;user-select:none;}
 .tg.a{background:var(--gg);border-color:var(--gd);color:var(--gl);}
 .tbl{width:100%;border-collapse:collapse;font-size:11px;}
 .tbl th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--m);padding:5px 6px;border-bottom:1px solid var(--b);text-align:left;}
@@ -110,7 +110,6 @@ select option{background:var(--s2);}
 .btn-p{background:linear-gradient(135deg,var(--gd),var(--g));color:#0e1209;border:none;font-weight:700;}
 .btn-e{background:var(--earthg);border-color:rgba(154,108,26,.4);color:var(--earth);}
 .btn-r{background:var(--rg);border-color:rgba(196,72,40,.3);color:var(--r);}
-.btn-s{background:var(--skyg);border-color:rgba(61,143,168,.3);color:var(--sky);}
 .arow{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--b);margin-top:12px;}
 .fahrt-btn{flex:1;padding:10px 6px;border-radius:var(--rad);background:var(--s3);border:1px solid var(--b);color:var(--m);font-weight:600;font-size:12px;cursor:pointer;text-align:center;line-height:1.4;user-select:none;}
 .fahrt-btn.fahrt-active[data-val="fahrer"]{background:rgba(61,143,168,.15);border-color:var(--sky);color:var(--sky);}
@@ -158,7 +157,6 @@ select option{background:var(--s2);}
 .toast{position:fixed;bottom:12px;right:12px;background:var(--s1);border:1px solid var(--b);border-radius:var(--rad);padding:9px 14px;font-size:11px;box-shadow:0 6px 20px rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;gap:7px;transform:translateY(60px);opacity:0;transition:all .25s cubic-bezier(.34,1.56,.64,1);}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.ok{border-left:2px solid var(--g);}.toast.err{border-left:2px solid var(--r);}.toast.info{border-left:2px solid var(--sky);}
-.div{border:none;border-top:1px solid var(--b);margin:10px 0;}
 .ma-zuweisung{margin-top:8px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:8px;}
 .ma-zuw-title{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--m);margin-bottom:6px;}
 .ma-check-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(44,58,28,.3);}
@@ -177,12 +175,12 @@ select option{background:var(--s2);}
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="klei-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="role-sub">Tagesberichte · Zeiterfassung · Baunatal</div>
   <div class="role-cards">
-    <div class="role-card ar" ontouchstart="setRole('ar')" onclick="setRole('ar')">
+    <div class="role-card ar" ontouchstart="event.preventDefault();setRole('ar')" onclick="setRole('ar')">
       <div class="role-icon">👷</div>
       <div class="role-name">Arbeiter</div>
-      <div class="role-desc">Zeiten eintragen<br>Tätigkeitsbericht<br>Auftrag wählen</div>
+      <div class="role-desc">Zeiten eintragen<br>Tätigkeitsbericht<br>Projekt wählen</div>
     </div>
-    <div class="role-card va" ontouchstart="showPIN()" onclick="showPIN()">
+    <div class="role-card va" ontouchstart="event.preventDefault();showPIN()" onclick="showPIN()">
       <div class="role-icon">📋</div>
       <div class="role-name">Vorarbeiter</div>
       <div class="role-desc">Vollständige Doku<br>Mengen · Lieferanten<br>KI-Analyse · PDF-Mail</div>
@@ -200,18 +198,18 @@ select option{background:var(--s2);}
   </div>
   <div class="pin-error" id="pin-error"></div>
   <div class="pin-pad">
-    <div class="pin-btn" ontouchstart="pinKey('1')" onclick="pinKey('1')">1</div>
-    <div class="pin-btn" ontouchstart="pinKey('2')" onclick="pinKey('2')">2</div>
-    <div class="pin-btn" ontouchstart="pinKey('3')" onclick="pinKey('3')">3</div>
-    <div class="pin-btn" ontouchstart="pinKey('4')" onclick="pinKey('4')">4</div>
-    <div class="pin-btn" ontouchstart="pinKey('5')" onclick="pinKey('5')">5</div>
-    <div class="pin-btn" ontouchstart="pinKey('6')" onclick="pinKey('6')">6</div>
-    <div class="pin-btn" ontouchstart="pinKey('7')" onclick="pinKey('7')">7</div>
-    <div class="pin-btn" ontouchstart="pinKey('8')" onclick="pinKey('8')">8</div>
-    <div class="pin-btn" ontouchstart="pinKey('9')" onclick="pinKey('9')">9</div>
-    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinBack()" onclick="pinBack()">&#x21A9;</div>
-    <div class="pin-btn" ontouchstart="pinKey('0')" onclick="pinKey('0')">0</div>
-    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="pinCancel()" onclick="pinCancel()">&#x2715;</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('1')" onclick="pinKey('1')">1</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('2')" onclick="pinKey('2')">2</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('3')" onclick="pinKey('3')">3</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('4')" onclick="pinKey('4')">4</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('5')" onclick="pinKey('5')">5</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('6')" onclick="pinKey('6')">6</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('7')" onclick="pinKey('7')">7</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('8')" onclick="pinKey('8')">8</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('9')" onclick="pinKey('9')">9</div>
+    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="event.preventDefault();pinBack()" onclick="pinBack()">&#x21A9;</div>
+    <div class="pin-btn" ontouchstart="event.preventDefault();pinKey('0')" onclick="pinKey('0')">0</div>
+    <div class="pin-btn" style="font-size:16px;color:var(--m)" ontouchstart="event.preventDefault();pinCancel()" onclick="pinCancel()">&#x2715;</div>
   </div>
 </div>
 <div class="mo" id="mo-df">
@@ -221,11 +219,11 @@ select option{background:var(--s2);}
     <div class="md-sub">Zeiterfassung Export und API</div>
     <div class="row">
       <div class="fg w50"><label>Server URL</label><input id="df-url" placeholder="https://server/api"></div>
-      <div class="fg w50"><label>API-Key</label><input id="df-key" type="password" placeholder=""></div>
+      <div class="fg w50"><label>API-Key</label><input id="df-key" type="password"></div>
       <div class="fg w50"><label>Mandant-Nr.</label><input id="df-mandant" placeholder="001"></div>
       <div class="fg w50"><label>Kostenstelle</label><input id="df-kst" placeholder="K-1000"></div>
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn" ontouchstart="saveDFCfg()" onclick="saveDFCfg()">Speichern</button>
       <button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">CSV Export</button>
       <button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">XML Export</button>
@@ -236,9 +234,9 @@ select option{background:var(--s2);}
   <div class="md">
     <button class="md-close" ontouchstart="closeMo('mo-au')" onclick="closeMo('mo-au')">&#x2715;</button>
     <div class="md-title">Auftraege verwalten</div>
-    <div class="md-sub">Auftraege fuer Zeiterfassungs-Zuordnung</div>
+    <div class="md-sub">Zusaetzliche Auftraege hinzufuegen</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <input id="au-nr" placeholder="Auftrags-Nr." style="width:100px;flex:none">
+      <input id="au-nr" placeholder="Auftrags-Nr." style="width:110px;flex:none">
       <input id="au-name" placeholder="Bezeichnung" style="flex:1">
       <button class="btn btn-p" ontouchstart="addAuftrag()" onclick="addAuftrag()" style="flex:none">+ Hinzufuegen</button>
     </div>
@@ -269,7 +267,7 @@ select option{background:var(--s2);}
   </main>
 </div>
 <div class="toast" id="toast"></div>
-  <script>
+<script>
 const GAS_URL='https://script.google.com/macros/s/AKfycbxVQNF3dwQo4qHYOImHNg44SPhs6NZ-8XxOMWqHzvEhjyS1pc0V_AncqG3B01i2TmlW1w/exec';
 const EMPFAENGER_MAIL='kleinzeitmanager34@gmail.com';
 const FIRMA_NAME='Friedrich Klei GmbH';
@@ -278,6 +276,20 @@ const FIRMA_TEL='+49 (0) 5601 8056';
 const FIRMA_WEB='www.klei-sportplatzbau.de';
 const FIRMA_LOGO='https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png';
 const _p=[49,49,55].map(c=>String.fromCharCode(c)).join('');
+
+// ══════ STAMMDATEN ══════
+const PROJEKTE=[
+  {nr:'2026-021',name:'Kassel Friedrichsplatz'},
+  {nr:'2023-345',name:'Kassel Dormannweg'},
+  {nr:'2024-323',name:'Kassel Mattenbergstr.'},
+  {nr:'2025-141',name:'Wolfhagen Liemeckestr.'}
+];
+
+const TAETIGKEITEN=[
+  'Vorbereitung','Baustelle allgemein','Abbruch','Erdarbeiten',
+  'Entwaesserung','Elektro','Unterbau','Einfassung',
+  'Wegebau','Treppen','Mauern','Vegetation','Rasen','Pflege'
+];
 
 const GERAETE=[
   {nr:'1010',bez:'Radlader 5 to'},{nr:'1012',bez:'Bagger Kette 5 to'},
@@ -293,6 +305,20 @@ const GERAETE=[
   {nr:'1700',bez:'Vermessungsgeraet'},{nr:'2000',bez:'LKW < 7 to (Transporter)'}
 ];
 
+// Projekt-Optionen HTML
+function projektOpts(selectedNr){
+  return '<option value="">- Projekt waehlen -</option>'+
+    PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(selectedNr===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('')+
+    '<option value="sonstig">Sonstiges / Manuell</option>';
+}
+
+// Tätigkeiten-Tags HTML
+function taetigkeitenTags(selected){
+  return TAETIGKEITEN.map((t,i)=>
+    '<div class="tg'+((selected||[]).includes(t)||(i===0&&!selected)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>'
+  ).join('');
+}
+
 let reports=JSON.parse(localStorage.getItem('klei_reports')||'[]');
 let auftraege=JSON.parse(localStorage.getItem('klei_auftraege')||'[]');
 let dfCfg=JSON.parse(localStorage.getItem('klei_df')||'{}');
@@ -300,7 +326,7 @@ let currentId=null,currentRole=null,curWeather='Sonnig';
 let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
 let pinBuffer='';
 
-// ══════ VOICE ENGINE - funktioniert auf iPad, iPhone, Android ══════
+// ══════ VOICE ENGINE ══════
 let voiceActive=false;
 let voiceTarget=null;
 let recognition=null;
@@ -308,96 +334,54 @@ let recognition=null;
 function startVoice(targetId,label){
   const el=document.getElementById(targetId);
   if(!el){toast('Feld nicht gefunden','err');return;}
-
-  // Wenn bereits aktiv fuer dieses Feld -> stoppen
   if(voiceActive&&voiceTarget===targetId){stopVoice();return;}
   if(voiceActive)stopVoice();
-
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){
-    toast('Spracheingabe: Bitte Chrome oder Safari 15+ verwenden','err');
-    return;
-  }
-
+  if(!SR){toast('Spracheingabe: Bitte Chrome oder Safari 15+ verwenden','err');return;}
   voiceTarget=targetId;
   voiceActive=true;
-
   if(recognition){try{recognition.stop();}catch(e){}}
   recognition=new SR();
   recognition.lang='de-DE';
   recognition.continuous=true;
   recognition.interimResults=true;
   recognition.maxAlternatives=1;
-
-  // WICHTIG: Bestehenden Text merken - neuer Text wird ADDIERT, nie ueberschrieben
   const existingText=el.value?el.value.trim()+' ':'';
   let addedFinal='';
   let lastSavedFinal='';
-
   showVoiceBanner(label);
   highlightMicBtn(targetId,true);
-
-  recognition.onstart=()=>{
-    toast('Mikrofon aktiv - sprechen Sie...','info');
-  };
-
+  recognition.onstart=()=>{toast('Mikrofon aktiv - sprechen Sie...','info');};
   recognition.onresult=(e)=>{
     let newFinalParts='';
     let interimText='';
-
     for(let i=e.resultIndex;i<e.results.length;i++){
-      if(e.results[i].isFinal){
-        newFinalParts+=e.results[i][0].transcript+' ';
-      }else{
-        interimText+=e.results[i][0].transcript;
-      }
+      if(e.results[i].isFinal){newFinalParts+=e.results[i][0].transcript+' ';}
+      else{interimText+=e.results[i][0].transcript;}
     }
-
-    // Neuen finalen Text sammeln
-    if(newFinalParts){
-      addedFinal+=newFinalParts;
-      lastSavedFinal=addedFinal;
-    }
-
-    // Anzeige: bisheriger Text + neuer finaler Text + aktueller interim (in Klammern)
-    const display=(existingText+addedFinal+(interimText?'('+interimText+')':'')).trim();
-    el.value=display;
+    if(newFinalParts){addedFinal+=newFinalParts;lastSavedFinal=addedFinal;}
+    el.value=(existingText+addedFinal+(interimText?'('+interimText+')':'')).trim();
   };
-
   recognition.onend=()=>{
-    // Sauber abschliessen ohne interim
     el.value=(existingText+(lastSavedFinal||addedFinal)).trim();
     voiceActive=false;
     hideVoiceBanner();
     highlightMicBtn(targetId,false);
     recognition=null;
   };
-
   recognition.onerror=(e)=>{
-    if(e.error==='not-allowed'){
-      toast('Mikrofon verweigert - bitte in Browser-Einstellungen erlauben','err');
-    }else if(e.error==='no-speech'){
-      // Kein Fehler zeigen - einfach weiterlaufen lassen
-    }else if(e.error!=='aborted'){
-      toast('Sprachfehler: '+e.error,'err');
-    }
+    if(e.error==='not-allowed'){toast('Mikrofon verweigert - Einstellungen pruefen','err');}
+    else if(e.error==='no-speech'){}
+    else if(e.error!=='aborted'){toast('Sprachfehler: '+e.error,'err');}
     stopVoice();
   };
-
-  try{
-    recognition.start();
-  }catch(e){
-    toast('Mikrofon konnte nicht gestartet werden','err');
-    stopVoice();
-  }
+  try{recognition.start();}
+  catch(e){toast('Mikrofon konnte nicht gestartet werden','err');stopVoice();}
 }
 
 function stopVoice(){
   voiceActive=false;
-  if(recognition){
-    try{recognition.stop();}catch(e){}
-    recognition=null;
-  }
+  if(recognition){try{recognition.stop();}catch(e){}recognition=null;}
   hideVoiceBanner();
   document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));
   voiceTarget=null;
@@ -406,17 +390,12 @@ function stopVoice(){
 function showVoiceBanner(label){
   let bar=document.getElementById('vbar-global');
   if(!bar){
-    bar=document.createElement('div');
-    bar.id='vbar-global';
-    bar.className='vbar';
-    bar.innerHTML=
-      '<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>'+
+    bar=document.createElement('div');bar.id='vbar-global';bar.className='vbar';
+    bar.innerHTML='<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>'+
       '<div class="vbar-lbl" id="vbar-lbl-text">Spracheingabe aktiv...</div>'+
       '<button class="vbar-stop" ontouchstart="stopVoice()" onclick="stopVoice()">STOP</button>';
-    // Ans Ende des content-Bereichs haengen
     const content=document.getElementById('main-content');
-    if(content)content.prepend(bar);
-    else document.body.appendChild(bar);
+    if(content)content.prepend(bar);else document.body.appendChild(bar);
   }
   bar.classList.add('on');
   const lbl=document.getElementById('vbar-lbl-text');
@@ -430,15 +409,12 @@ function hideVoiceBanner(){
 
 function highlightMicBtn(targetId,on){
   document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));
-  if(on){
-    const btn=document.querySelector('[data-mic="'+targetId+'"]');
-    if(btn)btn.classList.add('on');
-  }
+  if(on){const btn=document.querySelector('[data-mic="'+targetId+'"]');if(btn)btn.classList.add('on');}
 }
 
 function mkMic(targetId,label){
   return '<button class="mic-btn" data-mic="'+targetId+'" '+
-    'ontouchstart="startVoice(\''+targetId+'\',\''+label+'\')" '+
+    'ontouchstart="event.preventDefault();startVoice(\''+targetId+'\',\''+label+'\')" '+
     'onclick="startVoice(\''+targetId+'\',\''+label+'\')">'+
     '&#127908; '+label+' diktieren</button>';
 }
@@ -481,10 +457,15 @@ function updatePinDots(){
 }
 
 // ══════ ROLE ══════
-function setRole(r){if(r==='va'){showPIN();return;}activateRole(r);}
+function setRole(r){
+  if(r==='va'){showPIN();return;}
+  activateRole(r);
+}
 function activateRole(r){
   currentRole=r;
-  document.getElementById('role-screen').style.display='none';
+  const screen=document.getElementById('role-screen');
+  screen.style.display='none';
+  screen.style.pointerEvents='none';
   document.getElementById('pin-screen').style.display='none';
   const b=document.getElementById('role-badge');
   b.className='role-badge '+r;
@@ -496,7 +477,9 @@ function activateRole(r){
 }
 function switchRole(){
   currentRole=null;pinBuffer='';stopVoice();
-  document.getElementById('role-screen').style.display='flex';
+  const screen=document.getElementById('role-screen');
+  screen.style.display='flex';
+  screen.style.pointerEvents='all';
   document.getElementById('pin-screen').style.display='none';
 }
 
@@ -532,13 +515,15 @@ function buildUI(){
 
 // ══════ AR FORM ══════
 function buildAR(){
-  const auOpts=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name+'</option>').join('');
   return '<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
-    '<div class="fg w33"><label>Datum</label><input type="date" id="a-datum"></div>'+
-    '<div class="fg w33"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name"></div>'+
-    '<div class="fg w33"><label>Auftrag</label><select id="a-auftrag"><option value="">- Auftrag -</option>'+auOpts+'</select></div>'+
+    '<div class="fg w50"><label>Datum</label><input type="date" id="a-datum"></div>'+
+    '<div class="fg w50"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name"></div>'+
+    '<div class="fg w100"><label>Projekt</label><select id="a-projekt">'+projektOpts('')+'</select></div>'+
     '<div class="fg w50"><label>Qualifikation</label><select id="a-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option></select></div>'+
     '<div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>'+
+    '</div></div>'+
+    '<div class="qsec"><div class="qsec-t">Taetigkeiten (Mehrfachauswahl)</div>'+
+    '<div class="tags" id="ar-taetigkeiten-tags">'+taetigkeitenTags([])+
     '</div></div>'+
     '<div class="qsec"><div class="qsec-t">Arbeitszeiten</div>'+
     '<div class="row">'+
@@ -560,14 +545,12 @@ function buildAR(){
     '<div class="sc"><div class="sv" id="a-h-woche">-</div><div class="sl">Diese Woche</div></div>'+
     '<div class="sc"><div class="sv" id="a-h-monat">-</div><div class="sl">Dieser Monat</div></div>'+
     '</div></div>'+
-    '<div class="qsec"><div class="qsec-t">Taetigkeitsbericht</div>'+
-    '<textarea id="a-taetigkeit" placeholder="Was wurde heute gemacht?"></textarea>'+
+    '<div class="qsec"><div class="qsec-t">Zusaetzliche Angaben (optional)</div>'+
+    '<textarea id="a-taetigkeit" placeholder="Weitere Details zur Taetigkeit..." style="min-height:60px"></textarea>'+
     mkMic('a-taetigkeit','Taetigkeitsbericht')+
-    '</div>'+
-    '<div class="qsec"><div class="qsec-t">Besonderheiten (optional)</div>'+
-    '<input type="text" id="a-besonder" placeholder="z.B. Materialengpass, Maschinenpanne ...">'+
+    '<div style="margin-top:8px"><input type="text" id="a-besonder" placeholder="Besonderheiten, z.B. Materialengpass ...">'+
     mkMic('a-besonder','Besonderheiten')+
-    '</div>'+
+    '</div></div>'+
     '<div class="send-status" id="ar-send-status"></div>'+
     '<div class="arow">'+
     '<button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">Speichern und PDF senden</button>'+
@@ -575,40 +558,43 @@ function buildAR(){
     '</div>';
 }
 
-// ══════ VA FORMS ══════
+function getARTaetigkeiten(){
+  return[...document.querySelectorAll('#ar-taetigkeiten-tags .tg.a')].map(t=>t.textContent);
+}
+
+// ══════ VA BERICHT ══════
 function buildVABericht(){
   return '<div class="sec"><div class="sh">Grunddaten</div><div class="row">'+
     '<div class="fg w25"><label>Datum</label><input type="date" id="v-datum"></div>'+
-    '<div class="fg w25"><label>Auftrag</label><select id="v-auftrag"><option value="">- Auftrag -</option></select></div>'+
     '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="2025-042"></div>'+
     '<div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>'+
-    '<div class="fg w50"><label>Baustelle / Objekt</label>'+
-    '<input type="text" id="v-baustelle" placeholder="Sportanlage, Park ...">'+
+    '<div class="fg w25"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
+    '<div class="fg w100"><label>Projekt</label><select id="v-projekt">'+projektOpts('')+'</select></div>'+
+    '<div class="fg w50"><label>Baustelle / Objekt (Detail)</label>'+
+    '<input type="text" id="v-baustelle" placeholder="z.B. Bereich Nord, Abschnitt 2...">'+
     mkMic('v-baustelle','Baustelle')+
     '</div>'+
     '<div class="fg w50"><label>Bauherr / AG</label>'+
     '<input type="text" id="v-bauherr" placeholder="Gemeinde Musterstadt ...">'+
     mkMic('v-bauherr','Bauherr')+
     '</div>'+
-    '<div class="fg w33"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
     '<div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>'+
     '<div class="fg w33"><label>Besucher / Abnahmen</label><input type="text" id="v-besucher" placeholder="Bauherr, TUeV ..."></div>'+
+    '<div class="fg w33"><label>Fotos</label><input type="text" id="v-fotos" placeholder="z.B. 8 Fotos"></div>'+
     '</div>'+
     '<div class="wrow" id="v-wrow">'+
-    '<div class="wc s" ontouchstart="selW(this,\'Sonnig\')" onclick="selW(this,\'Sonnig\')">Sonnig</div>'+
-    '<div class="wc" ontouchstart="selW(this,\'Bewoelkt\')" onclick="selW(this,\'Bewoelkt\')">Bewoelkt</div>'+
-    '<div class="wc" ontouchstart="selW(this,\'Regen\')" onclick="selW(this,\'Regen\')">Regen</div>'+
-    '<div class="wc" ontouchstart="selW(this,\'Frost/Eis\')" onclick="selW(this,\'Frost/Eis\')">Frost</div>'+
-    '<div class="wc" ontouchstart="selW(this,\'Sturm\')" onclick="selW(this,\'Sturm\')">Sturm</div>'+
-    '<div class="wc" ontouchstart="selW(this,\'Schnee\')" onclick="selW(this,\'Schnee\')">Schnee</div>'+
+    '<div class="wc s" ontouchstart="event.preventDefault();selW(this,\'Sonnig\')" onclick="selW(this,\'Sonnig\')">Sonnig</div>'+
+    '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Bewoelkt\')" onclick="selW(this,\'Bewoelkt\')">Bewoelkt</div>'+
+    '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Regen\')" onclick="selW(this,\'Regen\')">Regen</div>'+
+    '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Frost/Eis\')" onclick="selW(this,\'Frost/Eis\')">Frost</div>'+
+    '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Sturm\')" onclick="selW(this,\'Sturm\')">Sturm</div>'+
+    '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Schnee\')" onclick="selW(this,\'Schnee\')">Schnee</div>'+
     '</div>'+
     '<div class="row">'+
     '<div class="fg w50"><label>Bodenzustand</label><select id="v-boden"><option>Trocken</option><option>Feucht</option><option>Nass</option><option>Gefroren</option><option>Wassersaettigung</option></select></div>'+
-    '<div class="fg w50"><label>Fotos (Anzahl/Hinweis)</label><input type="text" id="v-fotos" placeholder="z.B. 8 Fotos hochgeladen"></div>'+
     '</div></div>'+
-    '<div class="sec"><div class="sh">Gewerk / Leistungsphase</div>'+
-    '<div class="tags" id="gw-tags">'+
-    ['Rasenbau','Sportplatzbau','Kunstrasensystem','Laufbahn/LA','Tennisanlage','Bewaesserung','Drainage','Erdarbeiten','Wegebau','Pflaster','Bepflanzung','Spielplatz','Maeharbeiten','Gehoelzpflege','Aussaat'].map((g,i)=>'<div class="tg'+(i===0?' a':'')+'" ontouchstart="togTg(this)" onclick="togTg(this)">'+g+'</div>').join('')+
+    '<div class="sec"><div class="sh">Taetigkeiten (Mehrfachauswahl)</div>'+
+    '<div class="tags" id="va-taetigkeiten-tags">'+taetigkeitenTags([])+
     '</div></div>'+
     '<div class="sec"><div class="sh">Tagebuch / Arbeitsschritte</div>'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Mitarbeiter aus Zeiterfassung (Tab Zeiten) werden automatisch zur Auswahl angezeigt</div>'+
@@ -635,37 +621,38 @@ function buildVABericht(){
     '</div>';
 }
 
+function getVATaetigkeiten(){
+  return[...document.querySelectorAll('#va-taetigkeiten-tags .tg.a')].map(t=>t.textContent);
+}
+
 function buildVAZeit(){
   return '<div class="sec"><div class="sh">Personal-Zeiterfassung '+
     '<span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0 h gesamt</span></div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Formel: Arbeit = Von-Bis-Pause | Gesamt = Arbeit + Fahrzeit x Satz</div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Arbeit = Von-Bis-Pause | Gesamt = Arbeit + Fahrzeit x Satz</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
     '<th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th>'+
     '<th>Pause</th><th>Arbeit</th><th>Fahrt-Status</th>'+
     '<th>Fahrzeit</th><th>Fahrtanteil</th><th>GESAMT</th>'+
-    '<th>Auftrag</th><th>Taetigkeit</th><th></th>'+
+    '<th>Projekt</th><th>Taetigkeit</th><th></th>'+
     '</tr></thead><tbody id="zeit-body"></tbody></table></div>'+
-    '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
-    '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">+ Person</button>'+
-    '<button class="btn btn-e" ontouchstart="openMo(\'mo-df\')" onclick="openMo(\'mo-df\')">Dataflor Export</button>'+
-    '</div></div>'+
-    '<div class="sec"><div class="sh">Geraeteeinsatz (Dataflor-Nummern)</div>'+
+    '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">+ Person</button></div>'+
+    '<div class="sec"><div class="sh">Geraeteeinsatz (Dataflor)</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
-    '<th>Geraet (Dataflor)</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Std.</th><th>Auftrag</th><th></th>'+
+    '<th>Geraet</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Std.</th><th>Projekt</th><th></th>'+
     '</tr></thead><tbody id="mach-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">+ Geraet</button></div>';
 }
 
 function buildVAMaterial(){
-  return '<div class="sec"><div class="sh">Materiallieferungen und Lieferanten</div>'+
+  return '<div class="sec"><div class="sh">Materiallieferungen</div>'+
     '<div id="lief-con"></div>'+
     '<button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">+ Lieferung</button></div>'+
     '<div class="sec" style="margin-top:12px"><div class="sh">Mengennachweise</div>'+
     '<div id="mengen-con"></div>'+
     '<button class="btn" ontouchstart="addMenge()" onclick="addMenge()">+ Mengenzeile</button></div>'+
-    '<div class="sec" style="margin-top:12px"><div class="sh">LV-Positionen (ausgefuehrt)</div>'+
+    '<div class="sec" style="margin-top:12px"><div class="sh">LV-Positionen</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
-    '<th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Auftrag</th><th></th>'+
+    '<th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Projekt</th><th></th>'+
     '</tr></thead><tbody id="lv-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">+ Position</button></div>'+
     '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
@@ -687,7 +674,7 @@ function buildKI(){
 // ══════ ARBEITSSCHRITTE MIT MA-ZUWEISUNG ══════
 function addStep(data={}){
   stepIdx++;const i=stepIdx;
-  const auOpts=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+' - '+a.name+'</option>').join('');
+  const prOpts=PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(data.projektNr===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('');
   const maRows=getZeitRowsSimple();
   let maHtml='';
   if(maRows.length>0){
@@ -700,18 +687,18 @@ function addStep(data={}){
           '<input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')">'+
           '<span class="ma-name">'+ma.name+' <span style="color:var(--m);font-size:10px">('+ma.qual+')</span></span>'+
           '<input type="number" class="ma-h" data-name="'+ma.name+'" placeholder="Std." value="'+stunden+'" min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';
-      }).join('')+
-      '</div>';
+      }).join('')+'</div>';
   }else{
-    maHtml='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
+    maHtml='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
   }
-
   const div=document.createElement('div');
   div.className='lief-block';div.id='step-'+i;
   div.innerHTML=
     '<div class="lief-head">'+
     '<div class="lief-num">'+i+'</div>'+
-    '<select style="flex:0 0 160px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-au-'+i+'"><option value="">- Auftrag -</option>'+auOpts+'</select>'+
+    '<select style="flex:0 0 200px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'">'+
+    '<option value="">- Projekt -</option>'+prOpts+
+    '</select>'+
     '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'">'+
     '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button>'+
     '</div>'+
@@ -720,8 +707,7 @@ function addStep(data={}){
     '<div style="display:flex;gap:6px;margin-top:8px">'+
     '<div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" placeholder="200 m2" value="'+(data.menge||'')+'"></div>'+
     '<div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" placeholder="m2, lfm" value="'+(data.eh||'')+'"></div>'+
-    '</div>'+
-    maHtml;
+    '</div>'+maHtml;
   document.getElementById('steps-con')?.appendChild(div);
 }
 
@@ -746,7 +732,6 @@ function refreshStepMAs(){
     block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});
     const stunden={};
     block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});
-
     if(maRows.length===0){
       if(zone)zone.remove();
       if(!noMAMsg){
@@ -758,13 +743,8 @@ function refreshStepMAs(){
       }
       return;
     }
-
     if(noMAMsg)noMAMsg.remove();
-    if(!zone){
-      zone=document.createElement('div');
-      zone.className='ma-zuweisung';
-      block.appendChild(zone);
-    }
+    if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}
     zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
       maRows.map(ma=>{
         const isChecked=checked[ma.name]||false;
@@ -793,7 +773,7 @@ function getSteps(){
     const i=b.id.replace('step-','');
     return{
       txt:b.querySelector('#st-txt-'+i)?.value||'',
-      aid:b.querySelector('#st-au-'+i)?.value||'',
+      projektNr:b.querySelector('#st-pr-'+i)?.value||'',
       pos:b.querySelector('#st-pos-'+i)?.value||'',
       menge:b.querySelector('#st-mg-'+i)?.value||'',
       eh:b.querySelector('#st-eh-'+i)?.value||'',
@@ -813,7 +793,8 @@ function getZeitRowsSimple(){
 function addZeitRow(data={}){
   const tbody=document.getElementById('zeit-body');if(!tbody)return;
   const tr=document.createElement('tr');
-  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+' - '+a.name.substring(0,10)+'</option>').join('');
+  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(data.projektNr===p.nr?'selected':'')+'>'+p.nr+'</option>').join('');
+  const taeOpts='<option value="">-</option>'+TAETIGKEITEN.map(t=>'<option value="'+t+'" '+(data.tae===t?'selected':'')+'>'+t+'</option>').join('');
   const fahrtSel='<select class="fahrt-sel" style="font-size:10px" onchange="calcZR(this)">'+
     '<option value="fahrer" '+(data.fahrt==='fahrer'?'selected':'')+'>Fahrer 100%</option>'+
     '<option value="beifahrer" '+(data.fahrt==='beifahrer'?'selected':'')+'>Beifahrer 50%</option>'+
@@ -827,15 +808,14 @@ function addZeitRow(data={}){
     '<td><input type="number" value="'+(data.pause||30)+'" style="width:44px" oninput="calcZR(this)"></td>'+
     '<td><input class="netto-arbeit" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
     '<td>'+fahrtSel+'</td>'+
-    '<td><input type="number" value="'+(data.fahrzeitMin||0)+'" min="0" style="width:52px" placeholder="0" oninput="calcZR(this)"></td>'+
+    '<td><input type="number" value="'+(data.fahrzeitMin||0)+'" min="0" style="width:52px" oninput="calcZR(this)"></td>'+
     '<td><input class="fahrt-anteil" type="text" readonly style="width:48px;color:var(--earth);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
     '<td><input class="gesamt-h" type="text" readonly style="width:56px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;font-size:12px"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:100px"><option value="">-</option>'+au+'</select></td>'+
-    '<td><input type="text" value="'+(data.tae||'')+'" placeholder="Taetigkeit" style="width:90px"></td>'+
+    '<td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td>'+
+    '<td><select class="row-tae" style="font-size:9px;min-width:110px">'+taeOpts+'</select></td>'+
     '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()" onclick="this.closest(\'tr\').remove();updZeitTotal();refreshStepMAs()">&#x2715;</button></td>';
   tbody.appendChild(tr);
-  // Qualifikation setzen falls vorhanden
-  if(data.qual){const sel=tr.querySelector('select');if(sel){for(let o of sel.options){if(o.value===data.qual||o.text===data.qual){sel.value=o.value;break;}}}}
+  if(data.qual){const sel=tr.querySelector('select');if(sel)for(let o of sel.options)if(o.text===data.qual){sel.value=o.value;break;}}
   calcZR(tr.querySelector('input[type=time]'));
   setTimeout(refreshStepMAs,50);
 }
@@ -882,7 +862,8 @@ function getZeitRows(){
       fahrzeitMin:is[7]?.value,
       fahrtAnteil:is[8]?.value,
       gesamt:tr.querySelector('.gesamt-h')?.value,
-      aid:ss[1]?.value,tae:is[9]?.value
+      projektNr:tr.querySelector('.row-pr')?.value,
+      tae:tr.querySelector('.row-tae')?.value
     };
   }).filter(r=>r.name);
 }
@@ -890,7 +871,7 @@ function getZeitRows(){
 function addMachRow(data={}){
   const tbody=document.getElementById('mach-body');if(!tbody)return;
   const tr=document.createElement('tr');
-  const au=auftraege.map(a=>'<option value="'+a.id+'" '+(data.aid===a.id?'selected':'')+'>'+a.nr+'</option>').join('');
+  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(data.projektNr===p.nr?'selected':'')+'>'+p.nr+'</option>').join('');
   tr.innerHTML=
     '<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet waehlen -</option>'+
     GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+
@@ -899,7 +880,7 @@ function addMachRow(data={}){
     '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
     '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
     '<td><input class="gr-netto" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:80px"><option value="">-</option>'+au+'</select></td>'+
+    '<td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td>'+
     '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
   tbody.appendChild(tr);
   calcMR(tr.querySelector('input[type=time]'));
@@ -920,8 +901,13 @@ function getMachRows(){
     const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
     const geraetNr=tr.querySelector('.geraet-sel')?.value||'';
     const geraet=GERAETE.find(g=>g.nr===geraetNr);
-    return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:is[0]?.value,von:is[1]?.value,bis:is[2]?.value,netto:is[3]?.value,aid:ss[1]?.value};
+    return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:is[0]?.value,von:is[1]?.value,bis:is[2]?.value,netto:is[3]?.value,projektNr:tr.querySelector('.row-pr')?.value};
   }).filter(r=>r.geraetNr);
+}
+
+function getProjektLabel(nr){
+  const p=PROJEKTE.find(x=>x.nr===nr);
+  return p?p.nr+' - '+p.name:(nr||'--');
 }
 
 function addLief(data={}){
@@ -932,10 +918,10 @@ function addLief(data={}){
     '<div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div>'+
     '<button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button>'+
     '</div><div class="row">'+
-    '<div class="fg w50"><label>Lieferant / Firma</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div>'+
+    '<div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div>'+
     '<div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" placeholder="LS-2025-001" value="'+(data.ls||'')+'"></div>'+
-    '<div class="fg w50"><label>Material / Produkt</label>'+
-    '<input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen Typ A, Sand 0/2...">'+
+    '<div class="fg w50"><label>Material</label>'+
+    '<input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen, Sand...">'+
     mkMic('lf-mat-'+i,'Material')+
     '</div>'+
     '<div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div>'+
@@ -956,7 +942,7 @@ function getLiefData(){
 function addMenge(data={}){
   const div=document.createElement('div');div.className='lief-block';div.style.padding='8px';
   div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">'+
-    '<input type="text" placeholder="Bezeichnung / Leistung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px">'+
+    '<input type="text" placeholder="Bezeichnung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px">'+
     '<input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px">'+
     '<select style="flex:0 0 65px;font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select>'+
     '<input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px">'+
@@ -974,14 +960,14 @@ function getMengen(){
 function addLVRow(data={}){
   const tbody=document.getElementById('lv-body');if(!tbody)return;
   const tr=document.createElement('tr');
-  const au=auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+'</option>').join('');
+  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.nr+'">'+p.nr+'</option>').join('');
   tr.innerHTML=
     '<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td>'+
     '<td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td>'+
     '<td><select style="font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td>'+
     '<td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td>'+
     '<td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td>'+
-    '<td><select class="row-au" style="font-size:9px;min-width:70px"><option value="">-</option>'+au+'</select></td>'+
+    '<td><select class="row-pr" style="font-size:9px;min-width:70px">'+prOpts+'</select></td>'+
     '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
   tbody.appendChild(tr);
 }
@@ -989,7 +975,7 @@ function addLVRow(data={}){
 function getLVRows(){
   return[...document.querySelectorAll('#lv-body tr')].map(tr=>{
     const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
-    return{pos:is[0]?.value,bez:is[1]?.value,eh:ss[0]?.value,soll:is[2]?.value,ist:is[3]?.value,aid:ss[1]?.value};
+    return{pos:is[0]?.value,bez:is[1]?.value,eh:ss[0]?.value,soll:is[2]?.value,ist:is[3]?.value,projektNr:ss[1]?.value};
   }).filter(r=>r.pos||r.bez);
 }
 
@@ -1021,7 +1007,6 @@ function getMangelData(){
 
 function selW(el,val){document.querySelectorAll('.wc').forEach(c=>c.classList.remove('s'));el.classList.add('s');curWeather=val;}
 function togTg(el){el.classList.toggle('a');}
-function getActiveTags(){return[...document.querySelectorAll('#gw-tags .tg.a')].map(t=>t.textContent);}
 function setFahrt(btn){document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.remove('fahrt-active'));btn.classList.add('fahrt-active');curFahrtStatus=btn.dataset.val;calcAR();}
 
 function calcAR(){
@@ -1057,82 +1042,57 @@ function calcAR(){
 }
 function getWeekStart(){const d=new Date();d.setDate(d.getDate()-d.getDay()+1);return d.toISOString().split('T')[0];}
 
-function addAuftrag(){const nr=document.getElementById('au-nr').value.trim(),name=document.getElementById('au-name').value.trim();if(!nr||!name){toast('Nr. und Name erforderlich','err');return;}auftraege.push({id:Date.now().toString(),nr,name});localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));document.getElementById('au-nr').value='';document.getElementById('au-name').value='';renderAuList();populateAuftragOpts();toast('Auftrag gespeichert','ok');}
-function delAuftrag(id){auftraege=auftraege.filter(a=>a.id!==id);localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));renderAuList();populateAuftragOpts();}
-function renderAuList(){const el=document.getElementById('au-list');if(!el)return;el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">&#x2715;</button></div>').join('')||'<div style="color:var(--m);font-size:10px;padding:8px">Keine Auftraege</div>';}
-function populateAuftragOpts(){const opts='<option value="">- Auftrag -</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name+'</option>').join('');['v-auftrag','a-auftrag'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=opts;el.value=v;}});document.querySelectorAll('.row-au').forEach(s=>{const v=s.value;s.innerHTML='<option value="">-</option>'+auftraege.map(a=>'<option value="'+a.id+'">'+a.nr+' - '+a.name.substring(0,10)+'</option>').join('');s.value=v;});}
-function getAuLabel(id){const a=auftraege.find(x=>x.id===id);return a?a.nr+' - '+a.name:'--';}
-
-// ══════ PDF - WEISSES LAYOUT MIT LOGO FIX ══════
-async function loadLogoAsBase64(){
-  return new Promise((resolve)=>{
-    const img=new Image();
-    img.crossOrigin='anonymous';
-    const tryLoad=(src)=>{
-      img.onload=()=>{
-        try{
-          const canvas=document.createElement('canvas');
-          canvas.width=img.naturalWidth||300;
-          canvas.height=img.naturalHeight||100;
-          const ctx=canvas.getContext('2d');
-          ctx.drawImage(img,0,0);
-          const data=canvas.toDataURL('image/png');
-          resolve({data,w:img.naturalWidth,h:img.naturalHeight});
-        }catch(e){resolve(null);}
-      };
-      img.onerror=()=>resolve(null);
-      img.src=src;
-      setTimeout(()=>resolve(null),3000);
-    };
-    tryLoad(FIRMA_LOGO+'?_='+Date.now());
-  });
+function addAuftrag(){
+  const nr=document.getElementById('au-nr').value.trim(),name=document.getElementById('au-name').value.trim();
+  if(!nr||!name){toast('Nr. und Name erforderlich','err');return;}
+  auftraege.push({id:Date.now().toString(),nr,name});
+  localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));
+  document.getElementById('au-nr').value='';document.getElementById('au-name').value='';
+  renderAuList();toast('Auftrag gespeichert','ok');
 }
-
+function delAuftrag(id){auftraege=auftraege.filter(a=>a.id!==id);localStorage.setItem('klei_auftraege',JSON.stringify(auftraege));renderAuList();}
+function renderAuList(){
+  const el=document.getElementById('au-list');if(!el)return;
+  el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">&#x2715;</button></div>').join('')||
+    '<div style="color:var(--m);font-size:10px;padding:8px">Keine zusaetzlichen Auftraege</div>';
+}
+function populateAuftragOpts(){
+  // Wird nicht mehr fuer Dropdown benoetigt da PROJEKTE fest sind
+  // Aber row-pr selects werden schon bei addZeitRow etc. befuellt
+}
+// ══════ PDF GENERIERUNG ══════
 async function generatePDF(report){
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const W=210,M=15,cw=W-M*2;
   let y=M;
 
-  // Farben - weisses professionelles Layout
   const C={
-    schwarz:[0,0,0],
-    dunkel:[25,25,25],
-    grau:[90,90,90],
-    hellgrau:[150,150,150],
-    sehrHell:[245,245,245],
-    rahmen:[210,210,210],
-    gruen:[45,115,20],
-    gruenHell:[60,140,25],
-    rot:[175,45,20],
-    orange:[175,95,15],
-    blau:[35,95,155],
-    weiss:[255,255,255]
+    black:[0,0,0],dunkel:[30,30,30],grau:[100,100,100],
+    hellgrau:[160,160,160],rahmen:[210,210,210],heller:[245,245,245],
+    gruen:[50,120,20],rot:[180,50,20],orange:[170,100,10],
+    blau:[40,100,160],weiss:[255,255,255]
   };
 
-  // Hilfsfunktionen - ALLE Sonderzeichen/Emojis werden entfernt
-  const clean=(txt)=>{
-    return String(txt||'')
-      .replace(/[^\x20-\x7E\xC0-\xFF]/g,' ')
-      .replace(/\s+/g,' ')
-      .trim();
-  };
+  const clean=(txt)=>String(txt||'')
+    .replace(/[\u{1F000}-\u{1FFFF}]/gu,'')
+    .replace(/[\u2600-\u27FF]/g,'')
+    .replace(/[^\x00-\xFF]/g,'')
+    .trim();
 
   const T=(txt,x,fy,sz,bold,col,align)=>{
     doc.setFontSize(sz||10);
     doc.setFont('helvetica',bold?'bold':'normal');
     doc.setTextColor(...(col||C.dunkel));
-    const c=clean(txt);
-    if(align){doc.text(c,x,fy,{align});}
-    else{doc.text(c,x,fy);}
+    const t=clean(txt);
+    if(align==='right')doc.text(t,x,fy,{align:'right'});
+    else doc.text(t,x,fy);
   };
 
   const W2=(txt,x,fy,maxW,sz,col)=>{
-    doc.setFontSize(sz||10);
-    doc.setFont('helvetica','normal');
+    doc.setFontSize(sz||10);doc.setFont('helvetica','normal');
     doc.setTextColor(...(col||C.dunkel));
-    const c=clean(txt);
-    const lines=doc.splitTextToSize(c,maxW);
+    const lines=doc.splitTextToSize(clean(txt),maxW);
     doc.text(lines,x,fy);
     return lines.length;
   };
@@ -1148,361 +1108,337 @@ async function generatePDF(report){
     if(stroke){doc.setDrawColor(...stroke);doc.setLineWidth(0.3);doc.rect(x,fy,w,h,'S');}
   };
 
-  const newPage=()=>{doc.addPage();y=M;};
-  const needPage=(h)=>{if(y+h>280){newPage();}};
+  const needPage=(h)=>{if(y+h>280){doc.addPage();y=M;}};
 
-  // ── HEADER ──
-  // Logo laden
-  const logo=await loadLogoAsBase64();
-  if(logo&&logo.data){
-    const ratio=logo.w/logo.h;
-    const logoH=16;
-    const logoW=Math.min(logoH*ratio,55);
-    doc.addImage(logo.data,'PNG',M,y,logoW,logoH);
-  }else{
-    // Fallback: Firmenname als gruener Text
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(16);
-    doc.setTextColor(...C.gruen);
-    doc.text('KLEI',M,y+12);
+  // ── HEADER MIT LOGO ──
+  let logoLoaded=false;
+  try{
+    const logoData=await new Promise((resolve)=>{
+      const img=new Image();
+      img.crossOrigin='anonymous';
+      img.onload=()=>{
+        try{
+          const c=document.createElement('canvas');
+          c.width=img.naturalWidth||200;c.height=img.naturalHeight||80;
+          c.getContext('2d').drawImage(img,0,0);
+          resolve(c.toDataURL('image/png'));
+        }catch(e){resolve(null);}
+      };
+      img.onerror=()=>resolve(null);
+      img.src=FIRMA_LOGO;
+      setTimeout(()=>resolve(null),3000);
+    });
+    if(logoData&&logoData.length>100){
+      const tmpImg=new Image();tmpImg.src=logoData;
+      await new Promise(r=>{tmpImg.onload=r;setTimeout(r,500);});
+      const iW=tmpImg.naturalWidth||200,iH=tmpImg.naturalHeight||80;
+      const logoH=14,logoW=Math.min(logoH*(iW/iH),52);
+      doc.addImage(logoData,'PNG',M,y,logoW,logoH);
+      logoLoaded=true;
+    }
+  }catch(e){}
+
+  if(!logoLoaded){
+    doc.setFont('helvetica','bold');doc.setFontSize(18);
+    doc.setTextColor(...C.gruen);doc.text('KLEI',M,y+10);
   }
 
-  // Firmeninfo rechts
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(11);
+  doc.setFont('helvetica','bold');doc.setFontSize(11);
   doc.setTextColor(...C.dunkel);
   doc.text(FIRMA_NAME,W-M,y+7,{align:'right'});
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(8);
-  doc.setTextColor(...C.grau);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
   doc.text(FIRMA_ADRESSE,W-M,y+12,{align:'right'});
   doc.text(FIRMA_TEL+' - '+FIRMA_WEB,W-M,y+17,{align:'right'});
   y+=22;
 
-  // Gruene Trennlinie
-  LINE(M,y,W-M,y,C.gruen,0.8);
-  y+=5;
+  LINE(M,y,W-M,y,C.gruen,1.0);y+=5;
 
-  // Dokumenttyp - gruener Banner
+  // Banner
   const typ=report.role==='ar'?'ARBEITSZEITNACHWEIS':'TAGESBERICHT VORARBEITER';
   RECT(M,y,cw,9,C.gruen);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(9);
-  doc.setTextColor(...C.weiss);
-  doc.text(typ,M+4,y+6);
-  // Datum rechts - NUR Datum, keine Uhrzeit
-  doc.text(fmtD(report.datum),W-M-4,y+6,{align:'right'});
+  doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.weiss);
+  doc.text(typ,M+4,y+6.2);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);
+  doc.text(fmtD(report.datum),W-M-4,y+6.2,{align:'right'});
   y+=14;
 
   if(report.role==='ar'){
-    // ══ ARBEITSZEITNACHWEIS ══
+    // ── ARBEITSZEITNACHWEIS ──
+    doc.setFont('helvetica','bold');doc.setFontSize(16);doc.setTextColor(...C.dunkel);
+    doc.text(clean(report.name||'--'),M,y);y+=8;
+    LINE(M,y,W-M,y,C.rahmen);y+=6;
 
-    // Name gross
-    T(report.name||'--',M,y,18,true,C.dunkel);
-    y+=9;
-    LINE(M,y,W-M,y,C.rahmen,0.5);y+=6;
-
-    // Info-Zeile: Qual / Auftrag / Wetter
+    // Projekt + Infos
+    const projektLabel=getProjektLabel(report.projektNr);
     const infos=[
-      ['Qualifikation',clean(report.qual||'--')],
-      ['Auftrag',clean(getAuLabel(report.auftragId))],
-      ['Wetter',clean((report.wetter||'--')+(report.temp?' / '+report.temp+' Grad C':''))]
+      ['Projekt',projektLabel],
+      ['Qualifikation',report.qual||'--'],
+      ['Wetter',report.wetter+(report.temp?' - '+report.temp+'C':'')]
     ];
-    infos.forEach(([lbl,val],i)=>{
-      const x=M+(i*65);
-      T(lbl,x,y,7,false,C.hellgrau);
-      T(val,x,y+5,9,true,C.dunkel);
+    infos.forEach(([l,v],i)=>{
+      const x=M+(i*62);
+      doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text(l,x,y);
+      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);doc.text(clean(v),x,y+5);
     });
-    y+=13;LINE(M,y,W-M,y,C.rahmen,0.3);y+=6;
+    y+=14;
 
-    // Arbeitszeiten Ueberschrift
-    T('ARBEITSZEITEN',M,y,8,true,C.gruen);
-    y+=6;
+    // Taetigkeiten
+    if(report.taetigkeiten&&report.taetigkeiten.length>0){
+      doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text('Taetigkeiten',M,y);
+      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);
+      doc.text(report.taetigkeiten.join(', '),M,y+5);
+      y+=13;
+    }
 
-    // Tabelle Arbeitszeiten
-    RECT(M,y,cw,6,C.sehrHell);
-    LINE(M,y,W-M,y,C.rahmen);
-    const zHdr=['Arbeit Von','Arbeit Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
-    const zW=[25,25,22,27,22,36,25];
-    let xz=M+1;
-    zHdr.forEach((h,i)=>{T(h,xz,y+4.2,7,false,C.grau);xz+=zW[i];});
-    y+=6;LINE(M,y,W-M,y,C.rahmen);
+    LINE(M,y,W-M,y,C.rahmen);y+=7;
 
-    const fahrtLabel={
-      'fahrer':'Fahrer (100%)',
-      'beifahrer':'Beifahrer (50%)',
-      'privat':'Privat (0%)'
-    }[report.fahrtStatus||'fahrer'];
-
-    const zVals=[
-      report.von||'--',
-      report.bis||'--',
-      (report.pause||30)+' min',
-      (report.nettoWork||'--')+' h',
-      (report.fahrzeitMin||0)+' min',
-      fahrtLabel,
-      (report.netto||'--')+' h'
-    ];
-    xz=M+1;
+    // Zeiten-Tabelle
+    T('ARBEITSZEITEN',M,y,9,true,C.gruen);y+=6;
+    RECT(M,y,cw,6,C.heller);
+    LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
+    const zH=['Arbeit Von','Arbeit Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
+    const zW=[26,24,22,28,22,38,26];
+    let x2=M;
+    zH.forEach((h,i)=>{doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,x2+1,y+4.3);x2+=zW[i];});
+    y+=7;
+    LINE(M,y+7,W-M,y+7,C.rahmen);
+    x2=M;
+    const fahrtStatus=report.fahrtStatus||'fahrer';
+    const fahrtLabel={'fahrer':'Fahrer (100%)','beifahrer':'Beifahrer (50%)','privat':'Privat (0%)'}[fahrtStatus];
+    const zVals=[report.von||'--',report.bis||'--',(report.pause||30)+' min',(report.nettoWork||'--')+' h',(report.fahrzeitMin||0)+' min',fahrtLabel,(report.netto||'--')+' h'];
+    const zCols=[C.dunkel,C.dunkel,C.grau,C.dunkel,C.grau,C.blau,C.gruen];
+    const zBold=[false,false,false,true,false,true,true];
+    const zSz=[9,9,9,10,9,9,12];
     zVals.forEach((v,i)=>{
-      const isGesamt=(i===6);
-      const col=isGesamt?C.gruen:i===5?C.blau:C.dunkel;
-      T(clean(v),xz,y+5.5,isGesamt?11:9,isGesamt,col);
-      xz+=zW[i];
+      doc.setFont('helvetica',zBold[i]?'bold':'normal');doc.setFontSize(zSz[i]);doc.setTextColor(...zCols[i]);
+      doc.text(clean(v),x2+1,y+5.5);x2+=zW[i];
     });
-    y+=8;LINE(M,y,W-M,y,C.rahmen);y+=5;
+    y+=10;
 
-    // Fahrt Erklaerung - OHNE Emojis
-    const fahrtErk={
-      'fahrer':'Fahrer: Fahrzeit wird vollstaendig (100%) als Arbeitszeit angerechnet.',
-      'beifahrer':'Beifahrer: Fahrzeit wird zur Haelfte (50%) als Arbeitszeit angerechnet.',
-      'privat':'Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet (0%).'
-    }[report.fahrtStatus||'fahrer'];
-    const fahrtLineCol={
-      'fahrer':C.blau,
-      'beifahrer':C.orange,
-      'privat':C.hellgrau
-    }[report.fahrtStatus||'fahrer'];
+    const fahrtInfo={'fahrer':'Fahrer: Fahrzeit wird vollstaendig (100%) als Arbeitszeit angerechnet.',
+      'beifahrer':'Beifahrer: Fahrzeit wird zu 50% als Arbeitszeit angerechnet.',
+      'privat':'Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet.'}[fahrtStatus];
+    const fahrtLineCol={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[fahrtStatus];
+    RECT(M,y,cw,7,C.heller);
+    doc.setDrawColor(...fahrtLineCol);doc.setLineWidth(2);doc.line(M,y,M,y+7);doc.setLineWidth(0.3);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);doc.text(fahrtInfo,M+4,y+4.8);
+    y+=11;LINE(M,y,W-M,y,C.rahmen);y+=7;
 
-    RECT(M,y,cw,7,C.sehrHell);
-    doc.setDrawColor(...fahrtLineCol);
-    doc.setLineWidth(2);
-    doc.line(M,y,M,y+7);
-    doc.setLineWidth(0.3);
-    T(fahrtErk,M+4,y+5,8,false,C.grau);
-    y+=11;LINE(M,y,W-M,y,C.rahmen);y+=6;
-
-    // Taetigkeitsbericht
-    T('TAELIGKEITSBERICHT',M,y,8,true,C.gruen);y+=6;
+    T('TAETIGKEITSBERICHT',M,y,9,true,C.gruen);y+=6;
     const tLines=W2(report.taetigkeit||'--',M,y,cw,10,C.dunkel);
-    y+=tLines*5+4;
-
-    if(report.besonder&&report.besonder.trim()){
+    y+=tLines*5+5;
+    if(report.besonder){
       LINE(M,y,W-M,y,C.rahmen);y+=5;
-      T('BESONDERHEITEN / HINWEISE',M,y,8,true,C.rot);y+=5;
+      T('BESONDERHEITEN',M,y,9,true,C.rot);y+=5;
       W2(report.besonder,M,y,cw,9,C.dunkel);y+=8;
     }
 
   }else{
-    // ══ VORARBEITER TAGESBERICHT ══
+    // ── VORARBEITER TAGESBERICHT ──
+    const projektLabel=getProjektLabel(report.projektNr);
+    doc.setFont('helvetica','bold');doc.setFontSize(16);doc.setTextColor(...C.dunkel);
+    doc.text(clean(projektLabel),M,y);y+=8;
+    if(report.baustelle){
+      doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...C.grau);
+      doc.text(clean(report.baustelle),M,y);y+=6;
+    }
+    LINE(M,y,W-M,y,C.rahmen);y+=6;
 
-    // Projektname gross
-    T(report.baustelle||'Baustelle',M,y,17,true,C.dunkel);
-    y+=9;
-    LINE(M,y,W-M,y,C.rahmen,0.5);y+=5;
-
-    // Projektinfos 2-spaltig
     const pInfo=[
-      ['Bauherr / AG',clean(report.bauherr||'--')],
-      ['Bauleiter / Vorarbeiter',clean(report.bauleiter||'--')],
-      ['Auftrag',clean(getAuLabel(report.auftragId))],
-      ['Projektnummer',clean(report.projektnr||'--')]
+      ['Bauherr / AG',report.bauherr||'--'],
+      ['Bauleiter / Vorarbeiter',report.bauleiter||'--'],
+      ['Projektnummer',report.projektnr||'--'],
+      ['Datum',fmtD(report.datum)]
     ];
-    pInfo.forEach(([lbl,val],i)=>{
-      const cx=M+(i%2)*(cw/2);
-      const cy=y+Math.floor(i/2)*10;
-      T(lbl,cx,cy,7,false,C.hellgrau);
-      T(val,cx,cy+5,9,true,C.dunkel);
+    pInfo.forEach(([l,v],i)=>{
+      const cx=M+(i%2)*(cw/2);const cy=y+Math.floor(i/2)*10;
+      doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text(l,cx,cy);
+      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);doc.text(clean(v),cx,cy+5);
     });
     y+=22;
 
-    // Wetter Streifen
-    RECT(M,y,cw,7,C.sehrHell);
+    // Taetigkeiten
+    if(report.taetigkeiten&&report.taetigkeiten.length>0){
+      RECT(M,y,cw,7,C.heller);
+      LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
+      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+      doc.text('Taetigkeiten: '+report.taetigkeiten.join(' | '),M+3,y+4.8);
+      y+=11;
+    }
+
+    // Wetter
+    RECT(M,y,cw,7,C.heller);
     LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
-    const wetterStr=clean(
-      (report.wetter||'--')+' - '+
-      (report.temp||'--')+' Grad C - '+
-      (report.nied||0)+' mm Niederschlag - Boden: '+
-      (report.boden||'--')+' - Gewerke: '+
-      (report.gewerke||[]).join(', ')
-    );
-    T(wetterStr,M+3,y+5,8,false,C.grau);
+    const wetterStr=clean((report.wetter||'--')+' - '+(report.temp||'--')+'C - '+(report.nied||0)+'mm Nied. - Boden: '+(report.boden||'--'));
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+    doc.text(wetterStr,M+3,y+4.8);
     y+=12;
 
-    // ── ZEITERFASSUNG ──
+    // ZEITERFASSUNG
     const zRows=(report.zeitRows||[]).filter(t=>t.name);
     if(zRows.length){
       needPage(25);
-      T('ZEITERFASSUNG PERSONAL',M,y,9,true,C.gruen);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('ZEITERFASSUNG PERSONAL',M,y);
       const totalGes=zRows.reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0);
-      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);
       doc.text('Gesamt: '+totalGes.toFixed(2)+'h',W-M,y,{align:'right'});
       y+=7;
-
-      // Tabellen Header
-      RECT(M,y,cw,6,C.sehrHell);
+      RECT(M,y,cw,6,C.heller);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      const zHdr2=[
-        ['Name',0,30],['Qual.',30,20],['Von',50,17],['Bis',67,17],
-        ['Pause',84,16],['Arbeit',100,20],['Fahrt-Status',120,26],
-        ['Fahrzt.',146,19],['Anteil',165,20],['GESAMT',185,21]
-      ];
-      zHdr2.forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      [['Name',0,30],['Qual.',30,20],['Von',50,16],['Bis',66,16],['Pause',82,15],['Arbeit',97,20],['Fahrt',117,22],['Fahrzt.',139,20],['Anteil',159,20],['GESAMT',179,22]].forEach(([h,ox])=>{
+        doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);
+      });
       y+=7;
-
       zRows.forEach((t,idx)=>{
         needPage(8);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        const fl={
-          'fahrer':'Fahrer',
-          'beifahrer':'Beifahrer',
-          'privat':'Privat'
-        }[t.fahrt||'fahrer'];
-        const fc={
-          'fahrer':C.blau,
-          'beifahrer':C.orange,
-          'privat':C.hellgrau
-        }[t.fahrt||'fahrer'];
-        const zVals2=[
-          [clean(t.name),0,true,C.dunkel],
-          [clean(t.qual||''),30,false,C.grau],
-          [clean(t.von||''),50,false,C.dunkel],
-          [clean(t.bis||''),67,false,C.dunkel],
-          [clean((t.pause||30)+'min'),84,false,C.grau],
-          [clean((t.nettoArbeit||'--')+'h'),100,true,C.dunkel],
-          [clean(fl),120,false,fc],
-          [clean((t.fahrzeitMin||0)+'min'),146,false,C.grau],
-          [clean((t.fahrtAnteil||'0,00')+'h'),165,false,fc],
-          [clean((t.gesamt||t.nettoArbeit||'--')+'h'),185,true,C.gruen]
-        ];
-        zVals2.forEach(([v,ox,b,c])=>T(v,M+ox,y+4.5,8,b||false,c||C.dunkel));
-        y+=7;
+        const fl={'fahrer':'Fahrer','beifahrer':'Beifahrer','privat':'Privat'}[t.fahrt||'fahrer'];
+        const fc={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[t.fahrt||'fahrer'];
+        [[t.name,0,true,C.dunkel],[t.qual||'',30,false,C.grau],[t.von||'',50],[t.bis||'',66],
+         [(t.pause||30)+'min',82,false,C.grau],[(t.nettoArbeit||'--')+'h',97,true,C.dunkel],
+         [fl,117,false,fc],[(t.fahrzeitMin||0)+'min',139,false,C.grau],
+         [(t.fahrtAnteil||'0,00')+'h',159,false,fc],[(t.gesamt||t.nettoArbeit||'--')+'h',179,true,C.gruen]
+        ].forEach(([v,ox,b,c])=>{
+          doc.setFont('helvetica',b?'bold':'normal');doc.setFontSize(8);doc.setTextColor(...(c||C.dunkel));
+          doc.text(clean(v),M+ox,y+4.5);
+        });
+        // Taetigkeit unter der Zeile
+        if(t.tae){
+          doc.setFont('helvetica','italic');doc.setFontSize(7);doc.setTextColor(...C.grau);
+          doc.text(clean(t.tae),M+2,y+6.5);
+        }
+        y+=8;
       });
-      y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
+      y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
 
-    // ── GERAETEEINSATZ ──
+    // GERAETEEINSATZ
     const mRows=(report.machRows||[]).filter(m=>m.geraetNr);
     if(mRows.length){
-      needPage(22);
-      T('GERAETEEINSATZ (DATAFLOR-NUMMERN)',M,y,9,true,C.gruen);y+=7;
-      RECT(M,y,cw,6,C.sehrHell);
+      needPage(25);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('GERAETEEINSATZ (DATAFLOR)',M,y);y+=7;
+      RECT(M,y,cw,6,C.heller);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Dataflor-Nr.',0,18],['Geraet / Bezeichnung',18,74],['Fahrzeugnr.',92,28],['Von',120,18],['Bis',138,18],['Stunden',156,22]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      [['Nr.',0,16],['Geraet / Bezeichnung',16,72],['Kfz/Nr.',88,26],['Von',114,18],['Bis',132,18],['Std.',150,22]].forEach(([h,ox])=>{
+        doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);
+      });
       y+=7;
       mRows.forEach((m,idx)=>{
         needPage(8);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        T(clean(m.geraetNr),M+0,y+4.5,8,true,C.gruen);
-        T(clean(m.geraetBez||'--'),M+18,y+4.5,8,false,C.dunkel);
-        T(clean(m.fahrzeugnr||'--'),M+92,y+4.5,8,false,C.grau);
-        T(clean(m.von||''),M+120,y+4.5,8,false,C.dunkel);
-        T(clean(m.bis||''),M+138,y+4.5,8,false,C.dunkel);
-        T(clean((m.netto||'--')+'h'),M+156,y+4.5,9,true,C.gruen);
+        doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.gruen);doc.text(clean(m.geraetNr),M,y+4.5);
+        doc.setFont('helvetica','normal');doc.setTextColor(...C.dunkel);doc.text(clean(m.geraetBez||'--'),M+16,y+4.5);
+        doc.setTextColor(...C.grau);doc.text(clean(m.fahrzeugnr||'--'),M+88,y+4.5);
+        doc.setTextColor(...C.dunkel);doc.text(clean(m.von||''),M+114,y+4.5);doc.text(clean(m.bis||''),M+132,y+4.5);
+        doc.setFont('helvetica','bold');doc.setTextColor(...C.gruen);doc.text(clean((m.netto||'--')+'h'),M+150,y+4.5);
         y+=7;
       });
-      y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
+      y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
 
-    // ── ARBEITSSCHRITTE ──
+    // ARBEITSSCHRITTE
     const steps=(report.steps||[]).filter(s=>s.txt);
     if(steps.length){
-      needPage(20);
-      T('AUSGEFUEHRTE ARBEITEN / ARBEITSSCHRITTE',M,y,9,true,C.gruen);y+=8;
+      needPage(25);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('AUSGEFUEHRTE ARBEITEN',M,y);y+=8;
       steps.forEach((s,i)=>{
         needPage(22);
-        // Schritt Header
-        RECT(M,y,cw,7,C.sehrHell);
+        RECT(M,y,cw,7,C.heller);
         LINE(M,y,W-M,y,C.rahmen);
-        doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
-        doc.text(String(i+1)+'.',M+2,y+5);
-        if(s.aid){
+        doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);doc.text(String(i+1)+'.',M+2,y+5);
+        if(s.projektNr){
           doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.dunkel);
-          doc.text(clean(getAuLabel(s.aid)),M+12,y+5);
+          doc.text(clean(getProjektLabel(s.projektNr)),M+12,y+5);
         }
-        if(s.pos){
-          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);
-          doc.text('Pos. '+clean(s.pos),M+90,y+5);
-        }
-        if(s.menge){
-          doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);
-          doc.text(clean(s.menge)+' '+clean(s.eh||''),W-M-4,y+5,{align:'right'});
-        }
-        LINE(M,y+7,W-M,y+7,C.rahmen);
-        y+=10;
-
-        // Beschreibungstext
-        const lines=W2(s.txt,M+3,y,cw-6,9,C.dunkel);
-        y+=lines*5+3;
-
-        // Mitarbeiter
+        if(s.pos){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);doc.text('Pos. '+clean(s.pos),M+100,y+5);}
+        if(s.menge){doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);doc.text(clean(s.menge+' '+(s.eh||'')),W-M-4,y+5,{align:'right'});}
+        LINE(M,y+7,W-M,y+7,C.rahmen);y+=10;
+        const lines=W2(s.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+3;
         if(s.mitarbeiter&&s.mitarbeiter.length>0){
-          const maStr='Mitarbeiter: '+s.mitarbeiter.map(m=>clean(m.name)+(m.stunden?' ('+m.stunden+'h)':'')).join(', ');
-          T(maStr,M+3,y,8,false,C.grau);
-          y+=5;
+          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+          const maText='Mitarbeiter: '+s.mitarbeiter.map(m=>clean(m.name)+(m.stunden?' ('+m.stunden+'h)':'')).join(', ');
+          const maLines=doc.splitTextToSize(maText,cw-6);
+          doc.text(maLines,M+3,y);y+=maLines.length*4+2;
         }
-        LINE(M,y,W-M,y,[225,225,225],0.2);y+=4;
+        LINE(M,y,W-M,y,[220,220,220]);y+=5;
       });
       y+=2;
     }
 
-    // ── LIEFERUNGEN ──
+    // LIEFERUNGEN
     const liefs=(report.lieferungen||[]).filter(l=>l.firma||l.mat);
     if(liefs.length){
-      needPage(22);
-      T('MATERIALLIEFERUNGEN',M,y,9,true,C.gruen);y+=7;
-      RECT(M,y,cw,6,C.sehrHell);
+      needPage(25);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('MATERIALLIEFERUNGEN',M,y);y+=7;
+      RECT(M,y,cw,6,C.heller);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Lieferant',0,36],['Liefer-Nr.',36,28],['Material',64,54],['Menge',118,22],['Status',140,30]].forEach(([h,ox])=>T(h,M+ox,y+4.2,7,false,C.grau));
+      [['Lieferant',0,40],['Liefer-Nr.',40,28],['Material',68,54],['Menge',122,22],['Status',144,30]].forEach(([h,ox])=>{
+        doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);
+      });
       y+=7;
       liefs.forEach((l,idx)=>{
-        needPage(7);
-        if(idx%2===0)RECT(M,y-1,cw,7,C.sehrHell);
+        needPage(8);
+        if(idx%2===0)RECT(M,y-1,cw,7,C.heller);
         LINE(M,y+6,W-M,y+6,C.rahmen);
-        T(clean(l.firma||'--'),M+0,y+4.5,8,true,C.dunkel);
-        T(clean(l.ls||'--'),M+36,y+4.5,8,false,C.grau);
-        T(clean(l.mat||'--'),M+64,y+4.5,8,false,C.dunkel);
-        T(clean((l.menge||'--')+' '+(l.eh||'')),M+118,y+4.5,8,true,C.gruen);
-        const okCol=l.ok&&l.ok.includes('OK')?C.gruen:C.rot;
-        T(clean(l.ok||''),M+140,y+4.5,8,false,okCol);
+        doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.dunkel);doc.text(clean(l.firma||'--'),M,y+4.5);
+        doc.setFont('helvetica','normal');doc.setTextColor(...C.grau);doc.text(clean(l.ls||'--'),M+40,y+4.5);
+        doc.setTextColor(...C.dunkel);doc.text(clean(l.mat||'--'),M+68,y+4.5);
+        doc.setFont('helvetica','bold');doc.setTextColor(...C.gruen);doc.text(clean((l.menge||'--')+' '+(l.eh||'')),M+122,y+4.5);
+        const okCol=l.ok&&l.ok.toLowerCase().includes('ok')?C.gruen:C.rot;
+        doc.setFont('helvetica','normal');doc.setTextColor(...okCol);doc.text(clean(l.ok||''),M+144,y+4.5);
         y+=7;
       });
-      y+=4;LINE(M,y,W-M,y,C.rahmen);y+=6;
+      y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
 
-    // ── MAENGEL ──
+    // MAENGEL
     const maengel=(report.maengel||[]).filter(m=>m.txt);
     if(maengel.length){
-      needPage(20);
-      RECT(M,y,cw,7,[255,248,248]);
-      doc.setDrawColor(...C.rot);doc.setLineWidth(2);
-      doc.line(M,y,M,y+7);doc.setLineWidth(0.3);
-      T('MAENGEL UND PROBLEME ('+maengel.length+')',M+5,y+5,9,true,C.rot);
-      LINE(M,y+7,W-M,y+7,C.rahmen);y+=11;
+      needPage(25);
+      RECT(M,y,cw,8,[255,245,245]);
+      doc.setDrawColor(...C.rot);doc.setLineWidth(2);doc.line(M,y,M,y+8);doc.setLineWidth(0.3);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.rot);
+      doc.text('MAENGEL UND PROBLEME ('+maengel.length+')',M+5,y+5.5);
+      LINE(M,y+8,W-M,y+8,C.rahmen);y+=12;
       maengel.forEach(m=>{
-        needPage(16);
-        T(clean((m.schwere||'')+' - '+(m.typ||'')),M,y,8,true,C.rot);y+=5;
+        needPage(18);
+        doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.rot);
+        doc.text(clean((m.schwere||'')+' - '+(m.typ||'')),M,y);y+=5;
         const lines=W2(m.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+2;
-        if(m.massnahme&&m.massnahme.trim()){
-          T('Massnahme: '+clean(m.massnahme),M+3,y,8,false,C.orange);y+=5;
+        if(m.massnahme){
+          doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...C.orange);
+          doc.text('Massnahme: '+clean(m.massnahme),M+3,y);y+=5;
         }
-        LINE(M,y,W-M,y,[230,200,200],0.2);y+=4;
+        LINE(M,y,W-M,y,[230,200,200]);y+=4;
       });
     }
 
-    // ── NAECHSTE SCHRITTE ──
-    if(report.naechstes&&report.naechstes.trim()){
-      needPage(16);
-      T('NAECHSTE SCHRITTE / PLANUNG',M,y,9,true,C.gruen);y+=6;
-      const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);
-      y+=lines*5+4;
+    // NAECHSTE SCHRITTE
+    if(report.naechstes){
+      needPage(18);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('NAECHSTE SCHRITTE / PLANUNG',M,y);y+=6;
+      const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);y+=lines*5+4;
     }
   }
 
-  // ── FOOTER ──
-  LINE(M,284,W-M,284,C.gruen,0.5);
+  // FOOTER
+  LINE(M,284,W-M,284,C.gruen,0.6);
   doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);
   doc.text(FIRMA_NAME+' - '+FIRMA_ADRESSE+' - '+FIRMA_TEL,M,288);
   doc.text('Erstellt: '+new Date().toLocaleDateString('de-DE')+' '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),W-M,288,{align:'right'});
 
-  // Unterschriften
   if(y<268){
-    LINE(M,274,M+65,274,C.rahmen);
-    LINE(W-M-65,274,W-M,274,C.rahmen);
-    T('Unterschrift Mitarbeiter',M,278,7,false,C.hellgrau);
-    T('Unterschrift Bauleiter / Vorarbeiter',W-M-65,278,7,false,C.hellgrau);
+    doc.setDrawColor(...C.rahmen);doc.setLineWidth(0.3);
+    doc.line(M,275,M+65,275);doc.line(W-M-65,275,W-M,275);
+    doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);
+    doc.text('Unterschrift Mitarbeiter',M,279);
+    doc.text('Unterschrift Bauleiter / Vorarbeiter',W-M-65,279);
   }
 
   return doc;
@@ -1515,18 +1451,19 @@ async function sendPDFMail(report,statusElId){
   try{
     const doc=await generatePDF(report);
     const pdfBase64=doc.output('datauristring').split(',')[1];
-    const totalH=report.role==='ar'?
-      parseFloat((report.netto||'0').replace(',','.'))||0:
-      (report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0);
+    const netto=report.role==='ar'
+      ?report.netto
+      :String((report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0).toFixed(2));
+    const projektLabel=getProjektLabel(report.projektNr||'');
     const payload={
       empfaenger:EMPFAENGER_MAIL,
-      betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' - '+(report.role==='ar'?report.name:report.baustelle||'Bericht'),
+      betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' - '+(report.role==='ar'?report.name:projektLabel),
       rolle:report.role==='ar'?'Arbeiter':'Vorarbeiter',
       name:report.role==='ar'?report.name:report.bauleiter,
       datum:report.datum,
-      baustelle:report.role==='va'?report.baustelle:'',
-      auftrag:getAuLabel(report.auftragId||''),
-      netto:totalH.toFixed(2),
+      baustelle:report.role==='va'?(projektLabel+(report.baustelle?' - '+report.baustelle:'')):'',
+      auftrag:projektLabel,
+      netto,
       wetter:report.wetter||'',
       pdfBase64,
       reportJson:JSON.stringify(report)
@@ -1534,26 +1471,27 @@ async function sendPDFMail(report,statusElId){
     const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});
     const txt=await res.text();
     if(res.ok&&txt.includes('OK')){
-      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='PDF erfolgreich gesendet an '+EMPFAENGER_MAIL;}
+      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='PDF gesendet an '+EMPFAENGER_MAIL;}
       toast('PDF gesendet!','ok');
-    }else{throw new Error(txt||'Unbekannter Fehler');}
+    }else{throw new Error(txt||'Fehler');}
   }catch(e){
-    if(statusEl){statusEl.className='send-status show err';statusEl.textContent='Fehler: '+e.message+' - PDF wird lokal gespeichert.';}
+    if(statusEl){statusEl.className='send-status show err';statusEl.textContent='Fehler: '+e.message+' - PDF lokal gespeichert.';}
     const doc=await generatePDF(report);
-    doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:report.baustelle)||'Bericht')+'.pdf');
+    doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:getProjektLabel(report.projektNr))||'Bericht')+'.pdf');
     toast('PDF lokal gespeichert','err');
   }
 }
 
-// ══════ SAVE AND SEND ══════
+// ══════ SAVE & SEND ══════
 async function saveAndSendAR(){
   const d={
     id:currentId||Date.now().toString(),role:'ar',
     datum:document.getElementById('a-datum').value,
     name:document.getElementById('a-name').value,
-    auftragId:document.getElementById('a-auftrag').value,
+    projektNr:document.getElementById('a-projekt').value,
     qual:document.getElementById('a-qual').value,
     wetter:document.getElementById('a-wetter').value,
+    taetigkeiten:getARTaetigkeiten(),
     von:document.getElementById('a-von').value,
     bis:document.getElementById('a-bis').value,
     pause:document.getElementById('a-pause').value,
@@ -1579,9 +1517,9 @@ async function saveAndSendVA(){
   const d={
     id:currentId||Date.now().toString(),role:'va',
     datum:document.getElementById('v-datum').value,
+    projektNr:document.getElementById('v-projekt').value,
     baustelle:document.getElementById('v-baustelle').value,
     bauherr:document.getElementById('v-bauherr')?.value,
-    auftragId:document.getElementById('v-auftrag').value,
     projektnr:document.getElementById('v-projektnr').value,
     bauleiter:document.getElementById('v-bauleiter').value,
     temp:document.getElementById('v-temp').value,
@@ -1592,7 +1530,7 @@ async function saveAndSendVA(){
     naechstes:document.getElementById('v-naechstes').value,
     bemerkungen:document.getElementById('v-bemerkungen').value,
     wetter:curWeather,
-    gewerke:getActiveTags(),
+    taetigkeiten:getVATaetigkeiten(),
     steps:getSteps(),
     zeitRows:getZeitRows(),
     machRows:getMachRows(),
@@ -1603,7 +1541,7 @@ async function saveAndSendVA(){
     createdAt:new Date().toISOString(),
     aiAnalysis:null
   };
-  if(!d.datum||!d.baustelle){toast('Datum und Baustelle erforderlich','err');return;}
+  if(!d.datum||!d.projektNr){toast('Datum und Projekt erforderlich','err');return;}
   const idx=reports.findIndex(r=>r.id===d.id);
   if(idx>=0){d.aiAnalysis=reports[idx].aiAnalysis;reports[idx]=d;}else reports.push(d);
   currentId=d.id;
@@ -1626,6 +1564,8 @@ function clearARForm(){
   const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}
   curFahrtStatus='fahrer';
   document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});
+  // Taetigkeiten-Tags zuruecksetzen
+  document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
   toast('Formular geleert','ok');
 }
 
@@ -1641,11 +1581,12 @@ function newReport(){
     const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';
     const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';
     const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';
+    const vp=document.getElementById('v-projekt');if(vp)vp.value='';
     const st=document.getElementById('va-send-status');if(st){st.className='send-status';st.textContent='';}
-    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},60);
+    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},50);
     curWeather='Sonnig';
     document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));
-    document.querySelectorAll('#gw-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
+    document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
     showTab('bericht');
   }
   toast('Neuer Bericht','ok');
@@ -1660,8 +1601,10 @@ function loadReport(id){
     sv('a-datum',r.datum);sv('a-name',r.name);sv('a-von',r.von);sv('a-bis',r.bis);
     sv('a-pause',r.pause);sv('a-fahrzeit',r.fahrzeitMin||0);
     sv('a-taetigkeit',r.taetigkeit);sv('a-besonder',r.besonder);
-    if(document.getElementById('a-auftrag'))document.getElementById('a-auftrag').value=r.auftragId||'';
-    if(document.getElementById('a-qual'))document.getElementById('a-qual').value=r.qual||'Facharbeiter GaLa';
+    const ap=document.getElementById('a-projekt');if(ap)ap.value=r.projektNr||'';
+    const aq=document.getElementById('a-qual');if(aq)aq.value=r.qual||'Facharbeiter GaLa';
+    // Taetigkeiten laden
+    document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
     curFahrtStatus=r.fahrtStatus||'fahrer';
     document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.toggle('fahrt-active',b.dataset.val===curFahrtStatus));
     calcAR();renderARDetail(r);showTab('quick');
@@ -1676,12 +1619,13 @@ function loadVAForm(r){
   sv('v-projektnr',r.projektnr);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temp);
   sv('v-nied',r.nied);sv('v-besucher',r.besucher);sv('v-fotos',r.fotos);
   sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);
-  if(document.getElementById('v-auftrag'))document.getElementById('v-auftrag').value=r.auftragId||'';
+  const vp=document.getElementById('v-projekt');if(vp)vp.value=r.projektNr||'';
   if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';
   curWeather=r.wetter||'Sonnig';
   const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
   document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));
-  document.querySelectorAll('#gw-tags .tg').forEach(t=>t.classList.toggle('a',(r.gewerke||[]).includes(t.textContent)));
+  // Taetigkeiten laden
+  document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
   stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';
   (r.steps||[]).forEach(s=>addStep(s));if(!r.steps?.length)addStep();
   const mgc=document.getElementById('mangel-con');if(mgc)mgc.innerHTML='';
@@ -1707,17 +1651,19 @@ function renderARDetail(r){
   const fa=(fh*satz).toFixed(2).replace('.',',');
   document.getElementById('detailContent').innerHTML=
     '<div class="card"><div class="card-title">'+(r.name||'--')+'</div>'+
-    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.qual||'--')+'</span><span>'+(r.wetter||'--')+'</span></div></div>'+
+    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span>'+
+    '<span>'+getProjektLabel(r.projektNr)+'</span>'+
+    '<span>'+(r.qual||'--')+'</span></div></div>'+
+    (r.taetigkeiten?.length?'<div class="ib"><div class="ib-t">Taetigkeiten</div><div class="ib-c">'+r.taetigkeiten.join(' | ')+'</div></div>':'')+
     '<div class="srow">'+
     '<div class="sc"><div class="sv">'+(r.nettoWork||r.netto||'--')+'h</div><div class="sl">Arbeit</div></div>'+
     '<div class="sc"><div class="sv" style="color:'+fc+'">'+fa+'h</div><div class="sl">Fahrzeit</div></div>'+
     '<div class="sc"><div class="sv" style="color:var(--gl)">'+(r.netto||'--')+'h</div><div class="sl">Gesamt</div></div>'+
     '</div>'+
-    '<div class="ib"><div class="ib-t">Zeiten</div><div class="ib-c">'+(r.von||'--')+' bis '+(r.bis||'--')+' - Pause: '+(r.pause||30)+'min'+
-    (parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min - '+fl+' - '+fa+'h angerechnet</span>':'')+
+    '<div class="ib"><div class="ib-t">Zeiten</div><div class="ib-c">'+(r.von||'--')+' - '+(r.bis||'--')+' - Pause: '+(r.pause||30)+'min'+
+    (parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min - '+fl+' = '+fa+'h</span>':'')+
     '</div></div>'+
-    (r.auftragId?'<div class="ib"><div class="ib-t">Auftrag</div><div class="ib-c">'+getAuLabel(r.auftragId)+'</div></div>':'')+
-    '<div class="ib"><div class="ib-t">Taetigkeit</div><div class="ib-c">'+(r.taetigkeit||'--')+'</div></div>'+
+    (r.taetigkeit?'<div class="ib"><div class="ib-t">Taetigkeit</div><div class="ib-c">'+r.taetigkeit+'</div></div>':'')+
     (r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+
     '<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button></div>';
 }
@@ -1726,12 +1672,16 @@ function renderVADetail(r){
   const hours=(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0);
   document.getElementById('detailContent').innerHTML=
     '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start">'+
-    '<div><div class="card-title">'+(r.baustelle||'Baustelle')+'</div>'+
-    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.bauleiter||'--')+'</span><span>#'+(r.projektnr||'--')+'</span></div></div>'+
+    '<div><div class="card-title">'+getProjektLabel(r.projektNr)+'</div>'+
+    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span>'+
+    '<span>'+(r.bauleiter||'--')+'</span>'+
+    (r.baustelle?'<span>'+r.baustelle+'</span>':'')+
+    '</div></div>'+
     '<div style="display:flex;gap:5px">'+
     '<button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="showTab(\'bericht\')" onclick="showTab(\'bericht\')">Bearbeiten</button>'+
     '<button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button>'+
     '</div></div></div>'+
+    (r.taetigkeiten?.length?'<div class="ib"><div class="ib-t">Taetigkeiten</div><div class="ib-c">'+r.taetigkeiten.join(' | ')+'</div></div>':'')+
     '<div class="srow">'+
     '<div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div>'+
     '<div class="sc"><div class="sv">'+((r.zeitRows||[]).filter(t=>t.name).length)+'</div><div class="sl">Mitarbeiter</div></div>'+
@@ -1740,33 +1690,34 @@ function renderVADetail(r){
     ((r.zeitRows||[]).filter(t=>t.name).length?
       '<div class="ib"><div class="ib-t">Zeiterfassung</div>'+
       (r.zeitRows||[]).filter(t=>t.name).map(t=>{
-        const fl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[t.fahrt||'fahrer'];
         const fc={'fahrer':'var(--sky)','beifahrer':'var(--earth)','privat':'var(--m)'}[t.fahrt||'fahrer'];
         return '<div style="padding:4px 0;border-bottom:1px solid var(--b);font-size:11px;display:flex;justify-content:space-between;align-items:center">'+
           '<span style="color:var(--c);font-weight:600;flex:1">'+t.name+'</span>'+
-          '<span style="color:var(--m);width:90px">'+t.von+' - '+t.bis+'</span>'+
-          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;width:50px">'+(t.nettoArbeit||'--')+'h</span>'+
-          '<span style="color:'+fc+';width:60px;font-size:10px">'+fl+'</span>'+
-          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;width:55px">'+(t.gesamt||t.nettoArbeit||'--')+'h</span>'+
+          '<span style="color:var(--m);width:80px">'+t.von+'-'+t.bis+'</span>'+
+          '<span style="color:var(--gl);font-family:\'IBM Plex Mono\',monospace;width:44px">'+(t.nettoArbeit||'--')+'h</span>'+
+          '<span style="color:'+fc+';font-family:\'IBM Plex Mono\',monospace;font-weight:700;width:52px">'+(t.gesamt||t.nettoArbeit||'--')+'h</span>'+
+          (t.tae?'<span style="color:var(--m);font-size:10px;width:80px">'+t.tae+'</span>':'')+
           '</div>';
-      }).join('')+'</div>':'')+'<div class="arow">'+
-    '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">PDF erneut senden</button>'+
-    '</div>';
+      }).join('')+'</div>':'')+(r.aiAnalysis?'<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>KI-Analyse</div><div class="ai-txt">'+r.aiAnalysis+'</div></div>':'')+
+    '<div class="arow"><button class="btn btn-p" style="font-size:11px" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">PDF erneut senden</button></div>';
 }
 
 function renderSB(){
   const el=document.getElementById('sb-list');
   if(!reports.length){el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Keine Berichte</div>';return;}
   el.innerHTML=[...reports].reverse().map(r=>{
-    const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
+    const h=r.role==='va'
+      ?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0)
+      :parseFloat((r.netto||'0').replace(',','.')||0);
+    const label=r.role==='va'?getProjektLabel(r.projektNr):(r.name||'Mitarbeiter');
     return '<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
       '<div class="ri-d">'+fmtD(r.datum)+'</div>'+
-      '<div class="ri-n">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div>'+
+      '<div class="ri-n">'+label+'</div>'+
       '<div class="ri-s">'+(r.role==='va'?(r.bauleiter||'VA'):(r.qual||'AR'))+' - '+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+
       '<div class="ri-tags">'+
       '<span class="tag-s '+(r.role==='va'?'tag-e':'tag-g')+'">'+(r.role==='va'?'VA':'AR')+'</span>'+
       (r.aiAnalysis?'<span class="tag-s tag-g">KI</span>':'')+
-      ((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">Maengel '+r.maengel.filter(m=>m.txt).length+'</span>':'')+
+      ((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">'+r.maengel.filter(m=>m.txt).length+' Maengel</span>':'')+
       '</div></div>';
   }).join('');
 }
@@ -1787,6 +1738,123 @@ function buildUE(){
       const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0')||0);
       return '<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
         '<div style="display:flex;justify-content:space-between;align-items:center">'+
-        '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.role==='va'?(r.baustelle||'Baustelle'):(r.name||'Mitarbeiter'))+'</div>'+
-        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' - '+(r.role==='va'?'VA':'AR')+'</div>
+        '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.role==='va'?getProjektLabel(r.projektNr):(r.name||'Mitarbeiter'))+'</div>'+
+        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);margin-top:1px">'+fmtD(r.datum)+' - '+(r.role==='va'?'VA':'AR')+'</div></div>'+
+        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+(typeof h==='number'?h.toFixed(1):h)+'h</div>'+
+        '</div></div>';
+    }).join('');
+}
 
+async function triggerAI(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Erst speichern!','err');return;}showTab('ki');await runAI('zusammenfassung');}
+
+async function runAI(type){
+  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
+  const prompts={
+    zusammenfassung:'Erstelle eine kompakte strukturierte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',
+    risiken:'Analysiere Risiken, Maengel, Behinderungen. Bewerte Schweregrad, nenne DIN-Normen.',
+    kosten:'Kostenschaetzung: Personal nach GaLaBau-Tariflohn, Geraete, Material.',
+    qualitaet:'Qualitaetspruefung nach DIN 18917, DIN 18035, RSM, VOB/C.',
+    bericht:'Formaler VOB-konformer Tagesbericht fuer Baudokumentation.',
+    plan:'Wochenplanung fuer naechste 5 Werktage.'
+  };
+  const stTxt=(r.steps||[]).map((s,i)=>(i+1)+'. ['+getProjektLabel(s.projektNr)+'] '+s.txt+' '+(s.menge||'')+
+    (s.mitarbeiter?.length?' MA: '+s.mitarbeiter.map(m=>m.name+(m.stunden?'('+m.stunden+'h)':'')).join(', '):'')
+  ).join('\n');
+  const rTxt='KLEI Tagesbericht\nDatum:'+r.datum+'|Projekt:'+getProjektLabel(r.projektNr)+'|Bauleiter:'+r.bauleiter+
+    '\nTaetigkeiten:'+(r.taetigkeiten||[]).join(',')+
+    '\nWetter:'+r.wetter+','+r.temp+'C'+
+    '\nZeiten:'+(r.zeitRows||[]).map(t=>t.name+'('+t.qual+'):'+t.von+'-'+t.bis+' Arbeit:'+t.nettoArbeit+'h Gesamt:'+t.gesamt+'h Taet:'+t.tae).join('; ')+
+    '\nGeraete:'+(r.machRows||[]).map(m=>m.geraetNr+' '+m.geraetBez+' Kfz:'+m.fahrzeugnr+' '+m.von+'-'+m.bis+'='+m.netto+'h').join('; ')+
+    '\nArbeiten:\n'+stTxt+
+    '\nMaengel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+
+    '\nNaechstes:'+(r.naechstes||'--');
+  const lbl={zusammenfassung:'Zusammenfassung',risiken:'Risiken',kosten:'Kosten',qualitaet:'Qualitaet',bericht:'VOB-Bericht',plan:'Wochenplanung'};
+  const out=document.getElementById('ki-out');
+  out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompts[type]+'\n\n---\n'+rTxt}]})});
+    const data=await res.json();
+    const txt=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';
+    const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>').replace(/^- (.+)$/gm,'- $1');
+    out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';
+    const idx=reports.findIndex(x=>x.id===r.id);
+    if(idx>=0){reports[idx].aiAnalysis=fmt;localStorage.setItem('klei_reports',JSON.stringify(reports));renderSB();}
+    toast('KI fertig','ok');
+  }catch(e){
+    out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">Fehler: '+e.message+'</div></div>';
+    toast('KI-Fehler','err');
+  }
+}
+
+function loadDFCfg(){if(!dfCfg)return;['df-url','df-key','df-mandant','df-kst'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=[dfCfg.url,dfCfg.key,dfCfg.mandant,dfCfg.kst][i]||'';});}
+function saveDFCfg(){dfCfg={url:document.getElementById('df-url')?.value,key:document.getElementById('df-key')?.value,mandant:document.getElementById('df-mandant')?.value,kst:document.getElementById('df-kst')?.value};localStorage.setItem('klei_df',JSON.stringify(dfCfg));toast('Dataflor gespeichert','ok');}
+
+function expDFCSV(){
+  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
+  const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,nettoArbeit:r.nettoWork,fahrt:r.fahrtStatus,fahrzeitMin:r.fahrzeitMin,gesamt:r.netto,projektNr:r.projektNr,tae:r.taetigkeiten?.join(',')}];
+  const hdr='Mandant;Datum;Projekt;Name;Qual;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h;Taetigkeit';
+  const lines=rows.filter(t=>t.name).map(t=>[
+    dfCfg.mandant||'001',r.datum,
+    getProjektLabel(t.projektNr||r.projektNr),
+    t.name,t.qual||'',t.von||'',t.bis||'',
+    (t.nettoArbeit||'0').replace(',','.'),
+    t.fahrt||'fahrer',t.fahrzeitMin||0,
+    (t.gesamt||'0').replace(',','.'),
+    t.tae||''
+  ].join(';'));
+  dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');
+  toast('CSV exportiert','ok');
+}
+
+function expDFXML(){
+  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
+  const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,nettoArbeit:r.nettoWork,fahrt:r.fahrtStatus,fahrzeitMin:r.fahrzeitMin,gesamt:r.netto,projektNr:r.projektNr}];
+  const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung>\n  <Datum>'+r.datum+'</Datum>\n  <Projekt>'+x(getProjektLabel(r.projektNr))+'</Projekt>\n  <Personal>\n'+
+    rows.filter(t=>t.name).map(t=>'    <Eintrag><Name>'+x(t.name)+'</Name><Projekt>'+x(getProjektLabel(t.projektNr||r.projektNr))+'</Projekt><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Arbeit>'+(t.nettoArbeit||'0').replace(',','.')+'</Arbeit><Fahrt>'+(t.fahrt||'fahrer')+'</Fahrt><FahrzeitMin>'+(t.fahrzeitMin||0)+'</FahrzeitMin><Gesamt>'+(t.gesamt||'0').replace(',','.')+'</Gesamt></Eintrag>').join('\n')+
+    '\n  </Personal>\n  <Geraete>\n'+
+    (r.machRows||[]).filter(m=>m.geraetNr).map(m=>'    <Geraet><DataflorNr>'+x(m.geraetNr)+'</DataflorNr><Bez>'+x(m.geraetBez||'')+'</Bez><FzNr>'+x(m.fahrzeugnr||'')+'</FzNr><Projekt>'+x(getProjektLabel(m.projektNr||r.projektNr))+'</Projekt><Von>'+(m.von||'')+'</Von><Bis>'+(m.bis||'')+'</Bis><Netto>'+(m.netto||'0').replace(',','.')+'</Netto></Geraet>').join('\n')+
+    '\n  </Geraete>\n</DataflorZeiterfassung>';
+  dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');
+  toast('XML exportiert','ok');
+}
+
+function expTXT(){
+  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
+  const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
+  dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+getProjektLabel(r.projektNr||'')+'\n'+(r.role==='va'?'Bauleiter: '+r.bauleiter:'Mitarbeiter: '+r.name)+'\nStunden: '+h.toFixed(2)+'h','text/plain;charset=utf-8');
+  toast('TXT exportiert','ok');
+}
+
+function delReport(id){
+  if(!confirm('Bericht loeschen?'))return;
+  reports=reports.filter(r=>r.id!==id);
+  localStorage.setItem('klei_reports',JSON.stringify(reports));
+  if(currentId===id)currentId=null;
+  renderSB();
+  document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">&#128465;</div><div class="et">Geloescht</div></div>';
+  toast('Geloescht','err');
+}
+
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
+  const t=document.getElementById('tab-'+name),p=document.getElementById('panel-'+name);
+  if(t)t.classList.add('act');if(p)p.classList.add('act');
+  if(name==='ue')buildUE();
+  if(name==='bericht')setTimeout(refreshStepMAs,100);
+  stopVoice();
+}
+
+function openMo(id){document.getElementById(id).classList.add('open');if(id==='mo-au')renderAuList();}
+function closeMo(id){document.getElementById(id).classList.remove('open');}
+document.addEventListener('touchstart',e=>{const mo=e.target.closest('.mo');if(mo&&e.target===mo)mo.classList.remove('open');},{passive:true});
+
+function todayStr(){return new Date().toISOString().split('T')[0];}
+function fmtD(d){if(!d)return'--';const p=d.split('-');return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d;}
+function dlFile(name,content,type){const b=new Blob([content],{type});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);}
+function toast(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className='toast '+type+' show';setTimeout(()=>el.classList.remove('show'),3000);}
+function updateSBDate(){const el=document.getElementById('sb-date');if(el)el.textContent=new Date().toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'});}
+</script>
+</body>
+</html>
