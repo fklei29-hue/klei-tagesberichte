@@ -65,7 +65,7 @@ main{display:flex;flex-direction:column;overflow:hidden;}
 .tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--b);padding:0 12px;overflow-x:auto;}
 .tab{padding:12px 14px;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .tab.act{color:var(--gl);border-bottom-color:var(--g);}
-.content{flex:1;overflow-y:auto;padding:12px 14px;}
+.content{flex:1;overflow-y:auto;padding:12px 14px;padding-bottom:70px;}
 .panel{display:none;}.panel.act{display:block;}
 .vbar{background:rgba(196,72,40,.15);border:1px solid rgba(196,72,40,.4);border-radius:var(--rad);padding:10px 14px;margin-bottom:10px;display:none;align-items:center;gap:10px;position:sticky;top:0;z-index:50;}
 .vbar.on{display:flex;}
@@ -84,6 +84,7 @@ main{display:flex;flex-direction:column;overflow:hidden;}
 label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.2px;color:var(--m);text-transform:uppercase;}
 input,textarea,select{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);color:var(--t);font-family:'IBM Plex Sans',sans-serif;font-size:13px;padding:8px 10px;outline:none;width:100%;}
 input:focus,textarea:focus,select:focus{border-color:var(--gd);}
+input[type=file]{padding:6px;font-size:11px;}
 textarea{resize:vertical;min-height:70px;}
 select option{background:var(--s2);}
 .sec{margin-bottom:14px;}
@@ -110,7 +111,7 @@ select option{background:var(--s2);}
 .btn-p{background:linear-gradient(135deg,var(--gd),var(--g));color:#0e1209;border:none;font-weight:700;}
 .btn-e{background:var(--earthg);border-color:rgba(154,108,26,.4);color:var(--earth);}
 .btn-r{background:var(--rg);border-color:rgba(196,72,40,.3);color:var(--r);}
-.arow{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--b);margin-top:12px;}
+.arow{display:flex;gap:8px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--b);margin-top:12px;position:sticky;bottom:0;background:var(--bg);z-index:40;}
 .fahrt-btn{flex:1;padding:10px 6px;border-radius:var(--rad);background:var(--s3);border:1px solid var(--b);color:var(--m);font-weight:600;font-size:12px;cursor:pointer;text-align:center;line-height:1.4;user-select:none;}
 .fahrt-btn.fahrt-active[data-val="fahrer"]{background:rgba(61,143,168,.15);border-color:var(--sky);color:var(--sky);}
 .fahrt-btn.fahrt-active[data-val="beifahrer"]{background:rgba(154,108,26,.18);border-color:var(--earth);color:var(--earth);}
@@ -154,7 +155,7 @@ select option{background:var(--s2);}
 .send-status.sending{background:var(--skyg);border:1px solid rgba(61,143,168,.3);color:var(--sky);}
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:180px;color:var(--m);gap:8px;}
 .ei{font-size:32px;opacity:.25;}.et{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--s3);}
-.toast{position:fixed;bottom:12px;right:12px;background:var(--s1);border:1px solid var(--b);border-radius:var(--rad);padding:9px 14px;font-size:11px;box-shadow:0 6px 20px rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;gap:7px;transform:translateY(60px);opacity:0;transition:all .25s cubic-bezier(.34,1.56,.64,1);}
+.toast{position:fixed;bottom:70px;right:12px;background:var(--s1);border:1px solid var(--b);border-radius:var(--rad);padding:9px 14px;font-size:11px;box-shadow:0 6px 20px rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;gap:7px;transform:translateY(60px);opacity:0;transition:all .25s cubic-bezier(.34,1.56,.64,1);}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.ok{border-left:2px solid var(--g);}.toast.err{border-left:2px solid var(--r);}.toast.info{border-left:2px solid var(--sky);}
 .ma-zuweisung{margin-top:8px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:8px;}
@@ -164,6 +165,10 @@ select option{background:var(--s2);}
 .ma-check-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--g);flex-shrink:0;}
 .ma-name{font-size:12px;color:var(--t);flex:1;}
 .ma-h{width:70px;font-size:11px;background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:4px 6px;color:var(--gl);font-family:'IBM Plex Mono',monospace;text-align:right;}
+.foto-prev-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.foto-item{position:relative;display:inline-block;}
+.foto-item img{width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid var(--b);display:block;}
+.foto-del{position:absolute;top:-5px;right:-5px;background:var(--r);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;line-height:20px;text-align:center;font-weight:700;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--b);border-radius:2px;}
@@ -183,7 +188,7 @@ select option{background:var(--s2);}
     <div class="role-card va" ontouchstart="event.preventDefault();showPIN()" onclick="showPIN()">
       <div class="role-icon">📋</div>
       <div class="role-name">Vorarbeiter</div>
-      <div class="role-desc">Vollständige Doku<br>Mengen · Lieferanten<br>KI-Analyse · PDF-Mail</div>
+      <div class="role-desc">Vollständige Doku<br>Fotos · Lieferanten<br>KI-Analyse · PDF-Mail</div>
     </div>
   </div>
 </div>
@@ -233,8 +238,8 @@ select option{background:var(--s2);}
 <div class="mo" id="mo-au">
   <div class="md">
     <button class="md-close" ontouchstart="closeMo('mo-au')" onclick="closeMo('mo-au')">&#x2715;</button>
-    <div class="md-title">Auftraege verwalten</div>
-    <div class="md-sub">Zusaetzliche Auftraege hinzufuegen</div>
+    <div class="md-title">Zusaetzliche Auftraege</div>
+    <div class="md-sub">Auftraege manuell hinzufuegen</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
       <input id="au-nr" placeholder="Auftrags-Nr." style="width:110px;flex:none">
       <input id="au-name" placeholder="Bezeichnung" style="flex:1">
@@ -277,7 +282,6 @@ const FIRMA_WEB='www.klei-sportplatzbau.de';
 const FIRMA_LOGO='https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png';
 const _p=[49,49,55].map(c=>String.fromCharCode(c)).join('');
 
-// ══════ STAMMDATEN ══════
 const PROJEKTE=[
   {nr:'2026-021',name:'Kassel Friedrichsplatz'},
   {nr:'2023-345',name:'Kassel Dormannweg'},
@@ -305,18 +309,20 @@ const GERAETE=[
   {nr:'1700',bez:'Vermessungsgeraet'},{nr:'2000',bez:'LKW < 7 to (Transporter)'}
 ];
 
-// Projekt-Optionen HTML
 function projektOpts(selectedNr){
   return '<option value="">- Projekt waehlen -</option>'+
-    PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(selectedNr===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('')+
-    '<option value="sonstig">Sonstiges / Manuell</option>';
+    PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(selectedNr===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('');
 }
 
-// Tätigkeiten-Tags HTML
 function taetigkeitenTags(selected){
-  return TAETIGKEITEN.map((t,i)=>
-    '<div class="tg'+((selected||[]).includes(t)||(i===0&&!selected)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>'
+  return TAETIGKEITEN.map(t=>
+    '<div class="tg'+((selected||[]).includes(t)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>'
   ).join('');
+}
+
+function getProjektLabel(nr){
+  const p=PROJEKTE.find(x=>x.nr===nr);
+  return p?p.nr+' - '+p.name:(nr||'--');
 }
 
 let reports=JSON.parse(localStorage.getItem('klei_reports')||'[]');
@@ -325,11 +331,67 @@ let dfCfg=JSON.parse(localStorage.getItem('klei_df')||'{}');
 let currentId=null,currentRole=null,curWeather='Sonnig';
 let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
 let pinBuffer='';
+let fotoDataUrls=[];
+
+// ══════ FOTO FUNKTIONEN ══════
+function handleFotos(input){
+  const files=[...input.files].slice(0,5);
+  if(!files.length)return;
+  fotoDataUrls=[];
+  const preview=document.getElementById('v-fotos-preview');
+  const count=document.getElementById('v-fotos-count');
+  if(preview)preview.innerHTML='';
+  let loaded=0;
+  files.forEach((file,idx)=>{
+    const reader=new FileReader();
+    reader.onload=(e)=>{
+      const img=new Image();
+      img.onload=()=>{
+        const canvas=document.createElement('canvas');
+        const maxW=1200,maxH=1200;
+        let w=img.width,h=img.height;
+        if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+        if(h>maxH){w=Math.round(w*maxH/h);h=maxH;}
+        canvas.width=w;canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        const dataUrl=canvas.toDataURL('image/jpeg',0.75);
+        fotoDataUrls[idx]=dataUrl;
+        loaded++;
+        if(preview){
+          const div=document.createElement('div');
+          div.className='foto-item';div.id='foto-prev-'+idx;
+          div.innerHTML='<img src="'+dataUrl+'"><button class="foto-del" ontouchstart="removeFoto('+idx+')" onclick="removeFoto('+idx+')">x</button>';
+          preview.appendChild(div);
+        }
+        if(count)count.textContent=loaded+' Foto'+(loaded===1?'':'s')+' gewaehlt';
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function removeFoto(idx){
+  fotoDataUrls[idx]=null;
+  const prev=document.getElementById('foto-prev-'+idx);
+  if(prev)prev.remove();
+  const c=fotoDataUrls.filter(Boolean).length;
+  const el=document.getElementById('v-fotos-count');
+  if(el)el.textContent=c>0?c+' Foto'+(c===1?'':'s')+' gewaehlt':'Keine Fotos gewaehlt';
+}
+
+function clearFotos(){
+  fotoDataUrls=[];
+  const preview=document.getElementById('v-fotos-preview');
+  if(preview)preview.innerHTML='';
+  const count=document.getElementById('v-fotos-count');
+  if(count)count.textContent='Keine Fotos gewaehlt';
+  const input=document.getElementById('v-fotos-input');
+  if(input)input.value='';
+}
 
 // ══════ VOICE ENGINE ══════
-let voiceActive=false;
-let voiceTarget=null;
-let recognition=null;
+let voiceActive=false,voiceTarget=null,recognition=null;
 
 function startVoice(targetId,label){
   const el=document.getElementById(targetId);
@@ -338,45 +400,33 @@ function startVoice(targetId,label){
   if(voiceActive)stopVoice();
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){toast('Spracheingabe: Bitte Chrome oder Safari 15+ verwenden','err');return;}
-  voiceTarget=targetId;
-  voiceActive=true;
+  voiceTarget=targetId;voiceActive=true;
   if(recognition){try{recognition.stop();}catch(e){}}
   recognition=new SR();
-  recognition.lang='de-DE';
-  recognition.continuous=true;
-  recognition.interimResults=true;
-  recognition.maxAlternatives=1;
+  recognition.lang='de-DE';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
   const existingText=el.value?el.value.trim()+' ':'';
-  let addedFinal='';
-  let lastSavedFinal='';
-  showVoiceBanner(label);
-  highlightMicBtn(targetId,true);
+  let addedFinal='',lastSavedFinal='';
+  showVoiceBanner(label);highlightMicBtn(targetId,true);
   recognition.onstart=()=>{toast('Mikrofon aktiv - sprechen Sie...','info');};
   recognition.onresult=(e)=>{
-    let newFinalParts='';
-    let interimText='';
+    let newFinal='',interim='';
     for(let i=e.resultIndex;i<e.results.length;i++){
-      if(e.results[i].isFinal){newFinalParts+=e.results[i][0].transcript+' ';}
-      else{interimText+=e.results[i][0].transcript;}
+      if(e.results[i].isFinal)newFinal+=e.results[i][0].transcript+' ';
+      else interim+=e.results[i][0].transcript;
     }
-    if(newFinalParts){addedFinal+=newFinalParts;lastSavedFinal=addedFinal;}
-    el.value=(existingText+addedFinal+(interimText?'('+interimText+')':'')).trim();
+    if(newFinal){addedFinal+=newFinal;lastSavedFinal=addedFinal;}
+    el.value=(existingText+addedFinal+(interim?'('+interim+')':'')).trim();
   };
   recognition.onend=()=>{
     el.value=(existingText+(lastSavedFinal||addedFinal)).trim();
-    voiceActive=false;
-    hideVoiceBanner();
-    highlightMicBtn(targetId,false);
-    recognition=null;
+    voiceActive=false;hideVoiceBanner();highlightMicBtn(targetId,false);recognition=null;
   };
   recognition.onerror=(e)=>{
-    if(e.error==='not-allowed'){toast('Mikrofon verweigert - Einstellungen pruefen','err');}
-    else if(e.error==='no-speech'){}
-    else if(e.error!=='aborted'){toast('Sprachfehler: '+e.error,'err');}
+    if(e.error==='not-allowed')toast('Mikrofon verweigert - Einstellungen pruefen','err');
+    else if(e.error!=='no-speech'&&e.error!=='aborted')toast('Sprachfehler: '+e.error,'err');
     stopVoice();
   };
-  try{recognition.start();}
-  catch(e){toast('Mikrofon konnte nicht gestartet werden','err');stopVoice();}
+  try{recognition.start();}catch(e){toast('Mikrofon konnte nicht gestartet werden','err');stopVoice();}
 }
 
 function stopVoice(){
@@ -392,7 +442,7 @@ function showVoiceBanner(label){
   if(!bar){
     bar=document.createElement('div');bar.id='vbar-global';bar.className='vbar';
     bar.innerHTML='<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>'+
-      '<div class="vbar-lbl" id="vbar-lbl-text">Spracheingabe aktiv...</div>'+
+      '<div class="vbar-lbl" id="vbar-lbl-text">Spracheingabe...</div>'+
       '<button class="vbar-stop" ontouchstart="stopVoice()" onclick="stopVoice()">STOP</button>';
     const content=document.getElementById('main-content');
     if(content)content.prepend(bar);else document.body.appendChild(bar);
@@ -403,8 +453,7 @@ function showVoiceBanner(label){
 }
 
 function hideVoiceBanner(){
-  const bar=document.getElementById('vbar-global');
-  if(bar)bar.classList.remove('on');
+  const bar=document.getElementById('vbar-global');if(bar)bar.classList.remove('on');
 }
 
 function highlightMicBtn(targetId,on){
@@ -415,8 +464,7 @@ function highlightMicBtn(targetId,on){
 function mkMic(targetId,label){
   return '<button class="mic-btn" data-mic="'+targetId+'" '+
     'ontouchstart="event.preventDefault();startVoice(\''+targetId+'\',\''+label+'\')" '+
-    'onclick="startVoice(\''+targetId+'\',\''+label+'\')">'+
-    '&#127908; '+label+' diktieren</button>';
+    'onclick="startVoice(\''+targetId+'\',\''+label+'\')">&#127908; '+label+' diktieren</button>';
 }
 
 // ══════ PIN ══════
@@ -432,10 +480,8 @@ function pinKey(k){
   pinBuffer+=k;updatePinDots();
   if(pinBuffer.length===3){
     setTimeout(()=>{
-      if(pinBuffer===_p){
-        document.getElementById('pin-screen').style.display='none';
-        activateRole('va');
-      }else{
+      if(pinBuffer===_p){document.getElementById('pin-screen').style.display='none';activateRole('va');}
+      else{
         document.getElementById('pin-error').textContent='Falscher PIN - bitte erneut versuchen';
         pinBuffer='';updatePinDots();
         setTimeout(()=>document.getElementById('pin-error').textContent='',2500);
@@ -450,36 +496,44 @@ function pinCancel(){
   document.getElementById('role-screen').style.display='flex';
 }
 function updatePinDots(){
-  for(let i=0;i<3;i++){
-    const d=document.getElementById('pd'+i);
-    if(d)d.className='pin-dot'+(i<pinBuffer.length?' filled':'');
-  }
+  for(let i=0;i<3;i++){const d=document.getElementById('pd'+i);if(d)d.className='pin-dot'+(i<pinBuffer.length?' filled':'');}
 }
 
 // ══════ ROLE ══════
-function setRole(r){
-  if(r==='va'){showPIN();return;}
-  activateRole(r);
-}
+function setRole(r){if(r==='va'){showPIN();return;}activateRole(r);}
 function activateRole(r){
   currentRole=r;
   const screen=document.getElementById('role-screen');
-  screen.style.display='none';
-  screen.style.pointerEvents='none';
+  screen.style.display='none';screen.style.pointerEvents='none';
   document.getElementById('pin-screen').style.display='none';
   const b=document.getElementById('role-badge');
   b.className='role-badge '+r;
   b.textContent=r==='va'?'Vorarbeiter':'Arbeiter';
   document.querySelectorAll('.va-only').forEach(el=>el.style.display=r==='va'?'':'none');
   buildUI();renderSB();updateSBDate();loadDFCfg();
-  if(r==='ar'){setTimeout(()=>{const d=document.getElementById('a-datum');if(d)d.value=todayStr();calcAR();},100);}
-  if(reports.length)loadReport(reports[reports.length-1].id);
+  if(r==='ar'){
+    setTimeout(()=>{
+      const d=document.getElementById('a-datum');if(d)d.value=todayStr();
+      const savedName=localStorage.getItem('klei_ar_name');
+      const nameEl=document.getElementById('a-name');
+      if(nameEl&&savedName)nameEl.value=savedName;
+      calcAR();
+    },100);
+  }
+  if(reports.length){
+    if(r==='ar'){
+      const myName=localStorage.getItem('klei_ar_name')||'';
+      const myReports=reports.filter(x=>x.role==='ar'&&x.name===myName);
+      if(myReports.length)loadReport(myReports[myReports.length-1].id);
+    }else{
+      loadReport(reports[reports.length-1].id);
+    }
+  }
 }
 function switchRole(){
   currentRole=null;pinBuffer='';stopVoice();
   const screen=document.getElementById('role-screen');
-  screen.style.display='flex';
-  screen.style.pointerEvents='all';
+  screen.style.display='flex';screen.style.pointerEvents='all';
   document.getElementById('pin-screen').style.display='none';
 }
 
@@ -510,14 +564,18 @@ function buildUI(){
       '<div class="panel" id="panel-ue"><div id="ue-content"></div></div>';
     setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();const d=document.getElementById('v-datum');if(d)d.value=todayStr();},100);
   }
-  populateAuftragOpts();
 }
 
 // ══════ AR FORM ══════
+function saveARName(){
+  const name=document.getElementById('a-name')?.value?.trim();
+  if(name)localStorage.setItem('klei_ar_name',name);
+}
+
 function buildAR(){
   return '<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
     '<div class="fg w50"><label>Datum</label><input type="date" id="a-datum"></div>'+
-    '<div class="fg w50"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name"></div>'+
+    '<div class="fg w50"><label>Name</label><input type="text" id="a-name" placeholder="Dein Name" oninput="saveARName()"></div>'+
     '<div class="fg w100"><label>Projekt</label><select id="a-projekt">'+projektOpts('')+'</select></div>'+
     '<div class="fg w50"><label>Qualifikation</label><select id="a-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option></select></div>'+
     '<div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>'+
@@ -566,11 +624,11 @@ function getARTaetigkeiten(){
 function buildVABericht(){
   return '<div class="sec"><div class="sh">Grunddaten</div><div class="row">'+
     '<div class="fg w25"><label>Datum</label><input type="date" id="v-datum"></div>'+
-    '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="2025-042"></div>'+
+    '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="intern"></div>'+
     '<div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>'+
     '<div class="fg w25"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
     '<div class="fg w100"><label>Projekt</label><select id="v-projekt">'+projektOpts('')+'</select></div>'+
-    '<div class="fg w50"><label>Baustelle / Objekt (Detail)</label>'+
+    '<div class="fg w50"><label>Bereich / Detail</label>'+
     '<input type="text" id="v-baustelle" placeholder="z.B. Bereich Nord, Abschnitt 2...">'+
     mkMic('v-baustelle','Baustelle')+
     '</div>'+
@@ -580,7 +638,7 @@ function buildVABericht(){
     '</div>'+
     '<div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>'+
     '<div class="fg w33"><label>Besucher / Abnahmen</label><input type="text" id="v-besucher" placeholder="Bauherr, TUeV ..."></div>'+
-    '<div class="fg w33"><label>Fotos</label><input type="text" id="v-fotos" placeholder="z.B. 8 Fotos"></div>'+
+    '<div class="fg w33"><label>Bodenzustand</label><select id="v-boden"><option>Trocken</option><option>Feucht</option><option>Nass</option><option>Gefroren</option><option>Wassersaettigung</option></select></div>'+
     '</div>'+
     '<div class="wrow" id="v-wrow">'+
     '<div class="wc s" ontouchstart="event.preventDefault();selW(this,\'Sonnig\')" onclick="selW(this,\'Sonnig\')">Sonnig</div>'+
@@ -589,15 +647,20 @@ function buildVABericht(){
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Frost/Eis\')" onclick="selW(this,\'Frost/Eis\')">Frost</div>'+
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Sturm\')" onclick="selW(this,\'Sturm\')">Sturm</div>'+
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Schnee\')" onclick="selW(this,\'Schnee\')">Schnee</div>'+
-    '</div>'+
-    '<div class="row">'+
-    '<div class="fg w50"><label>Bodenzustand</label><select id="v-boden"><option>Trocken</option><option>Feucht</option><option>Nass</option><option>Gefroren</option><option>Wassersaettigung</option></select></div>'+
     '</div></div>'+
     '<div class="sec"><div class="sh">Taetigkeiten (Mehrfachauswahl)</div>'+
     '<div class="tags" id="va-taetigkeiten-tags">'+taetigkeitenTags([])+
     '</div></div>'+
+    '<div class="sec"><div class="sh">Fotos (max. 5 - werden ins PDF eingebettet)</div>'+
+    '<input type="file" id="v-fotos-input" accept="image/*" multiple style="display:none" onchange="handleFotos(this)">'+
+    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+    '<button class="btn btn-e" ontouchstart="document.getElementById(\'v-fotos-input\').click()" onclick="document.getElementById(\'v-fotos-input\').click()">Fotos hinzufuegen</button>'+
+    '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)" id="v-fotos-count">Keine Fotos gewaehlt</span>'+
+    '</div>'+
+    '<div class="foto-prev-wrap" id="v-fotos-preview"></div>'+
+    '</div>'+
     '<div class="sec"><div class="sh">Tagebuch / Arbeitsschritte</div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Mitarbeiter aus Zeiterfassung (Tab Zeiten) werden automatisch zur Auswahl angezeigt</div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Mitarbeiter aus Zeiterfassung werden automatisch zur Auswahl angezeigt</div>'+
     '<div id="steps-con"></div>'+
     '<button class="btn" ontouchstart="addStep()" onclick="addStep()">+ Schritt hinzufuegen</button>'+
     '</div>'+
@@ -616,7 +679,6 @@ function buildVABericht(){
     '<div class="arow">'+
     '<button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button>'+
     '<button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">KI Analyse</button>'+
-    '<button class="btn" ontouchstart="expTXT()" onclick="expTXT()">TXT Export</button>'+
     '<button class="btn" ontouchstart="newReport()" onclick="newReport()">Neu</button>'+
     '</div>';
 }
@@ -631,16 +693,17 @@ function buildVAZeit(){
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px;">Arbeit = Von-Bis-Pause | Gesamt = Arbeit + Fahrzeit x Satz</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
     '<th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th>'+
-    '<th>Pause</th><th>Arbeit</th><th>Fahrt-Status</th>'+
-    '<th>Fahrzeit</th><th>Fahrtanteil</th><th>GESAMT</th>'+
+    '<th>Pause</th><th>Arbeit</th><th>Fahrt</th>'+
+    '<th>Fahrzeit</th><th>Anteil</th><th>GESAMT</th>'+
     '<th>Projekt</th><th>Taetigkeit</th><th></th>'+
     '</tr></thead><tbody id="zeit-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">+ Person</button></div>'+
     '<div class="sec"><div class="sh">Geraeteeinsatz (Dataflor)</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
-    '<th>Geraet</th><th>Fahrzeugnr.</th><th>Von</th><th>Bis</th><th>Std.</th><th>Projekt</th><th></th>'+
+    '<th>Geraet</th><th>Fahrzeugnr.</th><th>Stunden</th><th>Projekt</th><th></th>'+
     '</tr></thead><tbody id="mach-body"></tbody></table></div>'+
-    '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">+ Geraet</button></div>';
+    '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">+ Geraet</button></div>'+
+    '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
 }
 
 function buildVAMaterial(){
@@ -671,7 +734,7 @@ function buildKI(){
     '<div id="ki-out"><div class="empty"><div class="ei">&#127807;</div><div class="et">Bericht laden und analysieren</div></div></div>';
 }
 
-// ══════ ARBEITSSCHRITTE MIT MA-ZUWEISUNG ══════
+// ══════ ARBEITSSCHRITTE ══════
 function addStep(data={}){
   stepIdx++;const i=stepIdx;
   const prOpts=PROJEKTE.map(p=>'<option value="'+p.nr+'" '+(data.projektNr===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('');
@@ -697,8 +760,7 @@ function addStep(data={}){
     '<div class="lief-head">'+
     '<div class="lief-num">'+i+'</div>'+
     '<select style="flex:0 0 200px;font-size:10px;font-family:\'IBM Plex Mono\',monospace;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'">'+
-    '<option value="">- Projekt -</option>'+prOpts+
-    '</select>'+
+    '<option value="">- Projekt -</option>'+prOpts+'</select>'+
     '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'">'+
     '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button>'+
     '</div>'+
@@ -712,34 +774,28 @@ function addStep(data={}){
 }
 
 function updateStepMA(idx){
-  const block=document.getElementById('step-'+idx);
-  if(!block)return;
+  const block=document.getElementById('step-'+idx);if(!block)return;
   block.querySelectorAll('.ma-cb').forEach(cb=>{
-    const hInput=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
-    if(hInput)hInput.style.opacity=cb.checked?'1':'0.4';
+    const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
+    if(h)h.style.opacity=cb.checked?'1':'0.4';
   });
 }
 
 function refreshStepMAs(){
-  const stepBlocks=document.querySelectorAll('[id^="step-"]');
-  if(!stepBlocks.length)return;
+  const stepBlocks=document.querySelectorAll('[id^="step-"]');if(!stepBlocks.length)return;
   const maRows=getZeitRowsSimple();
   stepBlocks.forEach(block=>{
     const idx=block.id.replace('step-','');
     let zone=block.querySelector('.ma-zuweisung');
     const noMAMsg=block.querySelector('[data-no-ma]');
-    const checked={};
-    block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});
-    const stunden={};
-    block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});
+    const checked={};block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});
+    const stunden={};block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});
     if(maRows.length===0){
       if(zone)zone.remove();
       if(!noMAMsg){
-        const msg=document.createElement('div');
-        msg.setAttribute('data-no-ma','1');
+        const msg=document.createElement('div');msg.setAttribute('data-no-ma','1');
         msg.style.cssText='font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px';
-        msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';
-        block.appendChild(msg);
+        msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';block.appendChild(msg);
       }
       return;
     }
@@ -747,8 +803,7 @@ function refreshStepMAs(){
     if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}
     zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen (aus Zeiterfassung)</div>'+
       maRows.map(ma=>{
-        const isChecked=checked[ma.name]||false;
-        const h=stunden[ma.name]||'';
+        const isChecked=checked[ma.name]||false;const h=stunden[ma.name]||'';
         return '<div class="ma-check-row">'+
           '<input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(isChecked?'checked':'')+' onchange="updateStepMA('+idx+')">'+
           '<span class="ma-name">'+ma.name+' <span style="color:var(--m);font-size:10px">('+ma.qual+')</span></span>'+
@@ -758,12 +813,11 @@ function refreshStepMAs(){
 }
 
 function getStepMAs(idx){
-  const block=document.getElementById('step-'+idx);
-  if(!block)return[];
+  const block=document.getElementById('step-'+idx);if(!block)return[];
   const result=[];
   block.querySelectorAll('.ma-cb:checked').forEach(cb=>{
-    const hInput=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
-    result.push({name:cb.dataset.name,stunden:hInput?.value||''});
+    const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');
+    result.push({name:cb.dataset.name,stunden:h?.value||''});
   });
   return result;
 }
@@ -771,14 +825,7 @@ function getStepMAs(idx){
 function getSteps(){
   return[...document.querySelectorAll('[id^="step-"]')].filter(b=>b.id.match(/^step-\d+$/)).map(b=>{
     const i=b.id.replace('step-','');
-    return{
-      txt:b.querySelector('#st-txt-'+i)?.value||'',
-      projektNr:b.querySelector('#st-pr-'+i)?.value||'',
-      pos:b.querySelector('#st-pos-'+i)?.value||'',
-      menge:b.querySelector('#st-mg-'+i)?.value||'',
-      eh:b.querySelector('#st-eh-'+i)?.value||'',
-      mitarbeiter:getStepMAs(i)
-    };
+    return{txt:b.querySelector('#st-txt-'+i)?.value||'',projektNr:b.querySelector('#st-pr-'+i)?.value||'',pos:b.querySelector('#st-pos-'+i)?.value||'',menge:b.querySelector('#st-mg-'+i)?.value||'',eh:b.querySelector('#st-eh-'+i)?.value||'',mitarbeiter:getStepMAs(i)};
   }).filter(s=>s.txt);
 }
 
@@ -798,8 +845,7 @@ function addZeitRow(data={}){
   const fahrtSel='<select class="fahrt-sel" style="font-size:10px" onchange="calcZR(this)">'+
     '<option value="fahrer" '+(data.fahrt==='fahrer'?'selected':'')+'>Fahrer 100%</option>'+
     '<option value="beifahrer" '+(data.fahrt==='beifahrer'?'selected':'')+'>Beifahrer 50%</option>'+
-    '<option value="privat" '+(data.fahrt==='privat'?'selected':'')+'>Privat 0%</option>'+
-    '</select>';
+    '<option value="privat" '+(data.fahrt==='privat'?'selected':'')+'>Privat 0%</option></select>';
   tr.innerHTML=
     '<td><input type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:80px" oninput="refreshStepMAs()"></td>'+
     '<td><select style="font-size:10px" onchange="refreshStepMAs()"><option>VA</option><option>Facharbeiter</option><option>Helfer</option><option>Azubi</option><option>Sub</option></select></td>'+
@@ -826,48 +872,34 @@ function calcZR(inp){
   const v=is[2]?.value,b=is[3]?.value;
   const pause=parseFloat(is[4]?.value)||0;
   const fahrzeitMin=parseFloat(is[7]?.value)||0;
-  const fahrtSel=tr.querySelector('.fahrt-sel');
-  const fahrtVal=fahrtSel?.value||'fahrer';
+  const fahrtVal=tr.querySelector('.fahrt-sel')?.value||'fahrer';
   if(v&&b){
     const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
-    let arbMin=(bh*60+bm)-(vh*60+vm)-pause;
-    if(arbMin<0)arbMin+=1440;
+    let arbMin=(bh*60+bm)-(vh*60+vm)-pause;if(arbMin<0)arbMin+=1440;
     const arbH=arbMin/60;
     if(is[5])is[5].value=arbH.toFixed(2).replace('.',',');
     const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[fahrtVal]??1.0;
     const fahrtH=(fahrzeitMin/60)*satz;
     if(is[8])is[8].value=fahrtH.toFixed(2).replace('.',',');
-    const gesamt=arbH+fahrtH;
     const gEl=tr.querySelector('.gesamt-h');
-    if(gEl)gEl.value=gesamt.toFixed(2).replace('.',',');
+    if(gEl)gEl.value=(arbH+fahrtH).toFixed(2).replace('.',',');
   }
   updZeitTotal();
 }
 
 function updZeitTotal(){
-  let t=0;
-  document.querySelectorAll('.gesamt-h').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);
-  const el=document.getElementById('zeit-total');
-  if(el)el.textContent=t.toFixed(2).replace('.',',')+'h gesamt';
+  let t=0;document.querySelectorAll('.gesamt-h').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);
+  const el=document.getElementById('zeit-total');if(el)el.textContent=t.toFixed(2).replace('.',',')+'h gesamt';
 }
 
 function getZeitRows(){
   return[...document.querySelectorAll('#zeit-body tr')].map(tr=>{
     const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
-    return{
-      name:is[0]?.value,qual:ss[0]?.value,
-      von:is[2]?.value,bis:is[3]?.value,pause:is[4]?.value,
-      nettoArbeit:is[5]?.value,
-      fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',
-      fahrzeitMin:is[7]?.value,
-      fahrtAnteil:is[8]?.value,
-      gesamt:tr.querySelector('.gesamt-h')?.value,
-      projektNr:tr.querySelector('.row-pr')?.value,
-      tae:tr.querySelector('.row-tae')?.value
-    };
+    return{name:is[0]?.value,qual:ss[0]?.value,von:is[2]?.value,bis:is[3]?.value,pause:is[4]?.value,nettoArbeit:is[5]?.value,fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:is[7]?.value,fahrtAnteil:is[8]?.value,gesamt:tr.querySelector('.gesamt-h')?.value,projektNr:tr.querySelector('.row-pr')?.value,tae:tr.querySelector('.row-tae')?.value};
   }).filter(r=>r.name);
 }
 
+// GERAETE - fixe Stunden
 function addMachRow(data={}){
   const tbody=document.getElementById('mach-body');if(!tbody)return;
   const tr=document.createElement('tr');
@@ -877,23 +909,10 @@ function addMachRow(data={}){
     GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+
     '</select></td>'+
     '<td><input type="text" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td>'+
-    '<td><input type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
-    '<td><input type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcMR(this)"></td>'+
-    '<td><input class="gr-netto" type="text" readonly style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
+    '<td><input type="number" class="gr-netto" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700;font-size:13px"></td>'+
     '<td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td>'+
     '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
   tbody.appendChild(tr);
-  calcMR(tr.querySelector('input[type=time]'));
-}
-
-function calcMR(inp){
-  const tr=inp.closest('tr');const is=tr.querySelectorAll('input');
-  const v=is[1]?.value,b=is[2]?.value;
-  if(v&&b){
-    const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
-    let m=(bh*60+bm)-(vh*60+vm);if(m<0)m+=1440;
-    is[3].value=(m/60).toFixed(2).replace('.',',');
-  }
 }
 
 function getMachRows(){
@@ -901,29 +920,19 @@ function getMachRows(){
     const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');
     const geraetNr=tr.querySelector('.geraet-sel')?.value||'';
     const geraet=GERAETE.find(g=>g.nr===geraetNr);
-    return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:is[0]?.value,von:is[1]?.value,bis:is[2]?.value,netto:is[3]?.value,projektNr:tr.querySelector('.row-pr')?.value};
+    return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:is[0]?.value,netto:is[1]?.value,projektNr:tr.querySelector('.row-pr')?.value};
   }).filter(r=>r.geraetNr);
-}
-
-function getProjektLabel(nr){
-  const p=PROJEKTE.find(x=>x.nr===nr);
-  return p?p.nr+' - '+p.name:(nr||'--');
 }
 
 function addLief(data={}){
   liefIdx++;const i=liefIdx;
   const div=document.createElement('div');div.className='lief-block';
-  div.innerHTML=
-    '<div class="lief-head">'+
-    '<div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div>'+
-    '<button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button>'+
-    '</div><div class="row">'+
+  div.innerHTML='<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div>'+
+    '<button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div>'+
+    '<div class="row">'+
     '<div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" placeholder="Muster GmbH..." value="'+(data.firma||'')+'"></div>'+
     '<div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" placeholder="LS-2025-001" value="'+(data.ls||'')+'"></div>'+
-    '<div class="fg w50"><label>Material</label>'+
-    '<input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen, Sand...">'+
-    mkMic('lf-mat-'+i,'Material')+
-    '</div>'+
+    '<div class="fg w50"><label>Material</label><input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen, Sand...">'+mkMic('lf-mat-'+i,'Material')+'</div>'+
     '<div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div>'+
     '<div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option><option>l</option></select></div>'+
     '<div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>OK</option><option>Teillieferung</option><option>Falsche Ware</option><option>Maengel</option><option>Verzug</option></select></div>'+
@@ -982,9 +991,7 @@ function getLVRows(){
 function addMangel(data={}){
   mangelIdx++;const i=mangelIdx;
   const div=document.createElement('div');div.className='mangel-block';
-  div.innerHTML=
-    '<div style="display:flex;gap:8px;align-items:flex-start">'+
-    '<div style="flex:1">'+
+  div.innerHTML='<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1">'+
     '<div style="display:flex;gap:5px;margin-bottom:6px">'+
     '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausfuehrung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select>'+
     '<select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mittel</option><option>Hoch</option><option>Niedrig</option></select>'+
@@ -992,9 +999,7 @@ function addMangel(data={}){
     '<textarea id="mg-'+i+'" placeholder="Mangelbeschreibung ..." style="min-height:50px;border-color:rgba(196,72,40,.25)">'+(data.txt||'')+'</textarea>'+
     mkMic('mg-'+i,'Mangel')+
     '<input type="text" placeholder="Massnahme / Verantwortlich" style="margin-top:6px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'">'+
-    '</div>'+
-    '<button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">&#x2715;</button>'+
-    '</div>';
+    '</div><button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">&#x2715;</button></div>';
   document.getElementById('mangel-con')?.appendChild(div);
 }
 
@@ -1019,8 +1024,7 @@ function calcAR(){
     const wh=wm/60;
     const nwEl=document.getElementById('a-netto-work');if(nwEl)nwEl.value=wh.toFixed(2).replace('.',',');
     const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[curFahrtStatus]??1.0;
-    const fh=(fmin/60)*satz;
-    const tot=wh+fh;
+    const fh=(fmin/60)*satz;const tot=wh+fh;
     const ntEl=document.getElementById('a-netto');if(ntEl)ntEl.value=tot.toFixed(2).replace('.',',');
     const infoEl=document.getElementById('fahrzeit-info');
     if(infoEl&&fmin>0){
@@ -1056,10 +1060,7 @@ function renderAuList(){
   el.innerHTML=auftraege.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><div style="flex:1"><div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth)">'+a.nr+'</div><div style="font-size:12px;font-weight:600;color:var(--c)">'+a.name+'</div></div><button class="delbtn" ontouchstart="delAuftrag(\''+a.id+'\')" onclick="delAuftrag(\''+a.id+'\')">&#x2715;</button></div>').join('')||
     '<div style="color:var(--m);font-size:10px;padding:8px">Keine zusaetzlichen Auftraege</div>';
 }
-function populateAuftragOpts(){
-  // Wird nicht mehr fuer Dropdown benoetigt da PROJEKTE fest sind
-  // Aber row-pr selects werden schon bei addZeitRow etc. befuellt
-}
+function populateAuftragOpts(){}
 // ══════ PDF GENERIERUNG ══════
 async function generatePDF(report){
   const{jsPDF}=window.jspdf;
@@ -1068,8 +1069,8 @@ async function generatePDF(report){
   let y=M;
 
   const C={
-    black:[0,0,0],dunkel:[30,30,30],grau:[100,100,100],
-    hellgrau:[160,160,160],rahmen:[210,210,210],heller:[245,245,245],
+    dunkel:[30,30,30],grau:[100,100,100],hellgrau:[160,160,160],
+    rahmen:[210,210,210],heller:[245,245,245],
     gruen:[50,120,20],rot:[180,50,20],orange:[170,100,10],
     blau:[40,100,160],weiss:[255,255,255]
   };
@@ -1093,29 +1094,24 @@ async function generatePDF(report){
     doc.setFontSize(sz||10);doc.setFont('helvetica','normal');
     doc.setTextColor(...(col||C.dunkel));
     const lines=doc.splitTextToSize(clean(txt),maxW);
-    doc.text(lines,x,fy);
-    return lines.length;
+    doc.text(lines,x,fy);return lines.length;
   };
 
   const LINE=(x1,y1,x2,y2,col,lw)=>{
-    doc.setDrawColor(...(col||C.rahmen));
-    doc.setLineWidth(lw||0.3);
-    doc.line(x1,y1,x2,y2);
+    doc.setDrawColor(...(col||C.rahmen));doc.setLineWidth(lw||0.3);doc.line(x1,y1,x2,y2);
   };
 
-  const RECT=(x,fy,w,h,fill,stroke)=>{
+  const RECT=(x,fy,w,h,fill)=>{
     if(fill){doc.setFillColor(...fill);doc.rect(x,fy,w,h,'F');}
-    if(stroke){doc.setDrawColor(...stroke);doc.setLineWidth(0.3);doc.rect(x,fy,w,h,'S');}
   };
 
   const needPage=(h)=>{if(y+h>280){doc.addPage();y=M;}};
 
-  // ── HEADER MIT LOGO ──
+  // ── LOGO & HEADER ──
   let logoLoaded=false;
   try{
     const logoData=await new Promise((resolve)=>{
-      const img=new Image();
-      img.crossOrigin='anonymous';
+      const img=new Image();img.crossOrigin='anonymous';
       img.onload=()=>{
         try{
           const c=document.createElement('canvas');
@@ -1129,22 +1125,19 @@ async function generatePDF(report){
       setTimeout(()=>resolve(null),3000);
     });
     if(logoData&&logoData.length>100){
-      const tmpImg=new Image();tmpImg.src=logoData;
-      await new Promise(r=>{tmpImg.onload=r;setTimeout(r,500);});
-      const iW=tmpImg.naturalWidth||200,iH=tmpImg.naturalHeight||80;
-      const logoH=14,logoW=Math.min(logoH*(iW/iH),52);
+      const tmp=new Image();tmp.src=logoData;
+      await new Promise(r=>{tmp.onload=r;setTimeout(r,500);});
+      const logoH=14,logoW=Math.min(logoH*(tmp.naturalWidth/tmp.naturalHeight),52);
       doc.addImage(logoData,'PNG',M,y,logoW,logoH);
       logoLoaded=true;
     }
   }catch(e){}
 
   if(!logoLoaded){
-    doc.setFont('helvetica','bold');doc.setFontSize(18);
-    doc.setTextColor(...C.gruen);doc.text('KLEI',M,y+10);
+    doc.setFont('helvetica','bold');doc.setFontSize(18);doc.setTextColor(...C.gruen);doc.text('KLEI',M,y+10);
   }
 
-  doc.setFont('helvetica','bold');doc.setFontSize(11);
-  doc.setTextColor(...C.dunkel);
+  doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(...C.dunkel);
   doc.text(FIRMA_NAME,W-M,y+7,{align:'right'});
   doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
   doc.text(FIRMA_ADRESSE,W-M,y+12,{align:'right'});
@@ -1168,10 +1161,8 @@ async function generatePDF(report){
     doc.text(clean(report.name||'--'),M,y);y+=8;
     LINE(M,y,W-M,y,C.rahmen);y+=6;
 
-    // Projekt + Infos
-    const projektLabel=getProjektLabel(report.projektNr);
     const infos=[
-      ['Projekt',projektLabel],
+      ['Projekt',getProjektLabel(report.projektNr)],
       ['Qualifikation',report.qual||'--'],
       ['Wetter',report.wetter+(report.temp?' - '+report.temp+'C':'')]
     ];
@@ -1182,18 +1173,15 @@ async function generatePDF(report){
     });
     y+=14;
 
-    // Taetigkeiten
     if(report.taetigkeiten&&report.taetigkeiten.length>0){
       doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text('Taetigkeiten',M,y);
       doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);
-      doc.text(report.taetigkeiten.join(', '),M,y+5);
-      y+=13;
+      doc.text(report.taetigkeiten.join(' | '),M,y+5);y+=13;
     }
 
     LINE(M,y,W-M,y,C.rahmen);y+=7;
-
-    // Zeiten-Tabelle
     T('ARBEITSZEITEN',M,y,9,true,C.gruen);y+=6;
+
     RECT(M,y,cw,6,C.heller);
     LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
     const zH=['Arbeit Von','Arbeit Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
@@ -1215,9 +1203,11 @@ async function generatePDF(report){
     });
     y+=10;
 
-    const fahrtInfo={'fahrer':'Fahrer: Fahrzeit wird vollstaendig (100%) als Arbeitszeit angerechnet.',
+    const fahrtInfo={
+      'fahrer':'Fahrer: Fahrzeit wird vollstaendig (100%) als Arbeitszeit angerechnet.',
       'beifahrer':'Beifahrer: Fahrzeit wird zu 50% als Arbeitszeit angerechnet.',
-      'privat':'Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet.'}[fahrtStatus];
+      'privat':'Privat: Fahrzeit wird nicht als Arbeitszeit angerechnet.'
+    }[fahrtStatus];
     const fahrtLineCol={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[fahrtStatus];
     RECT(M,y,cw,7,C.heller);
     doc.setDrawColor(...fahrtLineCol);doc.setLineWidth(2);doc.line(M,y,M,y+7);doc.setLineWidth(0.3);
@@ -1257,7 +1247,6 @@ async function generatePDF(report){
     });
     y+=22;
 
-    // Taetigkeiten
     if(report.taetigkeiten&&report.taetigkeiten.length>0){
       RECT(M,y,cw,7,C.heller);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
@@ -1266,12 +1255,10 @@ async function generatePDF(report){
       y+=11;
     }
 
-    // Wetter
     RECT(M,y,cw,7,C.heller);
     LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
-    const wetterStr=clean((report.wetter||'--')+' - '+(report.temp||'--')+'C - '+(report.nied||0)+'mm Nied. - Boden: '+(report.boden||'--'));
     doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
-    doc.text(wetterStr,M+3,y+4.8);
+    doc.text(clean((report.wetter||'--')+' - '+(report.temp||'--')+'C - '+(report.nied||0)+'mm Nied. - Boden: '+(report.boden||'--')),M+3,y+4.8);
     y+=12;
 
     // ZEITERFASSUNG
@@ -1303,12 +1290,11 @@ async function generatePDF(report){
           doc.setFont('helvetica',b?'bold':'normal');doc.setFontSize(8);doc.setTextColor(...(c||C.dunkel));
           doc.text(clean(v),M+ox,y+4.5);
         });
-        // Taetigkeit unter der Zeile
         if(t.tae){
           doc.setFont('helvetica','italic');doc.setFontSize(7);doc.setTextColor(...C.grau);
-          doc.text(clean(t.tae),M+2,y+6.5);
+          doc.text(clean(t.tae),M+2,y+7);
         }
-        y+=8;
+        y+=t.tae?9:7;
       });
       y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
@@ -1321,7 +1307,7 @@ async function generatePDF(report){
       doc.text('GERAETEEINSATZ (DATAFLOR)',M,y);y+=7;
       RECT(M,y,cw,6,C.heller);
       LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Nr.',0,16],['Geraet / Bezeichnung',16,72],['Kfz/Nr.',88,26],['Von',114,18],['Bis',132,18],['Std.',150,22]].forEach(([h,ox])=>{
+      [['Dataflor-Nr.',0,16],['Geraet / Bezeichnung',16,80],['Kfz/Nr.',96,26],['Stunden',122,22]].forEach(([h,ox])=>{
         doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);
       });
       y+=7;
@@ -1331,9 +1317,8 @@ async function generatePDF(report){
         LINE(M,y+6,W-M,y+6,C.rahmen);
         doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.gruen);doc.text(clean(m.geraetNr),M,y+4.5);
         doc.setFont('helvetica','normal');doc.setTextColor(...C.dunkel);doc.text(clean(m.geraetBez||'--'),M+16,y+4.5);
-        doc.setTextColor(...C.grau);doc.text(clean(m.fahrzeugnr||'--'),M+88,y+4.5);
-        doc.setTextColor(...C.dunkel);doc.text(clean(m.von||''),M+114,y+4.5);doc.text(clean(m.bis||''),M+132,y+4.5);
-        doc.setFont('helvetica','bold');doc.setTextColor(...C.gruen);doc.text(clean((m.netto||'--')+'h'),M+150,y+4.5);
+        doc.setTextColor(...C.grau);doc.text(clean(m.fahrzeugnr||'--'),M+96,y+4.5);
+        doc.setFont('helvetica','bold');doc.setTextColor(...C.gruen);doc.text(clean((m.netto||'--')+'h'),M+122,y+4.5);
         y+=7;
       });
       y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
@@ -1350,10 +1335,7 @@ async function generatePDF(report){
         RECT(M,y,cw,7,C.heller);
         LINE(M,y,W-M,y,C.rahmen);
         doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);doc.text(String(i+1)+'.',M+2,y+5);
-        if(s.projektNr){
-          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.dunkel);
-          doc.text(clean(getProjektLabel(s.projektNr)),M+12,y+5);
-        }
+        if(s.projektNr){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.dunkel);doc.text(clean(getProjektLabel(s.projektNr)),M+12,y+5);}
         if(s.pos){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);doc.text('Pos. '+clean(s.pos),M+100,y+5);}
         if(s.menge){doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);doc.text(clean(s.menge+' '+(s.eh||'')),W-M-4,y+5,{align:'right'});}
         LINE(M,y+7,W-M,y+7,C.rahmen);y+=10;
@@ -1410,10 +1392,7 @@ async function generatePDF(report){
         doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.rot);
         doc.text(clean((m.schwere||'')+' - '+(m.typ||'')),M,y);y+=5;
         const lines=W2(m.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+2;
-        if(m.massnahme){
-          doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...C.orange);
-          doc.text('Massnahme: '+clean(m.massnahme),M+3,y);y+=5;
-        }
+        if(m.massnahme){doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...C.orange);doc.text('Massnahme: '+clean(m.massnahme),M+3,y);y+=5;}
         LINE(M,y,W-M,y,[230,200,200]);y+=4;
       });
     }
@@ -1425,14 +1404,63 @@ async function generatePDF(report){
       doc.text('NAECHSTE SCHRITTE / PLANUNG',M,y);y+=6;
       const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);y+=lines*5+4;
     }
+
+    // ── FOTODOKUMENTATION ──
+    const fotos=fotoDataUrls.filter(Boolean);
+    if(fotos.length>0){
+      doc.addPage();y=M;
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);
+      doc.text('FOTODOKUMENTATION ('+fotos.length+' Fotos)',M,y);
+      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+      doc.text('Projekt: '+clean(getProjektLabel(report.projektNr))+' - '+fmtD(report.datum),M,y+6);
+      y+=14;
+      LINE(M,y,W-M,y,C.gruen,0.5);y+=6;
+
+      const cols=2;
+      const fW=(cw-(cols-1)*6)/cols;
+      const fH=fW*0.75;
+      let col=0;let rowY=y;
+
+      fotos.forEach((dataUrl,i)=>{
+        if(col===0&&i>0){
+          rowY+=fH+14;
+          if(rowY+fH>278){doc.addPage();y=M;rowY=y;}
+        }
+        const fx=M+col*(fW+6);
+        try{
+          // Rahmen
+          doc.setDrawColor(...C.rahmen);doc.setLineWidth(0.3);
+          doc.rect(fx,rowY,fW,fH);
+          doc.addImage(dataUrl,'JPEG',fx,rowY,fW,fH);
+        }catch(e){
+          // Fehler beim Laden - Platzhalter
+          RECT(fx,rowY,fW,fH,C.heller);
+          doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+          doc.text('Foto '+(i+1)+' konnte nicht geladen werden',fx+4,rowY+fH/2);
+        }
+        // Foto-Nummer
+        doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.grau);
+        doc.text('Foto '+(i+1),fx,rowY+fH+5);
+        col++;
+        if(col>=cols)col=0;
+      });
+      y=rowY+fH+12;
+      if(y<275){LINE(M,y,W-M,y,C.rahmen);}
+    }
   }
 
-  // FOOTER
-  LINE(M,284,W-M,284,C.gruen,0.6);
-  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);
-  doc.text(FIRMA_NAME+' - '+FIRMA_ADRESSE+' - '+FIRMA_TEL,M,288);
-  doc.text('Erstellt: '+new Date().toLocaleDateString('de-DE')+' '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),W-M,288,{align:'right'});
+  // ── FOOTER ──
+  const pageCount=doc.getNumberOfPages();
+  for(let pg=1;pg<=pageCount;pg++){
+    doc.setPage(pg);
+    LINE(M,284,W-M,284,C.gruen,0.6);
+    doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);
+    doc.text(FIRMA_NAME+' - '+FIRMA_ADRESSE+' - '+FIRMA_TEL,M,288);
+    doc.text('Seite '+pg+'/'+pageCount+' - Erstellt: '+new Date().toLocaleDateString('de-DE')+' '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),W-M,288,{align:'right'});
+  }
 
+  // Unterschriften nur auf letzter Seite wenn Platz
+  doc.setPage(pageCount);
   if(y<268){
     doc.setDrawColor(...C.rahmen);doc.setLineWidth(0.3);
     doc.line(M,275,M+65,275);doc.line(W-M-65,275,W-M,275);
@@ -1451,9 +1479,7 @@ async function sendPDFMail(report,statusElId){
   try{
     const doc=await generatePDF(report);
     const pdfBase64=doc.output('datauristring').split(',')[1];
-    const netto=report.role==='ar'
-      ?report.netto
-      :String((report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0).toFixed(2));
+    const netto=report.role==='ar'?report.netto:String((report.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0).toFixed(2));
     const projektLabel=getProjektLabel(report.projektNr||'');
     const payload={
       empfaenger:EMPFAENGER_MAIL,
@@ -1462,11 +1488,8 @@ async function sendPDFMail(report,statusElId){
       name:report.role==='ar'?report.name:report.bauleiter,
       datum:report.datum,
       baustelle:report.role==='va'?(projektLabel+(report.baustelle?' - '+report.baustelle:'')):'',
-      auftrag:projektLabel,
-      netto,
-      wetter:report.wetter||'',
-      pdfBase64,
-      reportJson:JSON.stringify(report)
+      auftrag:projektLabel,netto,wetter:report.wetter||'',
+      pdfBase64,reportJson:JSON.stringify(report)
     };
     const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});
     const txt=await res.text();
@@ -1477,7 +1500,7 @@ async function sendPDFMail(report,statusElId){
   }catch(e){
     if(statusEl){statusEl.className='send-status show err';statusEl.textContent='Fehler: '+e.message+' - PDF lokal gespeichert.';}
     const doc=await generatePDF(report);
-    doc.save('KLEI_'+(report.datum||'')+'_'+((report.role==='ar'?report.name:getProjektLabel(report.projektNr))||'Bericht')+'.pdf');
+    doc.save('KLEI_'+(report.datum||'')+'_'+(getProjektLabel(report.projektNr)||'Bericht')+'.pdf');
     toast('PDF lokal gespeichert','err');
   }
 }
@@ -1526,7 +1549,6 @@ async function saveAndSendVA(){
     nied:document.getElementById('v-nied').value,
     boden:document.getElementById('v-boden')?.value,
     besucher:document.getElementById('v-besucher').value,
-    fotos:document.getElementById('v-fotos').value,
     naechstes:document.getElementById('v-naechstes').value,
     bemerkungen:document.getElementById('v-bemerkungen').value,
     wetter:curWeather,
@@ -1538,6 +1560,7 @@ async function saveAndSendVA(){
     mengen:getMengen(),
     lvRows:getLVRows(),
     maengel:getMangelData(),
+    fotoCount:fotoDataUrls.filter(Boolean).length,
     createdAt:new Date().toISOString(),
     aiAnalysis:null
   };
@@ -1554,6 +1577,9 @@ async function saveAndSendVA(){
 function clearARForm(){
   currentId=null;stopVoice();
   ['a-name','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  // Name wieder laden
+  const savedName=localStorage.getItem('klei_ar_name');
+  const nameEl=document.getElementById('a-name');if(nameEl&&savedName)nameEl.value=savedName;
   document.getElementById('a-datum').value=todayStr();
   document.getElementById('a-von').value='07:00';
   document.getElementById('a-bis').value='16:00';
@@ -1564,8 +1590,7 @@ function clearARForm(){
   const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}
   curFahrtStatus='fahrer';
   document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});
-  // Taetigkeiten-Tags zuruecksetzen
-  document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
+  document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));
   toast('Formular geleert','ok');
 }
 
@@ -1574,7 +1599,7 @@ function newReport(){
   if(currentRole==='ar'){clearARForm();}
   else{
     stepIdx=0;liefIdx=0;mangelIdx=0;
-    ['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-fotos','v-naechstes','v-bemerkungen'].forEach(id=>{
+    ['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-naechstes','v-bemerkungen'].forEach(id=>{
       const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';
     });
     ['steps-con','mangel-con','lief-con','mengen-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
@@ -1583,10 +1608,11 @@ function newReport(){
     const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';
     const vp=document.getElementById('v-projekt');if(vp)vp.value='';
     const st=document.getElementById('va-send-status');if(st){st.className='send-status';st.textContent='';}
+    clearFotos();
     setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},50);
     curWeather='Sonnig';
     document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));
-    document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach((t,i)=>t.classList.toggle('a',i===0));
+    document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));
     showTab('bericht');
   }
   toast('Neuer Bericht','ok');
@@ -1594,6 +1620,11 @@ function newReport(){
 
 function loadReport(id){
   const r=reports.find(x=>x.id===id);if(!r)return;
+  // Sicherheitspruefung fuer Arbeiter
+  if(currentRole==='ar'){
+    const myName=localStorage.getItem('klei_ar_name')||'';
+    if(r.role!=='ar'||r.name!==myName)return;
+  }
   currentId=id;
   document.querySelectorAll('.ri').forEach(el=>el.classList.toggle('act',el.dataset.id===id));
   if(r.role==='ar'){
@@ -1603,7 +1634,6 @@ function loadReport(id){
     sv('a-taetigkeit',r.taetigkeit);sv('a-besonder',r.besonder);
     const ap=document.getElementById('a-projekt');if(ap)ap.value=r.projektNr||'';
     const aq=document.getElementById('a-qual');if(aq)aq.value=r.qual||'Facharbeiter GaLa';
-    // Taetigkeiten laden
     document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
     curFahrtStatus=r.fahrtStatus||'fahrer';
     document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.toggle('fahrt-active',b.dataset.val===curFahrtStatus));
@@ -1617,14 +1647,13 @@ function loadVAForm(r){
   const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
   sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);
   sv('v-projektnr',r.projektnr);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temp);
-  sv('v-nied',r.nied);sv('v-besucher',r.besucher);sv('v-fotos',r.fotos);
+  sv('v-nied',r.nied);sv('v-besucher',r.besucher);
   sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);
   const vp=document.getElementById('v-projekt');if(vp)vp.value=r.projektNr||'';
   if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';
   curWeather=r.wetter||'Sonnig';
   const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
   document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));
-  // Taetigkeiten laden
   document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
   stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';
   (r.steps||[]).forEach(s=>addStep(s));if(!r.steps?.length)addStep();
@@ -1640,6 +1669,12 @@ function loadVAForm(r){
   (r.mengen||[]).forEach(m=>addMenge(m));if(!r.mengen?.length)addMenge();
   const lvb=document.getElementById('lv-body');if(lvb)lvb.innerHTML='';
   (r.lvRows||[]).forEach(row=>addLVRow(row));if(!r.lvRows?.length)addLVRow();
+  // Fotos leeren beim Laden (nicht gespeichert)
+  clearFotos();
+  if(r.fotoCount>0){
+    const count=document.getElementById('v-fotos-count');
+    if(count)count.textContent='Hinweis: '+r.fotoCount+' Fotos wurden beim letzten Speichern angehaengt';
+  }
   setTimeout(refreshStepMAs,200);
 }
 
@@ -1663,7 +1698,7 @@ function renderARDetail(r){
     '<div class="ib"><div class="ib-t">Zeiten</div><div class="ib-c">'+(r.von||'--')+' - '+(r.bis||'--')+' - Pause: '+(r.pause||30)+'min'+
     (parseFloat(r.fahrzeitMin)>0?'<br><span style="color:'+fc+';font-size:10px">'+r.fahrzeitMin+'min - '+fl+' = '+fa+'h</span>':'')+
     '</div></div>'+
-    (r.taetigkeit?'<div class="ib"><div class="ib-t">Taetigkeit</div><div class="ib-c">'+r.taetigkeit+'</div></div>':'')+
+    (r.taetigkeit?'<div class="ib"><div class="ib-t">Details</div><div class="ib-c">'+r.taetigkeit+'</div></div>':'')+
     (r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+
     '<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button></div>';
 }
@@ -1673,8 +1708,7 @@ function renderVADetail(r){
   document.getElementById('detailContent').innerHTML=
     '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start">'+
     '<div><div class="card-title">'+getProjektLabel(r.projektNr)+'</div>'+
-    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span>'+
-    '<span>'+(r.bauleiter||'--')+'</span>'+
+    '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.bauleiter||'--')+'</span>'+
     (r.baustelle?'<span>'+r.baustelle+'</span>':'')+
     '</div></div>'+
     '<div style="display:flex;gap:5px">'+
@@ -1685,7 +1719,7 @@ function renderVADetail(r){
     '<div class="srow">'+
     '<div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div>'+
     '<div class="sc"><div class="sv">'+((r.zeitRows||[]).filter(t=>t.name).length)+'</div><div class="sl">Mitarbeiter</div></div>'+
-    '<div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div>'+
+    '<div class="sc"><div class="sv">'+((r.steps||[]).length)+(r.fotoCount?'+'+r.fotoCount+'F':'')+'</div><div class="sl">Schritte</div></div>'+
     '</div>'+
     ((r.zeitRows||[]).filter(t=>t.name).length?
       '<div class="ib"><div class="ib-t">Zeiterfassung</div>'+
@@ -1704,11 +1738,17 @@ function renderVADetail(r){
 
 function renderSB(){
   const el=document.getElementById('sb-list');
-  if(!reports.length){el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Keine Berichte</div>';return;}
-  el.innerHTML=[...reports].reverse().map(r=>{
-    const h=r.role==='va'
-      ?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0)
-      :parseFloat((r.netto||'0').replace(',','.')||0);
+  let sichtbar=reports;
+  if(currentRole==='ar'){
+    const myName=localStorage.getItem('klei_ar_name')||document.getElementById('a-name')?.value||'';
+    sichtbar=myName?reports.filter(r=>r.role==='ar'&&r.name===myName):[];
+  }
+  if(!sichtbar.length){
+    el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+
+      (currentRole==='ar'?'Noch keine eigenen Berichte':'Keine Berichte')+'</div>';return;
+  }
+  el.innerHTML=[...sichtbar].reverse().map(r=>{
+    const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
     const label=r.role==='va'?getProjektLabel(r.projektNr):(r.name||'Mitarbeiter');
     return '<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
       '<div class="ri-d">'+fmtD(r.datum)+'</div>'+
@@ -1717,6 +1757,7 @@ function renderSB(){
       '<div class="ri-tags">'+
       '<span class="tag-s '+(r.role==='va'?'tag-e':'tag-g')+'">'+(r.role==='va'?'VA':'AR')+'</span>'+
       (r.aiAnalysis?'<span class="tag-s tag-g">KI</span>':'')+
+      (r.fotoCount?'<span class="tag-s tag-g">'+r.fotoCount+' Fotos</span>':'')+
       ((r.maengel?.filter(m=>m.txt).length)?'<span class="tag-s tag-r">'+r.maengel.filter(m=>m.txt).length+' Maengel</span>':'')+
       '</div></div>';
   }).join('');
@@ -1761,13 +1802,10 @@ async function runAI(type){
     (s.mitarbeiter?.length?' MA: '+s.mitarbeiter.map(m=>m.name+(m.stunden?'('+m.stunden+'h)':'')).join(', '):'')
   ).join('\n');
   const rTxt='KLEI Tagesbericht\nDatum:'+r.datum+'|Projekt:'+getProjektLabel(r.projektNr)+'|Bauleiter:'+r.bauleiter+
-    '\nTaetigkeiten:'+(r.taetigkeiten||[]).join(',')+
-    '\nWetter:'+r.wetter+','+r.temp+'C'+
+    '\nTaetigkeiten:'+(r.taetigkeiten||[]).join(',')+'\nWetter:'+r.wetter+','+r.temp+'C'+
     '\nZeiten:'+(r.zeitRows||[]).map(t=>t.name+'('+t.qual+'):'+t.von+'-'+t.bis+' Arbeit:'+t.nettoArbeit+'h Gesamt:'+t.gesamt+'h Taet:'+t.tae).join('; ')+
-    '\nGeraete:'+(r.machRows||[]).map(m=>m.geraetNr+' '+m.geraetBez+' Kfz:'+m.fahrzeugnr+' '+m.von+'-'+m.bis+'='+m.netto+'h').join('; ')+
-    '\nArbeiten:\n'+stTxt+
-    '\nMaengel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+
-    '\nNaechstes:'+(r.naechstes||'--');
+    '\nGeraete:'+(r.machRows||[]).map(m=>m.geraetNr+' '+m.geraetBez+' Kfz:'+m.fahrzeugnr+' Std:'+m.netto+'h').join('; ')+
+    '\nArbeiten:\n'+stTxt+'\nMaengel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+'\nNaechstes:'+(r.naechstes||'--');
   const lbl={zusammenfassung:'Zusammenfassung',risiken:'Risiken',kosten:'Kosten',qualitaet:'Qualitaet',bericht:'VOB-Bericht',plan:'Wochenplanung'};
   const out=document.getElementById('ki-out');
   out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';
@@ -1794,13 +1832,10 @@ function expDFCSV(){
   const rows=r.role==='va'?(r.zeitRows||[]):[{name:r.name,qual:r.qual,von:r.von,bis:r.bis,nettoArbeit:r.nettoWork,fahrt:r.fahrtStatus,fahrzeitMin:r.fahrzeitMin,gesamt:r.netto,projektNr:r.projektNr,tae:r.taetigkeiten?.join(',')}];
   const hdr='Mandant;Datum;Projekt;Name;Qual;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h;Taetigkeit';
   const lines=rows.filter(t=>t.name).map(t=>[
-    dfCfg.mandant||'001',r.datum,
-    getProjektLabel(t.projektNr||r.projektNr),
+    '001',r.datum,getProjektLabel(t.projektNr||r.projektNr),
     t.name,t.qual||'',t.von||'',t.bis||'',
-    (t.nettoArbeit||'0').replace(',','.'),
-    t.fahrt||'fahrer',t.fahrzeitMin||0,
-    (t.gesamt||'0').replace(',','.'),
-    t.tae||''
+    (t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',
+    t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.'),t.tae||''
   ].join(';'));
   dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');
   toast('CSV exportiert','ok');
@@ -1813,17 +1848,10 @@ function expDFXML(){
   const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung>\n  <Datum>'+r.datum+'</Datum>\n  <Projekt>'+x(getProjektLabel(r.projektNr))+'</Projekt>\n  <Personal>\n'+
     rows.filter(t=>t.name).map(t=>'    <Eintrag><Name>'+x(t.name)+'</Name><Projekt>'+x(getProjektLabel(t.projektNr||r.projektNr))+'</Projekt><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Arbeit>'+(t.nettoArbeit||'0').replace(',','.')+'</Arbeit><Fahrt>'+(t.fahrt||'fahrer')+'</Fahrt><FahrzeitMin>'+(t.fahrzeitMin||0)+'</FahrzeitMin><Gesamt>'+(t.gesamt||'0').replace(',','.')+'</Gesamt></Eintrag>').join('\n')+
     '\n  </Personal>\n  <Geraete>\n'+
-    (r.machRows||[]).filter(m=>m.geraetNr).map(m=>'    <Geraet><DataflorNr>'+x(m.geraetNr)+'</DataflorNr><Bez>'+x(m.geraetBez||'')+'</Bez><FzNr>'+x(m.fahrzeugnr||'')+'</FzNr><Projekt>'+x(getProjektLabel(m.projektNr||r.projektNr))+'</Projekt><Von>'+(m.von||'')+'</Von><Bis>'+(m.bis||'')+'</Bis><Netto>'+(m.netto||'0').replace(',','.')+'</Netto></Geraet>').join('\n')+
+    (r.machRows||[]).filter(m=>m.geraetNr).map(m=>'    <Geraet><DataflorNr>'+x(m.geraetNr)+'</DataflorNr><Bez>'+x(m.geraetBez||'')+'</Bez><FzNr>'+x(m.fahrzeugnr||'')+'</FzNr><Projekt>'+x(getProjektLabel(m.projektNr||r.projektNr))+'</Projekt><Netto>'+(m.netto||'0').replace(',','.')+'</Netto></Geraet>').join('\n')+
     '\n  </Geraete>\n</DataflorZeiterfassung>';
   dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');
   toast('XML exportiert','ok');
-}
-
-function expTXT(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
-  dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+getProjektLabel(r.projektNr||'')+'\n'+(r.role==='va'?'Bauleiter: '+r.bauleiter:'Mitarbeiter: '+r.name)+'\nStunden: '+h.toFixed(2)+'h','text/plain;charset=utf-8');
-  toast('TXT exportiert','ok');
 }
 
 function delReport(id){
@@ -1834,6 +1862,13 @@ function delReport(id){
   renderSB();
   document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">&#128465;</div><div class="et">Geloescht</div></div>';
   toast('Geloescht','err');
+}
+
+function expTXT(){
+  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
+  const h=r.role==='va'?(r.zeitRows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0):parseFloat((r.netto||'0').replace(',','.')||0);
+  dlFile('KLEI_'+r.datum+'.txt','KLEI Tagesbericht\n'+fmtD(r.datum)+'\n'+getProjektLabel(r.projektNr||'')+'\n'+(r.role==='va'?'Bauleiter: '+r.bauleiter:'Mitarbeiter: '+r.name)+'\nStunden: '+h.toFixed(2)+'h','text/plain;charset=utf-8');
+  toast('TXT exportiert','ok');
 }
 
 function showTab(name){
