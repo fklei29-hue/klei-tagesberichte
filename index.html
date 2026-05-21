@@ -33,17 +33,14 @@ body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;
 @keyframes spin{to{transform:rotate(360deg)}}
 #admin-screen{position:fixed;inset:0;background:var(--bg);z-index:9998;display:none;flex-direction:column;}
 #pl-screen{position:fixed;inset:0;background:var(--bg);z-index:9997;display:none;flex-direction:column;}
-#ws-screen{position:fixed;inset:0;background:var(--bg);z-index:9996;display:none;flex-direction:column;}
 .admin-header{background:var(--s1);border-bottom:1px solid var(--b);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .admin-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px;}
 .badge-admin{background:var(--skyg);border:1px solid rgba(61,143,168,.3);color:var(--sky);}
 .badge-pl{background:var(--earthg);border:1px solid rgba(154,108,26,.3);color:var(--earth);}
-.badge-ws{background:var(--wsg);border:1px solid rgba(139,92,246,.3);color:var(--ws);}
 .admin-tabs{display:flex;border-bottom:1px solid var(--b);background:var(--s1);overflow-x:auto;}
 .admin-tab{padding:12px 16px;font-size:11px;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .admin-tab.act{color:var(--sky);border-bottom-color:var(--sky);}
 .pl-tab.act{color:var(--earth);border-bottom-color:var(--earth);}
-.ws-tab.act{color:var(--ws);border-bottom-color:var(--ws);}
 .admin-content{flex:1;overflow-y:auto;padding:16px;}
 .admin-panel{display:none;}.admin-panel.act{display:block;}
 .a-sec{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:16px;margin-bottom:14px;}
@@ -63,10 +60,6 @@ body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;
 .ma-rolle.projektleiter{background:var(--earthg);color:var(--earth);}
 .ma-aktiv{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .ma-aktiv.on{background:var(--g);}.ma-aktiv.off{background:var(--r);}
-/* UNTERSCHRIFT */
-#sig-canvas{background:white;border-radius:var(--rad);cursor:crosshair;touch-action:none;}
-.sig-wrap{background:white;border-radius:var(--rad);display:inline-block;border:2px solid var(--b);}
-/* FAHRZEUG */
 .fz-item{background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:12px;margin-bottom:8px;}
 .fz-kz{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--ws);margin-bottom:4px;}
 .fz-info{font-size:11px;color:var(--m);}
@@ -75,24 +68,18 @@ body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;
 .fz-ok{background:rgba(114,184,50,.12);color:var(--g);}
 .fz-warn{background:rgba(212,120,42,.15);color:var(--o);}
 .fz-err{background:var(--rg);color:var(--r);}
-/* EMAIL GRUPPEN */
-.email-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;}
+.email-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;flex-wrap:wrap;}
 .email-toggle{width:40px;height:22px;background:var(--s2);border:1px solid var(--b);border-radius:11px;cursor:pointer;position:relative;flex-shrink:0;transition:all .2s;}
 .email-toggle.on{background:var(--g);border-color:var(--gd);}
 .email-toggle::after{content:'';position:absolute;width:16px;height:16px;background:white;border-radius:50%;top:2px;left:2px;transition:all .2s;}
 .email-toggle.on::after{left:20px;}
-/* PROJEKTLEITER */
 .pl-bericht{background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:12px;margin-bottom:8px;cursor:pointer;}
 .pl-bericht.abgenommen{border-color:var(--gd);background:rgba(114,184,50,.05);}
 .pl-bericht-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;}
 .pl-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--b);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
 .pl-check.done{background:var(--g);border-color:var(--gd);}
-/* PDF VIEWER */
-.pdf-viewer-wrap{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:600;display:flex;flex-direction:column;}
-.pdf-viewer-header{background:var(--s1);padding:12px 16px;display:flex;align-items:center;gap:10px;}
-.pdf-viewer-body{flex:1;overflow:auto;display:flex;justify-content:center;padding:16px;}
-.pdf-viewer-body iframe{width:100%;max-width:800px;height:100%;border:none;border-radius:var(--rad);}
-/* HAUPT APP */
+#sig-canvas{background:white;border-radius:var(--rad);cursor:crosshair;touch-action:none;}
+.sig-wrap{background:white;border-radius:var(--rad);display:inline-block;border:2px solid var(--b);}
 header{height:46px;background:var(--s1);border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 12px;gap:8px;z-index:100;}
 .h-logo{height:26px;}
 .h-divider{width:1px;height:20px;background:var(--b);margin:0 2px;}
@@ -145,18 +132,17 @@ main{display:flex;flex-direction:column;overflow:hidden;}
 label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.2px;color:var(--m);text-transform:uppercase;}
 input,textarea,select{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);color:var(--t);font-family:'IBM Plex Sans',sans-serif;font-size:13px;padding:8px 10px;outline:none;width:100%;}
 input:focus,textarea:focus,select:focus{border-color:var(--gd);}
-input[type=file]{padding:6px;font-size:11px;}
 textarea{resize:vertical;min-height:70px;}
 select option{background:var(--s2);}
 .sec{margin-bottom:14px;}
-.sh{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--m);padding-bottom:6px;border-bottom:1px solid var(--b);margin-bottom:10px;}
+.sh{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--m);padding-bottom:6px;border-bottom:1px solid var(--b);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .wrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
 .wc{background:var(--s2);border:1px solid var(--b);border-radius:var(--rad);padding:8px 12px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;user-select:none;}
 .wc.s{background:var(--gg);border-color:var(--gd);color:var(--gl);}
 .tags{display:flex;gap:4px;flex-wrap:wrap;}
 .tg{background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);cursor:pointer;user-select:none;}
 .tg.a{background:var(--gg);border-color:var(--gd);color:var(--gl);}
-.tg.a.ws{background:var(--wsg);border-color:rgba(139,92,246,.4);color:var(--ws);}
+.zusatz-projekt-block{background:var(--s2);border:1px solid rgba(154,108,26,.3);border-radius:6px;padding:12px;margin-top:10px;}
 .tbl{width:100%;border-collapse:collapse;font-size:11px;}
 .tbl th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--m);padding:5px 6px;border-bottom:1px solid var(--b);text-align:left;}
 .tbl td{padding:4px 3px;border-bottom:1px solid rgba(44,58,28,.4);}
@@ -253,20 +239,13 @@ select option{background:var(--s2);}
   <div class="login-card">
     <div class="login-card-title">Anmelden</div>
     <div class="login-card-sub">Mitarbeiternummer und Passwort eingeben</div>
-    <div class="login-field">
-      <label>Mitarbeiternummer</label>
-      <input type="text" id="login-nr" placeholder="z.B. 0042" inputmode="numeric" autocomplete="username">
-    </div>
-    <div class="login-field">
-      <label>Passwort</label>
-      <input type="password" id="login-pw" placeholder="••••••••" autocomplete="current-password">
-    </div>
+    <div class="login-field"><label>Mitarbeiternummer</label><input type="text" id="login-nr" placeholder="z.B. 0042" inputmode="numeric" autocomplete="username"></div>
+    <div class="login-field"><label>Passwort</label><input type="password" id="login-pw" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="login-btn" ontouchstart="doLogin()" onclick="doLogin()">Anmelden</button>
     <div class="login-err" id="login-err"></div>
   </div>
 </div>
 
-<!-- ADMIN SCREEN -->
 <div id="admin-screen">
   <div class="admin-header">
     <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
@@ -292,7 +271,6 @@ select option{background:var(--s2);}
   </div>
 </div>
 
-<!-- PROJEKTLEITER SCREEN -->
 <div id="pl-screen">
   <div class="admin-header">
     <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
@@ -312,7 +290,6 @@ select option{background:var(--s2);}
   </div>
 </div>
 
-<!-- HAUPT APP -->
 <header>
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="h-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="h-divider"></div>
@@ -338,7 +315,6 @@ select option{background:var(--s2);}
   </main>
 </div>
 
-<!-- PROFIL MODAL -->
 <div id="mo-profil" style="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;">
   <div style="background:var(--s1);border:1px solid var(--b);border-radius:8px;padding:20px;width:min(380px,94vw);max-height:85vh;overflow-y:auto">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -349,7 +325,6 @@ select option{background:var(--s2);}
   </div>
 </div>
 
-<!-- DATAFLOR MODAL -->
 <div id="mo-df" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;">
   <div style="background:var(--s1);border:1px solid var(--b);border-radius:8px;padding:18px;width:min(400px,94vw)">
     <button onclick="closeMo('mo-df')" style="float:right;background:none;border:none;color:var(--m);font-size:18px;cursor:pointer">&#x2715;</button>
@@ -361,23 +336,18 @@ select option{background:var(--s2);}
   </div>
 </div>
 
-<!-- PDF VIEWER -->
-<div id="pdf-viewer" style="position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:700;display:none;flex-direction:column;">
-  <div style="background:var(--s1);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--b)">
-    <div style="font-weight:700;font-size:13px;color:var(--c)" id="pdf-viewer-title">Bericht</div>
-    <button class="hbtn" style="margin-left:auto" onclick="closePDFViewer()">Schliessen</button>
-  </div>
-  <div style="flex:1;overflow:auto;display:flex;justify-content:center;padding:16px">
-    <canvas id="pdf-canvas" style="max-width:100%;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.5)"></canvas>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 <script>
 const SUPA_URL='https://nctciyyshywmdamyqvqo.supabase.co';
 const SUPA_KEY='sb_publishable_or0S3skW6i6-jfofutK_jQ_sA3urW4y';
 const GAS_URL='https://script.google.com/macros/s/AKfycbxVQNF3dwQo4qHYOImHNg44SPhs6NZ-8XxOMWqHzvEhjyS1pc0V_AncqG3B01i2TmlW1w/exec';
-const EMPFAENGER_MAIL='kleizeitmanager34@gmail.com';
+
+// FEST HINTERLEGT — im Admin ein/ausschaltbar
+const EMAIL_FEST=[
+  {name:'Produktion',email:'tagesbericht@klei-galabau.de',gruppe:'produktion',typ:'to'},
+  {name:'IT Test',email:'kleizeitmanager34@gmail.com',gruppe:'it',typ:'to'}
+];
+
 const FIRMA_NAME='Friedrich Klei GmbH';
 const FIRMA_ADRESSE='Stettiner Str. 14-16 - 34225 Baunatal';
 const FIRMA_TEL='+49 (0) 5601 8056';
@@ -404,14 +374,12 @@ const GERAETE=[
 ];
 const PAUSEN=[0,15,30,45,60,75,90];
 
-// STATE
 let currentUser=null,PROJEKTE=[],reports=[],FAHRZEUGE=[];
 let currentId=null,currentRole=null,curWeather='Sonnig';
 let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
 let fotoDataUrls=[],kalMonat=new Date().getMonth(),kalJahr=new Date().getFullYear();
 let voiceActive=false,voiceTarget=null,recognition=null;
-let unterschriftData=null;
-let sigDrawing=false,sigCtx=null,sigCanvas=null;
+let unterschriftData=null,sigDrawing=false,sigCtx=null,sigCanvas=null;
 
 // ══════ LOGIN ══════
 async function doLogin(){
@@ -439,46 +407,32 @@ document.getElementById('login-nr').addEventListener('keydown',e=>{if(e.key==='E
 
 function doLogout(){
   currentUser=null;reports=[];currentId=null;currentRole=null;unterschriftData=null;
-  ['admin-screen','pl-screen'].forEach(id=>{document.getElementById(id).style.display='none';});
+  ['admin-screen','pl-screen'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('login-nr').value='';document.getElementById('login-pw').value='';
   document.getElementById('login-err').textContent='';
   document.querySelector('.login-btn').innerHTML='Anmelden';document.querySelector('.login-btn').disabled=false;
 }
 
-// ══════ DATEN ══════
-async function loadProjekte(){
-  const{data}=await sb.from('projekte').select('*').eq('aktiv',true).order('nr');
-  if(data)PROJEKTE=data;
-}
-async function loadFahrzeuge(){
-  const{data}=await sb.from('fahrzeuge').select('*').eq('aktiv',true).order('kennzeichen');
-  if(data)FAHRZEUGE=data;
-}
+async function loadProjekte(){const{data}=await sb.from('projekte').select('*').eq('aktiv',true).order('nr');if(data)PROJEKTE=data;}
+async function loadFahrzeuge(){const{data}=await sb.from('fahrzeuge').select('*').eq('aktiv',true).order('kennzeichen');if(data)FAHRZEUGE=data;}
+
 async function loadReports(){
   let q=sb.from('berichte').select('*').order('datum',{ascending:false}).order('erstellt_am',{ascending:false});
-  if(currentRole==='arbeiter'||currentRole==='werkstatt'){
-    q=q.eq('mitarbeiter_id',currentUser.id);
-  }else if(currentRole==='vorarbeiter'){
-    q=q.eq('mitarbeiter_id',currentUser.id);
-  }
+  q=q.eq('mitarbeiter_id',currentUser.id);
   const{data}=await q.limit(100);
   if(data)reports=data;
 }
 
 async function initApp(){
   currentRole=currentUser.rolle;
-  await loadReports();
-  await loadFahrzeuge();
+  await loadReports();await loadFahrzeuge();
   const b=document.getElementById('role-badge');
-  const roleLabels={arbeiter:'Arbeiter',vorarbeiter:'Vorarbeiter',werkstatt:'Werkstatt'};
   b.className='role-badge '+(currentRole==='werkstatt'?'werkstatt':currentRole);
-  b.textContent=roleLabels[currentRole]||currentRole;
+  b.textContent={arbeiter:'Arbeiter',vorarbeiter:'Vorarbeiter',werkstatt:'Werkstatt'}[currentRole]||currentRole;
   document.getElementById('h-user-name').textContent=currentUser.name+' #'+currentUser.mitarbeiter_nr;
   document.querySelectorAll('.va-only').forEach(el=>el.style.display=currentRole==='vorarbeiter'?'':'none');
-  if(currentRole==='werkstatt'){
-    document.getElementById('btn-new-bericht').className='btn-new ws';
-  }
+  if(currentRole==='werkstatt')document.getElementById('btn-new-bericht').className='btn-new ws';
   buildUI();renderSB();updateSBDate();
   if(reports.length)loadReport(reports[0].id);
   else if(currentRole==='arbeiter'||currentRole==='werkstatt')setTimeout(()=>initARForm(),200);
@@ -495,285 +449,195 @@ function openProfil(){
     '</div>'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Meine Unterschrift</div>'+
     (unterschriftData?
-      '<div style="margin-bottom:10px"><img src="'+unterschriftData+'" style="max-width:100%;border-radius:4px;border:1px solid var(--b);background:white"></div>'+
-      '<div style="display:flex;gap:6px">'+
-      '<button class="btn btn-r" style="font-size:11px" ontouchstart="clearSig()" onclick="clearSig()">Loeschen</button>'+
-      '<button class="btn" style="font-size:11px" ontouchstart="showSigPad()" onclick="showSigPad()">Neu zeichnen</button>'+
-      '</div>':
-      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--m);margin-bottom:10px">Noch keine Unterschrift hinterlegt</div>'+
+      '<div style="margin-bottom:10px"><img src="'+unterschriftData+'" style="max-width:100%;border-radius:4px;border:1px solid var(--b);background:white;padding:4px"></div>'+
+      '<div style="display:flex;gap:6px"><button class="btn btn-r" style="font-size:11px" ontouchstart="clearSig()" onclick="clearSig()">Loeschen</button>'+
+      '<button class="btn" style="font-size:11px" ontouchstart="showSigPad()" onclick="showSigPad()">Neu zeichnen</button></div>':
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--m);margin-bottom:10px">Noch keine Unterschrift</div>'+
       '<button class="btn btn-p" ontouchstart="showSigPad()" onclick="showSigPad()">Unterschrift zeichnen</button>'
     )+
     '<div id="sig-pad-wrap" style="display:none;margin-top:14px">'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px">Hier unterschreiben:</div>'+
     '<div class="sig-wrap"><canvas id="sig-canvas" width="320" height="120"></canvas></div>'+
     '<div style="display:flex;gap:6px;margin-top:8px">'+
-    '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveSig()" onclick="saveSig()">Unterschrift speichern</button>'+
+    '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveSig()" onclick="saveSig()">Speichern</button>'+
     '<button class="btn" style="font-size:11px" ontouchstart="clearSigPad()" onclick="clearSigPad()">Loeschen</button>'+
     '</div></div>';
   openMo('mo-profil');
 }
-
-function showSigPad(){
-  document.getElementById('sig-pad-wrap').style.display='block';
-  setTimeout(()=>initSigCanvas(),100);
-}
-
+function showSigPad(){document.getElementById('sig-pad-wrap').style.display='block';setTimeout(()=>initSigCanvas(),100);}
 function initSigCanvas(){
-  sigCanvas=document.getElementById('sig-canvas');
-  if(!sigCanvas)return;
-  sigCtx=sigCanvas.getContext('2d');
-  sigCtx.strokeStyle='#1a1a1a';sigCtx.lineWidth=2;sigCtx.lineCap='round';sigCtx.lineJoin='round';
-  sigDrawing=false;
-
-  const getPos=(e)=>{
-    const rect=sigCanvas.getBoundingClientRect();
-    const scaleX=sigCanvas.width/rect.width;
-    const scaleY=sigCanvas.height/rect.height;
-    if(e.touches){
-      return{x:(e.touches[0].clientX-rect.left)*scaleX,y:(e.touches[0].clientY-rect.top)*scaleY};
-    }
-    return{x:(e.clientX-rect.left)*scaleX,y:(e.clientY-rect.top)*scaleY};
-  };
-
-  sigCanvas.onmousedown=sigCanvas.ontouchstart=(e)=>{
-    e.preventDefault();sigDrawing=true;
-    const pos=getPos(e);sigCtx.beginPath();sigCtx.moveTo(pos.x,pos.y);
-  };
-  sigCanvas.onmousemove=sigCanvas.ontouchmove=(e)=>{
-    e.preventDefault();if(!sigDrawing)return;
-    const pos=getPos(e);sigCtx.lineTo(pos.x,pos.y);sigCtx.stroke();
-  };
+  sigCanvas=document.getElementById('sig-canvas');if(!sigCanvas)return;
+  sigCtx=sigCanvas.getContext('2d');sigCtx.strokeStyle='#1a1a1a';sigCtx.lineWidth=2;sigCtx.lineCap='round';sigCtx.lineJoin='round';sigDrawing=false;
+  const getPos=(e)=>{const rect=sigCanvas.getBoundingClientRect();const sx=sigCanvas.width/rect.width,sy=sigCanvas.height/rect.height;if(e.touches)return{x:(e.touches[0].clientX-rect.left)*sx,y:(e.touches[0].clientY-rect.top)*sy};return{x:(e.clientX-rect.left)*sx,y:(e.clientY-rect.top)*sy};};
+  sigCanvas.onmousedown=sigCanvas.ontouchstart=(e)=>{e.preventDefault();sigDrawing=true;const pos=getPos(e);sigCtx.beginPath();sigCtx.moveTo(pos.x,pos.y);};
+  sigCanvas.onmousemove=sigCanvas.ontouchmove=(e)=>{e.preventDefault();if(!sigDrawing)return;const pos=getPos(e);sigCtx.lineTo(pos.x,pos.y);sigCtx.stroke();};
   sigCanvas.onmouseup=sigCanvas.ontouchend=(e)=>{e.preventDefault();sigDrawing=false;};
 }
-
-function clearSigPad(){
-  if(sigCtx&&sigCanvas)sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);
-}
-
+function clearSigPad(){if(sigCtx&&sigCanvas)sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);}
 async function saveSig(){
-  if(!sigCanvas){toast('Fehler beim Lesen der Unterschrift','err');return;}
+  if(!sigCanvas){toast('Fehler','err');return;}
   const dataUrl=sigCanvas.toDataURL('image/png');
   const{error}=await sb.from('mitarbeiter').update({unterschrift_data:dataUrl}).eq('id',currentUser.id);
   if(error){toast('Fehler: '+error.message,'err');return;}
-  unterschriftData=dataUrl;
-  currentUser.unterschrift_data=dataUrl;
-  toast('Unterschrift gespeichert','ok');
-  closeMo('mo-profil');
-  setTimeout(()=>openProfil(),200);
+  unterschriftData=dataUrl;currentUser.unterschrift_data=dataUrl;
+  toast('Unterschrift gespeichert','ok');closeMo('mo-profil');setTimeout(()=>openProfil(),200);
 }
-
 async function clearSig(){
   await sb.from('mitarbeiter').update({unterschrift_data:null}).eq('id',currentUser.id);
   unterschriftData=null;currentUser.unterschrift_data=null;
-  toast('Unterschrift geloescht','ok');
-  closeMo('mo-profil');setTimeout(()=>openProfil(),200);
+  toast('Geloescht','ok');closeMo('mo-profil');setTimeout(()=>openProfil(),200);
 }
 
 // ══════ ADMIN ══════
-function openAdmin(){
-  document.getElementById('admin-screen').style.display='flex';
-  document.getElementById('admin-user-name').textContent=currentUser.name;
-  showAdminTab('ma');
-}
-
+function openAdmin(){document.getElementById('admin-screen').style.display='flex';document.getElementById('admin-user-name').textContent=currentUser.name;showAdminTab('ma');}
 function showAdminTab(name){
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('act'));
   document.querySelectorAll('#admin-screen .admin-panel').forEach(p=>p.classList.remove('act'));
-  document.getElementById('atab-'+name).classList.add('act');
-  document.getElementById('apanel-'+name).classList.add('act');
-  if(name==='ma')renderAdminMA();
-  if(name==='proj')renderAdminProj();
-  if(name==='fz')renderAdminFZ();
-  if(name==='email')renderAdminEmail();
-  if(name==='ber')renderAdminBer();
-  if(name==='exp')renderAdminExp();
+  document.getElementById('atab-'+name).classList.add('act');document.getElementById('apanel-'+name).classList.add('act');
+  if(name==='ma')renderAdminMA();if(name==='proj')renderAdminProj();if(name==='fz')renderAdminFZ();
+  if(name==='email')renderAdminEmail();if(name==='ber')renderAdminBer();if(name==='exp')renderAdminExp();
 }
 
 async function renderAdminMA(){
   const el=document.getElementById('apanel-ma');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Mitarbeiter anlegen</div>'+
-    '<div class="row">'+
-    '<div class="fg w25"><label>MA-Nummer</label><input id="new-ma-nr" placeholder="0042" inputmode="numeric"></div>'+
+    '<div class="row"><div class="fg w25"><label>MA-Nummer</label><input id="new-ma-nr" placeholder="0042" inputmode="numeric"></div>'+
     '<div class="fg w50"><label>Name</label><input id="new-ma-name" placeholder="Max Mustermann"></div>'+
-    '<div class="fg w25"><label>Kuerzel</label><input id="new-ma-kuerzel" placeholder="MM"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w50"><label>Qualifikation</label><select id="new-ma-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option><option>VA</option><option>Werkstatt</option></select></div>'+
-    '<div class="fg w50"><label>Rolle</label><select id="new-ma-rolle">'+
-    '<option value="arbeiter">Arbeiter</option>'+
-    '<option value="vorarbeiter">Vorarbeiter</option>'+
-    '<option value="werkstatt">Werkstatt</option>'+
-    '<option value="projektleiter">Projektleiter</option>'+
-    '<option value="admin">Admin</option>'+
-    '</select></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w50"><label>Passwort</label><input id="new-ma-pw" placeholder="Initiales Passwort" type="text"></div>'+
-    '</div>'+
-    '<button class="btn btn-sky" ontouchstart="adminAddMA()" onclick="adminAddMA()">+ Mitarbeiter anlegen</button>'+
-    '</div>'+
-    '<div class="a-sec"><div class="a-sec-title">Alle Mitarbeiter (<span id="ma-count">...</span>)</div>'+
-    '<div id="ma-list"><div class="empty"><div class="spin"></div></div></div></div>';
+    '<div class="fg w25"><label>Kuerzel</label><input id="new-ma-kuerzel" placeholder="MM"></div></div>'+
+    '<div class="row"><div class="fg w50"><label>Qualifikation</label><select id="new-ma-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option><option>VA</option><option>Werkstatt</option></select></div>'+
+    '<div class="fg w50"><label>Rolle</label><select id="new-ma-rolle"><option value="arbeiter">Arbeiter</option><option value="vorarbeiter">Vorarbeiter</option><option value="werkstatt">Werkstatt</option><option value="projektleiter">Projektleiter</option><option value="admin">Admin</option></select></div></div>'+
+    '<div class="row"><div class="fg w50"><label>Passwort</label><input id="new-ma-pw" placeholder="Initiales Passwort" type="text"></div></div>'+
+    '<button class="btn btn-sky" ontouchstart="adminAddMA()" onclick="adminAddMA()">+ Mitarbeiter anlegen</button></div>'+
+    '<div class="a-sec"><div class="a-sec-title">Alle Mitarbeiter (<span id="ma-count">...</span>)</div><div id="ma-list"><div class="empty"><div class="spin"></div></div></div></div>';
   const{data}=await sb.from('mitarbeiter').select('*').order('mitarbeiter_nr');
   document.getElementById('ma-count').textContent=data?.length||0;
-  if(!data||!data.length){document.getElementById('ma-list').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Mitarbeiter</div>';return;}
+  if(!data?.length){document.getElementById('ma-list').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Mitarbeiter</div>';return;}
   document.getElementById('ma-list').innerHTML=data.map(ma=>
     '<div class="ma-item" id="ma-item-'+ma.id+'">'+
-    '<div class="ma-aktiv '+(ma.aktiv?'on':'off')+'"></div>'+
-    '<div class="ma-nr">'+ma.mitarbeiter_nr+'</div>'+
-    '<div class="ma-info">'+
-    '<div class="ma-name-el">'+ma.name+'</div>'+
-    '<div class="ma-meta">'+(ma.qualifikation||'--')+' · '+(ma.kuerzel||'--')+
-    (ma.unterschrift_data?' · <span style="color:var(--g)">✓ Unterschrift</span>':'')+'</div>'+
-    '</div>'+
+    '<div class="ma-aktiv '+(ma.aktiv?'on':'off')+'"></div><div class="ma-nr">'+ma.mitarbeiter_nr+'</div>'+
+    '<div class="ma-info"><div class="ma-name-el">'+ma.name+'</div>'+
+    '<div class="ma-meta">'+(ma.qualifikation||'--')+(ma.unterschrift_data?' · <span style="color:var(--g)">✓ Sig</span>':'')+'</div></div>'+
     '<span class="ma-rolle '+ma.rolle+'">'+ma.rolle+'</span>'+
-    '<button class="btn" style="font-size:10px;padding:5px 8px" ontouchstart="editMA(\''+ma.id+'\')" onclick="editMA(\''+ma.id+'\')">Bearbeiten</button>'+
+    '<button class="btn" style="font-size:10px;padding:5px 8px" ontouchstart="editMA(\''+ma.id+'\')" onclick="editMA(\''+ma.id+'\')">Bearb.</button>'+
     '<button class="btn '+(ma.aktiv?'btn-r':'btn-sky')+'" style="font-size:10px;padding:5px 8px" ontouchstart="toggleMAaktiv(\''+ma.id+'\','+ma.aktiv+')" onclick="toggleMAaktiv(\''+ma.id+'\','+ma.aktiv+')">'+
-    (ma.aktiv?'Deakt.':'Aktiv.')+'</button>'+
-    '</div>'
+    (ma.aktiv?'Deakt.':'Aktiv.')+'</button></div>'
   ).join('');
 }
 
 async function adminAddMA(){
-  const nr=document.getElementById('new-ma-nr').value.trim();
-  const name=document.getElementById('new-ma-name').value.trim();
-  const kuerzel=document.getElementById('new-ma-kuerzel').value.trim();
-  const qual=document.getElementById('new-ma-qual').value;
-  const rolle=document.getElementById('new-ma-rolle').value;
-  const pw=document.getElementById('new-ma-pw').value.trim();
+  const nr=document.getElementById('new-ma-nr').value.trim(),name=document.getElementById('new-ma-name').value.trim();
+  const kuerzel=document.getElementById('new-ma-kuerzel').value.trim(),qual=document.getElementById('new-ma-qual').value;
+  const rolle=document.getElementById('new-ma-rolle').value,pw=document.getElementById('new-ma-pw').value.trim();
   if(!nr||!name||!pw){toast('Nummer, Name und Passwort erforderlich','err');return;}
   const{error}=await sb.from('mitarbeiter').insert({mitarbeiter_nr:nr,name,kuerzel,qualifikation:qual,rolle,passwort_hash:pw,aktiv:true});
   if(error){toast('Fehler: '+error.message,'err');return;}
-  toast('Mitarbeiter angelegt','ok');
-  ['new-ma-nr','new-ma-name','new-ma-kuerzel','new-ma-pw'].forEach(id=>document.getElementById(id).value='');
-  renderAdminMA();
+  toast('Mitarbeiter angelegt','ok');['new-ma-nr','new-ma-name','new-ma-kuerzel','new-ma-pw'].forEach(id=>document.getElementById(id).value='');renderAdminMA();
 }
 
 async function editMA(id){
-  const{data}=await sb.from('mitarbeiter').select('*').eq('id',id).single();
-  if(!data)return;
+  const{data}=await sb.from('mitarbeiter').select('*').eq('id',id).single();if(!data)return;
   const el=document.getElementById('ma-item-'+id);
   el.innerHTML='<div style="width:100%"><div class="row">'+
     '<div class="fg w25"><label>MA-Nr.</label><input id="edit-nr-'+id+'" value="'+data.mitarbeiter_nr+'"></div>'+
     '<div class="fg w50"><label>Name</label><input id="edit-name-'+id+'" value="'+data.name+'"></div>'+
-    '<div class="fg w25"><label>Kuerzel</label><input id="edit-kuerzel-'+id+'" value="'+(data.kuerzel||'')+'"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w33"><label>Qualifikation</label><select id="edit-qual-'+id+'">'+
-    ['Facharbeiter GaLa','Helfer','Azubi','Subunternehmer','VA','Werkstatt'].map(q=>'<option '+(data.qualifikation===q?'selected':'')+'>'+q+'</option>').join('')+
-    '</select></div>'+
+    '<div class="fg w25"><label>Kuerzel</label><input id="edit-kuerzel-'+id+'" value="'+(data.kuerzel||'')+'"></div></div>'+
+    '<div class="row"><div class="fg w33"><label>Qualifikation</label><select id="edit-qual-'+id+'">'+
+    ['Facharbeiter GaLa','Helfer','Azubi','Subunternehmer','VA','Werkstatt'].map(q=>'<option '+(data.qualifikation===q?'selected':'')+'>'+q+'</option>').join('')+'</select></div>'+
     '<div class="fg w33"><label>Rolle</label><select id="edit-rolle-'+id+'">'+
-    ['arbeiter','vorarbeiter','werkstatt','projektleiter','admin'].map(r=>'<option value="'+r+'" '+(data.rolle===r?'selected':'')+'>'+r+'</option>').join('')+
-    '</select></div>'+
-    '<div class="fg w33"><label>Neues Passwort</label><input id="edit-pw-'+id+'" placeholder="Leer = unveraendert" type="text"></div>'+
-    '</div>'+
-    '<div style="display:flex;gap:6px">'+
-    '<button class="btn btn-sky" ontouchstart="saveEditMA(\''+id+'\')" onclick="saveEditMA(\''+id+'\')">Speichern</button>'+
-    '<button class="btn" ontouchstart="renderAdminMA()" onclick="renderAdminMA()">Abbrechen</button>'+
-    '</div></div>';
+    ['arbeiter','vorarbeiter','werkstatt','projektleiter','admin'].map(r=>'<option value="'+r+'" '+(data.rolle===r?'selected':'')+'>'+r+'</option>').join('')+'</select></div>'+
+    '<div class="fg w33"><label>Neues Passwort</label><input id="edit-pw-'+id+'" placeholder="Leer = unveraendert" type="text"></div></div>'+
+    '<div style="display:flex;gap:6px"><button class="btn btn-sky" ontouchstart="saveEditMA(\''+id+'\')" onclick="saveEditMA(\''+id+'\')">Speichern</button>'+
+    '<button class="btn" ontouchstart="renderAdminMA()" onclick="renderAdminMA()">Abbrechen</button></div></div>';
 }
 
 async function saveEditMA(id){
   const updates={mitarbeiter_nr:document.getElementById('edit-nr-'+id).value.trim(),name:document.getElementById('edit-name-'+id).value.trim(),kuerzel:document.getElementById('edit-kuerzel-'+id).value.trim(),qualifikation:document.getElementById('edit-qual-'+id).value,rolle:document.getElementById('edit-rolle-'+id).value};
-  const pw=document.getElementById('edit-pw-'+id).value.trim();
-  if(pw)updates.passwort_hash=pw;
+  const pw=document.getElementById('edit-pw-'+id).value.trim();if(pw)updates.passwort_hash=pw;
   const{error}=await sb.from('mitarbeiter').update(updates).eq('id',id);
   if(error){toast('Fehler: '+error.message,'err');return;}
   toast('Gespeichert','ok');renderAdminMA();
 }
-
-async function toggleMAaktiv(id,aktiv){
-  await sb.from('mitarbeiter').update({aktiv:!aktiv}).eq('id',id);
-  toast(aktiv?'Deaktiviert':'Aktiviert','ok');renderAdminMA();
-}
+async function toggleMAaktiv(id,aktiv){await sb.from('mitarbeiter').update({aktiv:!aktiv}).eq('id',id);toast(aktiv?'Deaktiviert':'Aktiviert','ok');renderAdminMA();}
 
 async function renderAdminProj(){
   const el=document.getElementById('apanel-proj');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Projekt anlegen</div>'+
-    '<div class="row">'+
-    '<div class="fg w33"><label>Projektnummer</label><input id="new-proj-nr" placeholder="2026-042"></div>'+
+    '<div class="row"><div class="fg w33"><label>Projektnummer</label><input id="new-proj-nr" placeholder="2026-042"></div>'+
     '<div class="fg w50"><label>Projektname</label><input id="new-proj-name" placeholder="Kassel Stadthalle"></div>'+
-    '<div class="fg w25"><label>Fahrzeit (min)</label><select id="new-proj-fz">'+
-    [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'">'+m+' min</option>').join('')+
-    '</select></div></div>'+
-    '<button class="btn btn-sky" ontouchstart="adminAddProj()" onclick="adminAddProj()">+ Projekt anlegen</button>'+
-    '</div>'+
-    '<div class="a-sec"><div class="a-sec-title">Alle Projekte</div>'+
-    '<div id="proj-list"><div class="empty"><div class="spin"></div></div></div></div>';
+    '<div class="fg w25"><label>Fahrzeit (min)</label><select id="new-proj-fz">'+[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'">'+m+' min</option>').join('')+'</select></div></div>'+
+    '<button class="btn btn-sky" ontouchstart="adminAddProj()" onclick="adminAddProj()">+ Projekt anlegen</button></div>'+
+    '<div class="a-sec"><div class="a-sec-title">Alle Projekte</div><div id="proj-list"><div class="empty"><div class="spin"></div></div></div></div>';
   const{data}=await sb.from('projekte').select('*').order('nr');
-  if(!data||!data.length){document.getElementById('proj-list').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Projekte</div>';return;}
+  if(!data?.length){document.getElementById('proj-list').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Projekte</div>';return;}
   document.getElementById('proj-list').innerHTML=data.map(p=>
-    '<div class="proj-item" id="proj-item-'+p.id+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;flex-wrap:wrap">'+
+    '<div id="proj-item-'+p.id+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;flex-wrap:wrap">'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--sky);width:80px;flex-shrink:0">'+p.nr+'</div>'+
     '<div style="flex:1;font-size:12px;font-weight:600;color:var(--c)">'+p.name+'</div>'+
     '<select style="width:80px;font-size:10px;background:var(--s2);border:1px solid var(--b);border-radius:3px;color:var(--earth)" onchange="adminUpdateFahrzeit(\''+p.id+'\',this.value)">'+
-    [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(p.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+
-    '</select>'+
-    '<button class="btn" style="font-size:10px;padding:5px 8px" ontouchstart="editProj(\''+p.id+'\')" onclick="editProj(\''+p.id+'\')">Bearbeiten</button>'+
-    '<button class="btn btn-r" style="font-size:10px;padding:5px 8px" ontouchstart="adminDelProj(\''+p.id+'\',\''+p.name+'\')" onclick="adminDelProj(\''+p.id+'\',\''+p.name+'\')">Loeschen</button>'+
-    '</div>'
+    [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(p.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+'</select>'+
+    '<button class="btn" style="font-size:10px;padding:5px 8px" ontouchstart="editProj(\''+p.id+'\')" onclick="editProj(\''+p.id+'\')">Bearb.</button>'+
+    '<button class="btn btn-r" style="font-size:10px;padding:5px 8px" ontouchstart="adminDelProj(\''+p.id+'\',\''+p.name+'\')" onclick="adminDelProj(\''+p.id+'\',\''+p.name+'\')">&#x2715;</button></div>'
   ).join('');
 }
 
 async function adminAddProj(){
-  const nr=document.getElementById('new-proj-nr').value.trim();
-  const name=document.getElementById('new-proj-name').value.trim();
+  const nr=document.getElementById('new-proj-nr').value.trim(),name=document.getElementById('new-proj-name').value.trim();
   const fz=parseInt(document.getElementById('new-proj-fz').value)||0;
   if(!nr||!name){toast('Nummer und Name erforderlich','err');return;}
   const{error}=await sb.from('projekte').insert({nr,name,fahrzeit_min:fz,aktiv:true});
   if(error){toast('Fehler: '+error.message,'err');return;}
-  await loadProjekte();toast('Projekt angelegt','ok');
-  document.getElementById('new-proj-nr').value='';document.getElementById('new-proj-name').value='';
-  renderAdminProj();
+  await loadProjekte();toast('Projekt angelegt','ok');document.getElementById('new-proj-nr').value='';document.getElementById('new-proj-name').value='';renderAdminProj();
 }
 async function adminUpdateFahrzeit(id,val){await sb.from('projekte').update({fahrzeit_min:parseInt(val)||0}).eq('id',id);await loadProjekte();toast('Fahrzeit gespeichert','ok');}
 async function editProj(id){
   const{data}=await sb.from('projekte').select('*').eq('id',id).single();if(!data)return;
   const el=document.getElementById('proj-item-'+id);
-  el.innerHTML='<div style="width:100%"><div class="row">'+
-    '<div class="fg w33"><label>Projektnummer</label><input id="ep-nr-'+id+'" value="'+data.nr+'"></div>'+
+  el.innerHTML='<div style="width:100%"><div class="row"><div class="fg w33"><label>Projektnummer</label><input id="ep-nr-'+id+'" value="'+data.nr+'"></div>'+
     '<div class="fg w50"><label>Projektname</label><input id="ep-name-'+id+'" value="'+data.name+'"></div>'+
-    '<div class="fg w25"><label>Fahrzeit</label><select id="ep-fz-'+id+'">'+
-    [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(data.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+
-    '</select></div></div>'+
-    '<div style="display:flex;gap:6px">'+
-    '<button class="btn btn-sky" ontouchstart="saveEditProj(\''+id+'\')" onclick="saveEditProj(\''+id+'\')">Speichern</button>'+
-    '<button class="btn" ontouchstart="renderAdminProj()" onclick="renderAdminProj()">Abbrechen</button>'+
-    '</div></div>';
+    '<div class="fg w25"><label>Fahrzeit</label><select id="ep-fz-'+id+'">'+[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(data.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+'</select></div></div>'+
+    '<div style="display:flex;gap:6px"><button class="btn btn-sky" ontouchstart="saveEditProj(\''+id+'\')" onclick="saveEditProj(\''+id+'\')">Speichern</button>'+
+    '<button class="btn" ontouchstart="renderAdminProj()" onclick="renderAdminProj()">Abbrechen</button></div></div>';
 }
 async function saveEditProj(id){
   await sb.from('projekte').update({nr:document.getElementById('ep-nr-'+id).value.trim(),name:document.getElementById('ep-name-'+id).value.trim(),fahrzeit_min:parseInt(document.getElementById('ep-fz-'+id).value)||0}).eq('id',id);
   await loadProjekte();toast('Gespeichert','ok');renderAdminProj();
 }
-async function adminDelProj(id,name){
-  if(!confirm('Projekt "'+name+'" loeschen?'))return;
-  await sb.from('projekte').update({aktiv:false}).eq('id',id);
-  await loadProjekte();toast('Geloescht','err');renderAdminProj();
-}
+async function adminDelProj(id,name){if(!confirm('Projekt "'+name+'" loeschen?'))return;await sb.from('projekte').update({aktiv:false}).eq('id',id);await loadProjekte();toast('Geloescht','err');renderAdminProj();}
 
 // ══════ FAHRZEUGVERWALTUNG ══════
 async function renderAdminFZ(){
-  const el=document.getElementById('apanel-fz');
-  await loadFahrzeuge();
-  el.innerHTML='<div class="a-sec"><div class="a-sec-title ws">Fahrzeug anlegen</div>'+
-    '<div class="row">'+
-    '<div class="fg w33"><label>Kennzeichen</label><input id="new-fz-kz" placeholder="KS-AB 123"></div>'+
-    '<div class="fg w33"><label>Typ / Bezeichnung</label><input id="new-fz-typ" placeholder="Bagger Kette 5to"></div>'+
-    '<div class="fg w33"><label>Hersteller</label><input id="new-fz-hs" placeholder="Kubota"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w25"><label>Baujahr</label><input id="new-fz-bj" placeholder="2020"></div>'+
-    '<div class="fg w25"><label>Kilometerstand</label><input type="number" id="new-fz-km" placeholder="0"></div>'+
-    '<div class="fg w25"><label>Betriebsstunden</label><input type="number" id="new-fz-bs" placeholder="0" step="0.1"></div>'+
-    '<div class="fg w25"><label>Naechste Inspektion km</label><input type="number" id="new-fz-ikm" placeholder="0"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w50"><label>TUeV Datum</label><input type="date" id="new-fz-tuev"></div>'+
-    '<div class="fg w50"><label>Inspektion Datum</label><input type="date" id="new-fz-ins"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w100"><label>Notizen</label><input id="new-fz-not" placeholder="Besonderheiten..."></div>'+
-    '</div>'+
-    '<button class="btn btn-ws" ontouchstart="adminAddFZ()" onclick="adminAddFZ()">+ Fahrzeug anlegen</button>'+
-    '</div>'+
+  await loadFahrzeuge();const el=document.getElementById('apanel-fz');
+  el.innerHTML='<div class="a-sec"><div class="a-sec-title ws">Fahrzeug anlegen</div>'+buildFZFormHTML('new-fz')+'<button class="btn btn-ws" ontouchstart="adminAddFZ()" onclick="adminAddFZ()">+ Fahrzeug anlegen</button></div>'+
     '<div class="a-sec"><div class="a-sec-title ws">Alle Fahrzeuge ('+FAHRZEUGE.length+')</div>'+
-    '<div id="fz-list">'+
-    (FAHRZEUGE.length?FAHRZEUGE.map(fz=>renderFZItem(fz)).join(''):'<div style="color:var(--m);font-size:10px;padding:8px">Keine Fahrzeuge</div>')+
-    '</div></div>';
+    '<div id="fz-list">'+(FAHRZEUGE.length?FAHRZEUGE.map(fz=>renderFZItem(fz)).join(''):'<div style="color:var(--m);font-size:10px;padding:8px">Keine Fahrzeuge</div>')+'</div></div>';
+}
+
+function buildFZFormHTML(prefix){
+  return '<div class="row"><div class="fg w33"><label>Kennzeichen</label><input id="'+prefix+'-kz" placeholder="KS-AB 123"></div>'+
+    '<div class="fg w33"><label>Typ</label><input id="'+prefix+'-typ" placeholder="Bagger Kette 5to"></div>'+
+    '<div class="fg w33"><label>Hersteller</label><input id="'+prefix+'-hs" placeholder="Kubota"></div></div>'+
+    '<div class="row"><div class="fg w25"><label>Baujahr</label><input id="'+prefix+'-bj" placeholder="2020"></div>'+
+    '<div class="fg w25"><label>km-Stand</label><input type="number" id="'+prefix+'-km" placeholder="0"></div>'+
+    '<div class="fg w25"><label>Betriebsstd.</label><input type="number" id="'+prefix+'-bs" placeholder="0" step="0.1"></div>'+
+    '<div class="fg w25"><label>Insp. km</label><input type="number" id="'+prefix+'-ikm" placeholder="0"></div></div>'+
+    '<div class="row"><div class="fg w50"><label>TUeV Datum</label><input type="date" id="'+prefix+'-tuev"></div>'+
+    '<div class="fg w50"><label>Inspektion Datum</label><input type="date" id="'+prefix+'-ins"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Notizen / Maengel</label><input id="'+prefix+'-not" placeholder="Besonderheiten..."></div></div>';
+}
+
+function getFZFormData(prefix){
+  return{
+    kennzeichen:document.getElementById(prefix+'-kz')?.value.trim()||'',
+    typ:document.getElementById(prefix+'-typ')?.value.trim()||'',
+    hersteller:document.getElementById(prefix+'-hs')?.value.trim()||'',
+    baujahr:document.getElementById(prefix+'-bj')?.value.trim()||'',
+    kilometerstand:parseInt(document.getElementById(prefix+'-km')?.value)||0,
+    betriebsstunden:parseFloat(document.getElementById(prefix+'-bs')?.value)||0,
+    inspektion_km:parseInt(document.getElementById(prefix+'-ikm')?.value)||0,
+    tuev_datum:document.getElementById(prefix+'-tuev')?.value||null,
+    inspektion_datum:document.getElementById(prefix+'-ins')?.value||null,
+    notizen:document.getElementById(prefix+'-not')?.value.trim()||''
+  };
 }
 
 function renderFZItem(fz){
@@ -787,37 +651,23 @@ function renderFZItem(fz){
   return '<div class="fz-item" id="fz-item-'+fz.id+'">'+
     '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
     '<div><div class="fz-kz">'+fz.kennzeichen+'</div>'+
-    '<div class="fz-info">'+(fz.typ||'--')+' · '+(fz.hersteller||'')+(fz.baujahr?' · Bj. '+fz.baujahr:'')+'</div>'+
-    '</div>'+
+    '<div class="fz-info">'+(fz.typ||'--')+' · '+(fz.hersteller||'')+(fz.baujahr?' Bj. '+fz.baujahr:'')+'</div></div>'+
     '<div style="display:flex;gap:5px">'+
-    '<button class="btn" style="font-size:10px;padding:4px 8px" ontouchstart="editFZ(\''+fz.id+'\')" onclick="editFZ(\''+fz.id+'\')">Bearbeiten</button>'+
-    '<button class="btn btn-r" style="font-size:10px;padding:4px 8px" ontouchstart="delFZ(\''+fz.id+'\')" onclick="delFZ(\''+fz.id+'\')">&#x2715;</button>'+
-    '</div></div>'+
+    '<button class="btn" style="font-size:10px;padding:4px 8px" ontouchstart="editFZ(\''+fz.id+'\')" onclick="editFZ(\''+fz.id+'\')">Bearb.</button>'+
+    '<button class="btn btn-r" style="font-size:10px;padding:4px 8px" ontouchstart="delFZ(\''+fz.id+'\')" onclick="delFZ(\''+fz.id+'\')">&#x2715;</button></div></div>'+
     '<div class="fz-status">'+
-    '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+fz.kilometerstand.toLocaleString()+'km</span>'+
-    '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+fz.betriebsstunden+'h</span>'+
+    '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+(fz.kilometerstand||0).toLocaleString()+'km</span>'+
+    '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+(fz.betriebsstunden||0)+'h</span>'+
     (tuevDate?'<span class="fz-badge '+tuevCls+'">TÜV: '+fmtD(fz.tuev_datum)+(tuevDiff!==null?' ('+tuevDiff+'d)':'')+'</span>':'')+
     (insDate?'<span class="fz-badge '+insCls+'">Insp: '+fmtD(fz.inspektion_datum)+(insDiff!==null?' ('+insDiff+'d)':'')+'</span>':'')+
-    '</div>'+
-    (fz.notizen?'<div style="font-size:11px;color:var(--m);margin-top:4px">'+fz.notizen+'</div>':'')+
+    '</div>'+(fz.notizen?'<div style="font-size:11px;color:var(--m);margin-top:4px">'+fz.notizen+'</div>':'')+
     '</div>';
 }
 
 async function adminAddFZ(){
-  const kz=document.getElementById('new-fz-kz').value.trim();
-  const typ=document.getElementById('new-fz-typ').value.trim();
-  if(!kz||!typ){toast('Kennzeichen und Typ erforderlich','err');return;}
-  const{error}=await sb.from('fahrzeuge').insert({
-    kennzeichen:kz,typ,hersteller:document.getElementById('new-fz-hs').value.trim(),
-    baujahr:document.getElementById('new-fz-bj').value.trim(),
-    kilometerstand:parseInt(document.getElementById('new-fz-km').value)||0,
-    betriebsstunden:parseFloat(document.getElementById('new-fz-bs').value)||0,
-    inspektion_km:parseInt(document.getElementById('new-fz-ikm').value)||0,
-    tuev_datum:document.getElementById('new-fz-tuev').value||null,
-    inspektion_datum:document.getElementById('new-fz-ins').value||null,
-    notizen:document.getElementById('new-fz-not').value.trim(),
-    aktiv:true
-  });
+  const d=getFZFormData('new-fz');
+  if(!d.kennzeichen||!d.typ){toast('Kennzeichen und Typ erforderlich','err');return;}
+  const{error}=await sb.from('fahrzeuge').insert({...d,aktiv:true});
   if(error){toast('Fehler: '+error.message,'err');return;}
   await loadFahrzeuge();toast('Fahrzeug angelegt','ok');renderAdminFZ();
 }
@@ -825,179 +675,140 @@ async function adminAddFZ(){
 async function editFZ(id){
   const fz=FAHRZEUGE.find(f=>f.id===id);if(!fz)return;
   const el=document.getElementById('fz-item-'+id);
-  el.innerHTML='<div class="row">'+
-    '<div class="fg w33"><label>Kennzeichen</label><input id="efz-kz-'+id+'" value="'+fz.kennzeichen+'"></div>'+
-    '<div class="fg w33"><label>Typ</label><input id="efz-typ-'+id+'" value="'+(fz.typ||'')+'"></div>'+
-    '<div class="fg w33"><label>Hersteller</label><input id="efz-hs-'+id+'" value="'+(fz.hersteller||'')+'"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w25"><label>Baujahr</label><input id="efz-bj-'+id+'" value="'+(fz.baujahr||'')+'"></div>'+
-    '<div class="fg w25"><label>km-Stand</label><input type="number" id="efz-km-'+id+'" value="'+(fz.kilometerstand||0)+'"></div>'+
-    '<div class="fg w25"><label>Betriebsstd.</label><input type="number" id="efz-bs-'+id+'" value="'+(fz.betriebsstunden||0)+'" step="0.1"></div>'+
-    '<div class="fg w25"><label>Insp. km</label><input type="number" id="efz-ikm-'+id+'" value="'+(fz.inspektion_km||0)+'"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w50"><label>TUeV Datum</label><input type="date" id="efz-tuev-'+id+'" value="'+(fz.tuev_datum||'')+'"></div>'+
-    '<div class="fg w50"><label>Inspektion Datum</label><input type="date" id="efz-ins-'+id+'" value="'+(fz.inspektion_datum||'')+'"></div>'+
-    '</div><div class="row">'+
-    '<div class="fg w100"><label>Notizen / Maengel</label><textarea id="efz-not-'+id+'" style="min-height:50px">'+(fz.notizen||fz.maengel||'')+'</textarea></div>'+
-    '</div>'+
-    '<div style="display:flex;gap:6px">'+
-    '<button class="btn btn-ws" ontouchstart="saveEditFZ(\''+id+'\')" onclick="saveEditFZ(\''+id+'\')">Speichern</button>'+
-    '<button class="btn" ontouchstart="renderAdminFZ()" onclick="renderAdminFZ()">Abbrechen</button>'+
-    '</div>';
+  el.innerHTML=buildFZFormHTML('efz-'+id).replace('placeholder="KS-AB 123"','value="'+fz.kennzeichen+'"').replace('placeholder="Bagger Kette 5to"','value="'+(fz.typ||'')+'"')+
+    '<div style="display:flex;gap:6px"><button class="btn btn-ws" ontouchstart="saveEditFZ(\''+id+'\')" onclick="saveEditFZ(\''+id+'\')">Speichern</button>'+
+    '<button class="btn" ontouchstart="renderAdminFZ()" onclick="renderAdminFZ()">Abbrechen</button></div>';
+  setTimeout(()=>{
+    const p='efz-'+id;
+    if(document.getElementById(p+'-hs'))document.getElementById(p+'-hs').value=fz.hersteller||'';
+    if(document.getElementById(p+'-bj'))document.getElementById(p+'-bj').value=fz.baujahr||'';
+    if(document.getElementById(p+'-km'))document.getElementById(p+'-km').value=fz.kilometerstand||0;
+    if(document.getElementById(p+'-bs'))document.getElementById(p+'-bs').value=fz.betriebsstunden||0;
+    if(document.getElementById(p+'-ikm'))document.getElementById(p+'-ikm').value=fz.inspektion_km||0;
+    if(document.getElementById(p+'-tuev'))document.getElementById(p+'-tuev').value=fz.tuev_datum||'';
+    if(document.getElementById(p+'-ins'))document.getElementById(p+'-ins').value=fz.inspektion_datum||'';
+    if(document.getElementById(p+'-not'))document.getElementById(p+'-not').value=fz.notizen||'';
+  },50);
 }
 
 async function saveEditFZ(id){
-  const updates={
-    kennzeichen:document.getElementById('efz-kz-'+id).value.trim(),
-    typ:document.getElementById('efz-typ-'+id).value.trim(),
-    hersteller:document.getElementById('efz-hs-'+id).value.trim(),
-    baujahr:document.getElementById('efz-bj-'+id).value.trim(),
-    kilometerstand:parseInt(document.getElementById('efz-km-'+id).value)||0,
-    betriebsstunden:parseFloat(document.getElementById('efz-bs-'+id).value)||0,
-    inspektion_km:parseInt(document.getElementById('efz-ikm-'+id).value)||0,
-    tuev_datum:document.getElementById('efz-tuev-'+id).value||null,
-    inspektion_datum:document.getElementById('efz-ins-'+id).value||null,
-    notizen:document.getElementById('efz-not-'+id).value.trim()
-  };
-  await sb.from('fahrzeuge').update(updates).eq('id',id);
-  await loadFahrzeuge();toast('Fahrzeug gespeichert','ok');renderAdminFZ();
+  const d=getFZFormData('efz-'+id);
+  await sb.from('fahrzeuge').update(d).eq('id',id);
+  await loadFahrzeuge();toast('Gespeichert','ok');renderAdminFZ();
 }
-
-async function delFZ(id){
-  if(!confirm('Fahrzeug loeschen?'))return;
-  await sb.from('fahrzeuge').update({aktiv:false}).eq('id',id);
-  await loadFahrzeuge();toast('Fahrzeug geloescht','err');renderAdminFZ();
-}
+async function delFZ(id){if(!confirm('Fahrzeug loeschen?'))return;await sb.from('fahrzeuge').update({aktiv:false}).eq('id',id);await loadFahrzeuge();toast('Geloescht','err');renderAdminFZ();}
 
 // ══════ EMAIL VERWALTUNG ══════
 async function renderAdminEmail(){
   const el=document.getElementById('apanel-email');
-  el.innerHTML='<div class="a-sec"><div class="a-sec-title">E-Mail Empfaenger</div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:12px">Aktive Empfaenger erhalten bei jedem Bericht eine E-Mail</div>'+
-    '<div id="email-list"><div class="empty"><div class="spin"></div></div></div>'+
-    '</div>'+
-    '<div class="a-sec"><div class="a-sec-title">Neuen Empfaenger hinzufuegen</div>'+
-    '<div class="row">'+
-    '<div class="fg w33"><label>Name</label><input id="new-em-name" placeholder="Buchhaltung"></div>'+
-    '<div class="fg w50"><label>E-Mail</label><input id="new-em-email" placeholder="buchhaltung@klei.de" type="email"></div>'+
-    '<div class="fg w25"><label>Gruppe</label><select id="new-em-gruppe">'+
-    '<option value="gf">Geschaeftsfuehrung</option>'+
-    '<option value="buchhaltung">Buchhaltung</option>'+
-    '<option value="it">IT / Test</option>'+
-    '<option value="alle">Alle</option>'+
-    '</select></div>'+
-    '</div>'+
-    '<button class="btn btn-sky" ontouchstart="adminAddEmail()" onclick="adminAddEmail()">+ Hinzufuegen</button>'+
-    '</div>';
   const{data}=await sb.from('email_empfaenger').select('*').order('gruppe');
-  const emailEl=document.getElementById('email-list');
-  if(!data||!data.length){emailEl.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Empfaenger hinterlegt</div>';return;}
-  const gruppenLabel={gf:'Geschaeftsfuehrung',buchhaltung:'Buchhaltung',it:'IT / Test',alle:'Alle'};
-  emailEl.innerHTML=data.map(em=>
-    '<div class="email-item">'+
-    '<div class="email-toggle '+(em.aktiv?'on':'')+'" ontouchstart="toggleEmail(\''+em.id+'\','+em.aktiv+')" onclick="toggleEmail(\''+em.id+'\','+em.aktiv+')"></div>'+
-    '<div style="flex:1">'+
-    '<div style="font-size:12px;font-weight:600;color:var(--c)">'+em.name+'</div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+em.email+'</div>'+
-    '</div>'+
-    '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;padding:2px 6px;border-radius:8px;background:var(--skyg);color:var(--sky)">'+(gruppenLabel[em.gruppe]||em.gruppe)+'</span>'+
-    '<button class="delbtn" style="color:var(--r)" ontouchstart="delEmail(\''+em.id+'\')" onclick="delEmail(\''+em.id+'\')">&#x2715;</button>'+
-    '</div>'
-  ).join('');
+
+  // Sync fest hinterlegte Adressen
+  for(const em of EMAIL_FEST){
+    const exists=data?.find(d=>d.email===em.email&&d.gruppe===em.gruppe);
+    if(!exists){
+      await sb.from('email_empfaenger').insert({name:em.name,email:em.email,gruppe:em.gruppe,aktiv:true});
+    }
+  }
+  const{data:fresh}=await sb.from('email_empfaenger').select('*').order('gruppe');
+
+  const gruppenLabel={produktion:'Produktion (Outlook)',it:'IT / Test (Gmail)',buchhaltung:'Buchhaltung',gf:'Geschaeftsfuehrung',alle:'Alle'};
+  const typLabel={to:'TO (Hauptempfaenger)',cc:'CC (Kopie)'};
+
+  el.innerHTML='<div class="a-sec"><div class="a-sec-title">E-Mail Empfaenger</div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:12px;line-height:1.6">'+
+    'Toggle AN = bekommt die E-Mail<br>Toggle AUS = wird uebersprungen</div>'+
+    '<div id="email-list">'+
+    (fresh||[]).map(em=>
+      '<div class="email-item">'+
+      '<div class="email-toggle '+(em.aktiv?'on':'')+'" ontouchstart="toggleEmail(\''+em.id+'\','+em.aktiv+')" onclick="toggleEmail(\''+em.id+'\','+em.aktiv+')"></div>'+
+      '<div style="flex:1">'+
+      '<div style="font-size:12px;font-weight:600;color:var(--c)">'+em.name+'</div>'+
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+em.email+'</div>'+
+      '</div>'+
+      '<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end">'+
+      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;padding:2px 6px;border-radius:8px;background:var(--skyg);color:var(--sky)">'+(gruppenLabel[em.gruppe]||em.gruppe)+'</span>'+
+      '<select style="font-size:9px;padding:2px 4px;width:120px" onchange="updateEmailTyp(\''+em.id+'\',this.value)">'+
+      '<option value="to" '+(em.typ!=='cc'?'selected':'')+'>TO</option>'+
+      '<option value="cc" '+(em.typ==='cc'?'selected':'')+'>CC</option>'+
+      '</select></div>'+
+      '<button class="delbtn" style="color:var(--r)" ontouchstart="delEmail(\''+em.id+'\')" onclick="delEmail(\''+em.id+'\')">&#x2715;</button>'+
+      '</div>'
+    ).join('')+'</div></div>'+
+    '<div class="a-sec"><div class="a-sec-title">Weitere Adresse hinzufuegen</div>'+
+    '<div class="row"><div class="fg w33"><label>Name</label><input id="new-em-name" placeholder="Buchhaltung"></div>'+
+    '<div class="fg w50"><label>E-Mail</label><input id="new-em-email" placeholder="info@firma.de" type="email"></div>'+
+    '<div class="fg w25"><label>Gruppe</label><select id="new-em-gruppe"><option value="produktion">Produktion</option><option value="buchhaltung">Buchhaltung</option><option value="gf">Geschaeftsfuehrung</option><option value="it">IT Test</option></select></div></div>'+
+    '<button class="btn btn-sky" ontouchstart="adminAddEmail()" onclick="adminAddEmail()">+ Hinzufuegen</button></div>';
 }
 
+async function toggleEmail(id,aktiv){await sb.from('email_empfaenger').update({aktiv:!aktiv}).eq('id',id);renderAdminEmail();}
+async function updateEmailTyp(id,typ){await sb.from('email_empfaenger').update({typ}).eq('id',id);}
+async function delEmail(id){await sb.from('email_empfaenger').delete().eq('id',id);toast('Geloescht','err');renderAdminEmail();}
 async function adminAddEmail(){
-  const name=document.getElementById('new-em-name').value.trim();
-  const email=document.getElementById('new-em-email').value.trim();
-  const gruppe=document.getElementById('new-em-gruppe').value;
+  const name=document.getElementById('new-em-name').value.trim(),email=document.getElementById('new-em-email').value.trim(),gruppe=document.getElementById('new-em-gruppe').value;
   if(!name||!email){toast('Name und E-Mail erforderlich','err');return;}
-  await sb.from('email_empfaenger').insert({name,email,gruppe,aktiv:true});
-  toast('Empfaenger hinzugefuegt','ok');renderAdminEmail();
-}
-async function toggleEmail(id,aktiv){
-  await sb.from('email_empfaenger').update({aktiv:!aktiv}).eq('id',id);
-  renderAdminEmail();
-}
-async function delEmail(id){
-  await sb.from('email_empfaenger').delete().eq('id',id);
-  toast('Empfaenger geloescht','err');renderAdminEmail();
+  await sb.from('email_empfaenger').insert({name,email,gruppe,aktiv:true,typ:'to'});
+  toast('Hinzugefuegt','ok');renderAdminEmail();
 }
 
 async function renderAdminBer(){
   const el=document.getElementById('apanel-ber');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Filter</div>'+
-    '<div class="row">'+
-    '<div class="fg w33"><label>Von</label><input type="date" id="ber-von"></div>'+
+    '<div class="row"><div class="fg w33"><label>Von</label><input type="date" id="ber-von"></div>'+
     '<div class="fg w33"><label>Bis</label><input type="date" id="ber-bis"></div>'+
-    '<div class="fg w33"><label>Mitarbeiter</label><input id="ber-ma" placeholder="Name..."></div>'+
-    '</div>'+
-    '<button class="btn btn-sky" ontouchstart="filterBer()" onclick="filterBer()">Suchen</button>'+
-    '</div>'+
-    '<div class="a-sec"><div class="a-sec-title">Berichte</div>'+
-    '<div id="ber-list"><div style="color:var(--m);font-size:10px;padding:8px">Filter anwenden</div></div></div>';
+    '<div class="fg w33"><label>Mitarbeiter</label><input id="ber-ma" placeholder="Name..."></div></div>'+
+    '<button class="btn btn-sky" ontouchstart="filterBer()" onclick="filterBer()">Suchen</button></div>'+
+    '<div class="a-sec"><div class="a-sec-title">Berichte</div><div id="ber-list"><div style="color:var(--m);font-size:10px;padding:8px">Filter anwenden</div></div></div>';
 }
 
 async function filterBer(){
-  const von=document.getElementById('ber-von').value;
-  const bis=document.getElementById('ber-bis').value;
-  const ma=document.getElementById('ber-ma').value.trim();
+  const von=document.getElementById('ber-von').value,bis=document.getElementById('ber-bis').value,ma=document.getElementById('ber-ma').value.trim();
   let q=sb.from('berichte').select('*').order('datum',{ascending:false}).limit(200);
-  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
-  if(ma)q=q.ilike('mitarbeiter_name','%'+ma+'%');
+  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);if(ma)q=q.ilike('mitarbeiter_name','%'+ma+'%');
   const{data}=await q;
   const el=document.getElementById('ber-list');
-  if(!data||!data.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Berichte gefunden</div>';return;}
+  if(!data?.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Berichte gefunden</div>';return;}
   el.innerHTML=data.map(b=>
     '<div style="display:flex;align-items:center;gap:8px;padding:10px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:4px;cursor:pointer;flex-wrap:wrap" ontouchstart="adminOpenBericht(\''+b.id+'\')" onclick="adminOpenBericht(\''+b.id+'\')">'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);width:72px">'+fmtD(b.datum)+'</div>'+
-    '<div style="flex:1;min-width:100px">'+
-    '<div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+' <span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">#'+(b.mitarbeiter_nr||'--')+'</span></div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+b.projekt_nr+' · '+(b.netto_gesamt_h||b.netto_arbeit_h||'--')+'h · '+(b.rolle==='va'?'VA':b.rolle==='ws'?'WS':'AR')+'</div></div>'+
-    (b.abgenommen?'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;padding:2px 6px;border-radius:8px;background:var(--gg);color:var(--gl)">&#x2713; Abgenommen</span>':'')+
-    '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--sky)">&#x276F;</span>'+
-    '</div>'
+    '<div style="flex:1;min-width:100px"><div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+' <span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">#'+(b.mitarbeiter_nr||'--')+'</span></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+b.projekt_nr+' · '+(b.netto_gesamt_h||b.netto_arbeit_h||'--')+'h</div></div>'+
+    (b.pdf_url?'<a href="'+b.pdf_url+'" target="_blank" style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--sky);text-decoration:none;padding:3px 7px;border:1px solid rgba(61,143,168,.3);border-radius:4px" ontouchstart="event.stopPropagation()" onclick="event.stopPropagation()">Drive</a>':'')+
+    '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--sky)">PDF &#x2193;</span></div>'
   ).join('');
 }
 
 async function adminOpenBericht(id){
-  const{data}=await sb.from('berichte').select('*').eq('id',id).single();
-  if(!data)return;
-  // PDF generieren und anzeigen
-  const reportForPDF={...data,role:data.rolle,name:data.mitarbeiter_name,projektNr:data.projekt_nr,zeitRows:data.zeit_rows,machRows:data.mach_rows};
-  document.getElementById('pdf-viewer-title').textContent=fmtD(data.datum)+' · '+data.mitarbeiter_name;
-  document.getElementById('pdf-viewer').style.display='flex';
+  const{data}=await sb.from('berichte').select('*').eq('id',id).single();if(!data)return;
   toast('PDF wird erstellt...','info');
   try{
+    const{data:ma}=await sb.from('mitarbeiter').select('unterschrift_data').eq('id',data.mitarbeiter_id).single();
+    if(ma?.unterschrift_data)unterschriftData=ma.unterschrift_data;
+    const reportForPDF={...data,role:data.rolle,name:data.mitarbeiter_name,projektNr:data.projekt_nr,zeitRows:data.zeit_rows,machRows:data.mach_rows};
     const doc=await generatePDF(reportForPDF);
-    const pdfData=doc.output('datauristring');
-    const canvas=document.getElementById('pdf-canvas');
-    // Einfache Darstellung als Bild
-    const img=new Image();img.src=pdfData;
-    img.onload=()=>{canvas.width=img.width;canvas.height=img.height;canvas.getContext('2d').drawImage(img,0,0);}
-    // Direkt als Download anbieten
-    const link=document.createElement('a');link.href=pdfData;link.download='KLEI_'+data.datum+'_'+data.mitarbeiter_name+'.pdf';
-    canvas.onclick=()=>link.click();
-    canvas.style.cursor='pointer';
-    canvas.title='Klicken zum Download';
-    toast('PDF bereit — antippen zum Download','ok');
-  }catch(e){toast('PDF Fehler: '+e.message,'err');}
+    doc.save(buildPDFName(data));
+    toast('PDF gespeichert','ok');
+  }catch(e){toast('Fehler: '+e.message,'err');}
 }
 
-function closePDFViewer(){document.getElementById('pdf-viewer').style.display='none';}
+function buildPDFName(data){
+  const proj=(data.projekt_nr||'unbekannt').replace(/[^a-zA-Z0-9_\-]/g,'_');
+  const name=(data.mitarbeiter_name||'').split(' ').pop().replace(/[^a-zA-Z0-9_\-äöüÄÖÜß]/g,'_');
+  const nr=data.mitarbeiter_nr||'--';
+  const rolle=(data.rolle||'ar').toUpperCase();
+  return (data.datum||'')+'_'+proj+'_'+name+'_'+nr+'_'+rolle+'.pdf';
+}
 
 async function renderAdminExp(){
   const el=document.getElementById('apanel-exp');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Buchhaltungs-Export</div>'+
-    '<div class="row">'+
-    '<div class="fg w50"><label>Von</label><input type="date" id="exp-von"></div>'+
-    '<div class="fg w50"><label>Bis</label><input type="date" id="exp-bis"></div>'+
-    '</div>'+
+    '<div class="row"><div class="fg w50"><label>Von</label><input type="date" id="exp-von"></div>'+
+    '<div class="fg w50"><label>Bis</label><input type="date" id="exp-bis"></div></div>'+
     '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
     '<button class="btn btn-sky" ontouchstart="expBuchhaltungCSV()" onclick="expBuchhaltungCSV()">CSV Buchhaltung</button>'+
-    '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button>'+
-    '</div></div>'+
-    '<div class="a-sec"><div class="a-sec-title">Statistik</div>'+
-    '<div id="exp-stats"><div class="empty"><div class="spin"></div></div></div></div>';
+    '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button></div></div>'+
+    '<div class="a-sec"><div class="a-sec-title">Statistik</div><div id="exp-stats"><div class="empty"><div class="spin"></div></div></div></div>';
   loadExpStats();
 }
 
@@ -1006,190 +817,135 @@ async function loadExpStats(){
   if(!data){document.getElementById('exp-stats').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Daten</div>';return;}
   const totalH=data.reduce((s,b)=>s+(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0)),0);
   const maMap={};
-  data.forEach(b=>{
-    const key=b.mitarbeiter_name+(b.mitarbeiter_nr?' #'+b.mitarbeiter_nr:'');
-    if(!maMap[key])maMap[key]=0;
-    maMap[key]+=(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0));
-  });
+  data.forEach(b=>{const key=b.mitarbeiter_name+(b.mitarbeiter_nr?' #'+b.mitarbeiter_nr:'');if(!maMap[key])maMap[key]=0;maMap[key]+=(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0));});
   document.getElementById('exp-stats').innerHTML=
     '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px">'+
     '<div class="sc"><div class="sv">'+data.length+'</div><div class="sl">Berichte</div></div>'+
-    '<div class="sc"><div class="sv">'+totalH.toFixed(0)+'h</div><div class="sl">Stunden</div></div>'+
-    '</div>'+
+    '<div class="sc"><div class="sv">'+totalH.toFixed(0)+'h</div><div class="sl">Stunden</div></div></div>'+
     Object.entries(maMap).sort((a,b)=>b[1]-a[1]).map(([name,h])=>
       '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--b)">'+
       '<span style="font-size:12px;color:var(--c)">'+name+'</span>'+
-      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--gl)">'+h.toFixed(1)+'h</span>'+
-      '</div>'
+      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--gl)">'+h.toFixed(1)+'h</span></div>'
     ).join('');
 }
 
 async function expBuchhaltungCSV(){
-  const von=document.getElementById('exp-von').value;
-  const bis=document.getElementById('exp-bis').value;
+  const von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
   let q=sb.from('berichte').select('*').order('datum').order('mitarbeiter_name');
   if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
   const{data}=await q;
-  if(!data||!data.length){toast('Keine Daten','err');return;}
+  if(!data?.length){toast('Keine Daten','err');return;}
   const hdr='Datum;Mitarbeiter;MA-Nr;Projekt-Nr;Projekt-Name;Von;Bis;Pause-min;Netto-h;Fahrzeit-min;Gesamt-h;Wetter;Taetigkeiten;Rolle';
-  const rows=data.map(b=>{
-    const proj=PROJEKTE.find(p=>p.id===b.projekt_id);
-    return[b.datum,b.mitarbeiter_name,b.mitarbeiter_nr||'--',b.projekt_nr,proj?.name||'',b.von||'',b.bis||'',b.pause_min||30,b.netto_arbeit_h||'0',b.fahrzeit_min||0,b.netto_gesamt_h||b.netto_arbeit_h||'0',b.wetter||'',(b.taetigkeiten||[]).join('|'),b.rolle].join(';');
-  });
+  const rows=data.map(b=>{const proj=PROJEKTE.find(p=>p.id===b.projekt_id);return[b.datum,b.mitarbeiter_name,b.mitarbeiter_nr||'--',b.projekt_nr,proj?.name||'',b.von||'',b.bis||'',b.pause_min||30,b.netto_arbeit_h||'0',b.fahrzeit_min||0,b.netto_gesamt_h||b.netto_arbeit_h||'0',b.wetter||'',(b.taetigkeiten||[]).join('|'),b.rolle].join(';');});
   dlFile('KLEI_Buchhaltung_'+(von||'')+'_'+(bis||new Date().toISOString().split('T')[0])+'.csv',[hdr,...rows].join('\n'),'text/csv;charset=utf-8');
   toast('CSV exportiert - '+data.length+' Eintraege','ok');
 }
 
 async function expDFCSVAdmin(){
-  const von=document.getElementById('exp-von').value;
-  const bis=document.getElementById('exp-bis').value;
+  const von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
   let q=sb.from('berichte').select('*').order('datum');
   if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
-  const{data}=await q;
-  if(!data||!data.length){toast('Keine Daten','err');return;}
+  const{data}=await q;if(!data?.length){toast('Keine Daten','err');return;}
   const hdr='Mandant;Datum;Projekt;Name;MA-Nr;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h';
   const rows=[];
-  data.forEach(b=>{
-    const zr=b.zeit_rows||[];
-    if(zr.length){zr.forEach(t=>{if(t.name)rows.push(['001',b.datum,b.projekt_nr,t.name,b.mitarbeiter_nr||'',t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.')].join(';'));});}
-    else{rows.push(['001',b.datum,b.projekt_nr,b.mitarbeiter_name,b.mitarbeiter_nr||'',b.von||'',b.bis||'',b.netto_arbeit_h||'0','fahrer',b.fahrzeit_min||0,b.netto_gesamt_h||'0'].join(';'));}
-  });
+  data.forEach(b=>{const zr=b.zeit_rows||[];if(zr.length){zr.forEach(t=>{if(t.name)rows.push(['001',b.datum,b.projekt_nr,t.name,b.mitarbeiter_nr||'',t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.')].join(';'));});}else{rows.push(['001',b.datum,b.projekt_nr,b.mitarbeiter_name,b.mitarbeiter_nr||'',b.von||'',b.bis||'',b.netto_arbeit_h||'0','fahrer',b.fahrzeit_min||0,b.netto_gesamt_h||'0'].join(';'));}});
   dlFile('KLEI_Dataflor_'+new Date().toISOString().split('T')[0]+'.csv',[hdr,...rows].join('\n'),'text/csv;charset=utf-8');
   toast('Dataflor CSV exportiert','ok');
 }
 
 // ══════ PROJEKTLEITER ══════
-function openPL(){
-  document.getElementById('pl-screen').style.display='flex';
-  document.getElementById('pl-user-name').textContent=currentUser.name;
-  showPLTab('ber');
-}
-
+function openPL(){document.getElementById('pl-screen').style.display='flex';document.getElementById('pl-user-name').textContent=currentUser.name;showPLTab('ber');}
 function showPLTab(name){
   document.querySelectorAll('#pl-screen .admin-tab').forEach(t=>t.classList.remove('act'));
   document.querySelectorAll('#pl-screen .admin-panel').forEach(p=>p.classList.remove('act'));
-  document.getElementById('pltab-'+name).classList.add('act');
-  document.getElementById('appanel-'+name).classList.add('act');
-  if(name==='ber')renderPLBer();
-  if(name==='proj')renderPLProj();
-  if(name==='offen')renderPLOffen();
+  document.getElementById('pltab-'+name).classList.add('act');document.getElementById('appanel-'+name).classList.add('act');
+  if(name==='ber')renderPLBer();if(name==='proj')renderPLProj();if(name==='offen')renderPLOffen();
 }
 
 async function renderPLBer(){
   const el=document.getElementById('appanel-ber');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">Filter</div>'+
-    '<div class="row">'+
-    '<div class="fg w33"><label>Von</label><input type="date" id="pl-von"></div>'+
+    '<div class="row"><div class="fg w33"><label>Von</label><input type="date" id="pl-von"></div>'+
     '<div class="fg w33"><label>Bis</label><input type="date" id="pl-bis"></div>'+
-    '<div class="fg w33"><label>Mitarbeiter</label><input id="pl-ma" placeholder="Name..."></div>'+
-    '</div>'+
-    '<div class="row">'+
-    '<div class="fg w50"><label>Projekt</label><select id="pl-proj"><option value="">Alle Projekte</option>'+
-    PROJEKTE.map(p=>'<option value="'+p.id+'">'+p.nr+' - '+p.name+'</option>').join('')+
-    '</select></div>'+
-    '<div class="fg w50"><label>Status</label><select id="pl-status">'+
-    '<option value="">Alle</option><option value="offen">Nicht abgenommen</option><option value="abgenommen">Abgenommen</option>'+
-    '</select></div>'+
-    '</div>'+
-    '<button class="btn btn-e" ontouchstart="filterPLBer()" onclick="filterPLBer()">Suchen</button>'+
-    '</div>'+
+    '<div class="fg w33"><label>Mitarbeiter</label><input id="pl-ma" placeholder="Name..."></div></div>'+
+    '<div class="row"><div class="fg w50"><label>Projekt</label><select id="pl-proj"><option value="">Alle Projekte</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'">'+p.nr+' - '+p.name+'</option>').join('')+'</select></div>'+
+    '<div class="fg w50"><label>Status</label><select id="pl-status"><option value="">Alle</option><option value="offen">Nicht abgenommen</option><option value="abgenommen">Abgenommen</option></select></div></div>'+
+    '<button class="btn btn-e" ontouchstart="filterPLBer()" onclick="filterPLBer()">Suchen</button></div>'+
     '<div id="pl-ber-list"><div style="color:var(--m);font-size:10px;padding:8px">Filter anwenden</div></div>';
 }
 
 async function filterPLBer(){
-  const von=document.getElementById('pl-von').value;
-  const bis=document.getElementById('pl-bis').value;
-  const ma=document.getElementById('pl-ma').value.trim();
-  const proj=document.getElementById('pl-proj').value;
+  const von=document.getElementById('pl-von').value,bis=document.getElementById('pl-bis').value;
+  const ma=document.getElementById('pl-ma').value.trim(),proj=document.getElementById('pl-proj').value;
   const status=document.getElementById('pl-status').value;
   let q=sb.from('berichte').select('*').order('datum',{ascending:false}).limit(200);
-  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
-  if(ma)q=q.ilike('mitarbeiter_name','%'+ma+'%');
-  if(proj)q=q.eq('projekt_id',proj);
-  if(status==='offen')q=q.eq('abgenommen',false);
-  if(status==='abgenommen')q=q.eq('abgenommen',true);
+  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);if(ma)q=q.ilike('mitarbeiter_name','%'+ma+'%');
+  if(proj)q=q.eq('projekt_id',proj);if(status==='offen')q=q.eq('abgenommen',false);if(status==='abgenommen')q=q.eq('abgenommen',true);
   const{data}=await q;
   const el=document.getElementById('pl-ber-list');
-  if(!data||!data.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:12px">Keine Berichte gefunden</div>';return;}
+  if(!data?.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:12px">Keine Berichte</div>';return;}
   el.innerHTML=data.map(b=>
     '<div class="pl-bericht '+(b.abgenommen?'abgenommen':'')+'" ontouchstart="plOpenBericht(\''+b.id+'\')" onclick="plOpenBericht(\''+b.id+'\')">'+
     '<div class="pl-bericht-header">'+
-    '<div>'+
-    '<div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+'</div>'+
+    '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+'</div>'+
     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g)">'+fmtD(b.datum)+' · '+b.projekt_nr+'</div>'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)'+'">'+
-    (b.netto_gesamt_h||b.netto_arbeit_h||'--')+'h · '+(b.rolle==='va'?'Vorarbeiter':b.rolle==='ws'?'Werkstatt':'Arbeiter')+
-    '</div></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+(b.netto_gesamt_h||b.netto_arbeit_h||'--')+'h · '+(b.rolle==='va'?'VA':b.rolle==='ws'?'WS':'AR')+'</div></div>'+
     '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
-    '<div class="pl-check '+(b.abgenommen?'done':'')+'" ontouchstart="event.stopPropagation();plToggleAbnahme(\''+b.id+'\','+b.abgenommen+')" onclick="event.stopPropagation();plToggleAbnahme(\''+b.id+'\','+b.abgenommen+')">'+
-    (b.abgenommen?'&#x2713;':'')+'</div>'+
+    '<div class="pl-check '+(b.abgenommen?'done':'')+'" ontouchstart="event.stopPropagation();plToggleAbnahme(\''+b.id+'\','+b.abgenommen+')" onclick="event.stopPropagation();plToggleAbnahme(\''+b.id+'\','+b.abgenommen+')">'+(b.abgenommen?'&#x2713;':'')+'</div>'+
     (b.abgenommen?'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;color:var(--g)">'+b.abgenommen_von+'</div>':'')+
-    '</div></div>'+
-    (b.pl_notiz?'<div style="font-size:11px;color:var(--m);margin-top:6px;padding-top:6px;border-top:1px solid var(--b)">'+b.pl_notiz+'</div>':'')+
+    (b.pdf_url?'<a href="'+b.pdf_url+'" target="_blank" style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;color:var(--sky);text-decoration:none" ontouchstart="event.stopPropagation()" onclick="event.stopPropagation()">Drive &#x279A;</a>':'')+
+    '</div></div>'+(b.pl_notiz?'<div style="font-size:11px;color:var(--m);margin-top:6px;padding-top:6px;border-top:1px solid var(--b)">'+b.pl_notiz+'</div>':'')+
     '</div>'
   ).join('');
 }
 
 async function plToggleAbnahme(id,aktuell){
-  const updates=aktuell?
-    {abgenommen:false,abgenommen_von:null,abgenommen_am:null}:
-    {abgenommen:true,abgenommen_von:currentUser.name,abgenommen_am:new Date().toISOString()};
+  const updates=aktuell?{abgenommen:false,abgenommen_von:null,abgenommen_am:null}:{abgenommen:true,abgenommen_von:currentUser.name,abgenommen_am:new Date().toISOString()};
   await sb.from('berichte').update(updates).eq('id',id);
-  toast(aktuell?'Abnahme zurueckgenommen':'Bericht abgenommen','ok');
-  filterPLBer();
+  toast(aktuell?'Abnahme zurueckgenommen':'Abgenommen ✓','ok');filterPLBer();
 }
 
 async function plOpenBericht(id){
-  const{data}=await sb.from('berichte').select('*').eq('id',id).single();
-  if(!data)return;
-  // Notiz hinzufuegen Option
-  const notiz=prompt('Notiz zum Bericht (leer lassen um zu ueberspringen):','');
-  if(notiz!==null&&notiz.trim()){
-    await sb.from('berichte').update({pl_notiz:notiz.trim()}).eq('id',id);
-    toast('Notiz gespeichert','ok');filterPLBer();
+  const{data}=await sb.from('berichte').select('*').eq('id',id).single();if(!data)return;
+  if(data.pdf_url){
+    if(confirm('Drive-Link oeffnen?'))window.open(data.pdf_url,'_blank');
+    return;
   }
-  // PDF anzeigen
-  const reportForPDF={...data,role:data.rolle,name:data.mitarbeiter_name,projektNr:data.projekt_nr,zeitRows:data.zeit_rows,machRows:data.mach_rows};
-  document.getElementById('pdf-viewer-title').textContent=fmtD(data.datum)+' · '+data.mitarbeiter_name;
-  document.getElementById('pdf-viewer').style.display='flex';
+  const notiz=prompt('Notiz (leer = ueberspringen):','');
+  if(notiz!==null&&notiz.trim()){await sb.from('berichte').update({pl_notiz:notiz.trim()}).eq('id',id);toast('Notiz gespeichert','ok');}
+  toast('PDF wird erstellt...','info');
   try{
+    const{data:ma}=await sb.from('mitarbeiter').select('unterschrift_data').eq('id',data.mitarbeiter_id).single();
+    if(ma?.unterschrift_data)unterschriftData=ma.unterschrift_data;
+    const reportForPDF={...data,role:data.rolle,name:data.mitarbeiter_name,projektNr:data.projekt_nr,zeitRows:data.zeit_rows,machRows:data.mach_rows};
     const doc=await generatePDF(reportForPDF);
-    const pdfData=doc.output('datauristring');
-    const canvas=document.getElementById('pdf-canvas');
-    const img=new Image();img.src=pdfData;
-    img.onload=()=>{canvas.width=img.width;canvas.height=img.height;canvas.getContext('2d').drawImage(img,0,0);};
-    canvas.onclick=()=>{const a=document.createElement('a');a.href=pdfData;a.download='KLEI_'+data.datum+'_'+data.mitarbeiter_name+'.pdf';a.click();};
-    canvas.style.cursor='pointer';canvas.title='Tippen zum Download';
-    toast('PDF bereit','ok');
-  }catch(e){toast('PDF Fehler','err');}
+    doc.save(buildPDFName(data));
+    toast('PDF gespeichert','ok');filterPLBer();
+  }catch(e){toast('Fehler: '+e.message,'err');}
 }
 
 async function renderPLProj(){
   const el=document.getElementById('appanel-proj');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">Berichte nach Projekt</div>'+
-    PROJEKTE.map(p=>
-      '<div style="background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:12px;margin-bottom:8px;cursor:pointer" ontouchstart="loadProjektBerichte(\''+p.id+'\')" onclick="loadProjektBerichte(\''+p.id+'\')">'+
+    PROJEKTE.map(p=>'<div style="background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);padding:12px;margin-bottom:8px;cursor:pointer" ontouchstart="loadProjektBerichte(\''+p.id+'\')" onclick="loadProjektBerichte(\''+p.id+'\')">'+
       '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--earth)">'+p.nr+'</div>'+
       '<div style="font-size:13px;font-weight:600;color:var(--c)">'+p.name+'</div>'+
-      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:2px">&#x276F; Berichte anzeigen</div>'+
-      '</div>'
-    ).join('')+
-    '</div>'+
-    '<div id="pl-proj-berichte"></div>';
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:2px">&#x276F; Berichte anzeigen</div></div>'
+    ).join('')+'</div><div id="pl-proj-berichte"></div>';
 }
 
 async function loadProjektBerichte(projektId){
   const{data}=await sb.from('berichte').select('*').eq('projekt_id',projektId).order('datum',{ascending:false}).limit(100);
   const proj=PROJEKTE.find(p=>p.id===projektId);
   const el=document.getElementById('pl-proj-berichte');
-  if(!data||!data.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Berichte fuer dieses Projekt</div>';return;}
+  if(!data?.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Berichte</div>';return;}
   const totalH=data.reduce((s,b)=>s+(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0)),0);
   el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">'+(proj?.name||'Projekt')+' — '+data.length+' Berichte — '+totalH.toFixed(1)+'h</div>'+
-    data.map(b=>
-      '<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:4px;cursor:pointer" ontouchstart="plOpenBericht(\''+b.id+'\')" onclick="plOpenBericht(\''+b.id+'\')">'+
+    data.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:4px;cursor:pointer;flex-wrap:wrap" ontouchstart="plOpenBericht(\''+b.id+'\')" onclick="plOpenBericht(\''+b.id+'\')">'+
       '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g);width:70px">'+fmtD(b.datum)+'</div>'+
       '<div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+'</div>'+
       '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">'+(b.netto_gesamt_h||b.netto_arbeit_h||'--')+'h · '+(b.rolle==='va'?'VA':'AR')+'</div></div>'+
+      (b.pdf_url?'<a href="'+b.pdf_url+'" target="_blank" style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--sky)" ontouchstart="event.stopPropagation()" onclick="event.stopPropagation()">Drive</a>':'')+
       (b.abgenommen?'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;color:var(--g)">&#x2713;</span>':'')+
       '</div>'
     ).join('')+'</div>';
@@ -1199,15 +955,12 @@ async function renderPLOffen(){
   const el=document.getElementById('appanel-offen');
   el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px"><div class="spin"></div></div>';
   const{data}=await sb.from('berichte').select('*').eq('abgenommen',false).order('datum',{ascending:false}).limit(100);
-  if(!data||!data.length){el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">Offene Berichte</div><div style="color:var(--gl);font-size:12px;padding:8px">Alle Berichte abgenommen ✓</div></div>';return;}
+  if(!data?.length){el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">Offene Berichte</div><div style="color:var(--gl);font-size:12px;padding:8px">Alle abgenommen ✓</div></div>';return;}
   el.innerHTML='<div class="a-sec"><div class="a-sec-title earth">Offene Berichte ('+data.length+')</div>'+
-    data.map(b=>
-      '<div class="pl-bericht" ontouchstart="plOpenBericht(\''+b.id+'\')" onclick="plOpenBericht(\''+b.id+'\')">'+
-      '<div class="pl-bericht-header">'+
-      '<div>'+
+    data.map(b=>'<div class="pl-bericht" ontouchstart="plOpenBericht(\''+b.id+'\')" onclick="plOpenBericht(\''+b.id+'\')">'+
+      '<div class="pl-bericht-header"><div>'+
       '<div style="font-size:12px;font-weight:600;color:var(--c)">'+b.mitarbeiter_name+'</div>'+
-      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g)">'+fmtD(b.datum)+' · '+b.projekt_nr+'</div>'+
-      '</div>'+
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g)">'+fmtD(b.datum)+' · '+b.projekt_nr+'</div></div>'+
       '<div class="pl-check" ontouchstart="event.stopPropagation();plToggleAbnahme(\''+b.id+'\',false)" onclick="event.stopPropagation();plToggleAbnahme(\''+b.id+'\',false)"></div>'+
       '</div></div>'
     ).join('')+'</div>';
@@ -1215,9 +968,9 @@ async function renderPLOffen(){
 // ══════ HILFSFUNKTIONEN ══════
 function getProjektLabel(nrOrId){const p=PROJEKTE.find(x=>x.id===nrOrId||x.nr===nrOrId);return p?p.nr+' - '+p.name:(nrOrId||'--');}
 function getProjektFahrzeit(nrOrId){const p=PROJEKTE.find(x=>x.id===nrOrId||x.nr===nrOrId);return p?parseInt(p.fahrzeit_min||0):0;}
-function projektOpts(sel){return '<option value="">- Projekt waehlen -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(sel===p.id||sel===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+(p.fahrzeit_min?' ('+p.fahrzeit_min+'min)':'')+'</option>').join('');}
+function projektOpts(sel){return'<option value="">- Projekt waehlen -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(sel===p.id||sel===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+(p.fahrzeit_min?' ('+p.fahrzeit_min+'min)':'')+'</option>').join('');}
 function taetigkeitenTags(sel,liste){const list=liste||TAETIGKEITEN;return list.map(t=>'<div class="tg'+((sel||[]).includes(t)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>').join('');}
-function pausenSelect(val,cls){return '<select class="'+cls+'" style="width:72px" onchange="calcZR(this)">'+PAUSEN.map(p=>'<option value="'+p+'" '+(parseInt(val||30)===p?'selected':'')+'>'+p+'min</option>').join('')+'</select>';}
+function pausenSelect(val,cls){return'<select class="'+cls+'" style="width:72px" onchange="calcZR(this)">'+PAUSEN.map(p=>'<option value="'+p+'" '+(parseInt(val||30)===p?'selected':'')+'>'+p+'min</option>').join('')+'</select>';}
 function togTg(el){el.classList.toggle('a');}
 function selW(el,val){document.querySelectorAll('.wc').forEach(c=>c.classList.remove('s'));el.classList.add('s');curWeather=val;}
 function setFahrt(btn){document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.remove('fahrt-active'));btn.classList.add('fahrt-active');curFahrtStatus=btn.dataset.val;calcAR();}
@@ -1253,7 +1006,7 @@ function handleFotos(input){
     };reader.readAsDataURL(file);
   });
 }
-function removeFoto(idx){fotoDataUrls[idx]=null;const p=document.getElementById('foto-prev-'+idx);if(p)p.remove();const c=fotoDataUrls.filter(Boolean).length;const el=document.getElementById('v-fotos-count');if(el)el.textContent=c>0?c+' Fotos gewaehlt':'Keine Fotos';}
+function removeFoto(idx){fotoDataUrls[idx]=null;const p=document.getElementById('foto-prev-'+idx);if(p)p.remove();const c=fotoDataUrls.filter(Boolean).length;const el=document.getElementById('v-fotos-count');if(el)el.textContent=c>0?c+' Fotos':'Keine Fotos';}
 function clearFotos(){fotoDataUrls=[];const p=document.getElementById('v-fotos-preview');if(p)p.innerHTML='';const c=document.getElementById('v-fotos-count');if(c)c.textContent='Keine Fotos';const i=document.getElementById('v-fotos-input');if(i)i.value='';}
 
 // ══════ VOICE ══════
@@ -1276,7 +1029,7 @@ function stopVoice(){voiceActive=false;if(recognition){try{recognition.stop();}c
 function showVoiceBanner(label){let bar=document.getElementById('vbar-global');if(!bar){bar=document.createElement('div');bar.id='vbar-global';bar.className='vbar';bar.innerHTML='<div class="vwave"><span></span><span></span><span></span><span></span><span></span></div><div class="vbar-lbl" id="vbar-lbl-text">Spracheingabe...</div><button class="vbar-stop" ontouchstart="stopVoice()" onclick="stopVoice()">STOP</button>';const content=document.getElementById('main-content');if(content)content.prepend(bar);}bar.classList.add('on');const lbl=document.getElementById('vbar-lbl-text');if(lbl)lbl.textContent=label+' - sprechen...';}
 function hideVoiceBanner(){const bar=document.getElementById('vbar-global');if(bar)bar.classList.remove('on');}
 function highlightMicBtn(targetId,on){document.querySelectorAll('.mic-btn').forEach(b=>b.classList.remove('on'));if(on){const btn=document.querySelector('[data-mic="'+targetId+'"]');if(btn)btn.classList.add('on');}}
-function mkMic(targetId,label){return '<button class="mic-btn" data-mic="'+targetId+'" ontouchstart="event.preventDefault();startVoice(\''+targetId+'\',\''+label+'\')" onclick="startVoice(\''+targetId+'\',\''+label+'\')">&#127908; '+label+'</button>';}
+function mkMic(targetId,label){return'<button class="mic-btn" data-mic="'+targetId+'" ontouchstart="event.preventDefault();startVoice(\''+targetId+'\',\''+label+'\')" onclick="startVoice(\''+targetId+'\',\''+label+'\')">&#127908; '+label+'</button>';}
 
 // ══════ BUILD UI ══════
 function buildUI(){
@@ -1292,7 +1045,7 @@ function buildUI(){
       '<div class="panel" id="panel-fzliste"><div id="fzliste-content"></div></div>'+
       '<div class="panel" id="panel-kalender"><div id="kalender-content"></div></div>'+
       '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">&#128203;</div><div class="et">Bericht waehlen</div></div></div></div>';
-    setTimeout(()=>{initWSForm();},100);
+    setTimeout(()=>initWSForm(),100);
   }else if(currentRole==='arbeiter'){
     tabs.innerHTML=
       '<div class="tab act" id="tab-quick" ontouchstart="showTab(\'quick\')" onclick="showTab(\'quick\')">Zeiterfassung</div>'+
@@ -1323,113 +1076,65 @@ function buildUI(){
   }
 }
 
-// ══════ WERKSTATT FORM ══════
+// ══════ WERKSTATT ══════
 function buildWS(){
   const wsProjekt=PROJEKTE.find(p=>p.name.toLowerCase().includes('werkstatt'))||PROJEKTE[0];
-  return '<div class="qsec" style="border-color:rgba(139,92,246,.3)"><div class="qsec-t" style="color:var(--ws)">Werkstatt Einsatz</div><div class="row">'+
-    '<div class="fg w50"><label>Datum</label><input type="date" id="ws-datum"></div>'+
+  return'<div class="qsec" style="border-color:rgba(139,92,246,.3)"><div class="qsec-t" style="color:var(--ws)">Werkstatt Einsatz</div>'+
+    '<div class="row"><div class="fg w50"><label>Datum</label><input type="date" id="ws-datum"></div>'+
     '<div class="fg w50"><label>Name</label><input type="text" id="ws-name" readonly style="color:var(--ws);background:var(--s3)"></div>'+
-    '<div class="fg w100"><label>Projekt / Einsatzort</label><select id="ws-projekt" onchange="onWSProjektChange()">'+projektOpts(wsProjekt?.id||'')+'</select></div>'+
-    '<div class="fg w50"><label>Wetter</label><select id="ws-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option></select></div>'+
-    '</div></div>'+
+    '<div class="fg w100"><label>Projekt / Einsatzort</label><select id="ws-projekt">'+projektOpts(wsProjekt?.id||'')+'</select></div>'+
+    '<div class="fg w50"><label>Wetter</label><select id="ws-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option></select></div></div></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Taetigkeiten</div>'+
     '<div class="tags" id="ws-taetigkeiten-tags">'+taetigkeitenTags([],TAETIGKEITEN_WS)+'</div></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Fahrzeug</div>'+
-    '<div class="row">'+
-    '<div class="fg w100"><label>Bearbeitetes Fahrzeug</label><select id="ws-fahrzeug">'+
-    '<option value="">- Fahrzeug waehlen -</option>'+
-    FAHRZEUGE.map(fz=>'<option value="'+fz.id+'">'+fz.kennzeichen+' - '+fz.typ+'</option>').join('')+
-    '</select></div>'+
-    '</div></div>'+
+    '<select id="ws-fahrzeug" style="width:100%"><option value="">- Fahrzeug waehlen -</option>'+
+    FAHRZEUGE.map(fz=>'<option value="'+fz.id+'">'+fz.kennzeichen+' - '+fz.typ+'</option>').join('')+'</select></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Arbeitszeiten</div>'+
-    '<div class="row">'+
-    '<div class="fg w25"><label>Beginn</label><input type="time" id="ws-von" value="07:00" oninput="calcWS()"></div>'+
+    '<div class="row"><div class="fg w25"><label>Beginn</label><input type="time" id="ws-von" value="07:00" oninput="calcWS()"></div>'+
     '<div class="fg w25"><label>Ende</label><input type="time" id="ws-bis" value="16:00" oninput="calcWS()"></div>'+
     '<div class="fg w25"><label>Pause</label><select id="ws-pause" onchange="calcWS()">'+PAUSEN.map(p=>'<option value="'+p+'" '+(p===30?'selected':'')+'>'+p+' min</option>').join('')+'</select></div>'+
-    '<div class="fg w25"><label>Netto</label><input type="text" id="ws-netto" readonly style="color:var(--ws);font-weight:700;font-family:\'IBM Plex Mono\',monospace;font-size:18px"></div>'+
-    '</div></div>'+
+    '<div class="fg w25"><label>Netto</label><input type="text" id="ws-netto" readonly style="color:var(--ws);font-weight:700;font-family:\'IBM Plex Mono\',monospace;font-size:18px"></div></div></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Details</div>'+
-    '<textarea id="ws-taetigkeit" placeholder="Beschreibung der Arbeiten..."></textarea>'+
-    mkMic('ws-taetigkeit','Arbeiten')+
-    '<div style="margin-top:8px"><input type="text" id="ws-maengel" placeholder="Festgestellte Maengel...">'+
-    mkMic('ws-maengel','Maengel')+'</div></div>'+
+    '<textarea id="ws-taetigkeit" placeholder="Beschreibung der Arbeiten..."></textarea>'+mkMic('ws-taetigkeit','Arbeiten')+
+    '<div style="margin-top:8px"><input type="text" id="ws-maengel" placeholder="Festgestellte Maengel...">'+mkMic('ws-maengel','Maengel')+'</div></div>'+
     '<div class="send-status" id="ws-send-status"></div>'+
-    '<div class="arow">'+
-    '<button class="btn btn-ws" style="font-weight:700" ontouchstart="saveAndSendWS()" onclick="saveAndSendWS()">Speichern und PDF senden</button>'+
-    '<button class="btn" ontouchstart="clearWSForm()" onclick="clearWSForm()">Neu</button>'+
-    '</div>';
+    '<div class="arow"><button class="btn btn-ws" style="font-weight:700" ontouchstart="saveAndSendWS()" onclick="saveAndSendWS()">Speichern und PDF senden</button>'+
+    '<button class="btn" ontouchstart="clearWSForm()" onclick="clearWSForm()">Neu</button></div>';
 }
-
-function initWSForm(){
-  const nEl=document.getElementById('ws-name');if(nEl)nEl.value=currentUser.name;
-  const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();
-  calcWS();
-}
-
-function onWSProjektChange(){calcWS();}
-
-function calcWS(){
-  const v=document.getElementById('ws-von')?.value;
-  const b=document.getElementById('ws-bis')?.value;
-  const p=parseFloat(document.getElementById('ws-pause')?.value)||0;
-  if(v&&b){
-    const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
-    let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;
-    const el=document.getElementById('ws-netto');
-    if(el)el.value=(wm/60).toFixed(2).replace('.',',');
-  }
-}
-
-function clearWSForm(){
-  currentId=null;stopVoice();
-  const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();
-  ['ws-taetigkeit','ws-maengel'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  const netto=document.getElementById('ws-netto');if(netto)netto.value='';
-  const fzSel=document.getElementById('ws-fahrzeug');if(fzSel)fzSel.value='';
-  const st=document.getElementById('ws-send-status');if(st){st.className='send-status';st.textContent='';}
-  document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));
-  document.getElementById('ws-von').value='07:00';document.getElementById('ws-bis').value='16:00';
-  document.getElementById('ws-pause').value='30';calcWS();
-  toast('Neuer Werkstatt-Bericht','ok');
-}
+function initWSForm(){const nEl=document.getElementById('ws-name');if(nEl)nEl.value=currentUser.name;const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();calcWS();}
+function calcWS(){const v=document.getElementById('ws-von')?.value,b=document.getElementById('ws-bis')?.value,p=parseFloat(document.getElementById('ws-pause')?.value)||0;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;const el=document.getElementById('ws-netto');if(el)el.value=(wm/60).toFixed(2).replace('.',',');}}
+function clearWSForm(){currentId=null;stopVoice();const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();['ws-taetigkeit','ws-maengel'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const netto=document.getElementById('ws-netto');if(netto)netto.value='';const fzSel=document.getElementById('ws-fahrzeug');if(fzSel)fzSel.value='';const st=document.getElementById('ws-send-status');if(st){st.className='send-status';st.textContent='';}document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));document.getElementById('ws-von').value='07:00';document.getElementById('ws-bis').value='16:00';document.getElementById('ws-pause').value='30';calcWS();toast('Neuer Werkstatt-Bericht','ok');}
 
 function buildFZListe(){
   const el=document.getElementById('fzliste-content');if(!el)return;
-  if(!FAHRZEUGE.length){el.innerHTML='<div class="empty"><div class="ei">&#128663;</div><div class="et">Keine Fahrzeuge</div></div>';return;}
-  const heute=new Date();
-  el.innerHTML='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--ws);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">Fahrzeugliste</div>'+
-    FAHRZEUGE.map(fz=>{
-      const tuevDate=fz.tuev_datum?new Date(fz.tuev_datum):null;
-      const insDate=fz.inspektion_datum?new Date(fz.inspektion_datum):null;
-      const tuevDiff=tuevDate?Math.floor((tuevDate-heute)/(1000*60*60*24)):null;
-      const insDiff=insDate?Math.floor((insDate-heute)/(1000*60*60*24)):null;
-      const tuevCls=tuevDiff===null?'':tuevDiff<0?'fz-err':tuevDiff<30?'fz-warn':'fz-ok';
-      const insCls=insDiff===null?'':insDiff<0?'fz-err':insDiff<30?'fz-warn':'fz-ok';
-      return '<div class="fz-item">'+
-        '<div class="fz-kz">'+fz.kennzeichen+'</div>'+
-        '<div class="fz-info">'+(fz.typ||'--')+' · '+(fz.hersteller||'')+(fz.baujahr?' Bj. '+fz.baujahr:'')+'</div>'+
-        '<div class="fz-status">'+
-        '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+fz.kilometerstand.toLocaleString()+'km</span>'+
-        '<span class="fz-badge" style="background:rgba(61,143,168,.1);color:var(--sky)">'+fz.betriebsstunden+'h</span>'+
-        (tuevDate?'<span class="fz-badge '+tuevCls+'">TÜV: '+fmtD(fz.tuev_datum)+(tuevDiff!==null?' ('+tuevDiff+'d)':'')+'</span>':'')+
-        (insDate?'<span class="fz-badge '+insCls+'">Insp: '+fmtD(fz.inspektion_datum)+(insDiff!==null?' ('+insDiff+'d)':'')+'</span>':'')+
-        '</div>'+
-        (fz.notizen?'<div style="font-size:11px;color:var(--m);margin-top:4px">'+fz.notizen+'</div>':'')+
-        '</div>';
-    }).join('');
+  el.innerHTML='<div class="a-sec" style="border-color:rgba(139,92,246,.2)"><div class="a-sec-title ws">Fahrzeug anlegen</div>'+
+    buildFZFormHTML('ws-fz')+
+    '<button class="btn btn-ws" ontouchstart="wsAddFZ()" onclick="wsAddFZ()">+ Fahrzeug anlegen</button></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--ws);letter-spacing:1.5px;text-transform:uppercase;margin:10px 0 8px">Fahrzeugliste</div>'+
+    (FAHRZEUGE.length?FAHRZEUGE.map(fz=>renderFZItem(fz)).join(''):'<div class="empty"><div class="ei">&#128663;</div><div class="et">Keine Fahrzeuge</div></div>');
+}
+
+async function wsAddFZ(){
+  const d=getFZFormData('ws-fz');
+  if(!d.kennzeichen||!d.typ){toast('Kennzeichen und Typ erforderlich','err');return;}
+  const{error}=await sb.from('fahrzeuge').insert({...d,aktiv:true});
+  if(error){toast('Fehler: '+error.message,'err');return;}
+  await loadFahrzeuge();
+  const sel=document.getElementById('ws-fahrzeug');
+  if(sel)sel.innerHTML='<option value="">- Fahrzeug waehlen -</option>'+FAHRZEUGE.map(fz=>'<option value="'+fz.id+'">'+fz.kennzeichen+' - '+fz.typ+'</option>').join('');
+  toast('Fahrzeug angelegt','ok');buildFZListe();
 }
 
 // ══════ AR FORM ══════
 function buildAR(){
-  return '<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
+  return'<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
     '<div class="fg w50"><label>Datum</label><input type="date" id="a-datum"></div>'+
     '<div class="fg w50"><label>Name</label><input type="text" id="a-name" readonly style="color:var(--gl);background:var(--s3)"></div>'+
     '<div class="fg w100"><label>Projekt</label><select id="a-projekt" onchange="onARProjektChange()">'+projektOpts('')+'</select></div>'+
     '<div class="fg w50"><label>Qualifikation</label><input type="text" id="a-qual" readonly style="background:var(--s3);color:var(--m)"></div>'+
     '<div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>'+
     '</div></div>'+
-    '<div class="qsec"><div class="qsec-t">Taetigkeiten</div>'+
-    '<div class="tags" id="ar-taetigkeiten-tags">'+taetigkeitenTags([])+'</div></div>'+
+    '<div class="qsec"><div class="qsec-t">Taetigkeiten</div><div class="tags" id="ar-taetigkeiten-tags">'+taetigkeitenTags([])+'</div></div>'+
     '<div class="qsec"><div class="qsec-t">Arbeitszeiten</div>'+
     '<div class="row">'+
     '<div class="fg w25"><label>Beginn</label><input type="time" id="a-von" value="07:00" oninput="calcAR()"></div>'+
@@ -1451,40 +1156,23 @@ function buildAR(){
     '<div class="sc"><div class="sv" id="a-h-monat">-</div><div class="sl">Monat</div></div>'+
     '</div></div>'+
     '<div class="qsec"><div class="qsec-t">Details (optional)</div>'+
-    '<textarea id="a-taetigkeit" placeholder="Weitere Details..." style="min-height:60px"></textarea>'+
-    mkMic('a-taetigkeit','Details')+
-    '<div style="margin-top:8px"><input type="text" id="a-besonder" placeholder="Besonderheiten...">'+
-    mkMic('a-besonder','Besonderheiten')+'</div></div>'+
+    '<textarea id="a-taetigkeit" placeholder="Weitere Details..." style="min-height:60px"></textarea>'+mkMic('a-taetigkeit','Details')+
+    '<div style="margin-top:8px"><input type="text" id="a-besonder" placeholder="Besonderheiten...">'+mkMic('a-besonder','Besonderheiten')+'</div></div>'+
     '<div class="send-status" id="ar-send-status"></div>'+
-    '<div class="arow">'+
-    '<button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">Speichern und PDF senden</button>'+
-    '<button class="btn" ontouchstart="clearARForm()" onclick="clearARForm()">Neu</button>'+
-    '</div>';
+    '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendAR()" onclick="saveAndSendAR()">Speichern und PDF senden</button>'+
+    '<button class="btn" ontouchstart="clearARForm()" onclick="clearARForm()">Neu</button></div>';
 }
 
 function initARForm(){
   const nEl=document.getElementById('a-name');if(nEl)nEl.value=currentUser.name;
   const qEl=document.getElementById('a-qual');if(qEl)qEl.value=currentUser.qualifikation||'Facharbeiter GaLa';
-  const dEl=document.getElementById('a-datum');if(dEl)dEl.value=todayStr();
-  calcAR();
+  const dEl=document.getElementById('a-datum');if(dEl)dEl.value=todayStr();calcAR();
 }
-
-function onARProjektChange(){
-  const sel=document.getElementById('a-projekt');if(!sel)return;
-  const fz=getProjektFahrzeit(sel.value);
-  const anzeige=document.getElementById('a-fahrzeit-anzeige');
-  if(anzeige)anzeige.value=fz>0?fz+' min (aus Projekt)':'0 min';
-  calcAR();
-}
-
+function onARProjektChange(){const sel=document.getElementById('a-projekt');if(!sel)return;const fz=getProjektFahrzeit(sel.value);const anzeige=document.getElementById('a-fahrzeit-anzeige');if(anzeige)anzeige.value=fz>0?fz+' min (aus Projekt)':'0 min';calcAR();}
 function calcAR(){
-  const v=document.getElementById('a-von')?.value;
-  const b=document.getElementById('a-bis')?.value;
-  const p=parseFloat(document.getElementById('a-pause')?.value)||0;
-  const projektSel=document.getElementById('a-projekt');
-  const fmin=projektSel?getProjektFahrzeit(projektSel.value):0;
-  const anzeige=document.getElementById('a-fahrzeit-anzeige');
-  if(anzeige)anzeige.value=fmin>0?fmin+' min (aus Projekt)':'0 min';
+  const v=document.getElementById('a-von')?.value,b=document.getElementById('a-bis')?.value,p=parseFloat(document.getElementById('a-pause')?.value)||0;
+  const projektSel=document.getElementById('a-projekt');const fmin=projektSel?getProjektFahrzeit(projektSel.value):0;
+  const anzeige=document.getElementById('a-fahrzeit-anzeige');if(anzeige)anzeige.value=fmin>0?fmin+' min (aus Projekt)':'0 min';
   if(v&&b){
     const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);
     let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;const wh=wm/60;
@@ -1493,11 +1181,7 @@ function calcAR(){
     const fh=(fmin/60)*satz;const tot=wh+fh;
     const ntEl=document.getElementById('a-netto');if(ntEl)ntEl.value=tot.toFixed(2).replace('.',',');
     const infoEl=document.getElementById('fahrzeit-info');
-    if(infoEl&&fmin>0){
-      const lbl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[curFahrtStatus];
-      infoEl.textContent='Fahrzeit: '+fmin+'min x '+Math.round(satz*100)+'% = '+fh.toFixed(2).replace('.',',')+'h | '+lbl;
-      infoEl.style.color=curFahrtStatus==='privat'?'var(--m)':curFahrtStatus==='beifahrer'?'var(--earth)':'var(--sky)';
-    }else if(infoEl)infoEl.textContent='';
+    if(infoEl&&fmin>0){const lbl={'fahrer':'Fahrer 100%','beifahrer':'Beifahrer 50%','privat':'Privat 0%'}[curFahrtStatus];infoEl.textContent='Fahrzeit: '+fmin+'min x '+Math.round(satz*100)+'% = '+fh.toFixed(2).replace('.',',')+'h | '+lbl;infoEl.style.color=curFahrtStatus==='privat'?'var(--m)':curFahrtStatus==='beifahrer'?'var(--earth)':'var(--sky)';}else if(infoEl)infoEl.textContent='';
     const today=todayStr(),week=getWeekStart(),month=new Date().getMonth();
     const hT=reports.filter(r=>r.mitarbeiter_id===currentUser.id&&r.datum===today&&r.rolle==='ar').reduce((s,r)=>s+(parseFloat(r.netto_gesamt_h||r.netto_arbeit_h||0)),0)+tot;
     const hW=reports.filter(r=>r.mitarbeiter_id===currentUser.id&&r.datum>=week&&r.rolle==='ar').reduce((s,r)=>s+(parseFloat(r.netto_gesamt_h||r.netto_arbeit_h||0)),0)+tot;
@@ -1507,32 +1191,16 @@ function calcAR(){
     const mEl=document.getElementById('a-h-monat');if(mEl)mEl.textContent=hM.toFixed(1)+'h';
   }
 }
-
-function clearARForm(){
-  currentId=null;stopVoice();
-  document.getElementById('a-datum').value=todayStr();
-  document.getElementById('a-projekt').value='';
-  document.getElementById('a-von').value='07:00';
-  document.getElementById('a-bis').value='16:00';
-  document.getElementById('a-pause').value='30';
-  ['a-netto-work','a-netto','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  const fa=document.getElementById('a-fahrzeit-anzeige');if(fa)fa.value='0 min';
-  const fi=document.getElementById('fahrzeit-info');if(fi)fi.textContent='';
-  const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}
-  curFahrtStatus='fahrer';
-  document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});
-  document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));
-  toast('Neuer Bericht','ok');
-}
+function clearARForm(){currentId=null;stopVoice();document.getElementById('a-datum').value=todayStr();document.getElementById('a-projekt').value='';document.getElementById('a-von').value='07:00';document.getElementById('a-bis').value='16:00';document.getElementById('a-pause').value='30';['a-netto-work','a-netto','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const fa=document.getElementById('a-fahrzeit-anzeige');if(fa)fa.value='0 min';const fi=document.getElementById('fahrzeit-info');if(fi)fi.textContent='';const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}curFahrtStatus='fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));toast('Neuer Bericht','ok');}
 
 // ══════ VA FORMS ══════
 function buildVABericht(){
-  return '<div class="sec"><div class="sh">Grunddaten</div><div class="row">'+
+  return'<div class="sec"><div class="sh">Grunddaten</div><div class="row">'+
     '<div class="fg w25"><label>Datum</label><input type="date" id="v-datum"></div>'+
     '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="intern"></div>'+
     '<div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>'+
     '<div class="fg w25"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
-    '<div class="fg w100"><label>Projekt</label><select id="v-projekt">'+projektOpts('')+'</select></div>'+
+    '<div class="fg w100"><label>Hauptprojekt</label><select id="v-projekt" onchange="onVAProjektChange()">'+projektOpts('')+'</select></div>'+
     '<div class="fg w50"><label>Bereich / Detail</label><input type="text" id="v-baustelle" placeholder="z.B. Bereich Nord...">'+mkMic('v-baustelle','Baustelle')+'</div>'+
     '<div class="fg w50"><label>Bauherr / AG</label><input type="text" id="v-bauherr" placeholder="Gemeinde...">'+mkMic('v-bauherr','Bauherr')+'</div>'+
     '<div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>'+
@@ -1546,9 +1214,12 @@ function buildVABericht(){
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Frost/Eis\')" onclick="selW(this,\'Frost/Eis\')">Frost</div>'+
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Sturm\')" onclick="selW(this,\'Sturm\')">Sturm</div>'+
     '<div class="wc" ontouchstart="event.preventDefault();selW(this,\'Schnee\')" onclick="selW(this,\'Schnee\')">Schnee</div>'+
-    '</div></div>'+
-    '<div class="sec"><div class="sh">Taetigkeiten</div>'+
-    '<div class="tags" id="va-taetigkeiten-tags">'+taetigkeitenTags([])+'</div></div>'+
+    '</div>'+
+    // ZWEITES PROJEKT BLOCK
+    '<div id="zusatz-proj-wrap"></div>'+
+    '<button class="btn btn-e" style="margin-top:8px;font-size:11px" ontouchstart="addZusatzProjekt()" onclick="addZusatzProjekt()">+ Weitere Baustelle</button>'+
+    '</div>'+
+    '<div class="sec"><div class="sh">Taetigkeiten</div><div class="tags" id="va-taetigkeiten-tags">'+taetigkeitenTags([])+'</div></div>'+
     '<div class="sec"><div class="sh">Fotos (max. 5)</div>'+
     '<input type="file" id="v-fotos-input" accept="image/*" multiple style="display:none" onchange="handleFotos(this)">'+
     '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
@@ -1562,48 +1233,91 @@ function buildVABericht(){
     '<div id="mangel-con"></div>'+
     '<button class="btn btn-r" style="font-size:11px" ontouchstart="addMangel()" onclick="addMangel()">+ Mangel</button>'+
     '<div class="fg" style="margin-top:10px"><label>Naechste Schritte</label>'+
-    '<textarea id="v-naechstes" placeholder="Geplante Folgearbeiten..."></textarea>'+
-    mkMic('v-naechstes','Naechste Schritte')+'</div>'+
+    '<textarea id="v-naechstes" placeholder="Geplante Folgearbeiten..."></textarea>'+mkMic('v-naechstes','Naechste Schritte')+'</div>'+
     '<div class="fg" style="margin-top:8px"><label>Bemerkungen</label>'+
-    '<textarea id="v-bemerkungen"></textarea>'+
-    mkMic('v-bemerkungen','Bemerkungen')+'</div></div>'+
+    '<textarea id="v-bemerkungen"></textarea>'+mkMic('v-bemerkungen','Bemerkungen')+'</div></div>'+
     '<div class="send-status" id="va-send-status"></div>'+
     '<div class="arow">'+
     '<button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button>'+
-    '<button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">KI Analyse</button>'+
-    '<button class="btn" ontouchstart="newReport()" onclick="newReport()">Neu</button>'+
-    '</div>';
+    '<button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">KI</button>'+
+    '<button class="btn" ontouchstart="newReport()" onclick="newReport()">Neu</button></div>';
+}
+
+// FIX: Projekt-Übernahme in alle Zeitzeilen
+function onVAProjektChange(){
+  const sel=document.getElementById('v-projekt');if(!sel||!sel.value)return;
+  const fz=getProjektFahrzeit(sel.value);
+  // Alle Zeitzeilen aktualisieren
+  document.querySelectorAll('#zeit-body tr').forEach(tr=>{
+    const prSel=tr.querySelector('.row-pr');if(prSel&&!prSel.value)prSel.value=sel.value;
+    const fzEl=tr.querySelector('.zeit-fahrzeit');if(fzEl&&fz>0&&fzEl.value==='0')fzEl.value=fz;
+    calcZR(tr.querySelector('.zeit-von')||tr.querySelector('input'));
+  });
+  toast('Projekt + Fahrzeit in Zeiten übernommen','ok');
+}
+
+// ZWEITE BAUSTELLE
+let zusatzProjektIdx=0;
+function addZusatzProjekt(){
+  zusatzProjektIdx++;const i=zusatzProjektIdx;
+  const wrap=document.getElementById('zusatz-proj-wrap');if(!wrap)return;
+  const div=document.createElement('div');div.className='zusatz-projekt-block';div.id='zusatz-'+i;
+  div.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth);letter-spacing:1px">WEITERE BAUSTELLE '+i+'</div>'+
+    '<button class="delbtn" style="color:var(--r)" ontouchstart="document.getElementById(\'zusatz-'+i+'\').remove()" onclick="document.getElementById(\'zusatz-'+i+'\').remove()">&#x2715;</button></div>'+
+    '<div class="row">'+
+    '<div class="fg w100"><label>Projekt</label><select id="zusatz-proj-'+i+'" onchange="onZusatzProjektChange('+i+')">'+projektOpts('')+'</select></div>'+
+    '<div class="fg w50"><label>Bereich</label><input type="text" id="zusatz-baustelle-'+i+'" placeholder="z.B. Bereich Sued..."></div>'+
+    '<div class="fg w50"><label>Bauherr</label><input type="text" id="zusatz-bauherr-'+i+'" placeholder="Gemeinde..."></div>'+
+    '</div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:4px">'+
+    'Mitarbeiter werden im Zeiten-Tab dem Projekt zugewiesen</div>';
+  wrap.appendChild(div);
+}
+
+function onZusatzProjektChange(i){
+  const sel=document.getElementById('zusatz-proj-'+i);if(!sel||!sel.value)return;
+  toast('Zweites Projekt gewählt — Mitarbeiter in Zeiten zuweisen','info');
+}
+
+function getZusatzProjekte(){
+  const result=[];
+  document.querySelectorAll('[id^="zusatz-"]').forEach(block=>{
+    const i=block.id.replace('zusatz-','');
+    const projSel=document.getElementById('zusatz-proj-'+i);
+    if(projSel?.value){
+      const proj=PROJEKTE.find(p=>p.id===projSel.value);
+      result.push({projektId:projSel.value,projektNr:proj?.nr||'',projektName:proj?.name||'',baustelle:document.getElementById('zusatz-baustelle-'+i)?.value||'',bauherr:document.getElementById('zusatz-bauherr-'+i)?.value||''});
+    }
+  });
+  return result;
 }
 
 function buildVAZeit(){
-  return '<div class="sec"><div class="sh">Personal-Zeiterfassung <span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0h gesamt</span></div>'+
+  return'<div class="sec"><div class="sh">Personal-Zeiterfassung <span id="zeit-total" style="margin-left:auto;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-size:10px">0,0h gesamt</span></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px">Fahrzeit wird aus Hauptprojekt automatisch übernommen</div>'+
     '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
     '<th>Name</th><th>Qual.</th><th>Von</th><th>Bis</th><th>Pause</th><th>Arbeit</th><th>Fahrt</th><th>Fahrzeit</th><th>Anteil</th><th>GESAMT</th><th>Projekt</th><th>Taetigkeit</th><th></th>'+
     '</tr></thead><tbody id="zeit-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addZeitRow()" onclick="addZeitRow()">+ Person</button></div>'+
     '<div class="sec"><div class="sh">Geraeteeinsatz (Dataflor)</div>'+
-    '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
-    '<th>Geraet</th><th>Fahrzeugnr.</th><th>Stunden</th><th>Projekt</th><th></th>'+
-    '</tr></thead><tbody id="mach-body"></tbody></table></div>'+
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Geraet</th><th>Fahrzeugnr.</th><th>Stunden</th><th>Projekt</th><th></th></tr></thead><tbody id="mach-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addMachRow()" onclick="addMachRow()">+ Geraet</button></div>'+
     '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
 }
 
 function buildVAMaterial(){
-  return '<div class="sec"><div class="sh">Materiallieferungen</div>'+
-    '<div id="lief-con"></div><button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">+ Lieferung</button></div>'+
-    '<div class="sec" style="margin-top:12px"><div class="sh">Mengennachweise</div>'+
-    '<div id="mengen-con"></div><button class="btn" ontouchstart="addMenge()" onclick="addMenge()">+ Menge</button></div>'+
+  return'<div class="sec"><div class="sh">Materiallieferungen</div><div id="lief-con"></div><button class="btn btn-e" ontouchstart="addLief()" onclick="addLief()">+ Lieferung</button></div>'+
+    '<div class="sec" style="margin-top:12px"><div class="sh">Mengennachweise</div><div id="mengen-con"></div><button class="btn" ontouchstart="addMenge()" onclick="addMenge()">+ Menge</button></div>'+
     '<div class="sec" style="margin-top:12px"><div class="sh">LV-Positionen</div>'+
-    '<div class="tbl-wrap"><table class="tbl"><thead><tr>'+
-    '<th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Projekt</th><th></th>'+
-    '</tr></thead><tbody id="lv-body"></tbody></table></div>'+
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pos.-Nr.</th><th>Bezeichnung</th><th>Einheit</th><th>Soll</th><th>Ist</th><th>Projekt</th><th></th></tr></thead><tbody id="lv-body"></tbody></table></div>'+
     '<button class="btn" ontouchstart="addLVRow()" onclick="addLVRow()">+ Position</button></div>'+
     '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
 }
 
 function buildKI(){
-  return '<div class="sh">KI-Analyse</div>'+
+  return'<div class="sh">KI-Analyse</div>'+
     '<div class="ai-acts">'+
     '<button class="ai-ab" ontouchstart="runAI(\'zusammenfassung\')" onclick="runAI(\'zusammenfassung\')">Zusammenfassung</button>'+
     '<button class="ai-ab" ontouchstart="runAI(\'risiken\')" onclick="runAI(\'risiken\')">Risiken</button>'+
@@ -1620,12 +1334,16 @@ function getZeitRowsSimple(){return[...document.querySelectorAll('#zeit-body tr'
 function addZeitRow(data={}){
   const tbody=document.getElementById('zeit-body');if(!tbody)return;
   const tr=document.createElement('tr');
-  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id||data.projektNr===p.nr?'selected':'')+'>'+p.nr+'</option>').join('');
+  // Fahrzeit aus Hauptprojekt automatisch übernehmen
+  const hauptProjektId=document.getElementById('v-projekt')?.value||'';
+  const autoFz=getProjektFahrzeit(hauptProjektId);
+  const fzVal=data.fahrzeitMin!==undefined?parseInt(data.fahrzeitMin):autoFz;
+  const autoProjId=data.projektId||hauptProjektId||'';
+  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(autoProjId===p.id?'selected':'')+'>'+p.nr+'</option>').join('');
   const taeOpts='<option value="">-</option>'+TAETIGKEITEN.map(t=>'<option value="'+t+'" '+(data.tae===t?'selected':'')+'>'+t+'</option>').join('');
-  const fzVal=data.fahrzeitMin!==undefined?parseInt(data.fahrzeitMin):(data.projektNr?getProjektFahrzeit(data.projektNr):0);
   tr.innerHTML=
     '<td><input class="zeit-name" type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:80px" oninput="refreshStepMAs()"></td>'+
-    '<td><select class="zeit-qual" style="font-size:10px" onchange="refreshStepMAs()">'+['VA','Facharbeiter','Helfer','Azubi','Sub'].map(q=>'<option'+(data.qual===q?' selected':'')+'>'+q+'</option>').join('')+'</select></td>'+
+    '<td><select class="zeit-qual" style="font-size:10px">'+['VA','Facharbeiter','Helfer','Azubi','Sub'].map(q=>'<option'+(data.qual===q?' selected':'')+'>'+q+'</option>').join('')+'</select></td>'+
     '<td><input class="zeit-von" type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
     '<td><input class="zeit-bis" type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
     '<td>'+pausenSelect(data.pause||30,'zeit-pause')+'</td>'+
@@ -1647,7 +1365,7 @@ function addZeitRow(data={}){
 function onZeitProjektChange(sel){const tr=sel.closest('tr');if(!tr)return;const fz=getProjektFahrzeit(sel.value);const fzEl=tr.querySelector('.zeit-fahrzeit');if(fzEl&&fz>0)fzEl.value=fz;calcZR(tr.querySelector('.zeit-von'));}
 
 function calcZR(inp){
-  const tr=inp.closest('tr');if(!tr)return;
+  if(!inp)return;const tr=inp.closest('tr');if(!tr)return;
   const von=tr.querySelector('.zeit-von')?.value||'',bis=tr.querySelector('.zeit-bis')?.value||'';
   const pause=parseFloat(tr.querySelector('.zeit-pause')?.value)||0;
   const fahrzeitMin=parseFloat(tr.querySelector('.zeit-fahrzeit')?.value)||0;
@@ -1656,75 +1374,21 @@ function calcZR(inp){
     const[vh,vm]=von.split(':').map(Number),[bh,bm]=bis.split(':').map(Number);
     let arbMin=(bh*60+bm)-(vh*60+vm)-pause;if(arbMin<0)arbMin+=1440;const arbH=arbMin/60;
     const nettoEl=tr.querySelector('.zeit-netto');if(nettoEl)nettoEl.value=arbH.toFixed(2).replace('.',',');
-    const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[fahrtVal]??1.0;
-    const fahrtH=(fahrzeitMin/60)*satz;
+    const satz={'fahrer':1.0,'beifahrer':0.5,'privat':0.0}[fahrtVal]??1.0;const fahrtH=(fahrzeitMin/60)*satz;
     const anteilEl=tr.querySelector('.zeit-anteil');if(anteilEl)anteilEl.value=fahrtH.toFixed(2).replace('.',',');
     const gesamtEl=tr.querySelector('.zeit-gesamt');if(gesamtEl)gesamtEl.value=(arbH+fahrtH).toFixed(2).replace('.',',');
   }
   updZeitTotal();
 }
-
 function updZeitTotal(){let t=0;document.querySelectorAll('.zeit-gesamt').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);const el=document.getElementById('zeit-total');if(el)el.textContent=t.toFixed(2).replace('.',',')+'h gesamt';}
-
-function getZeitRows(){
-  return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({
-    name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||'',
-    von:tr.querySelector('.zeit-von')?.value||'',bis:tr.querySelector('.zeit-bis')?.value||'',
-    pause:tr.querySelector('.zeit-pause')?.value||'30',nettoArbeit:tr.querySelector('.zeit-netto')?.value||'',
-    fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:tr.querySelector('.zeit-fahrzeit')?.value||'0',
-    fahrtAnteil:tr.querySelector('.zeit-anteil')?.value||'',gesamt:tr.querySelector('.zeit-gesamt')?.value||'',
-    projektNr:PROJEKTE.find(p=>p.id===tr.querySelector('.row-pr')?.value)?.nr||'',
-    projektId:tr.querySelector('.row-pr')?.value||'',tae:tr.querySelector('.row-tae')?.value||''
-  })).filter(r=>r.name);
-}
-
-function addMachRow(data={}){
-  const tbody=document.getElementById('mach-body');if(!tbody)return;
-  const tr=document.createElement('tr');
-  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+'</option>').join('');
-  tr.innerHTML='<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet -</option>'+GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+'</select></td>'+
-    '<td><input type="text" class="mach-fzn" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td>'+
-    '<td><input type="number" class="mach-std" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700"></td>'+
-    '<td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td>'+
-    '<td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';
-  tbody.appendChild(tr);
-}
-
+function getZeitRows(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||'',von:tr.querySelector('.zeit-von')?.value||'',bis:tr.querySelector('.zeit-bis')?.value||'',pause:tr.querySelector('.zeit-pause')?.value||'30',nettoArbeit:tr.querySelector('.zeit-netto')?.value||'',fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:tr.querySelector('.zeit-fahrzeit')?.value||'0',fahrtAnteil:tr.querySelector('.zeit-anteil')?.value||'',gesamt:tr.querySelector('.zeit-gesamt')?.value||'',projektNr:PROJEKTE.find(p=>p.id===tr.querySelector('.row-pr')?.value)?.nr||'',projektId:tr.querySelector('.row-pr')?.value||'',tae:tr.querySelector('.row-tae')?.value||''})).filter(r=>r.name);}
+function addMachRow(data={}){const tbody=document.getElementById('mach-body');if(!tbody)return;const tr=document.createElement('tr');const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+'</option>').join('');tr.innerHTML='<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet -</option>'+GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+'</select></td><td><input type="text" class="mach-fzn" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td><td><input type="number" class="mach-std" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700"></td><td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
 function getMachRows(){return[...document.querySelectorAll('#mach-body tr')].map(tr=>{const geraetNr=tr.querySelector('.geraet-sel')?.value||'';const geraet=GERAETE.find(g=>g.nr===geraetNr);return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:tr.querySelector('.mach-fzn')?.value||'',netto:tr.querySelector('.mach-std')?.value||'',projektId:tr.querySelector('.row-pr')?.value||''};}).filter(r=>r.geraetNr);}
-
-function addStep(data={}){
-  stepIdx++;const i=stepIdx;
-  const maRows=getZeitRowsSimple();
-  let maHtml=maRows.length>0?'<div class="ma-zuweisung"><div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);const std=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+std+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';}).join('')+'</div>':'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
-  const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;
-  div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div>'+
-    '<select style="flex:0 0 180px;font-size:10px;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'"><option value="">- Projekt -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('')+'</select>'+
-    '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'">'+
-    '<button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button></div>'+
-    '<textarea id="st-txt-'+i+'" style="min-height:60px;margin-bottom:4px" placeholder="Taetigkeit beschreiben...">'+(data.txt||'')+'</textarea>'+mkMic('st-txt-'+i,'Schritt '+i)+
-    '<div style="display:flex;gap:6px;margin-top:8px"><div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" value="'+(data.menge||'')+'" placeholder="200 m2"></div>'+
-    '<div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" value="'+(data.eh||'')+'" placeholder="m2, lfm"></div></div>'+maHtml;
-  document.getElementById('steps-con')?.appendChild(div);
-}
-
+function addStep(data={}){stepIdx++;const i=stepIdx;const maRows=getZeitRowsSimple();let maHtml=maRows.length>0?'<div class="ma-zuweisung"><div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);const std=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+std+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';}).join('')+'</div>':'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div><select style="flex:0 0 180px;font-size:10px;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'"><option value="">- Projekt -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('')+'</select><input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'"><button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button></div><textarea id="st-txt-'+i+'" style="min-height:60px;margin-bottom:4px" placeholder="Taetigkeit beschreiben...">'+(data.txt||'')+'</textarea>'+mkMic('st-txt-'+i,'Schritt '+i)+'<div style="display:flex;gap:6px;margin-top:8px"><div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" value="'+(data.menge||'')+'" placeholder="200 m2"></div><div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" value="'+(data.eh||'')+'" placeholder="m2, lfm"></div></div>'+maHtml;document.getElementById('steps-con')?.appendChild(div);}
 function updateStepMA(idx){const block=document.getElementById('step-'+idx);if(!block)return;block.querySelectorAll('.ma-cb').forEach(cb=>{const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');if(h)h.style.opacity=cb.checked?'1':'0.4';});}
-
-function refreshStepMAs(){
-  const blocks=document.querySelectorAll('[id^="step-"]');if(!blocks.length)return;
-  const maRows=getZeitRowsSimple();
-  blocks.forEach(block=>{
-    const idx=block.id.replace('step-','');let zone=block.querySelector('.ma-zuweisung');const noMA=block.querySelector('[data-no-ma]');
-    const checked={};block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});
-    const stunden={};block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});
-    if(maRows.length===0){if(zone)zone.remove();if(!noMA){const msg=document.createElement('div');msg.setAttribute('data-no-ma','1');msg.style.cssText='font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px';msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';block.appendChild(msg);}return;}
-    if(noMA)noMA.remove();if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}
-    zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const ic=checked[ma.name]||false;const h=stunden[ma.name]||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(ic?'checked':'')+' onchange="updateStepMA('+idx+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+h+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(ic?'1':'0.4')+'" oninput="updateStepMA('+idx+')">';}).join('');
-  });
-}
-
+function refreshStepMAs(){const blocks=document.querySelectorAll('[id^="step-"]');if(!blocks.length)return;const maRows=getZeitRowsSimple();blocks.forEach(block=>{const idx=block.id.replace('step-','');let zone=block.querySelector('.ma-zuweisung');const noMA=block.querySelector('[data-no-ma]');const checked={};block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});const stunden={};block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});if(maRows.length===0){if(zone)zone.remove();if(!noMA){const msg=document.createElement('div');msg.setAttribute('data-no-ma','1');msg.style.cssText='font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px';msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';block.appendChild(msg);}return;}if(noMA)noMA.remove();if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const ic=checked[ma.name]||false;const h=stunden[ma.name]||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(ic?'checked':'')+' onchange="updateStepMA('+idx+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+h+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(ic?'1':'0.4')+'" oninput="updateStepMA('+idx+')">';}).join('');});}
 function getStepMAs(idx){const block=document.getElementById('step-'+idx);if(!block)return[];const result=[];block.querySelectorAll('.ma-cb:checked').forEach(cb=>{const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');result.push({name:cb.dataset.name,stunden:h?.value||''});});return result;}
 function getSteps(){return[...document.querySelectorAll('[id^="step-"]')].filter(b=>b.id.match(/^step-\d+$/)).map(b=>{const i=b.id.replace('step-','');const pid=b.querySelector('#st-pr-'+i)?.value||'';return{txt:b.querySelector('#st-txt-'+i)?.value||'',projektId:pid,projektNr:PROJEKTE.find(p=>p.id===pid)?.nr||'',pos:b.querySelector('#st-pos-'+i)?.value||'',menge:b.querySelector('#st-mg-'+i)?.value||'',eh:b.querySelector('#st-eh-'+i)?.value||'',mitarbeiter:getStepMAs(i)};}).filter(s=>s.txt);}
-
 function addLief(data={}){liefIdx++;const i=liefIdx;const div=document.createElement('div');div.className='lief-block';div.innerHTML='<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div><button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div><div class="row"><div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" value="'+(data.firma||'')+'" placeholder="Muster GmbH..."></div><div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" value="'+(data.ls||'')+'" placeholder="LS-001"></div><div class="fg w50"><label>Material</label><input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen...">'+mkMic('lf-mat-'+i,'Material')+'</div><div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div><div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option><option>l</option></select></div><div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>OK</option><option>Teillieferung</option><option>Falsche Ware</option><option>Maengel</option><option>Verzug</option></select></div><div class="fg w50"><label>Bemerkung</label><input type="text" id="lf-bem-'+i+'" value="'+(data.bem||'')+'"></div></div>';document.getElementById('lief-con')?.appendChild(div);}
 function getLiefData(){return[...document.querySelectorAll('#lief-con .lief-block')].map((b,i)=>{const n=i+1;return{firma:b.querySelector('#lf-firma-'+n)?.value,ls:b.querySelector('#lf-ls-'+n)?.value,mat:b.querySelector('#lf-mat-'+n)?.value,menge:b.querySelector('#lf-mg-'+n)?.value,eh:b.querySelector('#lf-eh-'+n)?.value,ok:b.querySelector('#lf-ok-'+n)?.value,bem:b.querySelector('#lf-bem-'+n)?.value};}).filter(l=>l.firma||l.mat);}
 function addMenge(data={}){const div=document.createElement('div');div.className='lief-block';div.style.padding='8px';div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><input type="text" placeholder="Bezeichnung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px"><input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px"><select style="flex:0 0 65px;font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select><input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"><button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div>';document.getElementById('mengen-con')?.appendChild(div);}
@@ -1737,16 +1401,11 @@ function getMangelData(){return[...document.querySelectorAll('.mangel-block')].m
 // ══════ KALENDER ══════
 function buildKalender(){
   const el=document.getElementById('kalender-content');if(!el)return;
-  const heute=new Date();const firstDay=new Date(kalJahr,kalMonat,1);const lastDay=new Date(kalJahr,kalMonat+1,0);
+  const heute=new Date(),firstDay=new Date(kalJahr,kalMonat,1),lastDay=new Date(kalJahr,kalMonat+1,0);
   const startWd=(firstDay.getDay()+6)%7;
   const MONATE=['Januar','Februar','Maerz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
   const berichteImMonat={};
-  reports.forEach(r=>{
-    if(!r.datum)return;const d=new Date(r.datum);
-    if(d.getMonth()!==kalMonat||d.getFullYear()!==kalJahr)return;
-    if(r.mitarbeiter_id!==currentUser.id)return;
-    berichteImMonat[r.datum]=(berichteImMonat[r.datum]||0)+1;
-  });
+  reports.forEach(r=>{if(!r.datum)return;const d=new Date(r.datum);if(d.getMonth()!==kalMonat||d.getFullYear()!==kalJahr)return;if(r.mitarbeiter_id!==currentUser.id)return;berichteImMonat[r.datum]=(berichteImMonat[r.datum]||0)+1;});
   let html='<div class="kalender-wrap"><div class="kal-header">'+
     '<button class="kal-nav" ontouchstart="kalPrev()" onclick="kalPrev()">&#x276E;</button>'+
     '<div class="kal-monat">'+MONATE[kalMonat]+' '+kalJahr+'</div>'+
@@ -1763,8 +1422,7 @@ function buildKalender(){
     html+='<div class="'+cls+'">'+tag+'</div>';
   }
   html+='</div></div>';
-  const werktage=[];
-  for(let t=1;t<=lastDay.getDate();t++){const d=new Date(kalJahr,kalMonat,t);if(d.getDay()!==0&&d.getDay()!==6&&d<=heute)werktage.push(kalJahr+'-'+String(kalMonat+1).padStart(2,'0')+'-'+String(t).padStart(2,'0'));}
+  const werktage=[];for(let t=1;t<=lastDay.getDate();t++){const d=new Date(kalJahr,kalMonat,t);if(d.getDay()!==0&&d.getDay()!==6&&d<=heute)werktage.push(kalJahr+'-'+String(kalMonat+1).padStart(2,'0')+'-'+String(t).padStart(2,'0'));}
   const mitBericht=werktage.filter(d=>berichteImMonat[d]>0).length;
   html+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">'+
     '<div class="sc"><div class="sv" style="color:var(--gl)">'+mitBericht+'</div><div class="sl">Berichte</div></div>'+
@@ -1776,9 +1434,11 @@ function kalPrev(){kalMonat--;if(kalMonat<0){kalMonat=11;kalJahr--;}buildKalende
 function kalNext(){kalMonat++;if(kalMonat>11){kalMonat=0;kalJahr++;}buildKalender();}
 // ══════ SAVE & SEND ══════
 async function getActiveEmpfaenger(){
-  const{data}=await sb.from('email_empfaenger').select('email').eq('aktiv',true);
-  if(!data||!data.length)return[EMPFAENGER_MAIL];
-  return data.map(e=>e.email);
+  const{data}=await sb.from('email_empfaenger').select('*').eq('aktiv',true);
+  if(!data||!data.length)return{to:['kleizeitmanager34@gmail.com'],cc:[]};
+  const to=data.filter(e=>e.typ!=='cc').map(e=>e.email).filter(Boolean);
+  const cc=data.filter(e=>e.typ==='cc').map(e=>e.email).filter(Boolean);
+  return{to:to.length?to:['kleizeitmanager34@gmail.com'],cc};
 }
 
 async function saveAndSendWS(){
@@ -1790,26 +1450,15 @@ async function saveAndSendWS(){
   const fz=FAHRZEUGE.find(f=>f.id===fzId);
   const nettoVal=parseFloat((document.getElementById('ws-netto')?.value||'0').replace(',','.'))||0;
   const d={
-    mitarbeiter_id:currentUser.id,
-    mitarbeiter_name:currentUser.name,
-    mitarbeiter_nr:currentUser.mitarbeiter_nr,
-    datum:document.getElementById('ws-datum').value,
-    projekt_id:projektId||null,
-    projekt_nr:projekt?.nr||'',
-    rolle:'ws',
-    wetter:document.getElementById('ws-wetter').value,
-    taetigkeiten:getWSTaetigkeiten(),
-    von:document.getElementById('ws-von').value,
-    bis:document.getElementById('ws-bis').value,
+    mitarbeiter_id:currentUser.id,mitarbeiter_name:currentUser.name,mitarbeiter_nr:currentUser.mitarbeiter_nr,
+    datum:document.getElementById('ws-datum').value,projekt_id:projektId||null,projekt_nr:projekt?.nr||'',
+    rolle:'ws',wetter:document.getElementById('ws-wetter').value,taetigkeiten:getWSTaetigkeiten(),
+    von:document.getElementById('ws-von').value,bis:document.getElementById('ws-bis').value,
     pause_min:parseInt(document.getElementById('ws-pause')?.value)||30,
-    fahrzeit_min:0,
-    fahrt_status:'fahrer',
-    netto_arbeit_h:nettoVal,
-    netto_gesamt_h:nettoVal,
+    fahrzeit_min:0,fahrt_status:'fahrer',netto_arbeit_h:nettoVal,netto_gesamt_h:nettoVal,
     taetigkeit_text:document.getElementById('ws-taetigkeit').value,
     besonder:document.getElementById('ws-maengel').value,
-    baustelle:fz?fz.kennzeichen+' - '+fz.typ:'',
-    gesendet:false
+    baustelle:fz?fz.kennzeichen+' - '+fz.typ:'',gesendet:false
   };
   if(!d.datum){toast('Datum erforderlich','err');return;}
   const st=document.getElementById('ws-send-status');
@@ -1824,11 +1473,11 @@ async function saveAndSendWS(){
     savedId=ins.id;currentId=savedId;
   }
   await loadReports();renderSB();toast('Gespeichert','ok');
-  const reportForPDF={...d,id:savedId,role:'ar',name:currentUser.name,projektNr:projekt?.nr||'',pause:d.pause_min,fahrzeitMin:0,fahrtStatus:'fahrer',nettoWork:document.getElementById('ws-netto')?.value,netto:document.getElementById('ws-netto')?.value};
-  await sendPDFMail(reportForPDF,'ws-send-status');
-  await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
-  await loadReports();renderSB();
-  currentId=null;clearWSForm();
+  const reportForPDF={...d,id:savedId,role:'ws',name:currentUser.name,projektNr:projekt?.nr||'',pause:d.pause_min,fahrzeitMin:0,fahrtStatus:'fahrer',nettoWork:document.getElementById('ws-netto')?.value,netto:document.getElementById('ws-netto')?.value};
+  const pdfUrl=await sendPDFMail(reportForPDF,'ws-send-status');
+  if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
+  else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
+  await loadReports();renderSB();currentId=null;clearWSForm();
 }
 
 async function saveAndSendAR(){
@@ -1837,25 +1486,16 @@ async function saveAndSendAR(){
   const projekt=PROJEKTE.find(p=>p.id===projektId);
   const fzMin=getProjektFahrzeit(projektId);
   const d={
-    mitarbeiter_id:currentUser.id,
-    mitarbeiter_name:currentUser.name,
-    mitarbeiter_nr:currentUser.mitarbeiter_nr,
-    datum:document.getElementById('a-datum').value,
-    projekt_id:projektId||null,
-    projekt_nr:projekt?.nr||'',
-    rolle:'ar',
-    wetter:document.getElementById('a-wetter').value,
-    taetigkeiten:getARTaetigkeiten(),
-    von:document.getElementById('a-von').value,
-    bis:document.getElementById('a-bis').value,
+    mitarbeiter_id:currentUser.id,mitarbeiter_name:currentUser.name,mitarbeiter_nr:currentUser.mitarbeiter_nr,
+    datum:document.getElementById('a-datum').value,projekt_id:projektId||null,projekt_nr:projekt?.nr||'',
+    rolle:'ar',wetter:document.getElementById('a-wetter').value,taetigkeiten:getARTaetigkeiten(),
+    von:document.getElementById('a-von').value,bis:document.getElementById('a-bis').value,
     pause_min:parseInt(document.getElementById('a-pause')?.value)||30,
-    fahrzeit_min:fzMin,
-    fahrt_status:curFahrtStatus,
+    fahrzeit_min:fzMin,fahrt_status:curFahrtStatus,
     netto_arbeit_h:parseFloat((document.getElementById('a-netto-work')?.value||'0').replace(',','.'))||0,
     netto_gesamt_h:parseFloat((document.getElementById('a-netto')?.value||'0').replace(',','.'))||0,
     taetigkeit_text:document.getElementById('a-taetigkeit').value,
-    besonder:document.getElementById('a-besonder').value,
-    gesendet:false
+    besonder:document.getElementById('a-besonder').value,gesendet:false
   };
   if(!d.datum){toast('Datum erforderlich','err');return;}
   const st=document.getElementById('ar-send-status');
@@ -1871,10 +1511,10 @@ async function saveAndSendAR(){
   }
   await loadReports();renderSB();toast('Gespeichert','ok');
   const reportForPDF={...d,id:savedId,role:'ar',name:currentUser.name,projektNr:projekt?.nr||'',pause:d.pause_min,fahrzeitMin:fzMin,fahrtStatus:curFahrtStatus,nettoWork:document.getElementById('a-netto-work')?.value,netto:document.getElementById('a-netto')?.value};
-  await sendPDFMail(reportForPDF,'ar-send-status');
-  await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
-  await loadReports();renderSB();
-  currentId=null;clearARForm();
+  const pdfUrl=await sendPDFMail(reportForPDF,'ar-send-status');
+  if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
+  else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
+  await loadReports();renderSB();currentId=null;clearARForm();
 }
 
 async function saveAndSendVA(){
@@ -1883,29 +1523,17 @@ async function saveAndSendVA(){
   const projekt=PROJEKTE.find(p=>p.id===projektId);
   const zeitRows=getZeitRows();
   const totalH=zeitRows.reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0);
+  const zusatzProjekte=getZusatzProjekte();
   const d={
-    mitarbeiter_id:currentUser.id,
-    mitarbeiter_name:currentUser.name,
-    mitarbeiter_nr:currentUser.mitarbeiter_nr,
-    datum:document.getElementById('v-datum').value,
-    projekt_id:projektId||null,
-    projekt_nr:projekt?.nr||'',
-    rolle:'va',
-    wetter:curWeather,
-    temperatur:document.getElementById('v-temp').value,
-    taetigkeiten:getVATaetigkeiten(),
-    boden:document.getElementById('v-boden')?.value,
+    mitarbeiter_id:currentUser.id,mitarbeiter_name:currentUser.name,mitarbeiter_nr:currentUser.mitarbeiter_nr,
+    datum:document.getElementById('v-datum').value,projekt_id:projektId||null,projekt_nr:projekt?.nr||'',
+    rolle:'va',wetter:curWeather,temperatur:document.getElementById('v-temp').value,
+    taetigkeiten:getVATaetigkeiten(),boden:document.getElementById('v-boden')?.value,
     nied_mm:parseInt(document.getElementById('v-nied')?.value)||0,
-    netto_gesamt_h:totalH,
-    netto_arbeit_h:totalH,
-    zeit_rows:zeitRows,
-    mach_rows:getMachRows(),
-    steps:getSteps(),
-    lieferungen:getLiefData(),
-    mengen:getMengen(),
-    lv_rows:getLVRows(),
-    maengel:getMangelData(),
-    naechstes:document.getElementById('v-naechstes').value,
+    netto_gesamt_h:totalH,netto_arbeit_h:totalH,
+    zeit_rows:zeitRows,mach_rows:getMachRows(),steps:getSteps(),
+    lieferungen:getLiefData(),mengen:getMengen(),lv_rows:getLVRows(),
+    maengel:getMangelData(),naechstes:document.getElementById('v-naechstes').value,
     bemerkungen:document.getElementById('v-bemerkungen').value,
     bauleiter:document.getElementById('v-bauleiter').value,
     bauherr:document.getElementById('v-bauherr')?.value,
@@ -1913,7 +1541,7 @@ async function saveAndSendVA(){
     projektnr_intern:document.getElementById('v-projektnr').value,
     besucher:document.getElementById('v-besucher').value,
     foto_count:fotoDataUrls.filter(Boolean).length,
-    gesendet:false
+    zusatz_projekte:zusatzProjekte,gesendet:false
   };
   if(!d.datum||!d.projekt_id){toast('Datum und Projekt erforderlich','err');return;}
   const st=document.getElementById('va-send-status');
@@ -1927,14 +1555,14 @@ async function saveAndSendVA(){
     if(error){toast('Fehler: '+error.message,'err');return;}
     savedId=data.id;currentId=savedId;
   }
-  const reportForPDF={...d,id:savedId,role:'va',projektNr:projekt?.nr||'',zeitRows,machRows:getMachRows(),steps:getSteps(),lieferungen:getLiefData(),maengel:getMangelData(),naechstes:d.naechstes,boden:d.boden,temp:d.temperatur,nied:d.nied_mm,bauleiter:d.bauleiter,bauherr:d.bauherr,baustelle:d.baustelle,taetigkeiten:getVATaetigkeiten()};
-  await sendPDFMail(reportForPDF,'va-send-status');
-  await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
-  await loadReports();renderSB();
-  currentId=null;newReport();
+  const reportForPDF={...d,id:savedId,role:'va',projektNr:projekt?.nr||'',zeitRows,machRows:getMachRows(),steps:getSteps(),lieferungen:getLiefData(),maengel:getMangelData(),zusatzProjekte};
+  const pdfUrl=await sendPDFMail(reportForPDF,'va-send-status');
+  if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
+  else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
+  await loadReports();renderSB();currentId=null;newReport();
 }
 
-// ══════ PDF MIT UNTERSCHRIFT ══════
+// ══════ PDF ══════
 async function generatePDF(report){
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
@@ -1968,77 +1596,70 @@ async function generatePDF(report){
 
   const isWS=report.role==='ws';
   const typ=isWS?'WERKSTATTBERICHT':report.role==='ar'?'ARBEITSZEITNACHWEIS':'TAGESBERICHT VORARBEITER';
-  const headerCol=isWS?C.lila:C.gruen;
-  RECT(M,y,cw,9,headerCol);
-  doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.weiss);doc.text(typ,M+4,y+6.2);
-  doc.text(fmtD(report.datum),W-M-4,y+6.2,{align:'right'});
+  const hCol=isWS?C.lila:C.gruen;
+  RECT(M,y,cw,9,hCol);
+  doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.weiss);
+  doc.text(typ,M+4,y+6.2);doc.text(fmtD(report.datum),W-M-4,y+6.2,{align:'right'});
   y+=14;
 
   if(report.role==='ar'||report.role==='ws'){
-    doc.setFont('helvetica','bold');doc.setFontSize(16);doc.setTextColor(...C.dunkel);doc.text(clean(report.name||report.mitarbeiter_name||'--'),M,y);y+=8;
+    doc.setFont('helvetica','bold');doc.setFontSize(16);doc.setTextColor(...C.dunkel);
+    doc.text(clean(report.name||report.mitarbeiter_name||'--'),M,y);y+=8;
     LINE(M,y,W-M,y,C.rahmen);y+=6;
     const pLabel=getProjektLabel(report.projekt_id||report.projektNr||'');
     [[' Projekt',pLabel],['Qualifikation',currentUser?.qualifikation||'--'],['Wetter',report.wetter||'--']].forEach(([l,v],i)=>{
       const x=M+(i*62);doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text(l,x,y);
       doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);doc.text(clean(v),x,y+5);
-    });
-    y+=14;
-    if(report.taetigkeiten?.length){
-      doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text('Taetigkeiten',M,y);
-      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);
-      const taeText=report.taetigkeiten.join(' | ');
-      const taeLines=doc.splitTextToSize(clean(taeText),cw);doc.text(taeLines,M,y+5);y+=5+taeLines.length*5+4;
-    }
+    });y+=14;
+    if(report.taetigkeiten?.length){doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text('Taetigkeiten',M,y);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);const taeLines=doc.splitTextToSize(clean(report.taetigkeiten.join(' | ')),cw);doc.text(taeLines,M,y+5);y+=5+taeLines.length*5+4;}
+    if(isWS&&report.baustelle){LINE(M,y,W-M,y,C.rahmen);y+=6;T('FAHRZEUG',M,y,9,true,C.lila);y+=5;doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.dunkel);doc.text(clean(report.baustelle),M,y);y+=8;}
     LINE(M,y,W-M,y,C.rahmen);y+=7;
-
-    if(isWS&&report.baustelle){
-      T('FAHRZEUG',M,y,9,true,C.lila);y+=6;
-      RECT(M,y,cw,7,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
-      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.dunkel);doc.text(clean(report.baustelle),M+3,y+5);
-      y+=11;LINE(M,y,W-M,y,C.rahmen);y+=7;
-    }
-
-    T('ARBEITSZEITEN',M,y,9,true,isWS?C.lila:C.gruen);y+=6;
+    T('ARBEITSZEITEN',M,y,9,true,hCol);y+=6;
     RECT(M,y,cw,6,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-    const zH=isWS?['Von','Bis','Pause','Netto Arbeit','GESAMT']:['Von','Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
+    const zH=isWS?['Von','Bis','Pause','Netto','GESAMT']:['Von','Bis','Pause','Netto Arbeit','Fahrzeit','Fahrt-Status','GESAMT'];
     const zW=isWS?[36,34,32,48,36]:[26,24,22,28,22,38,26];let x2=M;
     zH.forEach((h,i)=>{doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,x2+1,y+4.3);x2+=zW[i];});
-    y+=7;LINE(M,y+7,W-M,y+7,C.rahmen);x2=M;
+    y+=7;x2=M;
     const fs=report.fahrtStatus||report.fahrt_status||'fahrer';
     const fl={'fahrer':'Fahrer (100%)','beifahrer':'Beifahrer (50%)','privat':'Privat (0%)'}[fs];
     const fzMin=report.fahrzeitMin||report.fahrzeit_min||0;
-    const zVals=isWS?
-      [report.von||'--',report.bis||'--',(report.pause||report.pause_min||30)+' min',(report.nettoWork||report.netto_arbeit_h||'--')+'h',(report.netto||report.netto_gesamt_h||'--')+'h']:
+    const zVals=isWS?[report.von||'--',report.bis||'--',(report.pause||report.pause_min||30)+' min',(report.nettoWork||report.netto_arbeit_h||'--')+'h',(report.netto||report.netto_gesamt_h||'--')+'h']:
       [report.von||'--',report.bis||'--',(report.pause||report.pause_min||30)+' min',(report.nettoWork||report.netto_arbeit_h||'--')+'h',fzMin+' min',fl,(report.netto||report.netto_gesamt_h||'--')+'h'];
     const zCols=isWS?[C.dunkel,C.dunkel,C.grau,C.dunkel,C.lila]:[C.dunkel,C.dunkel,C.grau,C.dunkel,C.grau,C.blau,C.gruen];
     const zBold=isWS?[false,false,false,true,true]:[false,false,false,true,false,true,true];
     zVals.forEach((v,i)=>{doc.setFont('helvetica',zBold[i]?'bold':'normal');doc.setFontSize(zBold[i]?10:9);doc.setTextColor(...zCols[i]);doc.text(clean(String(v)),x2+1,y+5.5);x2+=zW[i];});
     y+=10;
-
     if(!isWS){
       const fahrtInfo={'fahrer':'Fahrer: Fahrzeit 100% angerechnet.','beifahrer':'Beifahrer: Fahrzeit 50% angerechnet.','privat':'Privat: Fahrzeit nicht angerechnet.'}[fs];
       const flc={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[fs];
       RECT(M,y,cw,7,C.heller);doc.setDrawColor(...flc);doc.setLineWidth(2);doc.line(M,y,M,y+7);doc.setLineWidth(0.3);
-      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);doc.text(fahrtInfo,M+4,y+4.8);
-      y+=11;
+      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);doc.text(fahrtInfo,M+4,y+4.8);y+=11;
     }else y+=3;
-
     LINE(M,y,W-M,y,C.rahmen);y+=7;
-    if(report.taetigkeit_text){T(isWS?'DURCHGEFUEHRTE ARBEITEN':'TAETIGKEITSBERICHT',M,y,9,true,isWS?C.lila:C.gruen);y+=6;const tL=W2(report.taetigkeit_text,M,y,cw,10,C.dunkel);y+=tL*5+5;}
-    if(report.besonder){LINE(M,y,W-M,y,C.rahmen);y+=5;T(isWS?'FESTGESTELLTE MAENGEL':'BESONDERHEITEN',M,y,9,true,C.rot);y+=5;W2(report.besonder,M,y,cw,9,C.dunkel);y+=8;}
-
+    if(report.taetigkeit_text){T(isWS?'ARBEITEN':'TAETIGKEITSBERICHT',M,y,9,true,hCol);y+=6;const tL=W2(report.taetigkeit_text,M,y,cw,10,C.dunkel);y+=tL*5+5;}
+    if(report.besonder){LINE(M,y,W-M,y,C.rahmen);y+=5;T(isWS?'MAENGEL':'BESONDERHEITEN',M,y,9,true,C.rot);y+=5;W2(report.besonder,M,y,cw,9,C.dunkel);y+=8;}
   }else{
-    // VA BERICHT
+    // VA
     const pLabel=getProjektLabel(report.projekt_id||report.projektNr||'');
     doc.setFont('helvetica','bold');doc.setFontSize(16);doc.setTextColor(...C.dunkel);doc.text(clean(pLabel),M,y);y+=8;
     if(report.baustelle){doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...C.grau);doc.text(clean(report.baustelle),M,y);y+=6;}
+
+    // ZUSATZ PROJEKTE im PDF
+    const zp=report.zusatzProjekte||report.zusatz_projekte||[];
+    if(zp.length){
+      zp.forEach(zpr=>{
+        RECT(M,y,cw,6,[240,248,235]);LINE(M,y,W-M,y,C.rahmen);
+        doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
+        doc.text('+ '+clean(zpr.projektNr+' - '+zpr.projektName+(zpr.baustelle?' | '+zpr.baustelle:'')),M+3,y+4.2);y+=8;
+      });
+    }
+
     LINE(M,y,W-M,y,C.rahmen);y+=6;
     [['Bauherr',report.bauherr||'--'],['Bauleiter',report.bauleiter||'--'],['Projekt-Nr.',report.projektnr_intern||'--'],['Datum',fmtD(report.datum)]].forEach(([l,v],i)=>{
       const cx=M+(i%2)*(cw/2);const cy=y+Math.floor(i/2)*10;
       doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);doc.text(l,cx,cy);
       doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.dunkel);doc.text(clean(v),cx,cy+5);
-    });
-    y+=22;
+    });y+=22;
     if(report.taetigkeiten?.length){RECT(M,y,cw,7,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);doc.text('Taetigkeiten: '+report.taetigkeiten.join(' | '),M+3,y+4.8);y+=11;}
     RECT(M,y,cw,7,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+7,W-M,y+7,C.rahmen);
     doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);
@@ -2062,8 +1683,7 @@ async function generatePDF(report){
         ].forEach(([v,ox,b,c])=>{doc.setFont('helvetica',b?'bold':'normal');doc.setFontSize(8);doc.setTextColor(...(c||C.dunkel));doc.text(clean(String(v||'')),M+ox,y+4.5);});
         if(t.tae){doc.setFont('helvetica','italic');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(clean(t.tae),M+2,y+7);}
         y+=t.tae?9:7;
-      });
-      y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
+      });y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
 
     const steps=(report.steps||[]).filter(s=>s.txt);
@@ -2096,20 +1716,14 @@ async function generatePDF(report){
         doc.setFont('helvetica','bold');doc.setTextColor(...C.gruen);doc.text(clean((l.menge||'--')+' '+(l.eh||'')),M+122,y+4.5);
         const okCol=l.ok?.toLowerCase().includes('ok')?C.gruen:C.rot;
         doc.setFont('helvetica','normal');doc.setTextColor(...okCol);doc.text(clean(l.ok||''),M+144,y+4.5);y+=7;
-      });
-      y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
+      });y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
 
     const maengel=(report.maengel||[]).filter(m=>m.txt);
     if(maengel.length){
       needPage(20);RECT(M,y,cw,8,[255,245,245]);doc.setDrawColor(...C.rot);doc.setLineWidth(2);doc.line(M,y,M,y+8);doc.setLineWidth(0.3);
       doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.rot);doc.text('MAENGEL ('+maengel.length+')',M+5,y+5.5);LINE(M,y+8,W-M,y+8,C.rahmen);y+=12;
-      maengel.forEach(m=>{
-        needPage(15);doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.rot);doc.text(clean((m.schwere||'')+' - '+(m.typ||'')),M,y);y+=5;
-        const lines=W2(m.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+2;
-        if(m.massnahme){doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...C.orange);doc.text('Massnahme: '+clean(m.massnahme),M+3,y);y+=5;}
-        LINE(M,y,W-M,y,[230,200,200]);y+=4;
-      });
+      maengel.forEach(m=>{needPage(15);doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.rot);doc.text(clean((m.schwere||'')+' - '+(m.typ||'')),M,y);y+=5;const lines=W2(m.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+2;if(m.massnahme){doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...C.orange);doc.text('Massnahme: '+clean(m.massnahme),M+3,y);y+=5;}LINE(M,y,W-M,y,[230,200,200]);y+=4;});
     }
     if(report.naechstes){needPage(15);T('NAECHSTE SCHRITTE',M,y,10,true,C.gruen);y+=6;const lines=W2(report.naechstes,M,y,cw,9,C.dunkel);y+=lines*5+4;}
 
@@ -2130,32 +1744,20 @@ async function generatePDF(report){
   // FOOTER + UNTERSCHRIFT
   const pageCount=doc.getNumberOfPages();
   for(let pg=1;pg<=pageCount;pg++){
-    doc.setPage(pg);LINE(M,284,W-M,284,headerCol,0.6);
+    doc.setPage(pg);LINE(M,284,W-M,284,hCol,0.6);
     doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);
     doc.text(FIRMA_NAME+' - '+FIRMA_ADRESSE+' - '+FIRMA_TEL,M,288);
     doc.text('Seite '+pg+'/'+pageCount+' - '+new Date().toLocaleDateString('de-DE')+' '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),W-M,288,{align:'right'});
   }
-
-  // UNTERSCHRIFT EINFUEGEN
   doc.setPage(pageCount);
   const sigY=270;
-  LINE(M,sigY,M+65,sigY,C.rahmen);
-  LINE(W-M-65,sigY,W-M,sigY,C.rahmen);
+  LINE(M,sigY,M+65,sigY,C.rahmen);LINE(W-M-65,sigY,W-M,sigY,C.rahmen);
   doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.hellgrau);
-  doc.text('Unterschrift Mitarbeiter',M,sigY+4);
-  doc.text('Unterschrift Bauleiter',W-M-65,sigY+4);
-
-  // Digitale Unterschrift des Mitarbeiters
+  doc.text('Unterschrift Mitarbeiter',M,sigY+4);doc.text('Unterschrift Bauleiter',W-M-65,sigY+4);
   const sigData=unterschriftData||currentUser?.unterschrift_data||null;
   if(sigData&&sigData.length>100){
-    try{
-      const sigImg=new Image();sigImg.src=sigData;
-      await new Promise(r=>{sigImg.onload=r;setTimeout(r,500);});
-      const sigW=60,sigH=15;
-      doc.addImage(sigData,'PNG',M,sigY-sigH-2,sigW,sigH);
-    }catch(e){}
+    try{const sigImg=new Image();sigImg.src=sigData;await new Promise(r=>{sigImg.onload=r;setTimeout(r,500);});doc.addImage(sigData,'PNG',M,sigY-17,60,15);}catch(e){}
   }
-
   return doc;
 }
 
@@ -2167,9 +1769,11 @@ async function sendPDFMail(report,statusElId){
     const pdfBase64=doc.output('datauristring').split(',')[1];
     const pLabel=getProjektLabel(report.projekt_id||report.projektNr||'');
     const netto=String(report.netto||report.netto_gesamt_h||report.netto_arbeit_h||'0');
-    const empfaenger=await getActiveEmpfaenger();
+    const{to,cc}=await getActiveEmpfaenger();
+    const pdfName=buildPDFName({datum:report.datum,projekt_nr:report.projektNr||report.projekt_nr,mitarbeiter_name:report.name||report.mitarbeiter_name,mitarbeiter_nr:report.mitarbeiter_nr||currentUser?.mitarbeiter_nr,rolle:report.role||report.rolle});
     const payload={
-      empfaenger:empfaenger.join(','),
+      empfaenger:to.join(','),
+      cc:cc.join(','),
       betreff:'KLEI Tagesbericht '+fmtD(report.datum)+' - '+(report.role==='ar'||report.role==='ws'?report.name||report.mitarbeiter_name:pLabel),
       rolle:report.role||'ar',
       name:report.name||report.mitarbeiter_name||'',
@@ -2177,39 +1781,38 @@ async function sendPDFMail(report,statusElId){
       baustelle:pLabel+(report.baustelle?' - '+report.baustelle:''),
       auftrag:pLabel,netto,wetter:report.wetter||'',
       maNr:currentUser?.mitarbeiter_nr||'',
-      pdfBase64
+      pdfName,pdfBase64
     };
     const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(payload)});
     const txt=await res.text();
+    let driveUrl='';
+    try{const parsed=JSON.parse(txt);driveUrl=parsed.driveUrl||'';}catch(e){}
     if(res.ok&&(txt.includes('OK')||txt.includes('status'))){
-      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='PDF gesendet und in Drive abgelegt!';}
-      toast('PDF gesendet!','ok');
+      if(statusEl){statusEl.className='send-status show ok';statusEl.textContent='PDF gesendet'+(driveUrl?' + Drive abgelegt':'')+' ✓';}
+      toast('PDF gesendet!','ok');return driveUrl||null;
     }else{throw new Error(txt||'Fehler');}
   }catch(e){
     if(statusEl){statusEl.className='send-status show err';statusEl.textContent='Fehler: '+e.message;}
     const doc=await generatePDF(report);
-    doc.save('KLEI_'+(report.datum||'')+'_'+((report.name||report.mitarbeiter_name)||'Bericht')+'.pdf');
-    toast('PDF lokal gespeichert','err');
+    doc.save(buildPDFName({datum:report.datum,projekt_nr:report.projektNr||report.projekt_nr,mitarbeiter_name:report.name||report.mitarbeiter_name,mitarbeiter_nr:currentUser?.mitarbeiter_nr,rolle:report.role||report.rolle}));
+    toast('PDF lokal gespeichert','err');return null;
   }
 }
 
 // ══════ LOAD / RENDER ══════
 function loadReport(id){
   const r=reports.find(x=>x.id===id);if(!r)return;
-  currentId=id;
-  document.querySelectorAll('.ri').forEach(el=>el.classList.toggle('act',el.dataset.id===id));
+  currentId=id;document.querySelectorAll('.ri').forEach(el=>el.classList.toggle('act',el.dataset.id===id));
   if(r.rolle==='ws'){
     const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v||'';};
-    sv('ws-datum',r.datum);sv('ws-von',r.von);sv('ws-bis',r.bis);
-    sv('ws-taetigkeit',r.taetigkeit_text||'');sv('ws-maengel',r.besonder||'');
+    sv('ws-datum',r.datum);sv('ws-von',r.von);sv('ws-bis',r.bis);sv('ws-taetigkeit',r.taetigkeit_text||'');sv('ws-maengel',r.besonder||'');
     const wp=document.getElementById('ws-projekt');if(wp)wp.value=r.projekt_id||'';
     const wp2=document.getElementById('ws-pause');if(wp2)wp2.value=r.pause_min||30;
     document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
     calcWS();showTab('quick');
   }else if(r.rolle==='ar'){
     const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v||'';};
-    sv('a-datum',r.datum);sv('a-von',r.von);sv('a-bis',r.bis);
-    sv('a-taetigkeit',r.taetigkeit_text||'');sv('a-besonder',r.besonder||'');
+    sv('a-datum',r.datum);sv('a-von',r.von);sv('a-bis',r.bis);sv('a-taetigkeit',r.taetigkeit_text||'');sv('a-besonder',r.besonder||'');
     const ap=document.getElementById('a-projekt');if(ap){ap.value=r.projekt_id||'';onARProjektChange();}
     const ps=document.getElementById('a-pause');if(ps)ps.value=r.pause_min||30;
     curFahrtStatus=r.fahrt_status||'fahrer';
@@ -2221,13 +1824,10 @@ function loadReport(id){
 
 function loadVAForm(r){
   const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
-  sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);
-  sv('v-projektnr',r.projektnr_intern);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temperatur||r.temp);
-  sv('v-nied',r.nied_mm||r.nied);sv('v-besucher',r.besucher);sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);
+  sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);sv('v-projektnr',r.projektnr_intern);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temperatur||r.temp);sv('v-nied',r.nied_mm||r.nied);sv('v-besucher',r.besucher);sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);
   const vp=document.getElementById('v-projekt');if(vp)vp.value=r.projekt_id||'';
   if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';
-  curWeather=r.wetter||'Sonnig';
-  const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
+  curWeather=r.wetter||'Sonnig';const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
   document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));
   document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
   stepIdx=0;const sc=document.getElementById('steps-con');if(sc)sc.innerHTML='';
@@ -2235,15 +1835,18 @@ function loadVAForm(r){
   const mgc=document.getElementById('mangel-con');if(mgc)mgc.innerHTML='';
   (r.maengel||[]).forEach(m=>addMangel({txt:m.txt,massnahme:m.massnahme}));
   const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';
-  (r.zeit_rows||r.zeitRows||[]).forEach(row=>addZeitRow(row));if(!(r.zeit_rows||r.zeitRows||[]).length)addZeitRow();
+  (r.zeit_rows||[]).forEach(row=>addZeitRow(row));if(!(r.zeit_rows||[]).length)addZeitRow();
   const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';
-  (r.mach_rows||r.machRows||[]).forEach(row=>addMachRow(row));
+  (r.mach_rows||[]).forEach(row=>addMachRow(row));
   liefIdx=0;const lc=document.getElementById('lief-con');if(lc)lc.innerHTML='';
   (r.lieferungen||[]).forEach(l=>addLief(l));if(!(r.lieferungen||[]).length)addLief();
   const mc=document.getElementById('mengen-con');if(mc)mc.innerHTML='';
   (r.mengen||[]).forEach(m=>addMenge(m));if(!(r.mengen||[]).length)addMenge();
   const lvb=document.getElementById('lv-body');if(lvb)lvb.innerHTML='';
-  (r.lv_rows||r.lvRows||[]).forEach(row=>addLVRow(row));if(!(r.lv_rows||r.lvRows||[]).length)addLVRow();
+  (r.lv_rows||[]).forEach(row=>addLVRow(row));if(!(r.lv_rows||[]).length)addLVRow();
+  // Zusatz Projekte laden
+  zusatzProjektIdx=0;const zpw=document.getElementById('zusatz-proj-wrap');if(zpw)zpw.innerHTML='';
+  (r.zusatz_projekte||[]).forEach(zp=>{addZusatzProjekt();const i=zusatzProjektIdx;setTimeout(()=>{const ps=document.getElementById('zusatz-proj-'+i);if(ps)ps.value=zp.projektId||'';const bs=document.getElementById('zusatz-baustelle-'+i);if(bs)bs.value=zp.baustelle||'';},100);});
   clearFotos();setTimeout(refreshStepMAs,200);
 }
 
@@ -2264,52 +1867,52 @@ function renderARDetail(r){
     '<div class="ib"><div class="ib-t">Zeiten</div><div class="ib-c">'+(r.von||'--')+' - '+(r.bis||'--')+' - Pause: '+(r.pause_min||30)+'min</div></div>'+
     (r.taetigkeit_text?'<div class="ib"><div class="ib-t">Details</div><div class="ib-c">'+r.taetigkeit_text+'</div></div>':'')+
     (r.besonder?'<div class="ib" style="border-color:rgba(196,72,40,.25)"><div class="ib-t" style="color:var(--r)">Besonderheiten</div><div class="ib-c">'+r.besonder+'</div></div>':'')+
+    (r.pdf_url?'<div class="ib"><div class="ib-t">Drive</div><a href="'+r.pdf_url+'" target="_blank" style="color:var(--sky);font-size:12px">PDF in Drive oeffnen &#x279A;</a></div>':'')+
     '<div class="arow"><button class="btn btn-r" style="font-size:11px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button></div>';
 }
 
 function renderVADetail(r){
   const hours=parseFloat(r.netto_gesamt_h||(r.zeit_rows||[]).reduce((s,w)=>s+(parseFloat((w.gesamt||'0').replace(',','.'))||0),0));
   const pLabel=getProjektLabel(r.projekt_id||'');
+  const zp=r.zusatz_projekte||[];
   document.getElementById('detailContent').innerHTML=
     '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start">'+
     '<div><div class="card-title">'+pLabel+'</div>'+
+    (zp.length?'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--earth);margin-top:3px">+'+zp.map(z=>z.projektNr).join(', ')+'</div>':'')+
     '<div class="card-meta"><span class="g">'+fmtD(r.datum)+'</span><span>'+(r.bauleiter||'--')+'</span></div></div>'+
     '<div style="display:flex;gap:5px">'+
-    '<button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="loadVAForm(reports.find(x=>x.id===\''+r.id+'\'));showTab(\'bericht\')" onclick="loadVAForm(reports.find(x=>x.id===\''+r.id+'\'));showTab(\'bericht\')">Bearbeiten</button>'+
-    '<button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">Loeschen</button>'+
+    '<button class="btn" style="font-size:11px;padding:5px 9px" ontouchstart="loadVAForm(reports.find(x=>x.id===\''+r.id+'\'));showTab(\'bericht\')" onclick="loadVAForm(reports.find(x=>x.id===\''+r.id+'\'));showTab(\'bericht\')">Bearb.</button>'+
+    '<button class="btn btn-r" style="font-size:11px;padding:5px 9px" ontouchstart="delReport(\''+r.id+'\')" onclick="delReport(\''+r.id+'\')">&#x2715;</button>'+
     '</div></div></div>'+
     '<div class="srow">'+
     '<div class="sc"><div class="sv">'+hours.toFixed(1)+'h</div><div class="sl">Stunden</div></div>'+
     '<div class="sc"><div class="sv">'+((r.zeit_rows||[]).filter(t=>t.name).length)+'</div><div class="sl">Mitarbeiter</div></div>'+
     '<div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div>'+
     '</div>'+
+    (r.pdf_url?'<div class="ib"><div class="ib-t">Drive</div><a href="'+r.pdf_url+'" target="_blank" style="color:var(--sky);font-size:12px">PDF in Drive oeffnen &#x279A;</a></div>':'')+
     (r.ai_analyse?'<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>KI</div><div class="ai-txt">'+r.ai_analyse+'</div></div>':'')+
     '<div class="arow"><button class="btn btn-p" style="font-size:11px" ontouchstart="resendVA(\''+r.id+'\')" onclick="resendVA(\''+r.id+'\')">PDF senden</button></div>';
 }
 
-async function resendVA(id){
-  const r=reports.find(x=>x.id===id);if(!r)return;
-  const reportForPDF={...r,role:r.rolle,name:r.mitarbeiter_name,projektNr:r.projekt_nr,zeitRows:r.zeit_rows,machRows:r.mach_rows};
-  await sendPDFMail(reportForPDF,'va-send-status');
-}
+async function resendVA(id){const r=reports.find(x=>x.id===id);if(!r)return;const reportForPDF={...r,role:r.rolle,name:r.mitarbeiter_name,projektNr:r.projekt_nr,zeitRows:r.zeit_rows,machRows:r.mach_rows};await sendPDFMail(reportForPDF,'va-send-status');}
 
 function renderSB(){
   const el=document.getElementById('sb-list');if(!el)return;
-  let sichtbar=reports.filter(r=>r.mitarbeiter_id===currentUser.id);
+  const sichtbar=reports.filter(r=>r.mitarbeiter_id===currentUser.id);
   if(!sichtbar.length){el.innerHTML='<div style="padding:20px;text-align:center;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">Keine Berichte</div>';return;}
   el.innerHTML=sichtbar.map(r=>{
     const h=parseFloat(r.netto_gesamt_h||r.netto_arbeit_h||0);
     const label=r.rolle==='va'?getProjektLabel(r.projekt_id||''):(r.mitarbeiter_name||'--');
     const tagCls=r.rolle==='va'?'tag-e':r.rolle==='ws'?'tag-ws':'tag-g';
     const tagLbl=r.rolle==='va'?'VA':r.rolle==='ws'?'WS':'AR';
-    return '<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
+    return'<div class="ri'+(r.id===currentId?' act':'')+'" data-id="'+r.id+'" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
       '<div class="ri-d">'+fmtD(r.datum)+'</div>'+
       '<div class="ri-n">'+label+'</div>'+
-      '<div class="ri-s">'+(r.rolle==='va'?(r.bauleiter||'VA'):tagLbl)+' - '+h.toFixed(1)+'h</div>'+
+      '<div class="ri-s">'+tagLbl+' - '+h.toFixed(1)+'h</div>'+
       '<div class="ri-tags">'+
       '<span class="tag-s '+tagCls+'">'+tagLbl+'</span>'+
+      (r.pdf_url?'<span class="tag-s" style="background:rgba(61,143,168,.12);color:var(--sky)">Drive</span>':'')+
       (r.ai_analyse?'<span class="tag-s tag-g">KI</span>':'')+
-      (r.foto_count?'<span class="tag-s tag-g">'+r.foto_count+'F</span>':'')+
       (r.gesendet?'<span class="tag-s" style="background:rgba(61,143,168,.12);color:var(--sky)">&#x2713;</span>':'')+
       '</div></div>';
   }).join('');
@@ -2322,18 +1925,15 @@ function buildUE(){
   el.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px">'+
     '<div class="sc"><div class="sv">'+meineReports.length+'</div><div class="sl">Berichte</div></div>'+
     '<div class="sc"><div class="sv">'+totalH.toFixed(0)+'h</div><div class="sl">Stunden</div></div></div>'+
-    meineReports.slice(0,20).map(r=>{
-      const h=parseFloat(r.netto_gesamt_h||r.netto_arbeit_h||0);
-      return '<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
-        '<div style="display:flex;justify-content:space-between;align-items:center">'+
-        '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.rolle==='va'?getProjektLabel(r.projekt_id||''):r.mitarbeiter_name)+'</div>'+
-        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g)">'+fmtD(r.datum)+' - '+(r.rolle||'ar').toUpperCase()+'</div></div>'+
-        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+h.toFixed(1)+'h</div></div></div>';
+    meineReports.slice(0,20).map(r=>{const h=parseFloat(r.netto_gesamt_h||r.netto_arbeit_h||0);return'<div class="ib" style="cursor:pointer" ontouchstart="loadReport(\''+r.id+'\')" onclick="loadReport(\''+r.id+'\')">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center">'+
+      '<div><div style="font-size:12px;font-weight:600;color:var(--c)">'+(r.rolle==='va'?getProjektLabel(r.projekt_id||''):r.mitarbeiter_name)+'</div>'+
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--g)">'+fmtD(r.datum)+' - '+(r.rolle||'ar').toUpperCase()+'</div></div>'+
+      '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--c)">'+h.toFixed(1)+'h</div></div></div>';
     }).join('');
 }
 
 async function triggerAI(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Erst speichern!','err');return;}showTab('ki');await runAI('zusammenfassung');}
-
 async function runAI(type){
   const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
   const prompts={zusammenfassung:'Erstelle eine kompakte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',risiken:'Analysiere Risiken und Maengel.',kosten:'Kostenschaetzung nach GaLaBau-Tariflohn.',qualitaet:'Qualitaetspruefung nach DIN 18917, DIN 18035, VOB/C.',bericht:'Formaler VOB-konformer Tagesbericht.',plan:'Wochenplanung fuer naechste 5 Werktage.'};
@@ -2348,64 +1948,41 @@ async function runAI(type){
     const txt=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';
     const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>');
     out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';
-    await sb.from('berichte').update({ai_analyse:fmt}).eq('id',r.id);
-    await loadReports();renderSB();toast('KI fertig','ok');
+    await sb.from('berichte').update({ai_analyse:fmt}).eq('id',r.id);await loadReports();renderSB();toast('KI fertig','ok');
   }catch(e){out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">Fehler: '+e.message+'</div></div>';toast('KI-Fehler','err');}
 }
 
-async function delReport(id){
-  if(!confirm('Bericht loeschen?'))return;
-  await sb.from('berichte').delete().eq('id',id);
-  if(currentId===id)currentId=null;
-  await loadReports();renderSB();
-  document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">&#128465;</div><div class="et">Geloescht</div></div>';
-  toast('Geloescht','err');
-}
+async function delReport(id){if(!confirm('Bericht loeschen?'))return;await sb.from('berichte').delete().eq('id',id);if(currentId===id)currentId=null;await loadReports();renderSB();document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">&#128465;</div><div class="et">Geloescht</div></div>';toast('Geloescht','err');}
 
 function newReport(){
   currentId=null;stopVoice();
   if(currentRole==='arbeiter'){clearARForm();return;}
   if(currentRole==='werkstatt'){clearWSForm();return;}
-  stepIdx=0;liefIdx=0;mangelIdx=0;
+  stepIdx=0;liefIdx=0;mangelIdx=0;zusatzProjektIdx=0;
   ['v-datum','v-baustelle','v-bauherr','v-projektnr','v-bauleiter','v-temp','v-nied','v-besucher','v-naechstes','v-bemerkungen'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id==='v-datum'?todayStr():'';});
   ['steps-con','mangel-con','lief-con','mengen-con'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
   const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';
   const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';
   const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';
   const vp=document.getElementById('v-projekt');if(vp)vp.value='';
+  const zpw=document.getElementById('zusatz-proj-wrap');if(zpw)zpw.innerHTML='';
   const st=document.getElementById('va-send-status');if(st){st.className='send-status';st.textContent='';}
   clearFotos();
   setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();},50);
-  curWeather='Sonnig';
-  document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));
+  curWeather='Sonnig';document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===0));
   document.querySelectorAll('#va-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));
   showTab('bericht');toast('Neuer Bericht','ok');
 }
 
-function expDFCSV(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const rows=r.zeit_rows||[];
-  const hdr='Datum;Projekt;Name;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h';
-  const lines=rows.filter(t=>t.name).map(t=>[r.datum,r.projekt_nr,t.name,t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.')].join(';'));
-  dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');toast('CSV exportiert','ok');
-}
-
-function expDFXML(){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const rows=r.zeit_rows||[];const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung>\n  <Datum>'+r.datum+'</Datum>\n  <Projekt>'+x(r.projekt_nr)+'</Projekt>\n  <Personal>\n'+
-    rows.filter(t=>t.name).map(t=>'    <Eintrag><Name>'+x(t.name)+'</Name><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Arbeit>'+(t.nettoArbeit||'0').replace(',','.')+'</Arbeit><Gesamt>'+(t.gesamt||'0').replace(',','.')+'</Gesamt></Eintrag>').join('\n')+
-    '\n  </Personal>\n</DataflorZeiterfassung>';
-  dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');toast('XML exportiert','ok');
-}
+function expDFCSV(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.zeit_rows||[];const hdr='Datum;Projekt;Name;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h';const lines=rows.filter(t=>t.name).map(t=>[r.datum,r.projekt_nr,t.name,t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.')].join(';'));dlFile('Dataflor_'+r.datum+'.csv',[hdr,...lines].join('\n'),'text/csv');toast('CSV exportiert','ok');}
+function expDFXML(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}const rows=r.zeit_rows||[];const x=(s)=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');const xml='<?xml version="1.0" encoding="UTF-8"?>\n<DataflorZeiterfassung>\n  <Datum>'+r.datum+'</Datum>\n  <Projekt>'+x(r.projekt_nr)+'</Projekt>\n  <Personal>\n'+rows.filter(t=>t.name).map(t=>'    <Eintrag><Name>'+x(t.name)+'</Name><Von>'+(t.von||'')+'</Von><Bis>'+(t.bis||'')+'</Bis><Arbeit>'+(t.nettoArbeit||'0').replace(',','.')+'</Arbeit><Gesamt>'+(t.gesamt||'0').replace(',','.')+'</Gesamt></Eintrag>').join('\n')+'\n  </Personal>\n</DataflorZeiterfassung>';dlFile('Dataflor_'+r.datum+'.xml',xml,'application/xml');toast('XML exportiert','ok');}
 
 function showTab(name){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
   const t=document.getElementById('tab-'+name),p=document.getElementById('panel-'+name);
   if(t)t.classList.add('act');if(p)p.classList.add('act');
-  if(name==='ue')buildUE();
-  if(name==='bericht')setTimeout(refreshStepMAs,100);
+  if(name==='ue')buildUE();if(name==='bericht')setTimeout(refreshStepMAs,100);
   if(name==='kalender'){kalMonat=new Date().getMonth();kalJahr=new Date().getFullYear();buildKalender();}
   if(name==='fzliste')buildFZListe();
   stopVoice();
