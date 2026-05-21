@@ -301,7 +301,13 @@ select option{background:var(--s2);}
     <div class="login-field"><label>Mitarbeiternummer</label><input type="text" id="login-nr" placeholder="z.B. 0042" inputmode="numeric" autocomplete="username"></div>
     <div class="login-field"><label>Passwort</label><input type="password" id="login-pw" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="login-btn" ontouchstart="doLogin()" onclick="doLogin()">Anmelden</button>
-<div style="text-align:center;margin-top:12px">
+<div style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:99999">
+  <div style="background:var(--gold);color:#000;font-weight:700;font-size:16px;padding:16px 32px;border-radius:8px;cursor:pointer" ontouchstart="showMasterLogin()" onclick="showMasterLogin()">
+    GF ZUGANG
+  </div>
+</div>
+
+    <div style="text-align:center;margin-top:12px">
   <div style="color:var(--m);font-family:'IBM Plex Mono',monospace;font-size:9px;text-decoration:underline;cursor:pointer;padding:8px" ontouchstart="showMasterLogin()" onclick="showMasterLogin()">GF-Zugang</div>
 </div>
 
