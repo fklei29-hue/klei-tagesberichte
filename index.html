@@ -490,10 +490,14 @@ let unterschriftData=null,sigDrawing=false,sigCtx=null,sigCanvas=null;
 
 // ══════ MASTER LOGIN ══════
 function showMasterLogin(){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('master-login-screen').style.display='flex';
-  setTimeout(()=>document.getElementById('master-pw')?.focus(),100);
+  alert('GF Login wird geöffnet');
+  var ls=document.getElementById('login-screen');
+  var ms=document.getElementById('master-login-screen');
+  if(!ms){alert('master-login-screen nicht gefunden!');return;}
+  if(ls)ls.style.display='none';
+  ms.style.display='flex';
 }
+
 function hideMasterLogin(){
   document.getElementById('master-login-screen').style.display='none';
   document.getElementById('login-screen').style.display='flex';
