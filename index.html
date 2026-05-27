@@ -381,6 +381,7 @@ let stepIdx=0,liefIdx=0,mangelIdx=0,curFahrtStatus='fahrer';
 let fotoDataUrls=[],kalMonat=new Date().getMonth(),kalJahr=new Date().getFullYear();
 let voiceActive=false,voiceTarget=null,recognition=null;
 let unterschriftData=null,sigDrawing=false,sigCtx=null,sigCanvas=null;
+let isSending=false;
 
 // ══════ LOGIN ══════
 async function doLogin(){
@@ -977,6 +978,9 @@ async function getActiveEmpfaenger(){
 }
 
 async function saveAndSendWS(){
+  if(isSending){toast('Bitte warten — wird noch verarbeitet','info');return;}
+  isSending=true;
+  try{
   const projektSel=document.getElementById('ws-projekt');
   const projektId=projektSel?.value||'';
   const projekt=PROJEKTE.find(p=>p.id===projektId);
@@ -1013,9 +1017,13 @@ async function saveAndSendWS(){
   if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
   else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
   await loadReports();renderSB();currentId=null;clearWSForm();
+  }finally{isSending=false;}
 }
 
 async function saveAndSendAR(){
+  if(isSending){toast('Bitte warten — wird noch verarbeitet','info');return;}
+  isSending=true;
+  try{
   const projektSel=document.getElementById('a-projekt');
   const projektId=projektSel?.value||'';
   const projekt=PROJEKTE.find(p=>p.id===projektId);
@@ -1050,9 +1058,13 @@ async function saveAndSendAR(){
   if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
   else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
   await loadReports();renderSB();currentId=null;clearARForm();
+  }finally{isSending=false;}
 }
 
 async function saveAndSendVA(){
+  if(isSending){toast('Bitte warten — wird noch verarbeitet','info');return;}
+  isSending=true;
+  try{
   const projektSel=document.getElementById('v-projekt');
   const projektId=projektSel?.value||'';
   const projekt=PROJEKTE.find(p=>p.id===projektId);
@@ -1095,6 +1107,7 @@ async function saveAndSendVA(){
   if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
   else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
   await loadReports();renderSB();currentId=null;newReport();
+  }finally{isSending=false;}
 }
 
 // ══════ PDF ══════
@@ -1206,20 +1219,39 @@ async function generatePDF(report){
       const tGes=zRows.reduce((s,w)=>s+(parseFloat((w.gesamt||w.nettoArbeit||'0').replace(',','.'))||0),0);
       doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);doc.text('Gesamt: '+tGes.toFixed(2)+'h',W-M,y,{align:'right'});y+=7;
       RECT(M,y,cw,6,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
-      [['Name',0],['Qual.',30],['Von',50],['Bis',66],['Pause',82],['Arbeit',97],['Fahrt',117],['Fahrzt.',137],['Anteil',157],['GESAMT',177]].forEach(([h,ox])=>{doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);});y+=7;
+      [['Name',0],['Qual.',26],['Von',45],['Bis',58],['Pause',71],['Arbeit',86],['Fahrt',103],['Fahrzt.',121],['Anteil',138],['GESAMT',158]].forEach(([h,ox])=>{doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);});y+=7;
       zRows.forEach((t,idx)=>{
         needPage(8);if(idx%2===0)RECT(M,y-1,cw,7,C.heller);LINE(M,y+6,W-M,y+6,C.rahmen);
         const fl2={'fahrer':'Fahrer','beifahrer':'Beifahrer','privat':'Privat'}[t.fahrt||'fahrer'];
         const fc={'fahrer':C.blau,'beifahrer':C.orange,'privat':C.hellgrau}[t.fahrt||'fahrer'];
-        [[t.name,0,true,C.dunkel],[t.qual||'',30,false,C.grau],[t.von||'',50],[t.bis||'',66],
-         [(t.pause||30)+'min',82,false,C.grau],[(t.nettoArbeit||'--')+'h',97,true,C.dunkel],
-         [fl2,117,false,fc],[(t.fahrzeitMin||0)+'min',137,false,C.grau],
-         [(t.fahrtAnteil||'0,00')+'h',157,false,fc],[(t.gesamt||t.nettoArbeit||'--')+'h',177,true,C.gruen]
+        [[t.name,0,true,C.dunkel],[t.qual||'',26,false,C.grau],[t.von||'',45],[t.bis||'',58],
+         [(t.pause||30)+'min',71,false,C.grau],[(t.nettoArbeit||'--')+'h',86,true,C.dunkel],
+         [fl2,103,false,fc],[(t.fahrzeitMin||0)+'min',121,false,C.grau],
+         [(t.fahrtAnteil||'0,00')+'h',138,false,fc],[(t.gesamt||t.nettoArbeit||'--')+'h',158,true,C.gruen]
         ].forEach(([v,ox,b,c])=>{doc.setFont('helvetica',b?'bold':'normal');doc.setFontSize(8);doc.setTextColor(...(c||C.dunkel));doc.text(clean(String(v||'')),M+ox,y+4.5);});
         if(t.tae){doc.setFont('helvetica','italic');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(clean(t.tae),M+2,y+7);}
         y+=t.tae?9:7;
       });y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
     }
+
+    // GERAETE-/FAHRZEUG-EINSATZ
+    const mRows=(report.machRows||report.mach_rows||[]).filter(m=>m.geraetNr||m.geraetBez);
+    if(mRows.length){
+      needPage(25);T('GERAETE-/FAHRZEUG-EINSATZ',M,y,10,true,C.gruen);
+      const mGes=mRows.reduce((s,m)=>s+(parseFloat(String(m.netto||'0').replace(',','.'))||0),0);
+      doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...C.gruen);doc.text('Gesamt: '+mGes.toFixed(2)+'h',W-M,y,{align:'right'});y+=7;
+      RECT(M,y,cw,6,C.heller);LINE(M,y,W-M,y,C.rahmen);LINE(M,y+6,W-M,y+6,C.rahmen);
+      [['Nr.',0],['Geraet / Fahrzeug',16],['Kfz/Nr.',110],['Stunden',140],['Projekt',162]].forEach(([h,ox])=>{doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...C.grau);doc.text(h,M+ox,y+4.2);});y+=7;
+      mRows.forEach((m,idx)=>{
+        needPage(8);if(idx%2===0)RECT(M,y-1,cw,7,C.heller);LINE(M,y+6,W-M,y+6,C.rahmen);
+        const projLabel=m.projektId?(PROJEKTE.find(p=>p.id===m.projektId)?.nr||'--'):'--';
+        const bezKurz=(m.geraetBez||'').substring(0,42);
+        [[m.geraetNr||'--',0,true,C.dunkel],[bezKurz,16,false,C.dunkel],[m.fahrzeugnr||'--',110,false,C.grau],[(m.netto||'0')+'h',140,true,C.gruen],[projLabel,162,false,C.blau]
+        ].forEach(([v,ox,b,c])=>{doc.setFont('helvetica',b?'bold':'normal');doc.setFontSize(8);doc.setTextColor(...(c||C.dunkel));doc.text(clean(String(v||'')),M+ox,y+4.5);});
+        y+=7;
+      });y+=3;LINE(M,y,W-M,y,C.rahmen);y+=7;
+    }
+
 
     const steps=(report.steps||[]).filter(s=>s.txt);
     if(steps.length){
