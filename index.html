@@ -14,6 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0e1209;--s1:#141a0d;--s2:#1a2210;--s3:#202a14;--b:#2c3a1c;--g:#72b832;--gd:#4d8520;--gg:rgba(114,184,50,.1);--gl:#9ed45a;--earth:#9a6c1a;--earthg:rgba(154,108,26,.12);--sky:#3d8fa8;--skyg:rgba(61,143,168,.1);--r:#c44828;--rg:rgba(196,72,40,.1);--o:#d4782a;--c:#dce8c4;--m:#6a8848;--t:#b8cc98;--rad:4px;--ws:#8b5cf6;--wsg:rgba(139,92,246,.1);}
+body.theme-light{--bg:#eef0ea;--s1:#ffffff;--s2:#ffffff;--s3:#f0f2ec;--b:#c2ccb0;--g:#4d8520;--gd:#3a6818;--gg:rgba(77,133,32,.14);--gl:#2f5614;--earth:#7a5212;--earthg:rgba(122,82,18,.12);--sky:#256075;--skyg:rgba(37,96,117,.1);--r:#a8331a;--rg:rgba(168,51,26,.1);--o:#b25e18;--c:#0d1207;--m:#5a6748;--t:#161e0c;--ws:#5e34a0;--wsg:rgba(94,52,160,.1);}
+body.theme-light{--b:#c2ccb0;}
+body.theme-light input,body.theme-light textarea,body.theme-light select{background:#ffffff;color:#1f2a0d;}
+body.theme-light .toast{box-shadow:0 6px 20px rgba(0,0,0,.15);}
+body.theme-light #sig-canvas{background:white;}
+body.theme-light .vbar{background:rgba(196,72,40,.08);}
+.theme-btn{background:none;border:1px solid var(--b);border-radius:var(--rad);padding:6px 10px;color:var(--m);font-size:14px;cursor:pointer;line-height:1;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;font-size:13px;}
@@ -232,7 +239,7 @@ select option{background:var(--s2);}
 @media(max-width:680px){.app{grid-template-columns:1fr;}aside{display:none;}.fg.w25,.fg.w33{flex:0 0 calc(50% - 4px);}}
 </style>
 </head>
-<body>
+<body class="theme-light">
 <div id="login-screen">
   <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" class="login-logo" alt="KLEI" onerror="this.style.display='none'">
   <div class="login-title">Tagesberichte · Zeiterfassung · Baunatal</div>
@@ -251,7 +258,8 @@ select option{background:var(--s2);}
     <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
     <span class="admin-badge badge-admin">Admin</span>
     <span id="admin-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
-    <button class="hbtn" style="margin-left:auto" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
+    <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
+    <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
   </div>
   <div class="admin-tabs">
     <div class="admin-tab act" id="atab-ma" ontouchstart="showAdminTab('ma')" onclick="showAdminTab('ma')">Mitarbeiter</div>
@@ -276,7 +284,8 @@ select option{background:var(--s2);}
     <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
     <span class="admin-badge badge-pl">Projektleiter</span>
     <span id="pl-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
-    <button class="hbtn" style="margin-left:auto" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
+    <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
+    <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
   </div>
   <div class="admin-tabs">
     <div class="admin-tab pl-tab act" id="pltab-ber" ontouchstart="showPLTab('ber')" onclick="showPLTab('ber')">Berichte</div>
@@ -296,6 +305,7 @@ select option{background:var(--s2);}
   <span class="role-badge" id="role-badge"></span>
   <span class="h-user" id="h-user-name"></span>
   <div class="h-right">
+    <button class="theme-btn" id="theme-btn" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
     <button class="hbtn" id="profil-btn" ontouchstart="openProfil()" onclick="openProfil()">Profil</button>
     <button class="hbtn va-only" ontouchstart="openMo('mo-df')" onclick="openMo('mo-df')">Dataflor</button>
     <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
@@ -325,6 +335,29 @@ select option{background:var(--s2);}
   </div>
 </div>
 
+<div id="mo-datenschutz" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:650;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;">
+  <div style="background:var(--s1);border:1px solid var(--b);border-radius:8px;padding:20px;width:min(560px,95vw);max-height:90vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-weight:700;font-size:15px;color:var(--c)">Datenschutz &amp; Information</div>
+      <button onclick="closeMo('mo-datenschutz')" style="background:none;border:none;color:var(--m);font-size:18px;cursor:pointer">&#x2715;</button>
+    </div>
+    <div id="datenschutz-content"></div>
+  </div>
+</div>
+
+<div id="mo-erst-login" style="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:700;display:none;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--s1);border:2px solid var(--gd);border-radius:8px;padding:24px;width:min(540px,95vw);max-height:92vh;overflow-y:auto">
+    <div style="font-weight:700;font-size:18px;color:var(--c);margin-bottom:6px">Willkommen zur Testphase</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);margin-bottom:16px;letter-spacing:1px">KLEI TAGESBERICHTE - PILOTPHASE</div>
+    <div id="erst-login-content" style="font-size:13px;line-height:1.6;color:var(--t);margin-bottom:16px"></div>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;background:var(--s3);padding:10px 12px;border-radius:6px;border:1px solid var(--b)">
+      <input type="checkbox" id="dsg-cb" style="width:20px;height:20px;flex-shrink:0;accent-color:var(--g)">
+      <label for="dsg-cb" style="font-size:12px;color:var(--t);cursor:pointer;letter-spacing:0;text-transform:none;font-family:'IBM Plex Sans',sans-serif">Ich habe die Informationen zur Datenverarbeitung gelesen und nehme an der Testphase teil.</label>
+    </div>
+    <button class="btn btn-p" style="width:100%;padding:14px;font-size:14px" ontouchstart="bestaetigeDatenschutz()" onclick="bestaetigeDatenschutz()">Bestaetigen und fortfahren</button>
+  </div>
+</div>
+
 <div id="mo-df" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;">
   <div style="background:var(--s1);border:1px solid var(--b);border-radius:8px;padding:18px;width:min(400px,94vw)">
     <button onclick="closeMo('mo-df')" style="float:right;background:none;border:none;color:var(--m);font-size:18px;cursor:pointer">&#x2715;</button>
@@ -332,6 +365,17 @@ select option{background:var(--s2);}
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn btn-e" ontouchstart="expDFCSV()" onclick="expDFCSV()">CSV Export</button>
       <button class="btn btn-e" ontouchstart="expDFXML()" onclick="expDFXML()">XML Export</button>
+    </div>
+  </div>
+</div>
+
+<div id="mo-draft" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:680;display:none;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--s1);border:2px solid var(--gd);border-radius:8px;padding:22px;width:min(440px,95vw)">
+    <div style="font-weight:700;font-size:16px;color:var(--c);margin-bottom:6px">Entwurf gefunden</div>
+    <div id="draft-restore-text" style="font-size:13px;line-height:1.6;color:var(--t);margin-bottom:18px"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-p" style="flex:1;min-width:140px;padding:13px" ontouchstart="restoreVADraft()" onclick="restoreVADraft()">Weitermachen</button>
+      <button class="btn btn-r" style="flex:1;min-width:120px;padding:13px" ontouchstart="discardVADraft()" onclick="discardVADraft()">Verwerfen</button>
     </div>
   </div>
 </div>
@@ -383,6 +427,212 @@ let voiceActive=false,voiceTarget=null,recognition=null;
 let unterschriftData=null,sigDrawing=false,sigCtx=null,sigCanvas=null;
 let isSending=false;
 
+// ══════ VA-ENTWURF (lokales Zwischenspeichern) ══════
+let draftTimer=null;
+function draftKey(){return 'klei_va_draft_'+(currentUser?currentUser.id:'anon');}
+
+// Sammelt den aktuellen Formularstand des VA-Berichts (ohne Pflichtfeld-Zwang)
+function collectVADraft(){
+  try{
+    return {
+      savedAt:new Date().toISOString(),
+      kat:document.getElementById('v-kat')?.value||'bau',
+      datum:document.getElementById('v-datum')?.value||'',
+      projekt_id:document.getElementById('v-projekt')?.value||'',
+      projektnr_intern:document.getElementById('v-projektnr')?.value||'',
+      bauleiter:document.getElementById('v-bauleiter')?.value||'',
+      bauherr:document.getElementById('v-bauherr')?.value||'',
+      baustelle:document.getElementById('v-baustelle')?.value||'',
+      temperatur:document.getElementById('v-temp')?.value||'',
+      nied_mm:document.getElementById('v-nied')?.value||'',
+      besucher:document.getElementById('v-besucher')?.value||'',
+      boden:document.getElementById('v-boden')?.value||'',
+      wetter:curWeather,
+      taetigkeiten:getVATaetigkeiten(),
+      zeit_rows:getZeitRows(),
+      mach_rows:getMachRows(),
+      steps:getSteps(),
+      lieferungen:getLiefData(),
+      mengen:getMengen(),
+      lv_rows:getLVRows(),
+      maengel:getMangelData(),
+      naechstes:document.getElementById('v-naechstes')?.value||'',
+      bemerkungen:document.getElementById('v-bemerkungen')?.value||'',
+      zusatz_projekte:getZusatzProjekte()
+    };
+  }catch(e){return null;}
+}
+
+// Prüft ob der Entwurf überhaupt Inhalt hat (damit leere Formulare nicht gespeichert werden)
+function draftHasContent(d){
+  if(!d)return false;
+  if(d.baustelle||d.bauleiter||d.bauherr||d.naechstes||d.bemerkungen||d.projekt_id)return true;
+  if((d.zeit_rows||[]).length||(d.steps||[]).length||(d.maengel||[]).length||(d.lieferungen||[]).length)return true;
+  if((d.taetigkeiten||[]).length)return true;
+  return false;
+}
+
+// Speichert den Entwurf lokal (nur wenn VA-Rolle, Bericht-Tab aktiv und Inhalt vorhanden)
+function autoSaveVADraft(){
+  if(currentRole!=='vorarbeiter')return;
+  if(currentId)return; // bereits gespeicherter/geladener Bericht -> kein Entwurf nötig
+  const d=collectVADraft();
+  if(!draftHasContent(d))return;
+  try{localStorage.setItem(draftKey(),JSON.stringify(d));
+    const ind=document.getElementById('draft-indicator');
+    if(ind){const t=new Date();ind.textContent='Entwurf gesichert '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');ind.style.opacity='1';setTimeout(()=>{if(ind)ind.style.opacity='0.5';},2000);}
+  }catch(e){}
+}
+
+// Startet das automatische Speichern (alle 5 Sek bei Änderungen)
+function startVAAutoSave(){
+  stopVAAutoSave();
+  draftTimer=setInterval(autoSaveVADraft,5000);
+}
+function stopVAAutoSave(){if(draftTimer){clearInterval(draftTimer);draftTimer=null;}}
+
+// Manuelles Speichern per Button
+function manualSaveDraft(){
+  const d=collectVADraft();
+  if(!draftHasContent(d)){toast('Noch nichts zum Speichern','info');return;}
+  try{localStorage.setItem(draftKey(),JSON.stringify(d));toast('Entwurf gespeichert','ok');
+    const ind=document.getElementById('draft-indicator');if(ind){ind.textContent='Entwurf gespeichert';ind.style.opacity='1';}
+  }catch(e){toast('Speichern fehlgeschlagen','err');}
+}
+
+// Löscht den Entwurf (nach erfolgreichem Senden oder beim Verwerfen)
+function clearVADraft(){try{localStorage.removeItem(draftKey());}catch(e){}}
+
+// Prüft beim Öffnen ob ein Entwurf vorliegt und fragt nach
+function checkVADraft(){
+  if(currentRole!=='vorarbeiter')return;
+  let raw=null;try{raw=localStorage.getItem(draftKey());}catch(e){}
+  if(!raw)return;
+  let d=null;try{d=JSON.parse(raw);}catch(e){clearVADraft();return;}
+  if(!draftHasContent(d)){clearVADraft();return;}
+  const wann=d.savedAt?new Date(d.savedAt):null;
+  const wannTxt=wann?wann.toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+  document.getElementById('draft-restore-text').textContent='Du hast einen nicht abgeschickten Bericht vom '+wannTxt+'. Moechtest du dort weitermachen?';
+  document.getElementById('mo-draft').style.display='flex';
+}
+
+// Stellt den Entwurf im Formular wieder her
+function restoreVADraft(){
+  let raw=null;try{raw=localStorage.getItem(draftKey());}catch(e){}
+  if(!raw){document.getElementById('mo-draft').style.display='none';return;}
+  let d=null;try{d=JSON.parse(raw);}catch(e){document.getElementById('mo-draft').style.display='none';return;}
+  // wie ein gespeicherter Bericht ins Formular laden (loadVAForm versteht dieses Format)
+  const r={
+    datum:d.datum,projekt_id:d.projekt_id,projektnr_intern:d.projektnr_intern,
+    bauleiter:d.bauleiter,bauherr:d.bauherr,baustelle:d.baustelle,
+    temperatur:d.temperatur,nied_mm:d.nied_mm,besucher:d.besucher,boden:d.boden,
+    wetter:d.wetter,taetigkeiten:d.taetigkeiten,zeit_rows:d.zeit_rows,mach_rows:d.mach_rows,
+    steps:d.steps,lieferungen:d.lieferungen,mengen:d.mengen,lv_rows:d.lv_rows,
+    maengel:d.maengel,naechstes:d.naechstes,bemerkungen:d.bemerkungen,zusatz_projekte:d.zusatz_projekte
+  };
+  currentId=null; // Entwurf ist ein neuer, ungespeicherter Bericht
+  document.getElementById('mo-draft').style.display='none';
+  showTab('bericht');
+  setTimeout(()=>{loadVAForm(r);toast('Entwurf wiederhergestellt','ok');},150);
+}
+
+function discardVADraft(){clearVADraft();document.getElementById('mo-draft').style.display='none';toast('Entwurf verworfen','info');}
+
+
+// ══════ THEME (Hell/Dunkel) ══════
+function applyTheme(){
+  const t=localStorage.getItem('klei_theme')||'light';
+  if(t==='light')document.body.classList.add('theme-light');else document.body.classList.remove('theme-light');
+  document.querySelectorAll('.theme-btn').forEach(b=>b.innerHTML=t==='light'?'&#9728;':'&#9790;');
+}
+function toggleTheme(){const c=localStorage.getItem('klei_theme')||'light';const n=c==='dark'?'light':'dark';localStorage.setItem('klei_theme',n);applyTheme();}
+applyTheme();
+
+// ══════ DATENSCHUTZ TEXTE ══════
+const DSG_KONTAKT_NAME='Florian Klei';
+const DSG_KONTAKT_MAIL='f.klei@klei-galabau.de';
+
+function getDatenschutzHTML(){
+  return ''+
+  '<div style="font-size:13px;line-height:1.7;color:var(--t)">'+
+  '<div style="background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:12px;margin-bottom:14px">'+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);letter-spacing:1.5px;margin-bottom:4px">TESTPHASE</div>'+
+  '<div style="font-size:12px;color:var(--c)">Diese App befindet sich in einer mehrwoechigen Pilotphase mit ausgewaehlten Mitarbeitern. Verbesserungen werden laufend in Ruecksprache mit den Nutzern umgesetzt.</div></div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">1. Verantwortlich</div>'+
+  '<div>Friedrich Klei GmbH, Stettiner Str. 14-16, 34225 Baunatal<br>Telefon: +49 (0) 5601 8056</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">2. Welche Daten werden erfasst</div>'+
+  '<ul style="margin-left:18px"><li>Name, Mitarbeiternummer, Qualifikation</li><li>Arbeitszeiten (Beginn, Ende, Pause, Fahrzeiten)</li><li>Eingesetzte Fahrzeuge, Maschinen und Geraete</li><li>Taetigkeitsbeschreibungen und Mengen</li><li>Unterschrift (digital, freiwillig im Profil hinterlegt)</li><li>Fotos der Baustelle (von Vorarbeitern erfasst)</li><li>Projekt- und Baustelleninformationen</li></ul>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">3. Sprachaufnahmen</div>'+
+  '<div>Sprachaufnahmen werden <b>nicht gespeichert</b>. Die Spracheingabe wird ausschliesslich live in Text umgewandelt. Die Aufnahme selbst verbleibt nur waehrend des Sprechens kurzzeitig im Geraet und wird nicht uebertragen.</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">4. Wo werden die Daten gespeichert</div>'+
+  '<ul style="margin-left:18px"><li><b>Supabase</b> (Datenbank, Server in Irland / EU)</li><li><b>Google Drive</b> (PDF-Archiv, Anbieter: Google LLC, USA)</li><li><b>Outlook / Gmail</b> (E-Mail-Versand der Tagesberichte)</li><li><b>Claude API</b> (Anthropic, USA - nur fuer optionale KI-Analyse von Vorarbeiter-Berichten)</li></ul>'+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--m);margin-top:6px;font-style:italic">Geplant: Migration zu einem firmeneigenen Server in Deutschland.</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">5. Wer hat Zugriff</div>'+
+  '<ul style="margin-left:18px"><li><b>Geschaeftsfuehrung / Verwaltung</b>: Vollzugriff auf alle Berichte</li><li><b>Vorarbeiter</b>: Eigene Berichte und Berichte der zugeordneten Arbeiter</li><li><b>Arbeiter</b>: Nur eigene Berichte</li><li><b>Werkstatt</b>: Nur eigene Werkstattberichte</li></ul>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">6. Zweck der Verarbeitung</div>'+
+  '<div>Erfassung von Arbeitszeiten, Dokumentation der Baustellenleistung, Materialnachweise, Lohnabrechnung sowie Erfuellung gesetzlicher Aufzeichnungspflichten (insbesondere Arbeitszeitgesetz und HGB).</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">7. Rechtsgrundlage</div>'+
+  '<div>Art. 6 Abs. 1 lit. b und c DSGVO (Vertragserfuellung und gesetzliche Pflichten), &sect; 26 BDSG (Beschaeftigtendatenschutz).</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">8. Speicherdauer</div>'+
+  '<div>Daten werden gemaess gesetzlicher Aufbewahrungsfristen gespeichert:<br>- Arbeitszeitnachweise: mindestens 2 Jahre<br>- Geschaeftsunterlagen / Buchungsbelege: 6 bis 10 Jahre (HGB / AO)<br>- Personalakten: nach Beendigung des Arbeitsverhaeltnisses + Aufbewahrungsfrist</div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">9. Ihre Rechte</div>'+
+  '<ul style="margin-left:18px"><li>Auskunft (Art. 15 DSGVO)</li><li>Berichtigung (Art. 16)</li><li>Loeschung (Art. 17)</li><li>Einschraenkung der Verarbeitung (Art. 18)</li><li>Datenuebertragbarkeit (Art. 20)</li><li>Widerspruch (Art. 21)</li><li>Beschwerde bei der Aufsichtsbehoerde (Hessischer Beauftragter fuer Datenschutz und Informationsfreiheit)</li></ul>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gl);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px">10. Ansprechperson</div>'+
+  '<div style="background:var(--gg);border:1px solid var(--gd);border-radius:6px;padding:10px 12px"><b>'+DSG_KONTAKT_NAME+'</b><br><a href="mailto:'+DSG_KONTAKT_MAIL+'" style="color:var(--gl);text-decoration:none">'+DSG_KONTAKT_MAIL+'</a></div>'+
+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:18px;padding-top:12px;border-top:1px solid var(--b);line-height:1.5">Stand: '+new Date().toLocaleDateString('de-DE')+' - Dieser Hinweistext wird laufend aktualisiert und kann jederzeit ueber das Profil eingesehen werden.</div>'+
+  '</div>';
+}
+
+function openDatenschutz(){const el=document.getElementById('datenschutz-content');if(el)el.innerHTML=getDatenschutzHTML();openMo('mo-datenschutz');}
+
+function getErstLoginHTML(){
+  return''+
+  '<p>Du nimmst an der <b>Testphase</b> der neuen KLEI Tagesberichte-App teil. Vielen Dank fuer dein Mitwirken!</p>'+
+  '<p style="margin-top:10px">Mit dieser App erfasst du <b>Arbeitszeiten, Taetigkeiten und Berichte</b>. Die Daten werden zur Lohnabrechnung, Baustellendokumentation und Erfuellung gesetzlicher Pflichten verarbeitet.</p>'+
+  '<div style="background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:10px 12px;margin:12px 0">'+
+  '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);letter-spacing:1.2px;margin-bottom:6px">KURZ-INFO</div>'+
+  '<div style="font-size:12px;line-height:1.6">'+
+  '- Erfasst werden Name, Stunden, Taetigkeiten, optional Unterschrift und Fotos<br>'+
+  '- Sprachaufnahmen werden <b>nicht</b> gespeichert<br>'+
+  '- Speicherorte: Supabase (EU), Google Drive, Outlook<br>'+
+  '- Speicherdauer gemaess gesetzlicher Aufbewahrungspflichten<br>'+
+  '- Vollzugriff: Geschaeftsfuehrung und Verwaltung'+
+  '</div></div>'+
+  '<p>Die vollstaendigen Informationen findest du jederzeit im <b>Profil</b> unter "Datenschutz".</p>'+
+  '<p style="margin-top:10px">Fragen, Hinweise oder Verbesserungsvorschlaege gerne an:<br><b>'+DSG_KONTAKT_NAME+'</b> - <a href="mailto:'+DSG_KONTAKT_MAIL+'" style="color:var(--gl)">'+DSG_KONTAKT_MAIL+'</a></p>';
+}
+
+async function bestaetigeDatenschutz(){
+  const cb=document.getElementById('dsg-cb');
+  if(!cb?.checked){toast('Bitte Checkbox bestaetigen','err');return;}
+  if(!currentUser){toast('Fehler: nicht eingeloggt','err');return;}
+  try{
+    await sb.from('mitarbeiter').update({datenschutz_bestaetigt_am:new Date().toISOString()}).eq('id',currentUser.id);
+    currentUser.datenschutz_bestaetigt_am=new Date().toISOString();
+  }catch(e){/* Spalte evtl. noch nicht da - kein Showstopper */}
+  document.getElementById('mo-erst-login').style.display='none';
+  toast('Danke! Viel Erfolg in der Testphase','ok');
+}
+
+function checkErstLogin(){
+  if(!currentUser)return;
+  if(currentUser.datenschutz_bestaetigt_am)return;
+  const el=document.getElementById('erst-login-content');
+  if(el)el.innerHTML=getErstLoginHTML();
+  document.getElementById('mo-erst-login').style.display='flex';
+}
+
 // ══════ LOGIN ══════
 async function doLogin(){
   const nr=document.getElementById('login-nr').value.trim();
@@ -402,12 +652,14 @@ async function doLogin(){
     if(data.rolle==='admin')openAdmin();
     else if(data.rolle==='projektleiter')openPL();
     else await initApp();
+    setTimeout(()=>checkErstLogin(),400);
   }catch(e){errEl.textContent='Verbindungsfehler: '+e.message;btn.innerHTML='Anmelden';btn.disabled=false;}
 }
 document.getElementById('login-pw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 document.getElementById('login-nr').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('login-pw').focus();});
 
 function doLogout(){
+  stopVAAutoSave();
   currentUser=null;reports=[];currentId=null;currentRole=null;unterschriftData=null;
   ['admin-screen','pl-screen'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('login-screen').style.display='flex';
@@ -463,7 +715,12 @@ function openProfil(){
     '<div style="display:flex;gap:6px;margin-top:8px">'+
     '<button class="btn btn-p" style="font-size:11px" ontouchstart="saveSig()" onclick="saveSig()">Speichern</button>'+
     '<button class="btn" style="font-size:11px" ontouchstart="clearSigPad()" onclick="clearSigPad()">Loeschen</button>'+
-    '</div></div>';
+    '</div></div>'+
+    '<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--b)">'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Datenschutz &amp; Information</div>'+
+    '<button class="btn" style="width:100%;font-size:12px;justify-content:center" ontouchstart="closeMo(\'mo-profil\');setTimeout(openDatenschutz,200)" onclick="closeMo(\'mo-profil\');setTimeout(openDatenschutz,200)">Datenschutz-Informationen anzeigen</button>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:8px;line-height:1.6">Bei Fragen: '+DSG_KONTAKT_NAME+' - <a href="mailto:'+DSG_KONTAKT_MAIL+'" style="color:var(--gl);text-decoration:none">'+DSG_KONTAKT_MAIL+'</a></div>'+
+    '</div>';
   openMo('mo-profil');
 }
 function showSigPad(){document.getElementById('sig-pad-wrap').style.display='block';setTimeout(()=>initSigCanvas(),100);}
@@ -564,44 +821,80 @@ async function toggleMAaktiv(id,aktiv){await sb.from('mitarbeiter').update({akti
 async function renderAdminProj(){
   const el=document.getElementById('apanel-proj');
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Projekt anlegen</div>'+
-    '<div class="row"><div class="fg w33"><label>Projektnummer</label><input id="new-proj-nr" placeholder="2026-042"></div>'+
-    '<div class="fg w50"><label>Projektname</label><input id="new-proj-name" placeholder="Kassel Stadthalle"></div>'+
+    '<div class="row"><div class="fg w33"><label>Projektnummer</label><input id="new-proj-nr" placeholder="2026-042 (bei Pflege optional)"></div>'+
+    '<div class="fg w50"><label>Projektname / Baustelle</label><input id="new-proj-name" placeholder="Kassel Stadthalle"></div>'+
     '<div class="fg w25"><label>Fahrzeit (min)</label><select id="new-proj-fz">'+[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'">'+m+' min</option>').join('')+'</select></div></div>'+
+    '<div class="row"><div class="fg w33"><label>Kategorie</label><select id="new-proj-kat" onchange="toggleLeistFeld()"><option value="bau">Bau / Sportplatzbau</option><option value="pflege">Pflege</option></select></div></div>'+
+    '<div id="new-proj-leist-wrap" style="display:none"><div class="fg w100"><label>Leistungen (eine pro Zeile)</label><textarea id="new-proj-leist" placeholder="Rasen mähen (6x)&#10;Hecken schneiden (2x)&#10;Bäume wässern (10x)" style="min-height:90px"></textarea></div>'+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-bottom:8px">Diese Leistungen erscheinen bei der Baustelle im Arbeitsschritt-Dropdown.</div></div>'+
     '<button class="btn btn-sky" ontouchstart="adminAddProj()" onclick="adminAddProj()">+ Projekt anlegen</button></div>'+
-    '<div class="a-sec"><div class="a-sec-title">Alle Projekte</div><div id="proj-list"><div class="empty"><div class="spin"></div></div></div></div>';
-  const{data}=await sb.from('projekte').select('*').order('nr');
-  if(!data?.length){document.getElementById('proj-list').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Projekte</div>';return;}
-  document.getElementById('proj-list').innerHTML=data.map(p=>
-    '<div id="proj-item-'+p.id+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;flex-wrap:wrap">'+
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--sky);width:80px;flex-shrink:0">'+p.nr+'</div>'+
-    '<div style="flex:1;font-size:12px;font-weight:600;color:var(--c)">'+p.name+'</div>'+
-    '<select style="width:80px;font-size:10px;background:var(--s2);border:1px solid var(--b);border-radius:3px;color:var(--earth)" onchange="adminUpdateFahrzeit(\''+p.id+'\',this.value)">'+
+    '<div class="a-sec"><div class="a-sec-title">Alle Projekte</div>'+
+    '<div class="row" style="margin-bottom:10px"><div class="fg w50"><input id="proj-filter" placeholder="Suchen (Name/Nr.)..." oninput="filterProjListe()"></div>'+
+    '<div class="fg w50"><select id="proj-kat-filter" onchange="filterProjListe()"><option value="">Alle Kategorien</option><option value="bau">Nur Bau</option><option value="pflege">Nur Pflege</option></select></div></div>'+
+    '<div id="proj-list"><div class="empty"><div class="spin"></div></div></div></div>';
+  const{data}=await sb.from('projekte').select('*').order('kategorie').order('nr');
+  window._allProj=data||[];
+  filterProjListe();
+}
+
+function toggleLeistFeld(){const kat=document.getElementById('new-proj-kat')?.value;const wrap=document.getElementById('new-proj-leist-wrap');if(wrap)wrap.style.display=kat==='pflege'?'block':'none';}
+
+function filterProjListe(){
+  const data=window._allProj||[];
+  const f=(document.getElementById('proj-filter')?.value||'').toLowerCase();
+  const kf=document.getElementById('proj-kat-filter')?.value||'';
+  const filtered=data.filter(p=>{
+    const matchText=!f||(p.name||'').toLowerCase().includes(f)||(p.nr||'').toLowerCase().includes(f);
+    const matchKat=!kf||(p.kategorie||'bau')===kf;
+    return matchText&&matchKat;
+  });
+  const el=document.getElementById('proj-list');if(!el)return;
+  if(!filtered.length){el.innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Projekte</div>';return;}
+  el.innerHTML=filtered.map(p=>{
+    const istPflege=p.kategorie==='pflege';
+    const anzLeist=Array.isArray(p.leistungen)?p.leistungen.length:0;
+    return '<div id="proj-item-'+p.id+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s3);border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;flex-wrap:wrap">'+
+    (istPflege?'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8px;padding:2px 6px;border-radius:8px;background:var(--gg);color:var(--gl);flex-shrink:0">PFLEGE</span>':'')+
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--sky);min-width:60px;flex-shrink:0">'+(p.nr||'--')+'</div>'+
+    '<div style="flex:1;min-width:120px;font-size:12px;font-weight:600;color:var(--c)">'+p.name+(istPflege&&anzLeist?' <span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m)">('+anzLeist+' Leist.)</span>':'')+'</div>'+
+    '<select style="width:74px;font-size:10px;background:var(--s2);border:1px solid var(--b);border-radius:3px;color:var(--earth)" onchange="adminUpdateFahrzeit(\''+p.id+'\',this.value)">'+
     [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(p.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+'</select>'+
     '<button class="btn" style="font-size:10px;padding:5px 8px" ontouchstart="editProj(\''+p.id+'\')" onclick="editProj(\''+p.id+'\')">Bearb.</button>'+
-    '<button class="btn btn-r" style="font-size:10px;padding:5px 8px" ontouchstart="adminDelProj(\''+p.id+'\',\''+p.name+'\')" onclick="adminDelProj(\''+p.id+'\',\''+p.name+'\')">&#x2715;</button></div>'
-  ).join('');
+    '<button class="btn btn-r" style="font-size:10px;padding:5px 8px" ontouchstart="adminDelProj(\''+p.id+'\',\''+(p.name||'').replace(/'/g,"")+'\')" onclick="adminDelProj(\''+p.id+'\',\''+(p.name||'').replace(/'/g,"")+'\')">&#x2715;</button></div>';
+  }).join('');
 }
 
 async function adminAddProj(){
   const nr=document.getElementById('new-proj-nr').value.trim(),name=document.getElementById('new-proj-name').value.trim();
   const fz=parseInt(document.getElementById('new-proj-fz').value)||0;
-  if(!nr||!name){toast('Nummer und Name erforderlich','err');return;}
-  const{error}=await sb.from('projekte').insert({nr,name,fahrzeit_min:fz,aktiv:true});
+  const kat=document.getElementById('new-proj-kat')?.value||'bau';
+  let leistungen=[];
+  if(kat==='pflege'){const txt=document.getElementById('new-proj-leist')?.value||'';leistungen=txt.split('\n').map(l=>l.trim()).filter(Boolean);}
+  if(!name){toast('Name erforderlich','err');return;}
+  const{error}=await sb.from('projekte').insert({nr,name,fahrzeit_min:fz,kategorie:kat,leistungen,aktiv:true});
   if(error){toast('Fehler: '+error.message,'err');return;}
-  await loadProjekte();toast('Projekt angelegt','ok');document.getElementById('new-proj-nr').value='';document.getElementById('new-proj-name').value='';renderAdminProj();
+  await loadProjekte();toast('Projekt angelegt','ok');document.getElementById('new-proj-nr').value='';document.getElementById('new-proj-name').value='';if(document.getElementById('new-proj-leist'))document.getElementById('new-proj-leist').value='';renderAdminProj();
 }
 async function adminUpdateFahrzeit(id,val){await sb.from('projekte').update({fahrzeit_min:parseInt(val)||0}).eq('id',id);await loadProjekte();toast('Fahrzeit gespeichert','ok');}
 async function editProj(id){
   const{data}=await sb.from('projekte').select('*').eq('id',id).single();if(!data)return;
   const el=document.getElementById('proj-item-'+id);
-  el.innerHTML='<div style="width:100%"><div class="row"><div class="fg w33"><label>Projektnummer</label><input id="ep-nr-'+id+'" value="'+data.nr+'"></div>'+
-    '<div class="fg w50"><label>Projektname</label><input id="ep-name-'+id+'" value="'+data.name+'"></div>'+
+  const istPflege=data.kategorie==='pflege';
+  const leistText=(Array.isArray(data.leistungen)?data.leistungen:[]).join('\n');
+  el.innerHTML='<div style="width:100%"><div class="row"><div class="fg w33"><label>Projektnummer</label><input id="ep-nr-'+id+'" value="'+(data.nr||'')+'"></div>'+
+    '<div class="fg w50"><label>Projektname / Baustelle</label><input id="ep-name-'+id+'" value="'+(data.name||'').replace(/"/g,'&quot;')+'"></div>'+
     '<div class="fg w25"><label>Fahrzeit</label><select id="ep-fz-'+id+'">'+[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120].map(m=>'<option value="'+m+'" '+(parseInt(data.fahrzeit_min||0)===m?'selected':'')+'>'+m+'min</option>').join('')+'</select></div></div>'+
+    '<div class="row"><div class="fg w33"><label>Kategorie</label><select id="ep-kat-'+id+'" onchange="toggleEpLeist(\''+id+'\')"><option value="bau" '+(!istPflege?'selected':'')+'>Bau</option><option value="pflege" '+(istPflege?'selected':'')+'>Pflege</option></select></div></div>'+
+    '<div id="ep-leist-wrap-'+id+'" style="display:'+(istPflege?'block':'none')+'"><div class="fg w100"><label>Leistungen (eine pro Zeile)</label><textarea id="ep-leist-'+id+'" style="min-height:90px">'+leistText+'</textarea></div></div>'+
     '<div style="display:flex;gap:6px"><button class="btn btn-sky" ontouchstart="saveEditProj(\''+id+'\')" onclick="saveEditProj(\''+id+'\')">Speichern</button>'+
     '<button class="btn" ontouchstart="renderAdminProj()" onclick="renderAdminProj()">Abbrechen</button></div></div>';
 }
+function toggleEpLeist(id){const kat=document.getElementById('ep-kat-'+id)?.value;const wrap=document.getElementById('ep-leist-wrap-'+id);if(wrap)wrap.style.display=kat==='pflege'?'block':'none';}
 async function saveEditProj(id){
-  await sb.from('projekte').update({nr:document.getElementById('ep-nr-'+id).value.trim(),name:document.getElementById('ep-name-'+id).value.trim(),fahrzeit_min:parseInt(document.getElementById('ep-fz-'+id).value)||0}).eq('id',id);
+  const kat=document.getElementById('ep-kat-'+id)?.value||'bau';
+  let leistungen=[];
+  if(kat==='pflege'){const txt=document.getElementById('ep-leist-'+id)?.value||'';leistungen=txt.split('\n').map(l=>l.trim()).filter(Boolean);}
+  await sb.from('projekte').update({nr:document.getElementById('ep-nr-'+id).value.trim(),name:document.getElementById('ep-name-'+id).value.trim(),fahrzeit_min:parseInt(document.getElementById('ep-fz-'+id).value)||0,kategorie:kat,leistungen}).eq('id',id);
   await loadProjekte();toast('Gespeichert','ok');renderAdminProj();
 }
 async function adminDelProj(id,name){if(!confirm('Projekt "'+name+'" loeschen?'))return;await sb.from('projekte').update({aktiv:false}).eq('id',id);await loadProjekte();toast('Geloescht','err');renderAdminProj();}
@@ -1106,6 +1399,7 @@ async function saveAndSendVA(){
   const pdfUrl=await sendPDFMail(reportForPDF,'va-send-status');
   if(pdfUrl)await sb.from('berichte').update({gesendet:true,pdf_url:pdfUrl}).eq('id',savedId);
   else await sb.from('berichte').update({gesendet:true}).eq('id',savedId);
+  clearVADraft();
   await loadReports();renderSB();currentId=null;newReport();
   }finally{isSending=false;}
 }
@@ -1264,6 +1558,7 @@ async function generatePDF(report){
         if(s.pos){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.blau);doc.text('Pos. '+clean(s.pos),M+100,y+5);}
         if(s.menge){doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...C.gruen);doc.text(clean(s.menge+' '+(s.eh||'')),W-M-4,y+5,{align:'right'});}
         LINE(M,y+7,W-M,y+7,C.rahmen);y+=10;
+        if(s.leistung){doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...C.gruen);doc.text('Leistung: '+clean(s.leistung),M+3,y);y+=5;}
         const lines=W2(s.txt,M+3,y,cw-6,9,C.dunkel);y+=lines*5+3;
         if(s.mitarbeiter?.length){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...C.grau);const maText='Mitarbeiter: '+s.mitarbeiter.map(m=>clean(m.name)+(m.stunden?' ('+m.stunden+'h)':'')).join(', ');const maLines=doc.splitTextToSize(maText,cw-6);doc.text(maLines,M+3,y);y+=maLines.length*4+2;}
         LINE(M,y,W-M,y,[220,220,220]);y+=5;
@@ -1373,14 +1668,18 @@ function loadReport(id){
   if(r.rolle==='ws'){
     const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v||'';};
     sv('ws-datum',r.datum);sv('ws-von',r.von);sv('ws-bis',r.bis);sv('ws-taetigkeit',r.taetigkeit_text||'');sv('ws-maengel',r.besonder||'');
-    const wp=document.getElementById('ws-projekt');if(wp)wp.value=r.projekt_id||'';
+    const wKat=r.projekt_id?getProjektKat(r.projekt_id):'bau';
+    const wk=document.getElementById('ws-kat');if(wk)wk.value=wKat;
+    const wp=document.getElementById('ws-projekt');if(wp){wp.innerHTML=projektOptsByKat(wKat,r.projekt_id||'');wp.value=r.projekt_id||'';}
     const wp2=document.getElementById('ws-pause');if(wp2)wp2.value=r.pause_min||30;
     document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.toggle('a',(r.taetigkeiten||[]).includes(t.textContent)));
     calcWS();showTab('quick');
   }else if(r.rolle==='ar'){
     const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v||'';};
     sv('a-datum',r.datum);sv('a-von',r.von);sv('a-bis',r.bis);sv('a-taetigkeit',r.taetigkeit_text||'');sv('a-besonder',r.besonder||'');
-    const ap=document.getElementById('a-projekt');if(ap){ap.value=r.projekt_id||'';onARProjektChange();}
+    const aKat=r.projekt_id?getProjektKat(r.projekt_id):'bau';
+    const ak=document.getElementById('a-kat');if(ak)ak.value=aKat;
+    const ap=document.getElementById('a-projekt');if(ap){ap.innerHTML=projektOptsByKat(aKat,r.projekt_id||'');ap.value=r.projekt_id||'';onARProjektChange();}
     const ps=document.getElementById('a-pause');if(ps)ps.value=r.pause_min||30;
     curFahrtStatus=r.fahrt_status||'fahrer';
     document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.toggle('fahrt-active',b.dataset.val===curFahrtStatus));
@@ -1392,7 +1691,9 @@ function loadReport(id){
 function loadVAForm(r){
   const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
   sv('v-datum',r.datum);sv('v-baustelle',r.baustelle);sv('v-bauherr',r.bauherr);sv('v-projektnr',r.projektnr_intern);sv('v-bauleiter',r.bauleiter);sv('v-temp',r.temperatur||r.temp);sv('v-nied',r.nied_mm||r.nied);sv('v-besucher',r.besucher);sv('v-naechstes',r.naechstes);sv('v-bemerkungen',r.bemerkungen);
-  const vp=document.getElementById('v-projekt');if(vp)vp.value=r.projekt_id||'';
+  const vKat=r.projekt_id?getProjektKat(r.projekt_id):'bau';
+  const vk=document.getElementById('v-kat');if(vk)vk.value=vKat;
+  const vp=document.getElementById('v-projekt');if(vp){vp.innerHTML=projektOptsByKat(vKat,r.projekt_id||'');vp.value=r.projekt_id||'';}
   if(document.getElementById('v-boden'))document.getElementById('v-boden').value=r.boden||'Trocken';
   curWeather=r.wetter||'Sonnig';const wm={Sonnig:0,Bewoelkt:1,Regen:2,'Frost/Eis':3,Sturm:4,Schnee:5};
   document.querySelectorAll('.wc').forEach((c,i)=>c.classList.toggle('s',i===(wm[curWeather]??0)));
@@ -1457,7 +1758,6 @@ function renderVADetail(r){
     '<div class="sc"><div class="sv">'+((r.steps||[]).length)+'</div><div class="sl">Schritte</div></div>'+
     '</div>'+
     (r.pdf_url?'<div class="ib"><div class="ib-t">Drive</div><a href="'+r.pdf_url+'" target="_blank" style="color:var(--sky);font-size:12px">PDF in Drive oeffnen &#x279A;</a></div>':'')+
-    (r.ai_analyse?'<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>KI</div><div class="ai-txt">'+r.ai_analyse+'</div></div>':'')+
     '<div class="arow"><button class="btn btn-p" style="font-size:11px" ontouchstart="resendVA(\''+r.id+'\')" onclick="resendVA(\''+r.id+'\')">PDF senden</button></div>';
 }
 
@@ -1479,7 +1779,6 @@ function renderSB(){
       '<div class="ri-tags">'+
       '<span class="tag-s '+tagCls+'">'+tagLbl+'</span>'+
       (r.pdf_url?'<span class="tag-s" style="background:rgba(61,143,168,.12);color:var(--sky)">Drive</span>':'')+
-      (r.ai_analyse?'<span class="tag-s tag-g">KI</span>':'')+
       (r.gesendet?'<span class="tag-s" style="background:rgba(61,143,168,.12);color:var(--sky)">&#x2713;</span>':'')+
       '</div></div>';
   }).join('');
@@ -1500,30 +1799,32 @@ function buildUE(){
     }).join('');
 }
 
-async function triggerAI(){const r=reports.find(x=>x.id===currentId);if(!r){toast('Erst speichern!','err');return;}showTab('ki');await runAI('zusammenfassung');}
-async function runAI(type){
-  const r=reports.find(x=>x.id===currentId);if(!r){toast('Kein Bericht','err');return;}
-  const prompts={zusammenfassung:'Erstelle eine kompakte Zusammenfassung dieses GaLaBau-Tagesberichts auf Deutsch.',risiken:'Analysiere Risiken und Maengel.',kosten:'Kostenschaetzung nach GaLaBau-Tariflohn.',qualitaet:'Qualitaetspruefung nach DIN 18917, DIN 18035, VOB/C.',bericht:'Formaler VOB-konformer Tagesbericht.',plan:'Wochenplanung fuer naechste 5 Werktage.'};
-  const zRows=r.zeit_rows||[];
-  const rTxt='KLEI Bericht\nDatum:'+r.datum+'|Projekt:'+getProjektLabel(r.projekt_id||'')+'|Bauleiter:'+r.bauleiter+'\nTaetigkeiten:'+(r.taetigkeiten||[]).join(',')+'\nWetter:'+r.wetter+','+r.temperatur+'C\nZeiten:'+zRows.map(t=>t.name+'('+t.qual+'):'+t.von+'-'+t.bis+' '+t.gesamt+'h').join('; ')+'\nArbeiten:'+(r.steps||[]).map((s,i)=>(i+1)+'. '+s.txt+' '+(s.menge||'')).join('\n')+'\nMaengel:'+(r.maengel||[]).map(m=>m.typ+': '+m.txt).join('; ')+'\nNaechstes:'+(r.naechstes||'--');
-  const lbl={zusammenfassung:'Zusammenfassung',risiken:'Risiken',kosten:'Kosten',qualitaet:'Qualitaet',bericht:'VOB-Bericht',plan:'Wochenplanung'};
-  const out=document.getElementById('ki-out');
-  out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot"></div>Analysiere...</div><div class="lbar"><div class="lfill"></div></div></div>';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompts[type]+'\n\n---\n'+rTxt}]})});
-    const data=await res.json();
-    const txt=data.content?.map(c=>c.text||'').join('\n')||'Keine Antwort.';
-    const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^#{1,3}\s(.+)$/gm,'<h3>$1</h3>');
-    out.innerHTML='<div class="ai-card"><div class="ai-lbl"><div class="ai-dot" style="animation:none"></div>'+lbl[type]+'</div><div class="ai-txt">'+fmt+'</div></div>';
-    await sb.from('berichte').update({ai_analyse:fmt}).eq('id',r.id);await loadReports();renderSB();toast('KI fertig','ok');
-  }catch(e){out.innerHTML='<div class="ai-card" style="border-color:var(--r)"><div style="color:var(--r);font-size:10px">Fehler: '+e.message+'</div></div>';toast('KI-Fehler','err');}
-}
-
 async function delReport(id){if(!confirm('Bericht loeschen?'))return;await sb.from('berichte').delete().eq('id',id);if(currentId===id)currentId=null;await loadReports();renderSB();document.getElementById('detailContent').innerHTML='<div class="empty"><div class="ei">&#128465;</div><div class="et">Geloescht</div></div>';toast('Geloescht','err');}
 // ══════ HILFSFUNKTIONEN ══════
-function getProjektLabel(nrOrId){const p=PROJEKTE.find(x=>x.id===nrOrId||x.nr===nrOrId);return p?p.nr+' - '+p.name:(nrOrId||'--');}
+function getProjektLabel(nrOrId){const p=PROJEKTE.find(x=>x.id===nrOrId||x.nr===nrOrId);if(!p)return nrOrId||'--';return p.nr?p.nr+' - '+p.name:p.name;}
 function getProjektFahrzeit(nrOrId){const p=PROJEKTE.find(x=>x.id===nrOrId||x.nr===nrOrId);return p?parseInt(p.fahrzeit_min||0):0;}
-function projektOpts(sel){return'<option value="">- Projekt waehlen -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(sel===p.id||sel===p.nr?'selected':'')+'>'+p.nr+' - '+p.name+(p.fahrzeit_min?' ('+p.fahrzeit_min+'min)':'')+'</option>').join('');}
+function projektOpts(sel){return'<option value="">- Projekt waehlen -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(sel===p.id||sel===p.nr?'selected':'')+'>'+(p.kategorie==='pflege'?'[Pflege] ':'')+(p.nr?p.nr+' - ':'')+p.name+(p.fahrzeit_min?' ('+p.fahrzeit_min+'min)':'')+'</option>').join('');}
+function getProjektLeistungen(projektId){const p=PROJEKTE.find(x=>x.id===projektId);return(p&&Array.isArray(p.leistungen))?p.leistungen:[];}
+function getProjektKat(projektId){const p=PROJEKTE.find(x=>x.id===projektId);return p?(p.kategorie||'bau'):'bau';}
+// Optionen nur fuer eine Kategorie (kurz, ohne Praefix)
+function projektOptsByKat(kat,sel){
+  const list=PROJEKTE.filter(p=>(p.kategorie||'bau')===kat);
+  return'<option value="">- '+(kat==='pflege'?'Baustelle':'Projekt')+' waehlen -</option>'+
+    list.map(p=>'<option value="'+p.id+'" '+(sel===p.id?'selected':'')+'>'+(p.nr?p.nr+' - ':'')+p.name+(p.fahrzeit_min?' ('+p.fahrzeit_min+'min)':'')+'</option>').join('');
+}
+function katSelectHTML(id,onchange,selKat){
+  return'<select id="'+id+'" onchange="'+onchange+'">'+
+    '<option value="bau" '+(selKat!=='pflege'?'selected':'')+'>Bau / Sportplatzbau</option>'+
+    '<option value="pflege" '+(selKat==='pflege'?'selected':'')+'>Pflege</option>'+
+    '</select>';
+}
+// Verkuerzte Optionen fuer Tabellenzellen (Zeiten/Maschinen/LV), gefiltert nach Kategorie
+function rowProjektOpts(kat,sel){
+  const list=PROJEKTE.filter(p=>(p.kategorie||'bau')===kat);
+  return'<option value="">-</option>'+list.map(p=>'<option value="'+p.id+'" '+(sel===p.id?'selected':'')+'>'+(p.nr||p.name.substring(0,14))+'</option>').join('');
+}
+// Aktuell im VA-Hauptprojekt gewaehlte Kategorie
+function currentVAKat(){return document.getElementById('v-kat')?.value||'bau';}
 function taetigkeitenTags(sel,liste){const list=liste||TAETIGKEITEN;return list.map(t=>'<div class="tg'+((sel||[]).includes(t)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>').join('');}
 function pausenSelect(val,cls){return'<select class="'+cls+'" style="width:72px" onchange="calcZR(this)">'+PAUSEN.map(p=>'<option value="'+p+'" '+(parseInt(val||30)===p?'selected':'')+'>'+p+'min</option>').join('')+'</select>';}
 function togTg(el){el.classList.toggle('a');}
@@ -1617,7 +1918,6 @@ function buildUI(){
       '<div class="tab" id="tab-material" ontouchstart="showTab(\'material\')" onclick="showTab(\'material\')">Material</div>'+
       '<div class="tab" id="tab-kalender" ontouchstart="showTab(\'kalender\')" onclick="showTab(\'kalender\')">Kalender</div>'+
       '<div class="tab" id="tab-details" ontouchstart="showTab(\'details\')" onclick="showTab(\'details\')">Details</div>'+
-      '<div class="tab" id="tab-ki" ontouchstart="showTab(\'ki\')" onclick="showTab(\'ki\')">KI</div>'+
       '<div class="tab" id="tab-ue" ontouchstart="showTab(\'ue\')" onclick="showTab(\'ue\')">Uebersicht</div>';
     content.innerHTML=
       '<div class="panel act" id="panel-bericht">'+buildVABericht()+'</div>'+
@@ -1625,9 +1925,8 @@ function buildUI(){
       '<div class="panel" id="panel-material">'+buildVAMaterial()+'</div>'+
       '<div class="panel" id="panel-kalender"><div id="kalender-content"></div></div>'+
       '<div class="panel" id="panel-details"><div id="detailContent"><div class="empty"><div class="ei">&#128203;</div><div class="et">Bericht waehlen</div></div></div></div>'+
-      '<div class="panel" id="panel-ki">'+buildKI()+'</div>'+
       '<div class="panel" id="panel-ue"><div id="ue-content"></div></div>';
-    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();const d=document.getElementById('v-datum');if(d)d.value=todayStr();},100);
+    setTimeout(()=>{addStep();addZeitRow();addLief();addMenge();addLVRow();const d=document.getElementById('v-datum');if(d)d.value=todayStr();startVAAutoSave();setTimeout(checkVADraft,600);},100);
   }
 }
 
@@ -1637,7 +1936,8 @@ function buildWS(){
   return'<div class="qsec" style="border-color:rgba(139,92,246,.3)"><div class="qsec-t" style="color:var(--ws)">Werkstatt Einsatz</div>'+
     '<div class="row"><div class="fg w50"><label>Datum</label><input type="date" id="ws-datum"></div>'+
     '<div class="fg w50"><label>Name</label><input type="text" id="ws-name" readonly style="color:var(--ws);background:var(--s3)"></div>'+
-    '<div class="fg w100"><label>Projekt / Einsatzort</label><select id="ws-projekt">'+projektOpts(wsProjekt?.id||'')+'</select></div>'+
+    '<div class="fg w50"><label>Bereich</label>'+katSelectHTML('ws-kat','onWSKatChange()','bau')+'</div>'+
+    '<div class="fg w50"><label>Projekt / Einsatzort</label><select id="ws-projekt">'+projektOptsByKat('bau','')+'</select></div>'+
     '<div class="fg w50"><label>Wetter</label><select id="ws-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option></select></div></div></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Taetigkeiten</div>'+
     '<div class="tags" id="ws-taetigkeiten-tags">'+taetigkeitenTags([],TAETIGKEITEN_WS)+'</div></div>'+
@@ -1657,6 +1957,7 @@ function buildWS(){
     '<button class="btn" ontouchstart="clearWSForm()" onclick="clearWSForm()">Neu</button></div>';
 }
 function initWSForm(){const nEl=document.getElementById('ws-name');if(nEl)nEl.value=currentUser.name;const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();calcWS();}
+function onWSKatChange(){const kat=document.getElementById('ws-kat')?.value||'bau';const sel=document.getElementById('ws-projekt');if(sel)sel.innerHTML=projektOptsByKat(kat,'');}
 function calcWS(){const v=document.getElementById('ws-von')?.value,b=document.getElementById('ws-bis')?.value,p=parseFloat(document.getElementById('ws-pause')?.value)||0;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;const el=document.getElementById('ws-netto');if(el)el.value=(wm/60).toFixed(2).replace('.',',');}}
 function clearWSForm(){currentId=null;stopVoice();const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();['ws-taetigkeit','ws-maengel'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const netto=document.getElementById('ws-netto');if(netto)netto.value='';const fzSel=document.getElementById('ws-fahrzeug');if(fzSel)fzSel.value='';const st=document.getElementById('ws-send-status');if(st){st.className='send-status';st.textContent='';}document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));document.getElementById('ws-von').value='07:00';document.getElementById('ws-bis').value='16:00';document.getElementById('ws-pause').value='30';calcWS();toast('Neuer Werkstatt-Bericht','ok');}
 
@@ -1685,7 +1986,8 @@ function buildAR(){
   return'<div class="qsec"><div class="qsec-t">Einsatz</div><div class="row">'+
     '<div class="fg w50"><label>Datum</label><input type="date" id="a-datum"></div>'+
     '<div class="fg w50"><label>Name</label><input type="text" id="a-name" readonly style="color:var(--gl);background:var(--s3)"></div>'+
-    '<div class="fg w100"><label>Projekt</label><select id="a-projekt" onchange="onARProjektChange()">'+projektOpts('')+'</select></div>'+
+    '<div class="fg w50"><label>Bereich</label>'+katSelectHTML('a-kat','onARKatChange()','bau')+'</div>'+
+    '<div class="fg w50"><label>Projekt</label><select id="a-projekt" onchange="onARProjektChange()">'+projektOptsByKat('bau','')+'</select></div>'+
     '<div class="fg w50"><label>Qualifikation</label><input type="text" id="a-qual" readonly style="background:var(--s3);color:var(--m)"></div>'+
     '<div class="fg w50"><label>Wetter</label><select id="a-wetter"><option>Sonnig</option><option>Bewoelkt</option><option>Regen</option><option>Frost</option><option>Sturm</option></select></div>'+
     '</div></div>'+
@@ -1723,6 +2025,7 @@ function initARForm(){
   const qEl=document.getElementById('a-qual');if(qEl)qEl.value=currentUser.qualifikation||'Facharbeiter GaLa';
   const dEl=document.getElementById('a-datum');if(dEl)dEl.value=todayStr();calcAR();
 }
+function onARKatChange(){const kat=document.getElementById('a-kat')?.value||'bau';const sel=document.getElementById('a-projekt');if(sel)sel.innerHTML=projektOptsByKat(kat,'');onARProjektChange();}
 function onARProjektChange(){const sel=document.getElementById('a-projekt');if(!sel)return;const fz=getProjektFahrzeit(sel.value);const anzeige=document.getElementById('a-fahrzeit-anzeige');if(anzeige)anzeige.value=fz>0?fz+' min (aus Projekt)':'0 min';calcAR();}
 function calcAR(){
   const v=document.getElementById('a-von')?.value,b=document.getElementById('a-bis')?.value,p=parseFloat(document.getElementById('a-pause')?.value)||0;
@@ -1755,7 +2058,8 @@ function buildVABericht(){
     '<div class="fg w25"><label>Projektnr.</label><input type="text" id="v-projektnr" placeholder="intern"></div>'+
     '<div class="fg w25"><label>Bauleiter</label><input type="text" id="v-bauleiter" placeholder="Name"></div>'+
     '<div class="fg w25"><label>Temperatur (C)</label><input type="number" id="v-temp" placeholder="18"></div>'+
-    '<div class="fg w100"><label>Hauptprojekt</label><select id="v-projekt" onchange="onVAProjektChange()">'+projektOpts('')+'</select></div>'+
+    '<div class="fg w50"><label>Bereich</label>'+katSelectHTML('v-kat','onVAKatChange()','bau')+'</div>'+
+    '<div class="fg w50"><label>Hauptprojekt / Baustelle</label><select id="v-projekt" onchange="onVAProjektChange()">'+projektOptsByKat('bau','')+'</select></div>'+
     '<div class="fg w50"><label>Bereich / Detail</label><input type="text" id="v-baustelle" placeholder="z.B. Bereich Nord...">'+mkMic('v-baustelle','Baustelle')+'</div>'+
     '<div class="fg w50"><label>Bauherr / AG</label><input type="text" id="v-bauherr" placeholder="Gemeinde...">'+mkMic('v-bauherr','Bauherr')+'</div>'+
     '<div class="fg w33"><label>Niederschlag (mm)</label><input type="number" id="v-nied" placeholder="0"></div>'+
@@ -1791,14 +2095,24 @@ function buildVABericht(){
     '<textarea id="v-naechstes" placeholder="Geplante Folgearbeiten..."></textarea>'+mkMic('v-naechstes','Naechste Schritte')+'</div>'+
     '<div class="fg" style="margin-top:8px"><label>Bemerkungen</label>'+
     '<textarea id="v-bemerkungen"></textarea>'+mkMic('v-bemerkungen','Bemerkungen')+'</div></div>'+
+    '<div style="display:flex;align-items:center;gap:8px;margin:4px 2px"><span id="draft-indicator" style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);opacity:0.5;transition:opacity .3s">Entwurf wird automatisch gesichert</span></div>'+
     '<div class="send-status" id="va-send-status"></div>'+
     '<div class="arow">'+
     '<button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button>'+
-    '<button class="btn" style="background:var(--gg);border-color:var(--gd);color:var(--gl)" ontouchstart="triggerAI()" onclick="triggerAI()">KI</button>'+
+    '<button class="btn btn-e" ontouchstart="manualSaveDraft()" onclick="manualSaveDraft()">Entwurf speichern</button>'+
     '<button class="btn" ontouchstart="newReport()" onclick="newReport()">Neu</button></div>';
 }
 
 // FIX: Projekt-Übernahme in alle Zeitzeilen
+function onVAKatChange(){
+  const kat=document.getElementById('v-kat')?.value||'bau';
+  const sel=document.getElementById('v-projekt');
+  if(sel)sel.innerHTML=projektOptsByKat(kat,'');
+  // Alle vorhandenen Zeitzeilen-/Maschinen-Projektdropdowns auf neue Kategorie umstellen
+  document.querySelectorAll('#zeit-body .row-pr,#mach-body .row-pr,#lv-body .row-pr').forEach(s=>{s.innerHTML=rowProjektOpts(kat,'');});
+  // Offene Arbeitsschritte ebenfalls
+  document.querySelectorAll('[id^="st-pr-"]').forEach(s=>{const i=s.id.replace('st-pr-','');const kEl=document.getElementById('st-kat-'+i);if(kEl)kEl.value=kat;s.innerHTML=projektOptsByKat(kat,'');const w=document.getElementById('st-leist-wrap-'+i);if(w)w.innerHTML='';});
+}
 function onVAProjektChange(){
   const sel=document.getElementById('v-projekt');if(!sel||!sel.value)return;
   const fz=getProjektFahrzeit(sel.value);
@@ -1871,17 +2185,7 @@ function buildVAMaterial(){
     '<div class="arow"><button class="btn btn-p" ontouchstart="saveAndSendVA()" onclick="saveAndSendVA()">Speichern und PDF senden</button></div>';
 }
 
-function buildKI(){
-  return'<div class="sh">KI-Analyse</div>'+
-    '<div class="ai-acts">'+
-    '<button class="ai-ab" ontouchstart="runAI(\'zusammenfassung\')" onclick="runAI(\'zusammenfassung\')">Zusammenfassung</button>'+
-    '<button class="ai-ab" ontouchstart="runAI(\'risiken\')" onclick="runAI(\'risiken\')">Risiken</button>'+
-    '<button class="ai-ab" ontouchstart="runAI(\'kosten\')" onclick="runAI(\'kosten\')">Kosten</button>'+
-    '<button class="ai-ab" ontouchstart="runAI(\'qualitaet\')" onclick="runAI(\'qualitaet\')">Qualitaet DIN</button>'+
-    '<button class="ai-ab" ontouchstart="runAI(\'bericht\')" onclick="runAI(\'bericht\')">VOB-Bericht</button>'+
-    '<button class="ai-ab" ontouchstart="runAI(\'plan\')" onclick="runAI(\'plan\')">Wochenplanung</button>'+
-    '</div><div id="ki-out"><div class="empty"><div class="ei">&#127807;</div><div class="et">Bericht laden und analysieren</div></div></div>';
-}
+function buildKI(){return'';}
 
 // ══════ ZEITERFASSUNG ══════
 function getZeitRowsSimple(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||''})).filter(r=>r.name);}
@@ -1894,7 +2198,8 @@ function addZeitRow(data={}){
   const autoFz=getProjektFahrzeit(hauptProjektId);
   const fzVal=data.fahrzeitMin!==undefined?parseInt(data.fahrzeitMin):autoFz;
   const autoProjId=data.projektId||hauptProjektId||'';
-  const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(autoProjId===p.id?'selected':'')+'>'+p.nr+'</option>').join('');
+  const rowKat=data.projektId?getProjektKat(data.projektId):currentVAKat();
+  const prOpts=rowProjektOpts(rowKat,autoProjId);
   const taeOpts='<option value="">-</option>'+TAETIGKEITEN.map(t=>'<option value="'+t+'" '+(data.tae===t?'selected':'')+'>'+t+'</option>').join('');
   tr.innerHTML=
     '<td><input class="zeit-name" type="text" value="'+(data.name||'')+'" placeholder="Name" style="min-width:80px" oninput="refreshStepMAs()"></td>'+
@@ -1937,18 +2242,42 @@ function calcZR(inp){
 }
 function updZeitTotal(){let t=0;document.querySelectorAll('.zeit-gesamt').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);const el=document.getElementById('zeit-total');if(el)el.textContent=t.toFixed(2).replace('.',',')+'h gesamt';}
 function getZeitRows(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||'',von:tr.querySelector('.zeit-von')?.value||'',bis:tr.querySelector('.zeit-bis')?.value||'',pause:tr.querySelector('.zeit-pause')?.value||'30',nettoArbeit:tr.querySelector('.zeit-netto')?.value||'',fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:tr.querySelector('.zeit-fahrzeit')?.value||'0',fahrtAnteil:tr.querySelector('.zeit-anteil')?.value||'',gesamt:tr.querySelector('.zeit-gesamt')?.value||'',projektNr:PROJEKTE.find(p=>p.id===tr.querySelector('.row-pr')?.value)?.nr||'',projektId:tr.querySelector('.row-pr')?.value||'',tae:tr.querySelector('.row-tae')?.value||''})).filter(r=>r.name);}
-function addMachRow(data={}){const tbody=document.getElementById('mach-body');if(!tbody)return;const tr=document.createElement('tr');const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+'</option>').join('');tr.innerHTML='<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet -</option>'+GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+'</select></td><td><input type="text" class="mach-fzn" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td><td><input type="number" class="mach-std" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700"></td><td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
+function addMachRow(data={}){const tbody=document.getElementById('mach-body');if(!tbody)return;const tr=document.createElement('tr');const rowKat=data.projektId?getProjektKat(data.projektId):currentVAKat();const prOpts=rowProjektOpts(rowKat,data.projektId||'');tr.innerHTML='<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet -</option>'+GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+'</select></td><td><input type="text" class="mach-fzn" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td><td><input type="number" class="mach-std" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700"></td><td><select class="row-pr" style="font-size:9px;min-width:90px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
 function getMachRows(){return[...document.querySelectorAll('#mach-body tr')].map(tr=>{const geraetNr=tr.querySelector('.geraet-sel')?.value||'';const geraet=GERAETE.find(g=>g.nr===geraetNr);return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:tr.querySelector('.mach-fzn')?.value||'',netto:tr.querySelector('.mach-std')?.value||'',projektId:tr.querySelector('.row-pr')?.value||''};}).filter(r=>r.geraetNr);}
-function addStep(data={}){stepIdx++;const i=stepIdx;const maRows=getZeitRowsSimple();let maHtml=maRows.length>0?'<div class="ma-zuweisung"><div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);const std=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+std+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';}).join('')+'</div>':'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div><select style="flex:0 0 180px;font-size:10px;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'"><option value="">- Projekt -</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'" '+(data.projektId===p.id?'selected':'')+'>'+p.nr+' - '+p.name+'</option>').join('')+'</select><input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 80px;font-size:10px" value="'+(data.pos||'')+'"><button class="delbtn" style="margin-left:auto" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button></div><textarea id="st-txt-'+i+'" style="min-height:60px;margin-bottom:4px" placeholder="Taetigkeit beschreiben...">'+(data.txt||'')+'</textarea>'+mkMic('st-txt-'+i,'Schritt '+i)+'<div style="display:flex;gap:6px;margin-top:8px"><div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" value="'+(data.menge||'')+'" placeholder="200 m2"></div><div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" value="'+(data.eh||'')+'" placeholder="m2, lfm"></div></div>'+maHtml;document.getElementById('steps-con')?.appendChild(div);}
+function addStep(data={}){stepIdx++;const i=stepIdx;const maRows=getZeitRowsSimple();let maHtml=maRows.length>0?'<div class="ma-zuweisung"><div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);const std=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+std+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';}).join('')+'</div>':'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
+  const stepKat=data.projektId?getProjektKat(data.projektId):currentVAKat();
+  const div=document.createElement('div');div.className='lief-block';div.id='step-'+i;
+  div.innerHTML='<div class="lief-head"><div class="lief-num">'+i+'</div>'+
+    '<select id="st-kat-'+i+'" onchange="onStepKatChange('+i+')" style="flex:0 0 110px;font-size:10px;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)"><option value="bau" '+(stepKat!=='pflege'?'selected':'')+'>Bau</option><option value="pflege" '+(stepKat==='pflege'?'selected':'')+'>Pflege</option></select>'+
+    '<select style="flex:1;min-width:140px;font-size:10px;background:var(--s3);border:1px solid var(--b);border-radius:3px;padding:3px 6px;color:var(--t)" id="st-pr-'+i+'" onchange="onStepProjektChange('+i+')">'+projektOptsByKat(stepKat,data.projektId||'')+'</select>'+
+    '<input type="text" id="st-pos-'+i+'" placeholder="LV-Pos." style="flex:0 0 70px;font-size:10px" value="'+(data.pos||'')+'">'+
+    '<button class="delbtn" ontouchstart="document.getElementById(\'step-'+i+'\').remove()" onclick="document.getElementById(\'step-'+i+'\').remove()">&#x2715;</button></div>'+
+    '<div id="st-leist-wrap-'+i+'"></div><textarea id="st-txt-'+i+'" style="min-height:60px;margin-bottom:4px" placeholder="Taetigkeit beschreiben...">'+(data.txt||'')+'</textarea>'+mkMic('st-txt-'+i,'Schritt '+i)+'<div style="display:flex;gap:6px;margin-top:8px"><div class="fg"><label>Menge</label><input type="text" id="st-mg-'+i+'" value="'+(data.menge||'')+'" placeholder="200 m2"></div><div class="fg"><label>Einheit</label><input type="text" id="st-eh-'+i+'" value="'+(data.eh||'')+'" placeholder="m2, lfm"></div></div>'+maHtml;
+  document.getElementById('steps-con')?.appendChild(div);if(data.projektId)renderStepLeistung(i,data.leistung||'');}
+
+function onStepKatChange(i){const kat=document.getElementById('st-kat-'+i)?.value||'bau';const sel=document.getElementById('st-pr-'+i);if(sel)sel.innerHTML=projektOptsByKat(kat,'');const w=document.getElementById('st-leist-wrap-'+i);if(w)w.innerHTML='';}
+
+function renderStepLeistung(i,selected){
+  const wrap=document.getElementById('st-leist-wrap-'+i);if(!wrap)return;
+  const pid=document.getElementById('st-pr-'+i)?.value||'';
+  const leist=getProjektLeistungen(pid);
+  if(!leist.length){wrap.innerHTML='';return;}
+  wrap.innerHTML='<div style="margin-bottom:6px"><label style="display:block;margin-bottom:3px">Leistung (Pflege)</label>'+
+    '<select id="st-leist-'+i+'" style="width:100%;font-size:11px;background:var(--gg);border:1px solid var(--gd);border-radius:4px;padding:6px;color:var(--gl)">'+
+    '<option value="">- Leistung waehlen -</option>'+
+    leist.map(l=>'<option value="'+l.replace(/"/g,'&quot;')+'" '+(selected===l?'selected':'')+'>'+l+'</option>').join('')+
+    '</select></div>';
+}
+function onStepProjektChange(i){renderStepLeistung(i,'');}
 function updateStepMA(idx){const block=document.getElementById('step-'+idx);if(!block)return;block.querySelectorAll('.ma-cb').forEach(cb=>{const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');if(h)h.style.opacity=cb.checked?'1':'0.4';});}
 function refreshStepMAs(){const blocks=document.querySelectorAll('[id^="step-"]');if(!blocks.length)return;const maRows=getZeitRowsSimple();blocks.forEach(block=>{const idx=block.id.replace('step-','');let zone=block.querySelector('.ma-zuweisung');const noMA=block.querySelector('[data-no-ma]');const checked={};block.querySelectorAll('.ma-cb').forEach(cb=>{checked[cb.dataset.name]=cb.checked;});const stunden={};block.querySelectorAll('.ma-h').forEach(h=>{stunden[h.dataset.name]=h.value;});if(maRows.length===0){if(zone)zone.remove();if(!noMA){const msg=document.createElement('div');msg.setAttribute('data-no-ma','1');msg.style.cssText='font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px';msg.textContent='Erst Mitarbeiter im Tab Zeiten eintragen';block.appendChild(msg);}return;}if(noMA)noMA.remove();if(!zone){zone=document.createElement('div');zone.className='ma-zuweisung';block.appendChild(zone);}zone.innerHTML='<div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const ic=checked[ma.name]||false;const h=stunden[ma.name]||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(ic?'checked':'')+' onchange="updateStepMA('+idx+')"><span class="ma-name-lbl">'+ma.name+'</span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+h+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(ic?'1':'0.4')+'" oninput="updateStepMA('+idx+')">';}).join('');});}
 function getStepMAs(idx){const block=document.getElementById('step-'+idx);if(!block)return[];const result=[];block.querySelectorAll('.ma-cb:checked').forEach(cb=>{const h=block.querySelector('.ma-h[data-name="'+cb.dataset.name+'"]');result.push({name:cb.dataset.name,stunden:h?.value||''});});return result;}
-function getSteps(){return[...document.querySelectorAll('[id^="step-"]')].filter(b=>b.id.match(/^step-\d+$/)).map(b=>{const i=b.id.replace('step-','');const pid=b.querySelector('#st-pr-'+i)?.value||'';return{txt:b.querySelector('#st-txt-'+i)?.value||'',projektId:pid,projektNr:PROJEKTE.find(p=>p.id===pid)?.nr||'',pos:b.querySelector('#st-pos-'+i)?.value||'',menge:b.querySelector('#st-mg-'+i)?.value||'',eh:b.querySelector('#st-eh-'+i)?.value||'',mitarbeiter:getStepMAs(i)};}).filter(s=>s.txt);}
+function getSteps(){return[...document.querySelectorAll('[id^="step-"]')].filter(b=>b.id.match(/^step-\d+$/)).map(b=>{const i=b.id.replace('step-','');const pid=b.querySelector('#st-pr-'+i)?.value||'';return{txt:b.querySelector('#st-txt-'+i)?.value||'',projektId:pid,projektNr:PROJEKTE.find(p=>p.id===pid)?.nr||'',pos:b.querySelector('#st-pos-'+i)?.value||'',leistung:b.querySelector('#st-leist-'+i)?.value||'',menge:b.querySelector('#st-mg-'+i)?.value||'',eh:b.querySelector('#st-eh-'+i)?.value||'',mitarbeiter:getStepMAs(i)};}).filter(s=>s.txt);}
 function addLief(data={}){liefIdx++;const i=liefIdx;const div=document.createElement('div');div.className='lief-block';div.innerHTML='<div class="lief-head"><div class="lief-num" style="background:var(--earthg);border-color:var(--earth);color:var(--earth)">'+i+'</div><button class="delbtn" style="margin-left:auto" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div><div class="row"><div class="fg w50"><label>Lieferant</label><input type="text" id="lf-firma-'+i+'" value="'+(data.firma||'')+'" placeholder="Muster GmbH..."></div><div class="fg w50"><label>Lieferschein-Nr.</label><input type="text" id="lf-ls-'+i+'" value="'+(data.ls||'')+'" placeholder="LS-001"></div><div class="fg w50"><label>Material</label><input type="text" id="lf-mat-'+i+'" placeholder="Rollrasen...">'+mkMic('lf-mat-'+i,'Material')+'</div><div class="fg w25"><label>Menge</label><input type="number" id="lf-mg-'+i+'" value="'+(data.menge||'')+'"></div><div class="fg w25"><label>Einheit</label><select id="lf-eh-'+i+'"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option><option>l</option></select></div><div class="fg w50"><label>Status</label><select id="lf-ok-'+i+'"><option>OK</option><option>Teillieferung</option><option>Falsche Ware</option><option>Maengel</option><option>Verzug</option></select></div><div class="fg w50"><label>Bemerkung</label><input type="text" id="lf-bem-'+i+'" value="'+(data.bem||'')+'"></div></div>';document.getElementById('lief-con')?.appendChild(div);}
 function getLiefData(){return[...document.querySelectorAll('#lief-con .lief-block')].map((b,i)=>{const n=i+1;return{firma:b.querySelector('#lf-firma-'+n)?.value,ls:b.querySelector('#lf-ls-'+n)?.value,mat:b.querySelector('#lf-mat-'+n)?.value,menge:b.querySelector('#lf-mg-'+n)?.value,eh:b.querySelector('#lf-eh-'+n)?.value,ok:b.querySelector('#lf-ok-'+n)?.value,bem:b.querySelector('#lf-bem-'+n)?.value};}).filter(l=>l.firma||l.mat);}
 function addMenge(data={}){const div=document.createElement('div');div.className='lief-block';div.style.padding='8px';div.innerHTML='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><input type="text" placeholder="Bezeichnung" value="'+(data.bez||'')+'" style="flex:2;min-width:100px"><input type="number" placeholder="Menge" value="'+(data.menge||'')+'" style="flex:0 0 75px"><select style="flex:0 0 65px;font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>kg</option></select><input type="text" placeholder="LV-Pos." value="'+(data.pos||'')+'" style="flex:0 0 80px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"><button class="delbtn" ontouchstart="this.closest(\'.lief-block\').remove()" onclick="this.closest(\'.lief-block\').remove()">&#x2715;</button></div>';document.getElementById('mengen-con')?.appendChild(div);}
 function getMengen(){return[...document.querySelectorAll('#mengen-con .lief-block')].map(b=>{const is=b.querySelectorAll('input'),se=b.querySelector('select');return{bez:is[0]?.value,menge:is[1]?.value,eh:se?.value,pos:is[2]?.value};}).filter(m=>m.bez);}
-function addLVRow(data={}){const tbody=document.getElementById('lv-body');if(!tbody)return;const tr=document.createElement('tr');const prOpts='<option value="">-</option>'+PROJEKTE.map(p=>'<option value="'+p.id+'">'+p.nr+'</option>').join('');tr.innerHTML='<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td><td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td><td><select style="font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td><td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td><td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td><td><select class="row-pr" style="font-size:9px;min-width:70px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
+function addLVRow(data={}){const tbody=document.getElementById('lv-body');if(!tbody)return;const tr=document.createElement('tr');const rowKat=data.projektId?getProjektKat(data.projektId):currentVAKat();const prOpts=rowProjektOpts(rowKat,data.projektId||'');tr.innerHTML='<td><input type="text" value="'+(data.pos||'')+'" placeholder="03.02.01" style="width:75px;font-family:\'IBM Plex Mono\',monospace;font-size:10px"></td><td><input type="text" value="'+(data.bez||'')+'" placeholder="Bezeichnung" style="min-width:110px"></td><td><select style="font-size:10px"><option>m2</option><option>m3</option><option>t</option><option>lfm</option><option>Stk</option><option>h</option></select></td><td><input type="number" value="'+(data.soll||'')+'" placeholder="0" style="width:60px"></td><td><input type="number" value="'+(data.ist||'')+'" placeholder="0" style="width:60px;color:var(--gl);font-weight:700"></td><td><select class="row-pr" style="font-size:9px;min-width:70px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
 function getLVRows(){return[...document.querySelectorAll('#lv-body tr')].map(tr=>{const is=tr.querySelectorAll('input'),ss=tr.querySelectorAll('select');return{pos:is[0]?.value,bez:is[1]?.value,eh:ss[0]?.value,soll:is[2]?.value,ist:is[3]?.value,projektId:ss[1]?.value};}).filter(r=>r.pos||r.bez);}
 function addMangel(data={}){mangelIdx++;const i=mangelIdx;const div=document.createElement('div');div.className='mangel-block';div.innerHTML='<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1"><div style="display:flex;gap:5px;margin-bottom:6px"><select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mangel (Material)</option><option>Mangel (Ausfuehrung)</option><option>Behinderung</option><option>Lieferverzug</option><option>Sicherheit</option></select><select style="font-size:10px;border-color:rgba(196,72,40,.3);background:var(--s1)"><option>Mittel</option><option>Hoch</option><option>Niedrig</option></select></div><textarea id="mg-'+i+'" placeholder="Mangelbeschreibung..." style="min-height:50px;border-color:rgba(196,72,40,.25)">'+(data.txt||'')+'</textarea>'+mkMic('mg-'+i,'Mangel')+'<input type="text" placeholder="Massnahme / Verantwortlich" style="margin-top:6px;border-color:rgba(196,72,40,.2)" value="'+(data.massnahme||'')+'"></div><button class="delbtn" ontouchstart="this.closest(\'.mangel-block\').remove()" onclick="this.closest(\'.mangel-block\').remove()">&#x2715;</button></div>';document.getElementById('mangel-con')?.appendChild(div);}
 function getMangelData(){return[...document.querySelectorAll('.mangel-block')].map(b=>{const sels=b.querySelectorAll('select'),ta=b.querySelector('textarea'),m=b.querySelector('input[type=text]');return{typ:sels[0]?.value,schwere:sels[1]?.value,txt:ta?.value,massnahme:m?.value};}).filter(m=>m.txt);}
@@ -1998,7 +2327,8 @@ function newReport(){
   const zb=document.getElementById('zeit-body');if(zb)zb.innerHTML='';
   const mb=document.getElementById('mach-body');if(mb)mb.innerHTML='';
   const lb=document.getElementById('lv-body');if(lb)lb.innerHTML='';
-  const vp=document.getElementById('v-projekt');if(vp)vp.value='';
+  const vk=document.getElementById('v-kat');if(vk)vk.value='bau';
+  const vp=document.getElementById('v-projekt');if(vp)vp.innerHTML=projektOptsByKat('bau','');
   const zpw=document.getElementById('zusatz-proj-wrap');if(zpw)zpw.innerHTML='';
   const st=document.getElementById('va-send-status');if(st){st.className='send-status';st.textContent='';}
   clearFotos();
