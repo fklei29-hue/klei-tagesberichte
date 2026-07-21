@@ -20,6 +20,7 @@ body.theme-light{--b:#c2ccb0;}
 body.theme-light input,body.theme-light textarea,body.theme-light select{background:#ffffff;color:#1f2a0d;}
 body.theme-light .toast{box-shadow:0 6px 20px rgba(0,0,0,.15);}
 body.theme-light #sig-canvas{background:white;}
+body.theme-light terrasuite-kalkulation{--bg:#eef0ea;--surface:#ffffff;--surface2:#f0f2ec;--line:#c2ccb0;--text:#1f2a0d;--muted:#5a6748;--accent:#3a6818;--warn:#b25e18;}
 body.theme-light .vbar{background:rgba(196,72,40,.08);}
 .theme-btn{background:none;border:1px solid var(--b);border-radius:var(--rad);padding:6px 10px;color:var(--m);font-size:14px;cursor:pointer;line-height:1;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
@@ -41,6 +42,64 @@ body{background:var(--bg);color:var(--t);font-family:'IBM Plex Sans',sans-serif;
 @keyframes spin{to{transform:rotate(360deg)}}
 #admin-screen{position:fixed;inset:0;background:var(--bg);z-index:9998;display:none;flex-direction:column;}
 #pl-screen{position:fixed;inset:0;background:var(--bg);z-index:9997;display:none;flex-direction:column;}
+#menu-screen{position:fixed;inset:0;background:var(--bg);z-index:9990;display:none;flex-direction:column;}
+#ausb-screen{position:fixed;inset:0;background:var(--bg);z-index:9993;display:none;flex-direction:column;}
+#br-screen{position:fixed;inset:0;background:var(--bg);z-index:9993;display:none;flex-direction:column;}
+.badge-azubi{background:var(--gg);border:1px solid var(--b);color:var(--gl);}
+.menu-wrap{flex:1;overflow-y:auto;padding:28px 16px;display:flex;flex-direction:column;align-items:center;-webkit-overflow-scrolling:touch;}
+.menu-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--m);margin-bottom:16px;}
+.menu-tile{width:100%;max-width:460px;background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:18px;margin-bottom:12px;cursor:pointer;}
+.menu-tile:active{border-color:var(--g);}
+.menu-tile-name{font-size:16px;font-weight:700;color:var(--c);}
+.menu-tile-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m);margin-top:4px;}
+.az-card{background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:12px;margin-bottom:8px;}
+.az-card-title{font-size:13px;font-weight:600;color:var(--c);}
+.az-card-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-top:2px;}
+.az-pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:10px;border:1px solid var(--b);color:var(--m);margin-right:4px;}
+.az-pill.ok{background:var(--gg);color:var(--gl);border-color:transparent;}
+.az-pill.warn{background:var(--rg);color:var(--r);border-color:transparent;}
+.az-pill.info{background:var(--skyg);color:var(--sky);border-color:transparent;}
+.az-qbox{background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:12px;margin-bottom:10px;}
+.az-qnr{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);margin-bottom:4px;}
+.az-qfrage{font-size:13px;font-weight:600;color:var(--c);margin-bottom:10px;}
+.az-opt{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--b);border-radius:var(--rad);margin-bottom:6px;cursor:pointer;background:var(--s2);}
+.az-opt input{width:auto;}
+.az-opt-txt{flex:1;font-size:13px;color:var(--t);}
+.az-ansok{color:var(--g);font-weight:600;}
+.az-ansbad{color:var(--r);font-weight:600;}
+.az-qmeta{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sky);margin-bottom:6px;}
+.az-hinweis{background:var(--skyg);border-left:2px solid var(--sky);padding:8px 10px;border-radius:3px;font-size:11px;color:var(--t);line-height:1.5;margin-top:8px;}
+.az-loesung{background:var(--gg);border-left:2px solid var(--g);padding:8px 10px;border-radius:3px;font-size:11px;color:var(--t);line-height:1.5;margin-top:6px;}
+.az-qbox em,.az-card em,.az-muted em{font-style:italic;}
+.az-pkt{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--m);}
+.az-bilder{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.az-bild{width:calc(50% - 4px);max-width:230px;background:var(--s2);border:1px solid var(--b);border-radius:6px;overflow:hidden;margin:0;}
+.az-bild img{width:100%;height:150px;object-fit:cover;display:block;background:var(--s3);}
+.az-bild figcaption{padding:6px 8px;font-size:11px;color:var(--t);line-height:1.4;}
+.az-bild-quelle{display:block;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--m);margin-top:3px;}
+.az-upload{border:1px dashed var(--b);border-radius:6px;padding:12px;margin-top:8px;}
+.az-bild-edit{display:flex;gap:8px;align-items:flex-start;background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:8px;margin-bottom:8px;}
+.az-bild-edit img{width:74px;height:74px;object-fit:cover;border-radius:4px;flex-shrink:0;background:var(--s2);}
+.az-bild-edit-felder{flex:1;min-width:0;}
+.az-bild-edit input{margin-bottom:5px;}
+.bh-card{background:var(--s3);border:1px solid var(--b);border-radius:6px;padding:12px;margin-bottom:8px;}
+.bh-status{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:10px;margin-right:4px;}
+.bh-status.entwurf{background:var(--rg);color:var(--o);}
+.bh-status.abgegeben{background:var(--skyg);color:var(--sky);}
+.bh-status.gezeichnet{background:var(--gg);color:var(--gl);}
+.bh-woche-titel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--earth);margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--b);}
+.bh-tag{background:var(--s2);border:1px solid var(--b);border-radius:6px;padding:10px;margin-bottom:8px;}
+.bh-tag-kopf{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.bh-tag-name{font-size:12px;font-weight:600;color:var(--c);min-width:104px;}
+.bh-tag-status{font-size:11px;padding:6px 8px;width:auto;min-width:120px;flex:0 0 auto;}
+.bh-tag-wetter{font-size:11px;padding:6px 8px;width:auto;flex:1;min-width:90px;}
+.bh-tag-tae textarea{min-height:44px;}
+.bh-tag.frei .bh-tag-tae{display:none;}
+.bh-summe{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--m);margin:6px 0 2px;}
+.az-muted{font-size:11px;color:var(--m);line-height:1.5;}
+.az-empty{color:var(--m);font-size:11px;padding:12px;text-align:center;}
+.az-subnav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.az-subnav .btn{flex:1;justify-content:center;min-width:100px;}
 .admin-header{background:var(--s1);border-bottom:1px solid var(--b);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .admin-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px;}
 .badge-admin{background:var(--skyg);border:1px solid rgba(61,143,168,.3);color:var(--sky);}
@@ -297,6 +356,7 @@ select option{background:var(--s2);}
     <span id="admin-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
     <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
     <button class="hbtn" ontouchstart="openProfil()" onclick="openProfil()">Profil</button>
+    <button class="hbtn menu-hbtn" style="display:none" ontouchstart="zumMenue()" onclick="zumMenue()">Menue</button>
     <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
   </div>
   <div class="admin-tabs">
@@ -309,6 +369,7 @@ select option{background:var(--s2);}
     <div class="admin-tab" id="atab-ausw" ontouchstart="showAdminTab('ausw')" onclick="showAdminTab('ausw')">Auswertung</div>
     <div class="admin-tab" id="atab-pfl" ontouchstart="showAdminTab('pfl')" onclick="showAdminTab('pfl')">Pflege</div>
     <div class="admin-tab" id="atab-cock" ontouchstart="showAdminTab('cock')" onclick="showAdminTab('cock')">Cockpit</div>
+    <div class="admin-tab" id="atab-kalk" ontouchstart="showAdminTab('kalk')" onclick="showAdminTab('kalk')">Kalkulation</div>
     <div class="admin-tab" id="atab-exp" ontouchstart="showAdminTab('exp')" onclick="showAdminTab('exp')">Export</div>
   </div>
   <div class="admin-content">
@@ -321,6 +382,7 @@ select option{background:var(--s2);}
     <div class="admin-panel" id="apanel-ausw"></div>
     <div class="admin-panel" id="apanel-pfl"></div>
     <div class="admin-panel" id="apanel-cock"></div>
+    <div class="admin-panel" id="apanel-kalk"></div>
     <div class="admin-panel" id="apanel-exp"></div>
   </div>
 </div>
@@ -332,17 +394,73 @@ select option{background:var(--s2);}
     <span id="pl-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
     <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
     <button class="hbtn" ontouchstart="openProfil()" onclick="openProfil()">Profil</button>
+    <button class="hbtn menu-hbtn" style="display:none" ontouchstart="zumMenue()" onclick="zumMenue()">Menue</button>
     <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
   </div>
   <div class="admin-tabs">
     <div class="admin-tab pl-tab act" id="pltab-ber" ontouchstart="showPLTab('ber')" onclick="showPLTab('ber')">Berichte</div>
     <div class="admin-tab pl-tab" id="pltab-proj" ontouchstart="showPLTab('proj')" onclick="showPLTab('proj')">Nach Projekt</div>
     <div class="admin-tab pl-tab" id="pltab-offen" ontouchstart="showPLTab('offen')" onclick="showPLTab('offen')">Offen</div>
+    <div class="admin-tab pl-tab" id="pltab-kalk" ontouchstart="showPLTab('kalk')" onclick="showPLTab('kalk')">Kalkulation</div>
   </div>
   <div class="admin-content">
     <div class="admin-panel act" id="appanel-ber"></div>
     <div class="admin-panel" id="appanel-proj"></div>
     <div class="admin-panel" id="appanel-offen"></div>
+    <div class="admin-panel" id="appanel-kalk"></div>
+  </div>
+</div>
+
+<div id="menu-screen">
+  <div class="admin-header">
+    <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
+    <span class="admin-badge badge-admin">Hauptmenue</span>
+    <span id="menu-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
+    <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
+    <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-title">Bereich auswaehlen</div>
+    <div id="menu-tiles" style="width:100%;max-width:460px"></div>
+  </div>
+</div>
+
+<div id="ausb-screen">
+  <div class="admin-header">
+    <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
+    <span class="admin-badge badge-azubi" id="ausb-badge">Azubi</span>
+    <span id="ausb-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
+    <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
+    <button class="hbtn menu-hbtn" style="display:none" ontouchstart="zumMenue()" onclick="zumMenue()">Menue</button>
+    <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
+  </div>
+  <div class="admin-tabs">
+    <div class="admin-tab act" id="aztab-lernen" ontouchstart="azShowTab('lernen')" onclick="azShowTab('lernen')">Lernen</div>
+    <div class="admin-tab" id="aztab-tests" ontouchstart="azShowTab('tests')" onclick="azShowTab('tests')">Tests</div>
+    <div class="admin-tab" id="aztab-erg" ontouchstart="azShowTab('erg')" onclick="azShowTab('erg')">Ergebnisse</div>
+    <div class="admin-tab" id="aztab-bh" ontouchstart="azShowTab('bh')" onclick="azShowTab('bh')">Berichtsheft</div>
+    <div class="admin-tab" id="aztab-verw" style="display:none" ontouchstart="azShowTab('verw')" onclick="azShowTab('verw')">Verwaltung</div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-panel act" id="azpanel-lernen"></div>
+    <div class="admin-panel" id="azpanel-tests"></div>
+    <div class="admin-panel" id="azpanel-erg"></div>
+    <div class="admin-panel" id="azpanel-bh"></div>
+    <div class="admin-panel" id="azpanel-verw"></div>
+  </div>
+</div>
+
+<div id="br-screen">
+  <div class="admin-header">
+    <img src="https://www.klei-sportplatzbau.de/images/logos/KLEI_LOGO_FARBIG_RGB_72DPI.png" style="height:24px" alt="KLEI" onerror="this.style.display='none'">
+    <span class="admin-badge badge-admin">Baurechner</span>
+    <span id="br-user-name" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--m)"></span>
+    <button class="theme-btn" style="margin-left:auto" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
+    <button class="hbtn menu-hbtn" style="display:none" ontouchstart="zumMenue()" onclick="zumMenue()">Menue</button>
+    <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
+  </div>
+  <div class="admin-content">
+    <div class="admin-panel act" id="brpanel-kalk"></div>
   </div>
 </div>
 
@@ -354,6 +472,7 @@ select option{background:var(--s2);}
   <div class="h-right">
     <button class="theme-btn" id="theme-btn" ontouchstart="toggleTheme()" onclick="toggleTheme()" title="Hell/Dunkel">&#9790;</button>
     <button class="hbtn" id="profil-btn" ontouchstart="openProfil()" onclick="openProfil()">Profil</button>
+    <button class="hbtn menu-hbtn" style="display:none" ontouchstart="zumMenue()" onclick="zumMenue()">Menue</button>
     <button class="hbtn va-only" ontouchstart="openMo('mo-df')" onclick="openMo('mo-df')">Dataflor</button>
     <button class="hbtn" ontouchstart="doLogout()" onclick="doLogout()">Abmelden</button>
   </div>
@@ -707,10 +826,10 @@ async function doLogin(){
     unterschriftData=data.unterschrift_data||null;
     document.getElementById('login-screen').style.display='none';
     await loadProjekte();
-    if(data.rolle==='admin')openAdmin();
-    else if(data.rolle==='verwaltung')openAdmin();
-    else if(data.rolle==='projektleiter')openPL();
-    else await initApp();
+    const mods=userModule(data);
+    document.querySelectorAll('.menu-hbtn').forEach(b=>b.style.display=mods.length>1?'':'none');
+    if(mods.length>1)openMenu();
+    else await openModul(mods[0]);
     setTimeout(()=>checkErstLogin(),400);
   }catch(e){errEl.textContent='Verbindungsfehler: '+e.message;btn.innerHTML='Anmelden';btn.disabled=false;}
 }
@@ -720,7 +839,8 @@ document.getElementById('login-nr').addEventListener('keydown',e=>{if(e.key==='E
 function doLogout(){
   stopVAAutoSave();
   currentUser=null;reports=[];currentId=null;currentRole=null;unterschriftData=null;
-  ['admin-screen','pl-screen'].forEach(id=>document.getElementById(id).style.display='none');
+  laufTest=null;tEdit=null;matEditId=null;bhEditId=null;bhArbeit=null;AUSB_MAT=[];AUSB_TESTS=[];AUSB_ABG=[];AUSB_BH=[];
+  ['admin-screen','pl-screen','menu-screen','ausb-screen','br-screen'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('login-nr').value='';document.getElementById('login-pw').value='';
   document.getElementById('login-err').textContent='';
@@ -815,7 +935,7 @@ function openAdmin(){
   const nurBuchhaltung=(currentUser.rolle==='verwaltung');
   const badge=document.querySelector('#admin-screen .admin-badge');
   if(badge)badge.textContent=nurBuchhaltung?'Buchhaltung':'Admin';
-  ['ma','proj','fz','email','ber','ausw','pfl','cock','exp'].forEach(t=>{
+  ['ma','proj','fz','email','ber','ausw','pfl','cock','kalk','exp'].forEach(t=>{
     const el=document.getElementById('atab-'+t);if(el)el.style.display=nurBuchhaltung?'none':'';
   });
   showAdminTab('frei');
@@ -829,6 +949,7 @@ function showAdminTab(name){
   if(name==='email')renderAdminEmail();if(name==='ber')renderAdminBer();if(name==='exp')renderAdminExp();
   if(name==='ausw')renderAdminAusw();
   if(name==='pfl')renderAdminPflege();if(name==='cock')renderAdminCockpit();
+  if(name==='kalk')renderKalkPanel('apanel-kalk');
 }
 
 // ══════ BUCHHALTUNGS-FREIGABE (finale Instanz) ══════
@@ -977,7 +1098,8 @@ async function renderAdminMA(){
     '<div class="fg w50"><label>Name</label><input id="new-ma-name" placeholder="Max Mustermann"></div>'+
     '<div class="fg w25"><label>Kuerzel</label><input id="new-ma-kuerzel" placeholder="MM"></div></div>'+
     '<div class="row"><div class="fg w50"><label>Qualifikation</label><select id="new-ma-qual"><option>Facharbeiter GaLa</option><option>Helfer</option><option>Azubi</option><option>Subunternehmer</option><option>VA</option><option>Werkstatt</option></select></div>'+
-    '<div class="fg w50"><label>Rolle</label><select id="new-ma-rolle"><option value="arbeiter">Arbeiter</option><option value="vorarbeiter">Vorarbeiter</option><option value="werkstatt">Werkstatt</option><option value="projektleiter">Projektleiter</option><option value="admin">Admin</option></select></div></div>'+
+    '<div class="fg w50"><label>Rolle</label><select id="new-ma-rolle"><option value="arbeiter">Arbeiter</option><option value="vorarbeiter">Vorarbeiter</option><option value="werkstatt">Werkstatt</option><option value="azubi">Azubi</option><option value="projektleiter">Projektleiter</option><option value="admin">Admin</option></select></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Modul-Freigaben</label><div style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 0">'+modCheckboxHTML('new-ma-mod',['tagesberichte'])+'</div></div></div>'+
     '<div class="row"><div class="fg w50"><label>Passwort</label><input id="new-ma-pw" placeholder="Initiales Passwort" type="text"></div></div>'+
     '<button class="btn btn-sky" ontouchstart="adminAddMA()" onclick="adminAddMA()">+ Mitarbeiter anlegen</button></div>'+
     '<div class="a-sec"><div class="a-sec-title">Alle Mitarbeiter (<span id="ma-count">...</span>)</div><div id="ma-list"><div class="empty"><div class="spin"></div></div></div></div>';
@@ -1001,7 +1123,8 @@ async function adminAddMA(){
   const kuerzel=document.getElementById('new-ma-kuerzel').value.trim(),qual=document.getElementById('new-ma-qual').value;
   const rolle=document.getElementById('new-ma-rolle').value,pw=document.getElementById('new-ma-pw').value.trim();
   if(!nr||!name||!pw){toast('Nummer, Name und Passwort erforderlich','err');return;}
-  const{error}=await sb.from('mitarbeiter').insert({mitarbeiter_nr:nr,name,kuerzel,qualifikation:qual,rolle,passwort_hash:pw,aktiv:true});
+  const module=modCheckboxLesen('new-ma-mod');
+  const{error}=await sb.from('mitarbeiter').insert({mitarbeiter_nr:nr,name,kuerzel,qualifikation:qual,rolle,passwort_hash:pw,aktiv:true,module:module});
   if(error){toast('Fehler: '+error.message,'err');return;}
   toast('Mitarbeiter angelegt','ok');['new-ma-nr','new-ma-name','new-ma-kuerzel','new-ma-pw'].forEach(id=>document.getElementById(id).value='');renderAdminMA();
 }
@@ -1016,14 +1139,15 @@ async function editMA(id){
     '<div class="row"><div class="fg w33"><label>Qualifikation</label><select id="edit-qual-'+id+'">'+
     ['Facharbeiter GaLa','Helfer','Azubi','Subunternehmer','VA','Werkstatt'].map(q=>'<option '+(data.qualifikation===q?'selected':'')+'>'+q+'</option>').join('')+'</select></div>'+
     '<div class="fg w33"><label>Rolle</label><select id="edit-rolle-'+id+'">'+
-    ['arbeiter','vorarbeiter','werkstatt','projektleiter','admin'].map(r=>'<option value="'+r+'" '+(data.rolle===r?'selected':'')+'>'+r+'</option>').join('')+'</select></div>'+
+    ['arbeiter','vorarbeiter','werkstatt','azubi','projektleiter','admin'].map(r=>'<option value="'+r+'" '+(data.rolle===r?'selected':'')+'>'+r+'</option>').join('')+'</select></div>'+
     '<div class="fg w33"><label>Neues Passwort</label><input id="edit-pw-'+id+'" placeholder="Leer = unveraendert" type="text"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Modul-Freigaben</label><div style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 0">'+modCheckboxHTML('edit-mod-'+id,userModule(data))+'</div></div></div>'+
     '<div style="display:flex;gap:6px"><button class="btn btn-sky" ontouchstart="saveEditMA(\''+id+'\')" onclick="saveEditMA(\''+id+'\')">Speichern</button>'+
     '<button class="btn" ontouchstart="renderAdminMA()" onclick="renderAdminMA()">Abbrechen</button></div></div>';
 }
 
 async function saveEditMA(id){
-  const updates={mitarbeiter_nr:document.getElementById('edit-nr-'+id).value.trim(),name:document.getElementById('edit-name-'+id).value.trim(),kuerzel:document.getElementById('edit-kuerzel-'+id).value.trim(),qualifikation:document.getElementById('edit-qual-'+id).value,rolle:document.getElementById('edit-rolle-'+id).value};
+  const updates={mitarbeiter_nr:document.getElementById('edit-nr-'+id).value.trim(),name:document.getElementById('edit-name-'+id).value.trim(),kuerzel:document.getElementById('edit-kuerzel-'+id).value.trim(),qualifikation:document.getElementById('edit-qual-'+id).value,rolle:document.getElementById('edit-rolle-'+id).value,module:modCheckboxLesen('edit-mod-'+id)};
   const pw=document.getElementById('edit-pw-'+id).value.trim();if(pw)updates.passwort_hash=pw;
   const{error}=await sb.from('mitarbeiter').update(updates).eq('id',id);
   if(error){toast('Fehler: '+error.message,'err');return;}
@@ -1316,7 +1440,11 @@ async function renderAdminExp(){
     '<label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin-bottom:10px;cursor:pointer"><input type="checkbox" id="exp-nur-frei" checked style="width:16px;height:16px"> Nur von der Buchhaltung freigegebene Berichte exportieren</label>'+
     '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
     '<button class="btn btn-sky" ontouchstart="expBuchhaltungCSV()" onclick="expBuchhaltungCSV()">CSV Buchhaltung</button>'+
-    '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button></div></div>'+
+    '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button>'+
+    '<button class="btn btn-sky" ontouchstart="expNKImport()" onclick="expNKImport()">DATAflor NK-Import (XML)</button></div>'+
+    '<div class="row" style="margin-top:8px"><div class="fg w50"><label>Standard-Lohnart (DATAflor)</label><input id="exp-lohnart" inputmode="numeric" value="1" placeholder="z.B. 1"></div>'+
+    '<div class="fg w50" style="display:flex;align-items:flex-end"><label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin:0;cursor:pointer"><input type="checkbox" id="exp-nk-zeiten" checked style="width:16px;height:16px"> Von/Bis-Zeiten ausgeben</label></div></div>'+
+    '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">NK-Import erzeugt eine schema-valide XML (DFNKImport) fuer den Digitalen Posteingang. Nur Berichte mit LV-Nummer werden verbucht; Zeilen mit Position gehen auf die Position, sonst als Taglohn. Lohnart und Personalnummern muessen im DATAflor BUSINESS existieren.</div></div>'+
     '<div class="a-sec"><div class="a-sec-title">Statistik</div><div id="exp-stats"><div class="empty"><div class="spin"></div></div></div></div>';
   loadExpStats();
 }
@@ -1350,6 +1478,63 @@ async function expBuchhaltungCSV(){
   const rows=data.map(b=>{const proj=PROJEKTE.find(p=>p.id===b.projekt_id);return[b.datum,b.mitarbeiter_name,b.mitarbeiter_nr||'--',b.projekt_nr,proj?.name||'',b.von||'',b.bis||'',b.pause_min||30,b.netto_arbeit_h||'0',b.fahrzeit_min||0,b.netto_gesamt_h||b.netto_arbeit_h||'0',b.wetter||'',(b.taetigkeiten||[]).join('|'),b.rolle].join(';');});
   dlFile('KLEI_Buchhaltung_'+(von||'')+'_'+(bis||new Date().toISOString().split('T')[0])+'.csv',[hdr,...rows].join('\n'),'text/csv;charset=utf-8');
   toast('CSV exportiert - '+data.length+' Eintraege'+(nurFrei!==false?' (nur freigegebene)':''),'ok');
+}
+
+// DATAflor NK-Import (schema-valide gegen DFNKImport.xsd)
+function nkEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function nkNum(v){var n=parseFloat(String(v==null?'':v).replace(',','.'));return isNaN(n)?0:n;}
+function nkZeit(s){s=String(s==null?'':s).trim();var m=s.match(/^(\d{1,2}):(\d{2})/);if(!m)return null;return ('0'+m[1]).slice(-2)+':'+m[2]+':00';}
+function nkLohn(o){
+  var x='  <Lohn>\n';
+  x+='    <Datum>'+nkEsc(o.datum)+'</Datum>\n';
+  x+='    <LVNr>'+nkEsc(String(o.lvNr).substring(0,16))+'</LVNr>\n';
+  if(o.posNr)x+='    <PosNr>'+nkEsc(String(o.posNr).substring(0,16))+'</PosNr>\n';
+  else x+='    <IstTaglohn>true</IstTaglohn>\n';
+  if(o.bemerkung)x+='    <Bemerkung>'+nkEsc(String(o.bemerkung).substring(0,60))+'</Bemerkung>\n';
+  if(o.erfasstVon)x+='    <ErfasstVon>'+nkEsc(String(o.erfasstVon).substring(0,60))+'</ErfasstVon>\n';
+  x+='    <PersonalNr>'+nkEsc(o.personalNr)+'</PersonalNr>\n';
+  x+='    <Lohnart>'+parseInt(o.lohnart,10)+'</Lohnart>\n';
+  if(o.von&&o.bis){x+='    <von>'+o.von+'</von>\n    <bis>'+o.bis+'</bis>\n    <Pause>'+(Math.round(nkNum(o.pause)*100)/100)+'</Pause>\n';}
+  x+='    <Stunden>'+nkNum(o.stunden)+'</Stunden>\n  </Lohn>\n';
+  return x;
+}
+async function expNKImport(){
+  var von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
+  var nfEl=document.getElementById('exp-nur-frei');
+  var nurFrei=nfEl?nfEl.checked:true;
+  var lohnart=parseInt(((document.getElementById('exp-lohnart')||{value:'1'}).value||'1').trim(),10);
+  if(isNaN(lohnart)||lohnart<=0){toast('Bitte eine gueltige Standard-Lohnart eintragen','err');return;}
+  var zEl=document.getElementById('exp-nk-zeiten');
+  var mitZeiten=zEl?zEl.checked:true;
+  var q=sb.from('berichte').select('*').order('datum');
+  if(von)q=q.gte('datum',von);
+  if(bis)q=q.lte('datum',bis);
+  if(nurFrei)q=q.eq('bh_freigegeben',true);
+  var res=await q;
+  if(res.error){toast('Fehler beim Laden: '+res.error.message,'err');return;}
+  var data=res.data||[];
+  if(!data.length){toast(nurFrei?'Keine FREIGEGEBENEN Berichte im Zeitraum':'Keine Daten','err');return;}
+  var lohn=[],uebersprungen=0;
+  data.forEach(function(b){
+    var zr=b.zeit_rows||[];
+    var quelle=zr.length?zr:[null];
+    quelle.forEach(function(t){
+      var lvNr=(t&&t.projektNr)?t.projektNr:b.projekt_nr;
+      var persNr=(t&&t.personalNr)?t.personalNr:(b.mitarbeiter_nr||'');
+      if(!lvNr||!persNr){uebersprungen++;return;}
+      var stunden=t?nkNum(t.nettoArbeit):nkNum(b.netto_arbeit_h);
+      if(stunden<=0)return;
+      var von2=null,bis2=null;
+      if(mitZeiten){von2=nkZeit(t?t.von:b.von);bis2=nkZeit(t?t.bis:b.bis);}
+      lohn.push({datum:b.datum,lvNr:lvNr,posNr:(t&&t.pos)?t.pos:'',personalNr:persNr,lohnart:lohnart,von:von2,bis:bis2,pause:t?(nkNum(t.pause)/60):(nkNum(b.pause_min)/60),stunden:stunden,erfasstVon:b.mitarbeiter_name||''});
+    });
+  });
+  if(!lohn.length){toast('Keine verbuchbaren Zeilen (LV-Nr oder Personalnummer fehlt)','err');return;}
+  var xml='<?xml version="1.0" encoding="UTF-8"?>\n<DFNKImport>\n';
+  lohn.forEach(function(e){xml+=nkLohn(e);});
+  xml+='</DFNKImport>\n';
+  dlFile('KLEI_NK-Import_'+new Date().toISOString().split('T')[0]+'.xml',xml,'application/xml;charset=utf-8');
+  toast(lohn.length+' Lohnbuchungen exportiert'+(uebersprungen?' ('+uebersprungen+' ohne LV/Pers-Nr uebersprungen)':''),'ok');
 }
 
 async function expDFCSVAdmin(){
@@ -2201,12 +2386,50 @@ function exportCockpitCSV(){
 }
 
 // ══════ PROJEKTLEITER ══════
+// ══════ KALKULATION SPORTPLATZBAU (Terrasuite-Modul) ══════
+// Nutzt die externen Modul-Dateien kalk-data.js, kalk-engine.js und
+// terrasuite-kalkulation.js, die im selben Repo-Ordner wie diese index.html
+// liegen muessen. Das Modul wird erst beim ersten Oeffnen des Tabs geladen.
+var _kalkModulGeladen=false;
+var _kalkModulFehler=false;
+var _kalkCallbacks=[];
+function ladeKalkModul(cb){
+  if(_kalkModulGeladen||_kalkModulFehler){cb();return;}
+  _kalkCallbacks.push(cb);
+  if(_kalkCallbacks.length>1)return; // laedt bereits
+  var s=document.createElement('script');
+  s.type='module';
+  s.src='./terrasuite-kalkulation.js';
+  s.onload=function(){_kalkModulGeladen=true;var cbs=_kalkCallbacks;_kalkCallbacks=[];cbs.forEach(function(f){f();});};
+  s.onerror=function(){_kalkModulFehler=true;var cbs=_kalkCallbacks;_kalkCallbacks=[];cbs.forEach(function(f){f();});};
+  document.head.appendChild(s);
+}
+function renderKalkPanel(panelId){
+  var panel=document.getElementById(panelId);
+  if(!panel)return;
+  if(panel.querySelector('terrasuite-kalkulation'))return; // schon eingebunden, Eingaben bleiben erhalten
+  panel.innerHTML='<div class="a-sec"><div class="a-sec-title">Kalkulation Sportplatzbau</div>'+
+    '<div style="font-size:11px;color:var(--m);line-height:1.5;margin-bottom:10px">Budget-Kalkulation fuer Sportplatz-Projekte: 75 LV-Positionen, Region Kassel/Nordhessen, Preisstand Juli 2026. Alle Preise netto, ohne Planungs- und Baunebenkosten (Budgetreserve 10-20 % empfohlen). Vor einer Vergabe die Einheitspreise mit aktuellen regionalen Preisen abgleichen.</div>'+
+    '<div id="'+panelId+'-kalkslot"><div style="color:var(--m);font-size:11px;padding:8px">Kalkulationsmodul wird geladen...</div></div></div>';
+  ladeKalkModul(function(){
+    var slot=document.getElementById(panelId+'-kalkslot');
+    if(!slot)return;
+    if(_kalkModulFehler){
+      slot.innerHTML='<div style="color:var(--r);font-size:11px;padding:8px;line-height:1.5">Kalkulationsmodul konnte nicht geladen werden.<br>Bitte pruefen, ob die drei Dateien <b>kalk-data.js</b>, <b>kalk-engine.js</b> und <b>terrasuite-kalkulation.js</b> im Repo neben der index.html liegen.</div>';
+      return;
+    }
+    slot.innerHTML='';
+    slot.appendChild(document.createElement('terrasuite-kalkulation'));
+  });
+}
+
 function openPL(){document.getElementById('pl-screen').style.display='flex';document.getElementById('pl-user-name').textContent=currentUser.name;showPLTab('ber');}
 function showPLTab(name){
   document.querySelectorAll('#pl-screen .admin-tab').forEach(t=>t.classList.remove('act'));
   document.querySelectorAll('#pl-screen .admin-panel').forEach(p=>p.classList.remove('act'));
   document.getElementById('pltab-'+name).classList.add('act');document.getElementById('appanel-'+name).classList.add('act');
   if(name==='ber')renderPLBer();if(name==='proj')renderPLProj();if(name==='offen')renderPLOffen();
+  if(name==='kalk')renderKalkPanel('appanel-kalk');
 }
 
 async function renderPLBer(){
@@ -2353,7 +2576,7 @@ async function saveAndSendWS(){
     datum:document.getElementById('ws-datum').value,projekt_id:projektId||null,projekt_nr:projekt?.nr||'',
     rolle:'ws',wetter:document.getElementById('ws-wetter').value,taetigkeiten:getWSTaetigkeiten(),
     von:document.getElementById('ws-von').value,bis:document.getElementById('ws-bis').value,
-    pause_min:parseInt(document.getElementById('ws-pause')?.value)||30,
+    pause_min:parseInt(document.getElementById('ws-pause')?.value)||60,
     fahrzeit_min:0,fahrt_status:'fahrer',netto_arbeit_h:nettoVal,netto_gesamt_h:nettoVal,
     taetigkeit_text:document.getElementById('ws-taetigkeit').value,
     besonder:document.getElementById('ws-maengel').value,
@@ -2394,7 +2617,7 @@ async function saveAndSendAR(){
     datum:document.getElementById('a-datum').value,projekt_id:projektId||null,projekt_nr:projekt?.nr||'',
     rolle:'ar',wetter:document.getElementById('a-wetter').value,taetigkeiten:getARTaetigkeiten(),
     von:document.getElementById('a-von').value,bis:document.getElementById('a-bis').value,
-    pause_min:parseInt(document.getElementById('a-pause')?.value)||30,
+    pause_min:parseInt(document.getElementById('a-pause')?.value)||60,
     fahrzeit_min:fzMin,fahrt_status:curFahrtStatus,
     netto_arbeit_h:parseFloat((document.getElementById('a-netto-work')?.value||'0').replace(',','.'))||0,
     netto_gesamt_h:parseFloat((document.getElementById('a-netto')?.value||'0').replace(',','.'))||0,
@@ -3131,7 +3354,7 @@ function onZeitNameChange(sel){
 // Aktuell im VA-Hauptprojekt gewaehlte Kategorie
 function currentVAKat(){return document.getElementById('v-kat')?.value||'bau';}
 function taetigkeitenTags(sel,liste){const list=liste||TAETIGKEITEN;return list.map(t=>'<div class="tg'+((sel||[]).includes(t)?' a':'')+'" ontouchstart="event.preventDefault();togTg(this)" onclick="togTg(this)">'+t+'</div>').join('');}
-function pausenSelect(val,cls){return'<select class="'+cls+'" style="width:72px" onchange="calcZR(this)">'+PAUSEN.map(p=>'<option value="'+p+'" '+(parseInt(val||30)===p?'selected':'')+'>'+p+'min</option>').join('')+'</select>';}
+function pausenSelect(val,cls){return'<select class="'+cls+'" style="width:72px" onchange="calcZR(this)">'+PAUSEN.map(p=>'<option value="'+p+'" '+(parseInt(val||60)===p?'selected':'')+'>'+p+'min</option>').join('')+'</select>';}
 function togTg(el){el.classList.toggle('a');}
 function selW(el,val){document.querySelectorAll('.wc').forEach(c=>c.classList.remove('s'));el.classList.add('s');curWeather=val;}
 function setFahrt(btn){document.querySelectorAll('.fahrt-btn').forEach(b=>b.classList.remove('fahrt-active'));btn.classList.add('fahrt-active');curFahrtStatus=btn.dataset.val;calcAR();}
@@ -3251,9 +3474,9 @@ function buildWS(){
     '<select id="ws-fahrzeug" style="width:100%"><option value="">- Fahrzeug waehlen -</option>'+
     FAHRZEUGE.map(fz=>'<option value="'+fz.id+'">'+fz.kennzeichen+' - '+fz.typ+'</option>').join('')+'</select></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Arbeitszeiten</div>'+
-    '<div class="row"><div class="fg w25"><label>Beginn</label><input type="time" id="ws-von" value="07:00" oninput="calcWS()"></div>'+
-    '<div class="fg w25"><label>Ende</label><input type="time" id="ws-bis" value="16:00" oninput="calcWS()"></div>'+
-    '<div class="fg w25"><label>Pause</label><select id="ws-pause" onchange="calcWS()">'+PAUSEN.map(p=>'<option value="'+p+'" '+(p===30?'selected':'')+'>'+p+' min</option>').join('')+'</select></div>'+
+    '<div class="row"><div class="fg w25"><label>Beginn</label><input type="time" id="ws-von" value="06:30" oninput="calcWS()"></div>'+
+    '<div class="fg w25"><label>Ende</label><input type="time" id="ws-bis" value="16:30" oninput="calcWS()"></div>'+
+    '<div class="fg w25"><label>Pause</label><select id="ws-pause" onchange="calcWS()">'+PAUSEN.map(p=>'<option value="'+p+'" '+(p===60?'selected':'')+'>'+p+' min</option>').join('')+'</select></div>'+
     '<div class="fg w25"><label>Netto</label><input type="text" id="ws-netto" readonly style="color:var(--ws);font-weight:700;font-family:\'IBM Plex Mono\',monospace;font-size:18px"></div></div></div>'+
     '<div class="qsec" style="border-color:rgba(139,92,246,.2)"><div class="qsec-t" style="color:var(--ws)">Details</div>'+
     '<textarea id="ws-taetigkeit" placeholder="Beschreibung der Arbeiten..."></textarea>'+mkMic('ws-taetigkeit','Arbeiten')+
@@ -3265,7 +3488,7 @@ function buildWS(){
 function initWSForm(){const nEl=document.getElementById('ws-name');if(nEl)nEl.value=currentUser.name;const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();calcWS();}
 function onWSKatChange(){const kat=document.getElementById('ws-kat')?.value||'bau';const sel=document.getElementById('ws-projekt');if(sel)sel.innerHTML=projektOptsByKat(kat,'');}
 function calcWS(){const v=document.getElementById('ws-von')?.value,b=document.getElementById('ws-bis')?.value,p=parseFloat(document.getElementById('ws-pause')?.value)||0;if(v&&b){const[vh,vm]=v.split(':').map(Number),[bh,bm]=b.split(':').map(Number);let wm=(bh*60+bm)-(vh*60+vm)-p;if(wm<0)wm+=1440;const el=document.getElementById('ws-netto');if(el)el.value=(wm/60).toFixed(2).replace('.',',');}}
-function clearWSForm(skipConfirm){if(!skipConfirm&&!confirm('Neuen Bericht beginnen? Nicht gespeicherte Eingaben gehen verloren.'))return;currentId=null;stopVoice();const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();['ws-taetigkeit','ws-maengel'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const netto=document.getElementById('ws-netto');if(netto)netto.value='';const fzSel=document.getElementById('ws-fahrzeug');if(fzSel)fzSel.value='';const st=document.getElementById('ws-send-status');if(st){st.className='send-status';st.textContent='';}document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));document.getElementById('ws-von').value='07:00';document.getElementById('ws-bis').value='16:00';document.getElementById('ws-pause').value='30';calcWS();toast('Neuer Werkstatt-Bericht','ok');}
+function clearWSForm(skipConfirm){if(!skipConfirm&&!confirm('Neuen Bericht beginnen? Nicht gespeicherte Eingaben gehen verloren.'))return;currentId=null;stopVoice();const dEl=document.getElementById('ws-datum');if(dEl)dEl.value=todayStr();['ws-taetigkeit','ws-maengel'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const netto=document.getElementById('ws-netto');if(netto)netto.value='';const fzSel=document.getElementById('ws-fahrzeug');if(fzSel)fzSel.value='';const st=document.getElementById('ws-send-status');if(st){st.className='send-status';st.textContent='';}document.querySelectorAll('#ws-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));document.getElementById('ws-von').value='06:30';document.getElementById('ws-bis').value='16:30';document.getElementById('ws-pause').value='60';calcWS();toast('Neuer Werkstatt-Bericht','ok');}
 
 function buildFZListe(){
   const el=document.getElementById('fzliste-content');if(!el)return;
@@ -3300,9 +3523,9 @@ function buildAR(){
     '<div class="qsec"><div class="qsec-t">Taetigkeiten</div><div class="tags" id="ar-taetigkeiten-tags">'+taetigkeitenTags([])+'</div></div>'+
     '<div class="qsec"><div class="qsec-t">Arbeitszeiten</div>'+
     '<div class="row">'+
-    '<div class="fg w25"><label>Beginn</label><input type="time" id="a-von" value="07:00" oninput="calcAR()"></div>'+
-    '<div class="fg w25"><label>Ende</label><input type="time" id="a-bis" value="16:00" oninput="calcAR()"></div>'+
-    '<div class="fg w25"><label>Pause</label><select id="a-pause" onchange="calcAR()">'+PAUSEN.map(p=>'<option value="'+p+'" '+(p===30?'selected':'')+'>'+p+' min</option>').join('')+'</select></div>'+
+    '<div class="fg w25"><label>Beginn</label><input type="time" id="a-von" value="06:30" oninput="calcAR()"></div>'+
+    '<div class="fg w25"><label>Ende</label><input type="time" id="a-bis" value="16:30" oninput="calcAR()"></div>'+
+    '<div class="fg w25"><label>Pause</label><select id="a-pause" onchange="calcAR()">'+PAUSEN.map(p=>'<option value="'+p+'" '+(p===60?'selected':'')+'>'+p+' min</option>').join('')+'</select></div>'+
     '<div class="fg w25"><label>Netto Arbeit</label><input type="text" id="a-netto-work" readonly style="color:var(--gl);font-weight:700;font-family:\'IBM Plex Mono\',monospace"></div>'+
     '</div><div class="row">'+
     '<div class="fg w50"><label>Fahrzeit (aus Projekt)</label><input type="text" id="a-fahrzeit-anzeige" readonly style="color:var(--earth);font-family:\'IBM Plex Mono\',monospace;font-size:11px"></div>'+
@@ -3355,7 +3578,7 @@ function calcAR(){
     const mEl=document.getElementById('a-h-monat');if(mEl)mEl.textContent=hM.toFixed(1)+'h';
   }
 }
-function clearARForm(skipConfirm){if(!skipConfirm&&!confirm('Neuen Bericht beginnen? Nicht gespeicherte Eingaben gehen verloren.'))return;currentId=null;stopVoice();document.getElementById('a-datum').value=todayStr();document.getElementById('a-projekt').value='';document.getElementById('a-von').value='07:00';document.getElementById('a-bis').value='16:00';document.getElementById('a-pause').value='30';['a-netto-work','a-netto','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const fa=document.getElementById('a-fahrzeit-anzeige');if(fa)fa.value='0 min';const fi=document.getElementById('fahrzeit-info');if(fi)fi.textContent='';const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}curFahrtStatus='fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));toast('Neuer Bericht','ok');}
+function clearARForm(skipConfirm){if(!skipConfirm&&!confirm('Neuen Bericht beginnen? Nicht gespeicherte Eingaben gehen verloren.'))return;currentId=null;stopVoice();document.getElementById('a-datum').value=todayStr();document.getElementById('a-projekt').value='';document.getElementById('a-von').value='06:30';document.getElementById('a-bis').value='16:30';document.getElementById('a-pause').value='60';['a-netto-work','a-netto','a-taetigkeit','a-besonder'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const fa=document.getElementById('a-fahrzeit-anzeige');if(fa)fa.value='0 min';const fi=document.getElementById('fahrzeit-info');if(fi)fi.textContent='';const st=document.getElementById('ar-send-status');if(st){st.className='send-status';st.textContent='';}curFahrtStatus='fahrer';document.querySelectorAll('.fahrt-btn').forEach(b=>{b.classList.remove('fahrt-active');if(b.dataset.val==='fahrer')b.classList.add('fahrt-active');});document.querySelectorAll('#ar-taetigkeiten-tags .tg').forEach(t=>t.classList.remove('a'));toast('Neuer Bericht','ok');}
 
 // ══════ VA FORMS ══════
 function buildVABericht(){
@@ -3519,8 +3742,8 @@ function addZeitRow(data={}){
     '<td><input class="projcell-filter" type="text" placeholder="Suchen..." style="display:block;width:110px;font-size:9px;padding:3px 5px;margin-bottom:2px" oninput="filterRowMA(this)">'+
     '<select class="zeit-name" style="font-size:10px;min-width:120px" onchange="onZeitNameChange(this)">'+maRowOpts(data.name||'')+'</select></td>'+
     '<td><select class="zeit-qual" style="font-size:10px">'+['VA','Facharbeiter','Helfer','Azubi','Sub'].map(q=>'<option'+(data.qual===q?' selected':'')+'>'+q+'</option>').join('')+'</select></td>'+
-    '<td><input class="zeit-von" type="time" value="'+(data.von||'07:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
-    '<td><input class="zeit-bis" type="time" value="'+(data.bis||'16:00')+'" style="width:76px" oninput="calcZR(this)"></td>'+
+    '<td><input class="zeit-von" type="time" value="'+(data.von||'06:30')+'" style="width:76px" oninput="calcZR(this)"></td>'+
+    '<td><input class="zeit-bis" type="time" value="'+(data.bis||'16:30')+'" style="width:76px" oninput="calcZR(this)"></td>'+
     '<td>'+pausenSelect(data.pause||30,'zeit-pause')+'</td>'+
     '<td><input class="zeit-netto" type="text" readonly value="'+(data.nettoArbeit||'')+'" style="width:52px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:600"></td>'+
     '<td><select class="fahrt-sel" style="font-size:10px" onchange="calcZR(this)">'+
@@ -3557,7 +3780,7 @@ function calcZR(inp){
   updZeitTotal();
 }
 function updZeitTotal(){let t=0;document.querySelectorAll('.zeit-gesamt').forEach(e=>t+=parseFloat(e.value.replace(',','.'))||0);const el=document.getElementById('zeit-total');if(el)el.textContent=t.toFixed(2).replace('.',',')+'h gesamt';updateSplitInfo();updateMAOffen();}
-function getZeitRows(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||'',von:tr.querySelector('.zeit-von')?.value||'',bis:tr.querySelector('.zeit-bis')?.value||'',pause:tr.querySelector('.zeit-pause')?.value||'30',nettoArbeit:tr.querySelector('.zeit-netto')?.value||'',fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:tr.querySelector('.zeit-fahrzeit')?.value||'0',fahrtAnteil:tr.querySelector('.zeit-anteil')?.value||'',gesamt:tr.querySelector('.zeit-gesamt')?.value||'',projektNr:PROJEKTE.find(p=>p.id===tr.querySelector('.row-pr')?.value)?.nr||'',projektId:tr.querySelector('.row-pr')?.value||'',tae:tr.querySelector('.row-tae')?.value||''})).filter(r=>r.name);}
+function getZeitRows(){return[...document.querySelectorAll('#zeit-body tr')].map(tr=>({name:tr.querySelector('.zeit-name')?.value||'',qual:tr.querySelector('.zeit-qual')?.value||'',von:tr.querySelector('.zeit-von')?.value||'',bis:tr.querySelector('.zeit-bis')?.value||'',pause:tr.querySelector('.zeit-pause')?.value||'60',nettoArbeit:tr.querySelector('.zeit-netto')?.value||'',fahrt:tr.querySelector('.fahrt-sel')?.value||'fahrer',fahrzeitMin:tr.querySelector('.zeit-fahrzeit')?.value||'0',fahrtAnteil:tr.querySelector('.zeit-anteil')?.value||'',gesamt:tr.querySelector('.zeit-gesamt')?.value||'',projektNr:PROJEKTE.find(p=>p.id===tr.querySelector('.row-pr')?.value)?.nr||'',projektId:tr.querySelector('.row-pr')?.value||'',tae:tr.querySelector('.row-tae')?.value||''})).filter(r=>r.name);}
 function addMachRow(data={}){const tbody=document.getElementById('mach-body');if(!tbody)return;const tr=document.createElement('tr');const rowKat=data.projektId?getProjektKat(data.projektId):currentVAKat();const prOpts=rowProjektOpts(rowKat,data.projektId||'');tr.innerHTML='<td><select class="geraet-sel" style="font-size:10px;min-width:200px"><option value="">- Geraet -</option>'+GERAETE.map(g=>'<option value="'+g.nr+'" '+(data.geraetNr===g.nr?'selected':'')+'>'+g.nr+' - '+g.bez+'</option>').join('')+'</select></td><td><input type="text" class="mach-fzn" value="'+(data.fahrzeugnr||'')+'" placeholder="Kfz/Nr." style="width:80px"></td><td><input type="number" class="mach-std" value="'+(data.netto||'')+'" placeholder="Std." min="0" step="0.5" style="width:70px;color:var(--gl);font-family:\'IBM Plex Mono\',monospace;font-weight:700"></td><td><select class="row-pr" data-kat="'+rowKat+'" style="font-size:9px;min-width:90px">'+prOpts+'</select></td><td><button class="delbtn" ontouchstart="this.closest(\'tr\').remove()" onclick="this.closest(\'tr\').remove()">&#x2715;</button></td>';tbody.appendChild(tr);}
 function getMachRows(){return[...document.querySelectorAll('#mach-body tr')].map(tr=>{const geraetNr=tr.querySelector('.geraet-sel')?.value||'';const geraet=GERAETE.find(g=>g.nr===geraetNr);return{geraetNr,geraetBez:geraet?.bez||'',fahrzeugnr:tr.querySelector('.mach-fzn')?.value||'',netto:tr.querySelector('.mach-std')?.value||'',projektId:tr.querySelector('.row-pr')?.value||''};}).filter(r=>r.geraetNr);}
 function addStep(data={}){stepIdx++;const i=stepIdx;const maRows=getZeitRowsSimple();let maHtml=maRows.length>0?'<div class="ma-zuweisung"><div class="ma-zuw-title">Mitarbeiter zuweisen</div>'+maRows.map(ma=>{const checked=(data.mitarbeiter||[]).some(m=>m.name===ma.name);const std=(data.mitarbeiter||[]).find(m=>m.name===ma.name)?.stunden||'';return'<div class="ma-check-row"><input type="checkbox" class="ma-cb" data-name="'+ma.name+'" '+(checked?'checked':'')+' onchange="updateStepMA('+i+')"><span class="ma-name-lbl">'+ma.name+'</span><span class="ma-budget" data-name="'+ma.name+'"></span><input type="number" class="ma-h" data-name="'+ma.name+'" value="'+std+'" placeholder="Std." min="0" step="0.5" style="opacity:'+(checked?'1':'0.4')+'" oninput="updateStepMA('+i+')">';}).join('')+'</div>':'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--m);margin-top:6px" data-no-ma="1">Erst Mitarbeiter im Tab Zeiten eintragen</div>';
@@ -3761,6 +3984,1195 @@ function showTab(name){
   if(name==='kalender'){kalMonat=new Date().getMonth();kalJahr=new Date().getFullYear();buildKalender();}
   if(name==='fzliste')buildFZListe();
   stopVoice();
+}
+
+// ════════════════════════════════════════════════════════════
+// MODULE / HAUPTMENUE
+// Freigaben pro Account in mitarbeiter.module (JSONB-Array),
+// z.B. ["tagesberichte","ausbildung"]. NULL = Standard nach Rolle.
+// ════════════════════════════════════════════════════════════
+const MODULE_DEFS=[
+  {key:'tagesberichte',name:'Tagesberichte',sub:'Zeiterfassung, Berichte, Freigaben'},
+  {key:'ausbildung',name:'Ausbildung',sub:'Lernen, Tests, Ergebnisse'},
+  {key:'baurechner',name:'Baurechner',sub:'Kalkulation Sportplatzbau'}
+];
+function userModule(u){
+  let m=u?u.module:null;
+  if(typeof m==='string'){try{m=JSON.parse(m);}catch(e){m=null;}}
+  if(Array.isArray(m)&&m.length){
+    const g=m.filter(x=>MODULE_DEFS.some(d=>d.key===x));
+    if(g.length)return g;
+  }
+  if(u.rolle==='azubi')return['ausbildung'];
+  if(u.rolle==='admin')return['tagesberichte','ausbildung','baurechner'];
+  return['tagesberichte'];
+}
+function modCheckboxHTML(prefix,checkedMods){
+  let html='';
+  MODULE_DEFS.forEach(d=>{
+    const chk=checkedMods.indexOf(d.key)>=0?' checked':'';
+    html+='<label style="display:flex;align-items:center;gap:6px;text-transform:none;font-size:12px;color:var(--t);letter-spacing:0;margin:0"><input type="checkbox" id="'+prefix+'-'+d.key+'"'+chk+' style="width:auto"> '+d.name+'</label>';
+  });
+  return html;
+}
+function modCheckboxLesen(prefix){
+  const module=[];
+  MODULE_DEFS.forEach(d=>{const c=document.getElementById(prefix+'-'+d.key);if(c&&c.checked)module.push(d.key);});
+  return module.length?module:['tagesberichte'];
+}
+function openMenu(){
+  ['admin-screen','pl-screen','ausb-screen','br-screen'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  document.getElementById('menu-user-name').textContent=currentUser.name;
+  const mods=userModule(currentUser);
+  let html='';
+  mods.forEach(k=>{
+    const d=MODULE_DEFS.find(x=>x.key===k);if(!d)return;
+    html+='<div class="menu-tile" ontouchstart="openModul(\''+k+'\')" onclick="openModul(\''+k+'\')">'+
+      '<div class="menu-tile-name">'+d.name+'</div><div class="menu-tile-sub">'+d.sub+'</div></div>';
+  });
+  document.getElementById('menu-tiles').innerHTML=html;
+  document.getElementById('menu-screen').style.display='flex';
+}
+async function openModul(k){
+  document.getElementById('menu-screen').style.display='none';
+  if(k==='ausbildung'){openAusb();return;}
+  if(k==='baurechner'){openBaurechner();return;}
+  // Modul Tagesberichte: bisheriges Rollen-Routing bleibt unveraendert
+  if(currentUser.rolle==='admin'||currentUser.rolle==='verwaltung')openAdmin();
+  else if(currentUser.rolle==='projektleiter')openPL();
+  else await initApp();
+}
+function zumMenue(){
+  ['admin-screen','pl-screen','ausb-screen','br-screen'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  openMenu();
+}
+function openBaurechner(){
+  document.getElementById('br-user-name').textContent=currentUser.name;
+  document.getElementById('br-screen').style.display='flex';
+  renderKalkPanel('brpanel-kalk');
+}
+
+// ════════════════════════════════════════════════════════════
+// MODUL AUSBILDUNG
+// Tabellen: ausbildung_material, ausbildung_tests, ausbildung_abgaben
+// ════════════════════════════════════════════════════════════
+let AUSB_MAT=[],AUSB_TESTS=[],AUSB_ABG=[];
+let laufTest=null,tEdit=null,matEditId=null,verwView='mat';
+let matBilder=[],fqBilder=[];   // Arbeitsstand der Bilder im Verwaltungs-Editor
+let AUSB_BH=[];        // Berichtsheft-Eintraege (Kontext: eigene oder alle)
+let bhEditId=null;     // gerade bearbeiteter Berichtsheft-Eintrag
+const AUSB_BUCKET='ausbildung';  // Supabase-Storage-Bucket
+
+function escH(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function azFmtD(d){if(!d)return'--';const p=String(d).substring(0,10).split('-');return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d;}
+function azFmtDT(d){if(!d)return'--';const dt=new Date(d);if(isNaN(dt))return azFmtD(d);return azFmtD(d)+' '+String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');}
+// Botanische Namen: *Text* wird kursiv dargestellt (nach dem Escapen!).
+function botH(s){
+  var e=escH(s);
+  return e.replace(/\*([^*]+)\*/g,'<em>$1</em>');
+}
+// Normalisiert eine Freitext-Antwort fuer den Vergleich:
+// Kleinschreibung, Umlaute/ss vereinheitlicht, Sternchen/Satzzeichen weg, Leerzeichen zusammengefasst.
+function azNorm(s){
+  var t=String(s==null?'':s).toLowerCase();
+  t=t.replace(/\*/g,' ');
+  t=t.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss');
+  t=t.replace(/[.,;:!?()\[\]"'\u0060\-\u2013\u2014\/]/g,' ');
+  t=t.replace(/\s+/g,' ').trim();
+  return t;
+}
+// Punkte einer Frage (Default 1, damit alte Tests unveraendert zaehlen).
+function fragePunkte(f){
+  var p=parseFloat(f.punkte);
+  return(isNaN(p)||p<=0)?1:p;
+}
+function frageTeilPunkte(f){
+  var p=parseFloat(f.teil_punkte);
+  if(isNaN(p)||p<0)return Math.floor(fragePunkte(f)/2)||1;
+  return p;
+}
+function testMaxPunkte(fragen){
+  var s=0;
+  (fragen||[]).forEach(function(f){s+=fragePunkte(f);});
+  return s;
+}
+// Bewertet eine Freitext-Antwort automatisch.
+// Rueckgabe: {punkte, korrekt: true|false|null, auto: bool}
+// null = konnte nicht automatisch bewertet werden -> Ausbilder.
+function bewerteText(f,antwort){
+  var a=azNorm(antwort);
+  // Aufzaehlungsfrage: es zaehlt, wie viele der gueltigen Begriffe genannt wurden.
+  var mind=parseInt(f.mind_anzahl,10);
+  if(!isNaN(mind)&&mind>0&&(f.varianten||[]).length){
+    if(a==='')return{punkte:0,korrekt:false,auto:true};
+    var treffer=0;
+    (f.varianten||[]).forEach(function(v){
+      var nv=azNorm(v);
+      if(nv!==''&&a.indexOf(nv)>=0)treffer++;
+    });
+    if(treffer>=mind)return{punkte:fragePunkte(f),korrekt:true,auto:true,treffer:treffer};
+    if(treffer>0)return{punkte:frageTeilPunkte(f),korrekt:false,auto:true,teil:true,treffer:treffer};
+    return{punkte:0,korrekt:false,auto:true,treffer:0};
+  }
+  if(a===''){
+    if(f.loesung)return{punkte:0,korrekt:false,auto:true};
+    return{punkte:0,korrekt:null,auto:false};
+  }
+  if(!f.loesung)return{punkte:0,korrekt:null,auto:false};
+  var voll=[f.loesung].concat(f.varianten||[]).map(azNorm).filter(function(x){return x!=='';});
+  for(var i=0;i<voll.length;i++){
+    if(a===voll[i])return{punkte:fragePunkte(f),korrekt:true,auto:true};
+  }
+  var teil=(f.teil_varianten||[]).map(azNorm).filter(function(x){return x!=='';});
+  var ersteswort=a.split(' ')[0];
+  for(var j=0;j<teil.length;j++){
+    if(a===teil[j]||ersteswort===teil[j])return{punkte:frageTeilPunkte(f),korrekt:false,auto:true,teil:true};
+  }
+  return{punkte:0,korrekt:false,auto:true};
+}
+// Bewertet eine Mehrfachauswahl.
+// Regel: eine falsche Auswahl -> 0 Punkte. Alle richtigen -> volle Punkte.
+// Ein Teil der richtigen (ohne falsche) -> Teilpunkte.
+function bewerteMulti(f,gewaehlt){
+  var richtige=(f.richtige||[]).map(Number);
+  var g=(gewaehlt||[]).map(Number);
+  var falsch=g.filter(function(x){return richtige.indexOf(x)<0;});
+  if(falsch.length>0)return{punkte:0,korrekt:false,auto:true};
+  var treffer=g.filter(function(x){return richtige.indexOf(x)>=0;});
+  if(treffer.length===0)return{punkte:0,korrekt:false,auto:true};
+  if(treffer.length===richtige.length)return{punkte:fragePunkte(f),korrekt:true,auto:true};
+  return{punkte:frageTeilPunkte(f),korrekt:false,auto:true,teil:true};
+}
+// Zeigt Bilder an (Lernmaterial und Fragen). Quelle steht als Nachweis unter dem Bild.
+function bilderHTML(bilder){
+  if(!bilder||!bilder.length)return'';
+  var html='<div class="az-bilder">';
+  bilder.forEach(function(b){
+    if(!b||!b.url)return;
+    html+='<figure class="az-bild">'+
+      '<a href="'+escH(b.url)+'" target="_blank" rel="noopener">'+
+      '<img src="'+escH(b.url)+'" alt="'+escH(b.bez||'Bild')+'" loading="lazy">'+
+      '</a>'+
+      '<figcaption>'+escH(b.bez||'')+
+      (b.quelle?'<span class="az-bild-quelle">'+escH(b.quelle)+'</span>':'')+
+      '</figcaption></figure>';
+  });
+  return html+'</div>';
+}
+// Zufaelliger Dateiname - darf die Pflanze NICHT verraten (Vorgabe aus dem Lernmaterial).
+function zufallsBildName(){
+  var z='abcdefghijklmnopqrstuvwxyz0123456789';
+  var s='';
+  for(var i=0;i<12;i++)s+=z.charAt(Math.floor(Math.random()*z.length));
+  return 'img_'+Date.now().toString(36)+'_'+s+'.jpg';
+}
+// Verkleinert ein Foto vor dem Upload (iPad-Fotos haben sonst 3-4 MB).
+function bildVerkleinern(datei,maxPx,fertig){
+  var leser=new FileReader();
+  leser.onerror=function(){fertig(null);};
+  leser.onload=function(e){
+    var img=new Image();
+    img.onerror=function(){fertig(null);};
+    img.onload=function(){
+      var w=img.width,h=img.height;
+      if(w>=h&&w>maxPx){h=Math.round(h*maxPx/w);w=maxPx;}
+      else if(h>w&&h>maxPx){w=Math.round(w*maxPx/h);h=maxPx;}
+      var c=document.createElement('canvas');
+      c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      c.toBlob(function(blob){fertig(blob);},'image/jpeg',0.8);
+    };
+    img.src=e.target.result;
+  };
+  leser.readAsDataURL(datei);
+}
+// Laedt ein Bild in den Storage-Bucket und haengt es an Material oder Frage.
+function bildHochladen(feld,ziel){
+  if(!feld||!feld.files||!feld.files.length)return;
+  var datei=feld.files[0];
+  feld.value='';
+  if(datei.size>25*1024*1024){toast('Bild ist zu gross (max 25 MB)','err');return;}
+  toast('Bild wird verkleinert...','ok');
+  bildVerkleinern(datei,1200,function(blob){
+    if(!blob){toast('Bild konnte nicht gelesen werden','err');return;}
+    var name=zufallsBildName();
+    toast('Bild wird hochgeladen...','ok');
+    sb.storage.from(AUSB_BUCKET).upload(name,blob,{contentType:'image/jpeg',upsert:false}).then(function(res){
+      if(res.error){toast('Upload fehlgeschlagen: '+res.error.message,'err');return;}
+      var pub=sb.storage.from(AUSB_BUCKET).getPublicUrl(name);
+      var url=(pub&&pub.data&&pub.data.publicUrl)?pub.data.publicUrl:'';
+      if(!url){toast('Bild-URL konnte nicht ermittelt werden','err');return;}
+      var eintrag={url:url,bez:'',quelle:''};
+      if(ziel==='mat'){matBilder.push(eintrag);zeichneMatBilder();}
+      else{fqBilder.push(eintrag);zeichneFqBilder();}
+      toast('Bild hinzugefuegt','ok');
+    });
+  });
+}
+function setMatBild(i,feld,wert){if(matBilder[i])matBilder[i][feld]=wert;}
+function setFqBild(i,feld,wert){if(fqBilder[i])fqBilder[i][feld]=wert;}
+function entfernMatBild(i){
+  if(!confirm('Dieses Bild aus dem Material entfernen?'))return;
+  matBilder.splice(i,1);zeichneMatBilder();
+}
+function entfernFqBild(i){fqBilder.splice(i,1);zeichneFqBilder();}
+// Baut die Bearbeitungsliste. Aendert NUR diesen Container - sonst gingen
+// bereits getippte Texte im Formular verloren.
+function bildEditHTML(arr,praefix,setFn,delFn){
+  if(!arr.length)return'<div class="az-muted">Noch keine Bilder.</div>';
+  var html='';
+  arr.forEach(function(b,i){
+    html+='<div class="az-bild-edit">'+
+      '<img src="'+escH(b.url)+'" alt="Bild '+(i+1)+'">'+
+      '<div class="az-bild-edit-felder">'+
+      '<input id="'+praefix+'bz-'+i+'" value="'+escH(b.bez||'')+'" placeholder="Bezeichnung, z.B. Rotbuche - Blatt" oninput="'+setFn+'('+i+',\'bez\',this.value)">'+
+      '<input id="'+praefix+'bq-'+i+'" value="'+escH(b.quelle||'')+'" placeholder="Quelle, z.B. Foto: Friedrich Klei GmbH" oninput="'+setFn+'('+i+',\'quelle\',this.value)">'+
+      '<button class="btn btn-r" style="font-size:11px;padding:4px 8px;min-height:30px" ontouchstart="'+delFn+'('+i+')" onclick="'+delFn+'('+i+')">Entfernen</button>'+
+      '</div></div>';
+  });
+  return html;
+}
+function zeichneMatBilder(){
+  var el=document.getElementById('mat-bilder-liste');
+  if(el)el.innerHTML=bildEditHTML(matBilder,'m','setMatBild','entfernMatBild');
+}
+function zeichneFqBilder(){
+  var el=document.getElementById('fq-bilder-liste');
+  if(el)el.innerHTML=bildEditHTML(fqBilder,'f','setFqBild','entfernFqBild');
+}
+// Liefert die 2-Wochen-Periode (Mo-So) fuer ein Datum, ausgerichtet an einem festen Anker.
+// Anker: Montag, 05.01.2026. So sind die Perioden fuer alle Azubis identisch.
+function bhPeriode(datum){
+  var anker=Date.UTC(2026,0,5); // 05.01.2026, ein Montag
+  var d=datum?new Date(datum):new Date();
+  var tag=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());
+  var diffTage=Math.floor((tag-anker)/86400000);
+  var periodenNr=Math.floor(diffTage/14);
+  var startMs=anker+periodenNr*14*86400000;
+  var endeMs=startMs+13*86400000;
+  var start=new Date(startMs),ende=new Date(endeMs);
+  function iso(x){return x.getUTCFullYear()+'-'+String(x.getUTCMonth()+1).padStart(2,'0')+'-'+String(x.getUTCDate()).padStart(2,'0');}
+  return{nr:periodenNr,start:iso(start),ende:iso(ende)};
+}
+function bhPeriodeLabel(startIso){
+  var p=bhPeriode(startIso);
+  return azFmtD(p.start)+' - '+azFmtD(p.ende);
+}
+function istAusbilder(){return currentUser&&(currentUser.rolle==='admin'||currentUser.rolle==='projektleiter'||currentUser.rolle==='verwaltung');}
+
+// Laedt eine Tabelle vollstaendig in 1000er-Bloecken (Konvention).
+async function loadAlle(tabelle,orderCol,filterFn){
+  let alle=[];let from=0;
+  while(true){
+    let q=sb.from(tabelle).select('*').order(orderCol,{ascending:false}).range(from,from+999);
+    if(filterFn)q=filterFn(q);
+    const res=await q;
+    if(res.error){toast('Fehler beim Laden ('+tabelle+')','err');return alle;}
+    const data=res.data||[];
+    alle=alle.concat(data);
+    if(data.length<1000)break;
+    from+=1000;
+  }
+  return alle;
+}
+async function loadAusbMaterial(){AUSB_MAT=await loadAlle('ausbildung_material','erstellt_am');}
+async function loadAusbTests(){AUSB_TESTS=await loadAlle('ausbildung_tests','erstellt_am');}
+async function loadAusbAbgabenEigene(){AUSB_ABG=await loadAlle('ausbildung_abgaben','abgegeben_am',function(q){return q.eq('mitarbeiter_id',String(currentUser.id));});}
+async function loadAusbAbgabenAlle(){AUSB_ABG=await loadAlle('ausbildung_abgaben','abgegeben_am');}
+async function loadBHeigene(){AUSB_BH=await loadAlle('ausbildung_berichtsheft','periode_start',function(q){return q.eq('mitarbeiter_id',String(currentUser.id));});}
+async function loadBHalle(){AUSB_BH=await loadAlle('ausbildung_berichtsheft','periode_start');}
+
+function openAusb(){
+  document.getElementById('ausb-screen').style.display='flex';
+  document.getElementById('ausb-user-name').textContent=currentUser.name+' #'+(currentUser.mitarbeiter_nr||'');
+  const badge=document.getElementById('ausb-badge');
+  if(istAusbilder()){badge.textContent='Ausbilder';badge.className='admin-badge badge-admin';}
+  else{badge.textContent='Azubi';badge.className='admin-badge badge-azubi';}
+  document.getElementById('aztab-verw').style.display=istAusbilder()?'':'none';
+  azShowTab('lernen');
+}
+function azShowTab(name){
+  document.querySelectorAll('#ausb-screen .admin-tab').forEach(t=>t.classList.remove('act'));
+  document.querySelectorAll('#ausb-screen .admin-panel').forEach(p=>p.classList.remove('act'));
+  document.getElementById('aztab-'+name).classList.add('act');
+  document.getElementById('azpanel-'+name).classList.add('act');
+  if(name==='lernen')renderLernen();
+  if(name==='tests')renderTests();
+  if(name==='erg')renderErgebnisse();
+  if(name==='bh')renderBerichtsheft();
+  if(name==='verw')renderVerwaltung();
+}
+
+// ── Lernen ──
+async function renderLernen(){
+  const el=document.getElementById('azpanel-lernen');
+  el.innerHTML='<div class="az-empty">Lade Lernmaterial...</div>';
+  await loadAusbMaterial();
+  const aktive=AUSB_MAT.filter(function(m){return m.aktiv;});
+  const kats=[];
+  aktive.forEach(function(m){const k=m.kategorie||'Allgemein';if(kats.indexOf(k)<0)kats.push(k);});
+  kats.sort();
+  let katOpts='<option value="">Alle Kategorien</option>';
+  kats.forEach(function(k){katOpts+='<option value="'+escH(k)+'">'+escH(k)+'</option>';});
+  el.innerHTML=
+    '<div class="a-sec"><div class="a-sec-title">Lernmaterial</div>'+
+    '<div class="row"><div class="fg w50"><label>Suchen</label><input id="lern-such" placeholder="Titel oder Inhalt..." oninput="filterLernen()"></div>'+
+    '<div class="fg w50"><label>Kategorie</label><select id="lern-kat" onchange="filterLernen()">'+katOpts+'</select></div></div>'+
+    '<div id="lern-liste"></div></div>';
+  filterLernen();
+}
+function filterLernen(){
+  const such=(document.getElementById('lern-such').value||'').toLowerCase();
+  const kat=document.getElementById('lern-kat').value;
+  const liste=document.getElementById('lern-liste');
+  let items=AUSB_MAT.filter(function(m){return m.aktiv;});
+  if(kat)items=items.filter(function(m){return(m.kategorie||'Allgemein')===kat;});
+  if(such)items=items.filter(function(m){
+    return(String(m.titel||'')+' '+String(m.beschreibung||'')+' '+String(m.inhalt||'')).toLowerCase().indexOf(such)>=0;
+  });
+  if(!items.length){liste.innerHTML='<div class="az-empty">Kein Lernmaterial gefunden.</div>';return;}
+  let html='';
+  items.forEach(function(m){
+    html+='<div class="az-card" ontouchstart="openMaterial(\''+m.id+'\')" onclick="openMaterial(\''+m.id+'\')" style="cursor:pointer">'+
+      '<div class="az-card-title">'+escH(m.titel)+'</div>'+
+      '<div class="az-card-sub">'+escH(m.kategorie||'Allgemein')+' &middot; '+azFmtD(m.erstellt_am)+
+      ((m.bilder&&m.bilder.length)?' &middot; '+m.bilder.length+' Bilder':'')+'</div>'+
+      (m.beschreibung?'<div class="az-muted" style="margin-top:6px">'+escH(m.beschreibung)+'</div>':'')+
+      '</div>';
+  });
+  liste.innerHTML=html;
+}
+function openMaterial(id){
+  const m=AUSB_MAT.find(function(x){return String(x.id)===String(id);});
+  if(!m)return;
+  const el=document.getElementById('azpanel-lernen');
+  let inhalt='';
+  if(m.inhalt){
+    const teile=String(m.inhalt).split('\n');
+    teile.forEach(function(z){inhalt+='<div style="min-height:8px;font-size:13px;line-height:1.6;color:var(--t)">'+botH(z)+'</div>';});
+  }
+  el.innerHTML=
+    '<div class="a-sec">'+
+    '<button class="btn" style="margin-bottom:12px" ontouchstart="renderLernen()" onclick="renderLernen()">&larr; Zurueck zur Uebersicht</button>'+
+    '<div class="a-sec-title">'+escH(m.titel)+'</div>'+
+    '<div class="az-card-sub" style="margin-bottom:12px">'+escH(m.kategorie||'Allgemein')+' &middot; '+azFmtD(m.erstellt_am)+'</div>'+
+    (m.beschreibung?'<div class="az-muted" style="margin-bottom:12px">'+escH(m.beschreibung)+'</div>':'')+
+    inhalt+
+    bilderHTML(m.bilder)+
+    (m.link_url?'<div style="margin-top:14px"><a href="'+escH(m.link_url)+'" target="_blank" rel="noopener" class="btn btn-sky" style="text-decoration:none">Externes Material oeffnen &#8599;</a></div>':'')+
+    '</div>';
+}
+
+// ── Tests ──
+async function renderTests(){
+  const el=document.getElementById('azpanel-tests');
+  el.innerHTML='<div class="az-empty">Lade Tests...</div>';
+  await loadAusbTests();
+  await loadAusbAbgabenEigene();
+  const aktive=AUSB_TESTS.filter(function(t){return t.aktiv&&(t.fragen||[]).length>0;});
+  if(!aktive.length){el.innerHTML='<div class="a-sec"><div class="a-sec-title">Tests</div><div class="az-empty">Aktuell sind keine Tests verfuegbar.</div></div>';return;}
+  let html='<div class="a-sec"><div class="a-sec-title">Verfuegbare Tests</div>';
+  aktive.forEach(function(t){
+    const eigene=AUSB_ABG.filter(function(a){return String(a.test_id)===String(t.id);});
+    let best=null;
+    eigene.forEach(function(a){if(a.punkte!=null&&(best===null||parseFloat(a.punkte)>best))best=parseFloat(a.punkte);});
+    html+='<div class="az-card">'+
+      '<div class="az-card-title">'+escH(t.titel)+'</div>'+
+      '<div class="az-card-sub">'+escH(t.kategorie||'Allgemein')+' &middot; '+(t.fragen||[]).length+' Fragen &middot; '+testMaxPunkte(t.fragen)+' Punkte</div>'+
+      (t.beschreibung?'<div class="az-muted" style="margin-top:6px">'+botH(t.beschreibung)+'</div>':'')+
+      '<div style="margin-top:8px">'+
+      (eigene.length?'<span class="az-pill info">'+eigene.length+'x abgegeben</span>':'<span class="az-pill">noch nicht gemacht</span>')+
+      (best!==null?'<span class="az-pill ok">Beste: '+best+' Pkt.</span>':'')+
+      '</div>'+
+      '<div style="margin-top:10px"><button class="btn btn-p" ontouchstart="startTest(\''+t.id+'\')" onclick="startTest(\''+t.id+'\')">Test starten</button></div>'+
+      '</div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+function startTest(id){
+  const t=AUSB_TESTS.find(function(x){return String(x.id)===String(id);});
+  if(!t)return;
+  laufTest=t;
+  const el=document.getElementById('azpanel-tests');
+  let html='<div class="a-sec">'+
+    '<button class="btn" style="margin-bottom:12px" ontouchstart="abbruchTest()" onclick="abbruchTest()">&larr; Abbrechen</button>'+
+    '<div class="a-sec-title">'+escH(t.titel)+'</div>'+
+    (t.beschreibung?'<div class="az-muted" style="margin-bottom:12px">'+escH(t.beschreibung)+'</div>':'');
+  (t.fragen||[]).forEach(function(f,i){
+    var typTxt=f.typ==='text'?'Freitext':(f.typ==='multi'?'Mehrfachauswahl':'Multiple Choice');
+    var meta=typTxt+' &middot; '+fragePunkte(f)+(fragePunkte(f)===1?' Punkt':' Punkte');
+    if(f.typ==='multi')meta+=' &middot; '+(f.richtige||[]).length+' Antworten sind richtig';
+    if(f.typ==='text'&&parseInt(f.mind_anzahl,10)>0)meta+=' &middot; mindestens '+parseInt(f.mind_anzahl,10)+' Nennungen';
+    if(f.schwierigkeit)meta+=' &middot; '+escH(f.schwierigkeit);
+    html+='<div class="az-qbox"><div class="az-qnr">Frage '+(i+1)+' von '+(t.fragen||[]).length+'</div>'+
+      '<div class="az-qmeta">'+meta+'</div>'+
+      '<div class="az-qfrage">'+botH(f.frage)+'</div>'+
+      bilderHTML(f.bilder);
+    if(f.typ==='text'){
+      html+='<textarea id="azq-'+i+'" placeholder="Antwort eingeben..." style="min-height:70px"></textarea>';
+    }else if(f.typ==='multi'){
+      (f.optionen||[]).forEach(function(o,oi){
+        if(String(o||'').trim()==='')return;
+        html+='<label class="az-opt"><input type="checkbox" name="azq'+i+'" value="'+oi+'"><span class="az-opt-txt">'+botH(o)+'</span></label>';
+      });
+    }else{
+      (f.optionen||[]).forEach(function(o,oi){
+        if(String(o||'').trim()==='')return;
+        html+='<label class="az-opt"><input type="radio" name="azq'+i+'" value="'+oi+'"><span class="az-opt-txt">'+botH(o)+'</span></label>';
+      });
+    }
+    html+='</div>';
+  });
+  html+='<button class="btn btn-p" style="width:100%;justify-content:center;font-size:14px" ontouchstart="submitTest()" onclick="submitTest()">Test abgeben</button>'+
+    '</div>';
+  el.innerHTML=html;
+  const sc=document.querySelector('#ausb-screen .admin-content');if(sc)sc.scrollTop=0;
+}
+function abbruchTest(){laufTest=null;renderTests();}
+async function submitTest(){
+  if(!laufTest)return;
+  const fragen=laufTest.fragen||[];
+  const antworten=[];
+  let punkte=0;let manuellNoetig=false;let unbeantwortet=0;
+  fragen.forEach(function(f,i){
+    const maxP=fragePunkte(f);
+    if(f.typ==='text'){
+      const feld=document.getElementById('azq-'+i);
+      const v=feld?feld.value.trim():'';
+      if(!v)unbeantwortet++;
+      const b=bewerteText(f,v);
+      if(!b.auto)manuellNoetig=true;
+      punkte+=b.punkte;
+      antworten.push({frage:f.frage,typ:'text',bilder:f.bilder||[],antwort:v,korrekt:b.korrekt,punkte:b.punkte,max:maxP,teil:!!b.teil,auto:b.auto,loesung:f.loesung||'',fachhinweis:f.fachhinweis||'',treffer:(b.treffer!=null?b.treffer:null),mind_anzahl:(parseInt(f.mind_anzahl,10)>0?parseInt(f.mind_anzahl,10):null)});
+    }else if(f.typ==='multi'){
+      const gewEls=document.querySelectorAll('input[name="azq'+i+'"]:checked');
+      const idxs=[];
+      for(let k=0;k<gewEls.length;k++)idxs.push(parseInt(gewEls[k].value,10));
+      if(!idxs.length)unbeantwortet++;
+      const b=bewerteMulti(f,idxs);
+      punkte+=b.punkte;
+      antworten.push({frage:f.frage,typ:'multi',bilder:f.bilder||[],optionen:f.optionen||[],richtige:(f.richtige||[]).map(Number),antwort:idxs,korrekt:b.korrekt,punkte:b.punkte,max:maxP,teil:!!b.teil,auto:true,fachhinweis:f.fachhinweis||''});
+    }else{
+      const gew=document.querySelector('input[name="azq'+i+'"]:checked');
+      const idx=gew?parseInt(gew.value,10):null;
+      if(idx===null)unbeantwortet++;
+      const korrekt=(idx!==null&&idx===parseInt(f.richtig,10));
+      const p=korrekt?maxP:0;
+      punkte+=p;
+      antworten.push({frage:f.frage,typ:'mc',bilder:f.bilder||[],optionen:f.optionen||[],richtig:parseInt(f.richtig,10),antwort:idx,korrekt:korrekt,punkte:p,max:maxP,auto:true,fachhinweis:f.fachhinweis||''});
+    }
+  });
+  if(unbeantwortet>0){
+    if(!confirm(unbeantwortet+' Frage(n) sind noch unbeantwortet. Trotzdem abgeben?'))return;
+  }else{
+    if(!confirm('Test jetzt abgeben?'))return;
+  }
+  const abgabe={
+    test_id:String(laufTest.id),
+    test_titel:laufTest.titel,
+    mitarbeiter_id:String(currentUser.id),
+    mitarbeiter_name:currentUser.name,
+    antworten:antworten,
+    punkte:punkte,
+    max_punkte:testMaxPunkte(fragen),
+    bewertet:!manuellNoetig
+  };
+  const res=await sb.from('ausbildung_abgaben').insert(abgabe);
+  if(res.error){toast('Fehler beim Abgeben: '+res.error.message,'err');return;}
+  laufTest=null;
+  toast('Test abgegeben','ok');
+  azShowTab('erg');
+}
+
+// ── Ergebnisse (eigene Abgaben) ──
+async function renderErgebnisse(){
+  const el=document.getElementById('azpanel-erg');
+  el.innerHTML='<div class="az-empty">Lade Ergebnisse...</div>';
+  await loadAusbAbgabenEigene();
+  if(!AUSB_ABG.length){el.innerHTML='<div class="a-sec"><div class="a-sec-title">Meine Ergebnisse</div><div class="az-empty">Noch keine Tests abgegeben.</div></div>';return;}
+  let html='<div class="a-sec"><div class="a-sec-title">Meine Ergebnisse</div>';
+  AUSB_ABG.forEach(function(a){
+    html+='<div class="az-card">'+
+      '<div class="az-card-title">'+escH(a.test_titel||'Test')+'</div>'+
+      '<div class="az-card-sub">'+azFmtDT(a.abgegeben_am)+'</div>'+
+      '<div style="margin-top:8px">'+
+      '<span class="az-pill '+(a.bewertet?'ok':'warn')+'">'+(a.bewertet?'Bewertet':'Bewertung offen')+'</span>'+
+      '<span class="az-pill info">'+(a.punkte!=null?a.punkte:'-')+' / '+(a.max_punkte!=null?a.max_punkte:'-')+' Punkte</span>'+
+      '</div>'+
+      (a.kommentar?'<div class="az-muted" style="margin-top:8px"><b>Kommentar Ausbilder:</b> '+escH(a.kommentar)+'</div>':'')+
+      '<div style="margin-top:8px"><button class="btn" ontouchstart="toggleAbgDetail(\''+a.id+'\')" onclick="toggleAbgDetail(\''+a.id+'\')">Details</button></div>'+
+      '<div id="abg-det-'+a.id+'" style="display:none;margin-top:10px"></div>'+
+      '</div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+function abgDetailHTML(a){
+  let html='';
+  (a.antworten||[]).forEach(function(x,i){
+    const hatP=(x.punkte!=null&&x.max!=null);
+    html+='<div class="az-qbox"><div class="az-qnr">Frage '+(i+1)+(hatP?' &middot; '+x.punkte+' / '+x.max+' Punkte':'')+'</div>'+
+      '<div class="az-qfrage">'+botH(x.frage)+'</div>'+
+      bilderHTML(x.bilder);
+    if(x.typ==='text'){
+      html+='<div class="az-muted"><b>Antwort:</b> '+(x.antwort?botH(x.antwort):'<i>keine Antwort</i>')+'</div>';
+      var trefferTxt=(x.mind_anzahl&&x.treffer!=null)?' ('+x.treffer+' von '+x.mind_anzahl+' geforderten Nennungen erkannt)':'';
+      if(x.teil)html+='<div class="az-ansbad" style="margin-top:4px">&#8226; teilweise richtig'+trefferTxt+'</div>';
+      else if(x.korrekt===true)html+='<div class="az-ansok" style="margin-top:4px">&#10003; richtig'+trefferTxt+'</div>';
+      else if(x.korrekt===false)html+='<div class="az-ansbad" style="margin-top:4px">&#10007; falsch'+trefferTxt+'</div>';
+      else html+='<div class="az-muted" style="margin-top:4px"><i>Bewertung durch den Ausbilder</i></div>';
+      if(x.loesung)html+='<div class="az-loesung"><b>Musterloesung:</b> '+botH(x.loesung)+'</div>';
+    }else if(x.typ==='multi'){
+      const gewTxt=(x.antwort||[]).map(function(k){return(x.optionen&&x.optionen[k]!=null)?x.optionen[k]:'?';});
+      const richTxt=(x.richtige||[]).map(function(k){return(x.optionen&&x.optionen[k]!=null)?x.optionen[k]:'?';});
+      html+='<div class="az-muted"><b>Deine Auswahl:</b> '+(gewTxt.length?botH(gewTxt.join(' | ')):'<i>keine Antwort</i>')+'</div>';
+      if(x.teil)html+='<div class="az-ansbad" style="margin-top:4px">&#8226; teilweise richtig</div>';
+      else if(x.korrekt)html+='<div class="az-ansok" style="margin-top:4px">&#10003; richtig</div>';
+      else html+='<div class="az-ansbad" style="margin-top:4px">&#10007; falsch</div>';
+      if(!x.korrekt)html+='<div class="az-loesung"><b>Richtig waere:</b> '+botH(richTxt.join(' | '))+'</div>';
+    }else{
+      const gew=(x.antwort!=null&&x.optionen&&x.optionen[x.antwort]!=null)?x.optionen[x.antwort]:null;
+      const richtig=(x.optionen&&x.optionen[x.richtig]!=null)?x.optionen[x.richtig]:'';
+      html+='<div class="az-muted"><b>Deine Antwort:</b> '+(gew!==null?botH(gew):'<i>keine Antwort</i>')+'</div>';
+      if(x.korrekt)html+='<div class="az-ansok" style="margin-top:4px">&#10003; richtig</div>';
+      else html+='<div class="az-ansbad" style="margin-top:4px">&#10007; falsch &middot; Richtig waere: '+botH(richtig)+'</div>';
+    }
+    if(x.fachhinweis)html+='<div class="az-hinweis"><b>Fachhinweis:</b> '+botH(x.fachhinweis)+'</div>';
+    html+='</div>';
+  });
+  return html;
+}
+function toggleAbgDetail(id){
+  const a=AUSB_ABG.find(function(x){return String(x.id)===String(id);});
+  const box=document.getElementById('abg-det-'+id);
+  if(!a||!box)return;
+  if(box.style.display==='none'){box.innerHTML=abgDetailHTML(a);box.style.display='';}
+  else box.style.display='none';
+}
+
+// ── Berichtsheft (Azubi-Ansicht) ──
+// Wochentage (Mo-Fr) einer Woche ab einem Montag (ISO-Datum).
+var BH_TAGE=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag'];
+var BH_STATUS=[['arbeit','Betrieb'],['schule','Berufsschule'],['ulu','ULU-Lehrgang'],['urlaub','Urlaub'],['krank','Krank'],['ausfall','Ausfall']];
+function bhAddTage(startIso,n){
+  var d=new Date(startIso+'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate()+n);
+  return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');
+}
+// Leeres Tagesgeruest fuer eine 2-Wochen-Periode: 2 Wochen x 5 Arbeitstage.
+function bhLeereTage(periodeStart){
+  var wochen=[];
+  for(var w=0;w<2;w++){
+    var wStart=bhAddTage(periodeStart,w*7);
+    var tage=[];
+    for(var t=0;t<5;t++){
+      tage.push({datum:bhAddTage(wStart,t),status:'arbeit',taetigkeit:'',wetter:''});
+    }
+    wochen.push({start:wStart,tage:tage});
+  }
+  return wochen;
+}
+// Vorhandene Tage laden oder frisch anlegen (robust gegen fehlende Struktur).
+function bhTageOf(b){
+  if(b&&Array.isArray(b.tage)&&b.tage.length)return b.tage;
+  return bhLeereTage(b.periode_start);
+}
+
+async function renderBerichtsheft(){
+  var el=document.getElementById('azpanel-bh');
+  el.innerHTML='<div class="az-empty">Lade Berichtsheft...</div>';
+  await loadBHeigene();
+  var aktuelle=bhPeriode(null);
+  var vorhandenAktuell=AUSB_BH.find(function(x){return x.periode_start===aktuelle.start;});
+  var html='<div class="a-sec"><div class="a-sec-title">Ausbildungsnachweis</div>'+
+    '<div class="az-muted" style="margin-bottom:10px">Aktueller Zeitraum: <b>'+bhPeriodeLabel(aktuelle.start)+'</b>. Trage fuer jeden Arbeitstag deine Taetigkeiten ein. Die Abgabe erfolgt alle zwei Wochen.</div>';
+  if(vorhandenAktuell&&vorhandenAktuell.status!=='entwurf'){
+    html+='<div class="az-muted">Fuer diesen Zeitraum ist bereits ein Nachweis abgegeben. Du findest ihn unten.</div>';
+  }else{
+    html+='<button class="btn btn-p" ontouchstart="bhOeffnen()" onclick="bhOeffnen()">'+(vorhandenAktuell?'Entwurf fortsetzen':'Nachweis fuer diesen Zeitraum ausfuellen')+'</button>';
+  }
+  html+='</div>';
+  html+='<div class="a-sec"><div class="a-sec-title">Meine Nachweise ('+AUSB_BH.length+')</div>';
+  if(!AUSB_BH.length)html+='<div class="az-empty">Noch kein Nachweis angelegt.</div>';
+  AUSB_BH.forEach(function(b){
+    var tage=bhTageOf(b);
+    var befuellt=0,gesamt=0;
+    tage.forEach(function(w){w.tage.forEach(function(t){gesamt++;if(t.status!=='arbeit'||String(t.taetigkeit||'').trim()!=='')befuellt++;});});
+    html+='<div class="bh-card">'+
+      '<div class="az-card-title">'+bhPeriodeLabel(b.periode_start)+'</div>'+
+      '<div style="margin-top:6px">'+bhStatusPill(b)+' <span class="az-pill">'+befuellt+' / '+gesamt+' Tagen ausgefuellt</span></div>'+
+      (b.ausbilder_kommentar?'<div class="az-loesung"><b>Ausbilder:</b> '+escH(b.ausbilder_kommentar)+'</div>':'')+
+      '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">'+
+      (b.status==='entwurf'?'<button class="btn" ontouchstart="bhBearbeiten(\''+b.id+'\')" onclick="bhBearbeiten(\''+b.id+'\')">Bearbeiten</button>':'<button class="btn" ontouchstart="bhAnsehen(\''+b.id+'\')" onclick="bhAnsehen(\''+b.id+'\')">Ansehen</button>')+
+      '</div></div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+function bhStatusPill(b){
+  if(b.status==='gezeichnet')return'<span class="bh-status gezeichnet">Gegengezeichnet</span>';
+  if(b.status==='abgegeben')return'<span class="bh-status abgegeben">Abgegeben</span>';
+  return'<span class="bh-status entwurf">Entwurf</span>';
+}
+// Arbeitsstand des offenen Nachweises (damit Tippen nicht verloren geht)
+var bhArbeit=null;
+function bhOeffnen(){
+  var p=bhPeriode(null);
+  var vorhanden=AUSB_BH.find(function(x){return x.periode_start===p.start;});
+  if(vorhanden){bhArbeit=JSON.parse(JSON.stringify(vorhanden));bhArbeit.tage=bhTageOf(vorhanden);}
+  else bhArbeit={id:'neu',periode_start:p.start,periode_ende:p.ende,status:'entwurf',tage:bhLeereTage(p.start),schule:'',gelernt:''};
+  bhEditId=bhArbeit.id;
+  renderBHFormular();
+}
+function bhBearbeiten(id){
+  var b=AUSB_BH.find(function(x){return String(x.id)===String(id);});
+  if(!b)return;
+  bhArbeit=JSON.parse(JSON.stringify(b));bhArbeit.tage=bhTageOf(b);
+  bhEditId=id;renderBHFormular();
+}
+function bhAnsehen(id){bhBearbeiten(id);}
+function bhAbbrechen(){bhArbeit=null;bhEditId=null;renderBerichtsheft();}
+function renderBHFormular(){
+  var el=document.getElementById('azpanel-bh');
+  if(!bhArbeit){renderBerichtsheft();return;}
+  el.innerHTML='<div class="a-sec"><div class="a-sec-title">Ausbildungsnachweis</div>'+bhFormularHTML(bhArbeit)+'</div>';
+  var sc=document.querySelector('#ausb-screen .admin-content');if(sc)sc.scrollTop=0;
+}
+function bhFormularHTML(b){
+  var nurLesen=(b.status&&b.status!=='entwurf');
+  var dis=nurLesen?' disabled':'';
+  var h='<div class="az-muted" style="margin-bottom:10px">Zeitraum: <b>'+bhPeriodeLabel(b.periode_start)+'</b></div>';
+  b.tage.forEach(function(woche,wi){
+    h+='<div class="bh-woche-titel">Woche '+(wi+1)+' &middot; ab '+azFmtD(woche.start)+'</div>';
+    woche.tage.forEach(function(tag,ti){
+      var frei=(tag.status!=='arbeit'&&tag.status!=='schule'&&tag.status!=='ulu');
+      h+='<div class="bh-tag'+(frei?' frei':'')+'" id="bhtag-'+wi+'-'+ti+'">'+
+        '<div class="bh-tag-kopf">'+
+        '<span class="bh-tag-name">'+BH_TAGE[ti]+'<br><span class="az-pill">'+azFmtD(tag.datum)+'</span></span>'+
+        '<select class="bh-tag-status" id="bhs-'+wi+'-'+ti+'"'+dis+' onchange="bhStatusChange('+wi+','+ti+',this.value)">'+
+        BH_STATUS.map(function(s){return '<option value="'+s[0]+'"'+(tag.status===s[0]?' selected':'')+'>'+s[1]+'</option>';}).join('')+
+        '</select>'+
+        '<input class="bh-tag-wetter" id="bhw-'+wi+'-'+ti+'"'+dis+' value="'+escH(tag.wetter||'')+'" placeholder="Wetter" oninput="bhFeld('+wi+','+ti+',\'wetter\',this.value)">'+
+        '</div>'+
+        '<div class="bh-tag-tae"><textarea id="bht-'+wi+'-'+ti+'"'+dis+' placeholder="Taetigkeiten an diesem Tag" oninput="bhFeld('+wi+','+ti+',\'taetigkeit\',this.value)">'+escH(tag.taetigkeit||'')+'</textarea></div>'+
+        '</div>';
+    });
+  });
+  h+='<div class="row" style="margin-top:12px"><div class="fg w100"><label>Berufsschule / Unterweisung: behandelte Themen (optional)</label><textarea id="bh-schule" style="min-height:60px"'+dis+' placeholder="Ausfuehrliche Themen, nicht nur Faecher">'+escH(b.schule||'')+'</textarea></div></div>';
+  if(!nurLesen){
+    h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">'+
+      '<button class="btn" ontouchstart="bhSpeichern(false)" onclick="bhSpeichern(false)">Entwurf speichern</button>'+
+      '<button class="btn btn-p" ontouchstart="bhSpeichern(true)" onclick="bhSpeichern(true)">Abgeben</button>'+
+      '<button class="btn" ontouchstart="bhAbbrechen()" onclick="bhAbbrechen()">Abbrechen</button>'+
+      '</div>';
+    if(b.ausbilder_kommentar)h+='<div class="az-loesung" style="margin-top:8px"><b>Ausbilder:</b> '+escH(b.ausbilder_kommentar)+'</div>';
+  }else{
+    h+='<div style="margin-top:6px">'+bhStatusPill(b)+'</div>';
+    if(b.ausbilder_kommentar)h+='<div class="az-loesung"><b>Ausbilder:</b> '+escH(b.ausbilder_kommentar)+'</div>';
+    h+='<div style="margin-top:8px"><button class="btn" ontouchstart="bhAbbrechen()" onclick="bhAbbrechen()">Zurueck</button></div>';
+  }
+  return h;
+}
+function bhFeld(wi,ti,feld,wert){if(bhArbeit&&bhArbeit.tage[wi]&&bhArbeit.tage[wi].tage[ti])bhArbeit.tage[wi].tage[ti][feld]=wert;}
+function bhStatusChange(wi,ti,wert){
+  bhFeld(wi,ti,'status',wert);
+  // Tagesbox ein-/ausblenden ohne Neuaufbau (getippte Texte bleiben)
+  var box=document.getElementById('bhtag-'+wi+'-'+ti);
+  if(box){
+    var frei=(wert!=='arbeit'&&wert!=='schule'&&wert!=='ulu');
+    if(frei)box.classList.add('frei');else box.classList.remove('frei');
+  }
+}
+async function bhSpeichern(abgeben){
+  if(!bhArbeit)return;
+  // Mindestpruefung bei Abgabe: jeder Arbeitstag braucht einen Eintrag ODER einen Nicht-Arbeit-Status
+  if(abgeben){
+    var luecke=null;
+    bhArbeit.tage.forEach(function(w,wi){w.tage.forEach(function(t,ti){
+      if(luecke)return;
+      var frei=(t.status!=='arbeit'&&t.status!=='schule'&&t.status!=='ulu');
+      if(!frei&&String(t.taetigkeit||'').trim()===''){luecke=BH_TAGE[ti]+' (Woche '+(wi+1)+')';}
+    });});
+    if(luecke){toast('Bitte noch ausfuellen: '+luecke+' - oder Status auf Urlaub/Krank/Ausfall setzen','err');return;}
+    if(!confirm('Nachweis fuer '+bhPeriodeLabel(bhArbeit.periode_start)+' abgeben? Danach ist er nicht mehr aenderbar.'))return;
+  }
+  var werte={
+    mitarbeiter_id:String(currentUser.id),
+    mitarbeiter_name:currentUser.name,
+    periode_start:bhArbeit.periode_start,
+    periode_ende:bhPeriode(bhArbeit.periode_start).ende,
+    tage:bhArbeit.tage,
+    schule:(document.getElementById('bh-schule')||{value:''}).value.trim(),
+    status:abgeben?'abgegeben':'entwurf'
+  };
+  var res;
+  if(bhArbeit.id&&bhArbeit.id!=='neu')res=await sb.from('ausbildung_berichtsheft').update(werte).eq('id',bhArbeit.id);
+  else res=await sb.from('ausbildung_berichtsheft').insert(werte);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast(abgeben?'Nachweis abgegeben':'Entwurf gespeichert','ok');
+  bhArbeit=null;bhEditId=null;renderBerichtsheft();
+}
+
+// ── Verwaltung (nur Ausbilder: admin / projektleiter / verwaltung) ──
+function renderVerwaltung(){
+  if(!istAusbilder()){document.getElementById('azpanel-verw').innerHTML='<div class="az-empty">Kein Zugriff.</div>';return;}
+  const el=document.getElementById('azpanel-verw');
+  el.innerHTML=
+    '<div class="az-subnav">'+
+    '<button class="btn '+(verwView==='mat'?'btn-sky':'')+'" ontouchstart="setVerwView(\'mat\')" onclick="setVerwView(\'mat\')">Material</button>'+
+    '<button class="btn '+(verwView==='tests'?'btn-sky':'')+'" ontouchstart="setVerwView(\'tests\')" onclick="setVerwView(\'tests\')">Tests</button>'+
+    '<button class="btn '+(verwView==='abg'?'btn-sky':'')+'" ontouchstart="setVerwView(\'abg\')" onclick="setVerwView(\'abg\')">Abgaben</button>'+
+    '<button class="btn '+(verwView==='bh'?'btn-sky':'')+'" ontouchstart="setVerwView(\'bh\')" onclick="setVerwView(\'bh\')">Berichtshefte</button>'+
+    '</div>'+
+    '<div id="verw-inhalt"></div>';
+  if(verwView==='mat')renderVerwMat();
+  if(verwView==='tests')renderVerwTests();
+  if(verwView==='abg')renderVerwAbg();
+  if(verwView==='bh')renderVerwBH();
+}
+function setVerwView(v){verwView=v;renderVerwaltung();}
+
+async function renderVerwMat(){
+  const el=document.getElementById('verw-inhalt');
+  el.innerHTML='<div class="az-empty">Lade...</div>';
+  await loadAusbMaterial();
+  const m=matEditId?AUSB_MAT.find(function(x){return String(x.id)===String(matEditId);}):null;
+  let html='<div class="a-sec"><div class="a-sec-title">'+(m?'Material bearbeiten':'Neues Lernmaterial')+'</div>'+
+    '<div class="row"><div class="fg w50"><label>Titel</label><input id="mat-titel" value="'+(m?escH(m.titel):'')+'" placeholder="z.B. Pflanzenliste Stauden"></div>'+
+    '<div class="fg w50"><label>Kategorie</label><input id="mat-kat" value="'+(m?escH(m.kategorie||''):'')+'" placeholder="z.B. Pflanzenkunde"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Kurzbeschreibung</label><input id="mat-beschr" value="'+(m?escH(m.beschreibung||''):'')+'" placeholder="Worum geht es?"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Inhalt (Text, optional)</label><textarea id="mat-inhalt" placeholder="Lerntext direkt hier eingeben..." style="min-height:90px">'+(m?escH(m.inhalt||''):'')+'</textarea></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Link (optional, z.B. PDF in Drive)</label><input id="mat-link" value="'+(m?escH(m.link_url||''):'')+'" placeholder="https://..."></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Bilder (Blatt, Rinde, Frucht, Bluete)</label>'+
+    '<div id="mat-bilder-liste"></div>'+
+    '<div class="az-upload"><input type="file" accept="image/*" id="mat-bild-datei" onchange="bildHochladen(this,\'mat\')">'+
+    '<div class="az-muted" style="margin-top:6px">Wird automatisch verkleinert. Der Dateiname wird zufaellig vergeben und verraet die Pflanze nicht. Bei fremden Bildern bitte immer die Quelle eintragen.</div></div>'+
+    '</div></div>'+
+    '<div style="display:flex;gap:8px">'+
+    '<button class="btn btn-p" ontouchstart="saveMat()" onclick="saveMat()">'+(m?'Aenderung speichern':'Material anlegen')+'</button>'+
+    (m?'<button class="btn" ontouchstart="cancelMatEdit()" onclick="cancelMatEdit()">Abbrechen</button>':'')+
+    '</div></div>';
+  html+='<div class="a-sec"><div class="a-sec-title">Vorhandenes Material ('+AUSB_MAT.length+')</div>';
+  if(!AUSB_MAT.length)html+='<div class="az-empty">Noch kein Material angelegt.</div>';
+  AUSB_MAT.forEach(function(x){
+    html+='<div class="az-card">'+
+      '<div class="az-card-title">'+escH(x.titel)+(x.aktiv?'':' <span class="az-pill warn">inaktiv</span>')+'</div>'+
+      '<div class="az-card-sub">'+escH(x.kategorie||'Allgemein')+' &middot; '+azFmtD(x.erstellt_am)+'</div>'+
+      '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">'+
+      '<button class="btn" ontouchstart="editMat(\''+x.id+'\')" onclick="editMat(\''+x.id+'\')">Bearbeiten</button>'+
+      '<button class="btn" ontouchstart="toggleMatAktiv(\''+x.id+'\')" onclick="toggleMatAktiv(\''+x.id+'\')">'+(x.aktiv?'Deaktivieren':'Aktivieren')+'</button>'+
+      '<button class="btn btn-r" ontouchstart="delMat(\''+x.id+'\')" onclick="delMat(\''+x.id+'\')">Loeschen</button>'+
+      '</div></div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+  zeichneMatBilder();
+}
+async function saveMat(){
+  const titel=document.getElementById('mat-titel').value.trim();
+  if(!titel){toast('Titel fehlt','err');return;}
+  const werte={
+    titel:titel,
+    kategorie:document.getElementById('mat-kat').value.trim()||'Allgemein',
+    beschreibung:document.getElementById('mat-beschr').value.trim(),
+    inhalt:document.getElementById('mat-inhalt').value,
+    link_url:document.getElementById('mat-link').value.trim(),
+    bilder:matBilder
+  };
+  let res;
+  if(matEditId)res=await sb.from('ausbildung_material').update(werte).eq('id',matEditId);
+  else{werte.aktiv=true;res=await sb.from('ausbildung_material').insert(werte);}
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast(matEditId?'Gespeichert':'Material angelegt','ok');
+  matEditId=null;matBilder=[];renderVerwMat();
+}
+function editMat(id){
+  matEditId=id;
+  const m=AUSB_MAT.find(function(x){return String(x.id)===String(id);});
+  matBilder=(m&&Array.isArray(m.bilder))?JSON.parse(JSON.stringify(m.bilder)):[];
+  renderVerwMat();
+  const sc=document.querySelector('#ausb-screen .admin-content');if(sc)sc.scrollTop=0;
+}
+function cancelMatEdit(){matEditId=null;matBilder=[];renderVerwMat();}
+async function toggleMatAktiv(id){
+  const x=AUSB_MAT.find(function(y){return String(y.id)===String(id);});
+  if(!x)return;
+  const res=await sb.from('ausbildung_material').update({aktiv:!x.aktiv}).eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast(x.aktiv?'Deaktiviert':'Aktiviert','ok');renderVerwMat();
+}
+async function delMat(id){
+  if(!confirm('Dieses Material wirklich loeschen?'))return;
+  const res=await sb.from('ausbildung_material').delete().eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast('Geloescht','ok');renderVerwMat();
+}
+
+function leererTest(){return{id:null,titel:'',kategorie:'Pflanzenkunde',beschreibung:'',fragen:[]};}
+async function renderVerwTests(){
+  const el=document.getElementById('verw-inhalt');
+  el.innerHTML='<div class="az-empty">Lade...</div>';
+  await loadAusbTests();
+  if(!tEdit)tEdit=leererTest();
+  renderVerwTestsMitDaten();
+}
+function renderVerwTestsMitDaten(){
+  // Baut die Tests-Ansicht aus dem Speicher (AUSB_TESTS + tEdit) neu auf - ohne DB-Load.
+  const el=document.getElementById('verw-inhalt');
+  if(!el)return;
+  el.innerHTML=bauVerwTestsHTML();
+  fqTypChanged();
+  zeichneFqBilder();
+}
+function bauVerwTestsHTML(){
+  let html='<div class="a-sec"><div class="a-sec-title">'+(tEdit.id?'Test bearbeiten':'Neuen Test erstellen')+'</div>'+
+    '<div class="row"><div class="fg w50"><label>Titel</label><input id="te-titel" value="'+escH(tEdit.titel)+'" placeholder="z.B. Pflanzentest Gehoelze 1"></div>'+
+    '<div class="fg w50"><label>Kategorie</label><input id="te-kat" value="'+escH(tEdit.kategorie)+'" placeholder="z.B. Pflanzenkunde"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Beschreibung (optional)</label><input id="te-beschr" value="'+escH(tEdit.beschreibung)+'" placeholder="Hinweis fuer die Azubis"></div></div>';
+  html+='<div style="margin:10px 0 4px;font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--m)">Fragen ('+tEdit.fragen.length+')</div>';
+  if(!tEdit.fragen.length)html+='<div class="az-empty">Noch keine Fragen. Unten Frage hinzufuegen.</div>';
+  tEdit.fragen.forEach(function(f,i){
+    var typTxt=f.typ==='text'?'Freitext':(f.typ==='multi'?'Mehrfachauswahl':'Multiple Choice');
+    html+='<div class="az-qbox"><div class="az-qnr">Frage '+(i+1)+' &middot; '+typTxt+' &middot; '+fragePunkte(f)+' P.'+
+      ((f.bilder&&f.bilder.length)?' &middot; '+f.bilder.length+' Bilder':'')+'</div>'+
+      '<div class="az-qfrage">'+botH(f.frage)+'</div>'+
+      bilderHTML(f.bilder);
+    if(f.typ==='mc'){
+      (f.optionen||[]).forEach(function(o,oi){
+        if(String(o||'').trim()==='')return;
+        html+='<div class="az-muted" style="margin-bottom:2px">'+(oi===parseInt(f.richtig,10)?'<span class="az-ansok">&#10003;</span> ':'&middot; ')+botH(o)+'</div>';
+      });
+    }else if(f.typ==='multi'){
+      (f.optionen||[]).forEach(function(o,oi){
+        if(String(o||'').trim()==='')return;
+        var ist=(f.richtige||[]).map(Number).indexOf(oi)>=0;
+        html+='<div class="az-muted" style="margin-bottom:2px">'+(ist?'<span class="az-ansok">&#10003;</span> ':'&middot; ')+botH(o)+'</div>';
+      });
+    }else if(f.loesung){
+      html+='<div class="az-muted" style="margin-bottom:2px"><b>Musterloesung:</b> '+botH(f.loesung)+'</div>';
+    }
+    html+='<div style="margin-top:8px"><button class="btn btn-r" style="font-size:11px;padding:4px 8px;min-height:30px" ontouchstart="delFrage('+i+')" onclick="delFrage('+i+')">Frage entfernen</button></div>'+
+      '</div>';
+  });
+  html+='<div style="border-top:1px dashed var(--b);margin:14px 0;padding-top:12px">'+
+    '<div class="row"><div class="fg w100"><label>Neue Frage</label><input id="fq-frage" placeholder="z.B. Wie heisst die Rotbuche botanisch?"></div></div>'+
+    '<div class="row"><div class="fg w33"><label>Typ</label><select id="fq-typ" onchange="fqTypChanged()"><option value="mc">Multiple Choice</option><option value="multi">Mehrfachauswahl</option><option value="text">Freitext</option></select></div>'+
+    '<div class="fg w33" id="fq-richtig-wrap"><label>Richtige Antwort</label><select id="fq-richtig"><option value="0">Antwort A</option><option value="1">Antwort B</option><option value="2">Antwort C</option><option value="3">Antwort D</option></select></div>'+
+    '<div class="fg w33"><label>Punkte</label><input id="fq-punkte" inputmode="decimal" value="1"></div></div>'+
+    '<div class="row" id="fq-multi-wrap" style="display:none"><div class="fg w100"><label>Richtige Antworten (mehrere moeglich)</label>'+
+    '<div style="display:flex;gap:14px;flex-wrap:wrap;padding:4px 0">'+
+    ['A','B','C','D'].map(function(L,k){return '<label style="display:flex;align-items:center;gap:6px;text-transform:none;font-size:12px;color:var(--t);letter-spacing:0;margin:0"><input type="checkbox" id="fq-r'+k+'" style="width:auto"> Antwort '+L+'</label>';}).join('')+
+    '</div></div></div>'+
+    '<div class="row" id="fq-text-wrap" style="display:none">'+
+    '<div class="fg w33"><label>Musterloesung (leer = Ausbilder bewertet)</label><input id="fq-loesung" placeholder="z.B. Fagus sylvatica"></div>'+
+    '<div class="fg w33"><label>Auch als voll richtig (Komma getrennt)</label><input id="fq-varianten" placeholder="z.B. Fluegelfrucht, Doppel-Samara"></div>'+
+    '<div class="fg w33"><label>Aufzaehlung: geforderte Nennungen</label><input id="fq-mind" inputmode="numeric" placeholder="leer = keine Aufzaehlung"></div></div>'+
+    '<div class="row" id="fq-teil-wrap" style="display:none">'+
+    '<div class="fg w50"><label>Teilpunkte fuer (Komma getrennt)</label><input id="fq-teilvar" placeholder="z.B. Fagus"></div>'+
+    '<div class="fg w50"><label>Teilpunkte-Wert</label><input id="fq-teilpunkte" inputmode="decimal" placeholder="1"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Fachhinweis (optional, erscheint bei der Auswertung)</label><input id="fq-hinweis" placeholder="Ergaenzende Erklaerung"></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Bilder zur Frage (optional)</label>'+
+    '<div id="fq-bilder-liste"></div>'+
+    '<div class="az-upload"><input type="file" accept="image/*" id="fq-bild-datei" onchange="bildHochladen(this,\'frage\')"></div>'+
+    '</div></div>'+
+    '<div id="fq-opts">'+
+    '<div class="row"><div class="fg w50"><label>Antwort A</label><input id="fq-o0"></div><div class="fg w50"><label>Antwort B</label><input id="fq-o1"></div></div>'+
+    '<div class="row"><div class="fg w50"><label>Antwort C (optional)</label><input id="fq-o2"></div><div class="fg w50"><label>Antwort D (optional)</label><input id="fq-o3"></div></div>'+
+    '</div>'+
+    '<button class="btn" ontouchstart="addFrage()" onclick="addFrage()">+ Frage hinzufuegen</button>'+
+    '</div>';
+  html+='<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">'+
+    '<button class="btn btn-p" ontouchstart="saveTest()" onclick="saveTest()">'+(tEdit.id?'Aenderung speichern':'Test speichern')+'</button>'+
+    '<button class="btn" ontouchstart="neuTest()" onclick="neuTest()">'+(tEdit.id?'Abbrechen / Neu':'Formular leeren')+'</button>'+
+    '</div></div>';
+  html+='<div class="a-sec"><div class="a-sec-title">Vorhandene Tests ('+AUSB_TESTS.length+')</div>';
+  if(!AUSB_TESTS.length)html+='<div class="az-empty">Noch keine Tests angelegt.</div>';
+  AUSB_TESTS.forEach(function(t){
+    html+='<div class="az-card">'+
+      '<div class="az-card-title">'+escH(t.titel)+(t.aktiv?'':' <span class="az-pill warn">inaktiv</span>')+'</div>'+
+      '<div class="az-card-sub">'+escH(t.kategorie||'Allgemein')+' &middot; '+(t.fragen||[]).length+' Fragen &middot; '+azFmtD(t.erstellt_am)+'</div>'+
+      '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">'+
+      '<button class="btn" ontouchstart="editTest(\''+t.id+'\')" onclick="editTest(\''+t.id+'\')">Bearbeiten</button>'+
+      '<button class="btn" ontouchstart="toggleTestAktiv(\''+t.id+'\')" onclick="toggleTestAktiv(\''+t.id+'\')">'+(t.aktiv?'Deaktivieren':'Aktivieren')+'</button>'+
+      '<button class="btn btn-r" ontouchstart="delTest(\''+t.id+'\')" onclick="delTest(\''+t.id+'\')">Loeschen</button>'+
+      '</div></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function tEditLesen(){
+  const t=document.getElementById('te-titel');if(t)tEdit.titel=t.value;
+  const k=document.getElementById('te-kat');if(k)tEdit.kategorie=k.value;
+  const b=document.getElementById('te-beschr');if(b)tEdit.beschreibung=b.value;
+}
+function fqTypChanged(){
+  const typEl=document.getElementById('fq-typ');
+  const typ=typEl?typEl.value:'mc';
+  const zeig=function(id,an){const el=document.getElementById(id);if(el)el.style.display=an?'':'none';};
+  zeig('fq-opts',typ==='mc'||typ==='multi');
+  zeig('fq-richtig-wrap',typ==='mc');
+  zeig('fq-multi-wrap',typ==='multi');
+  zeig('fq-text-wrap',typ==='text');
+  zeig('fq-teil-wrap',typ==='text'||typ==='multi');
+}
+function addFrage(){
+  tEditLesen();
+  const frage=document.getElementById('fq-frage').value.trim();
+  if(!frage){toast('Fragetext fehlt','err');return;}
+  const typ=document.getElementById('fq-typ').value;
+  const lesePunkte=function(id,std){
+    const el=document.getElementById(id);
+    if(!el||el.value.trim()==='')return std;
+    const v=parseFloat(el.value.replace(',','.'));
+    return isNaN(v)?std:v;
+  };
+  const listeLesen=function(id){
+    const el=document.getElementById(id);
+    if(!el)return[];
+    return el.value.split(',').map(function(s){return s.trim();}).filter(function(s){return s!=='';});
+  };
+  const punkte=lesePunkte('fq-punkte',1);
+  if(punkte<=0){toast('Punkte muessen groesser als 0 sein','err');return;}
+  const hinweisEl=document.getElementById('fq-hinweis');
+  const hinweis=hinweisEl?hinweisEl.value.trim():'';
+  const neueFrage={frage:frage,typ:typ,punkte:punkte};
+  if(hinweis)neueFrage.fachhinweis=hinweis;
+  if(fqBilder.length)neueFrage.bilder=fqBilder.slice();
+  if(typ==='text'){
+    const loesEl=document.getElementById('fq-loesung');
+    const loes=loesEl?loesEl.value.trim():'';
+    const mindEl=document.getElementById('fq-mind');
+    const mindRoh=mindEl?mindEl.value.trim():'';
+    const mind=mindRoh===''?0:parseInt(mindRoh,10);
+    if(mindRoh!==''&&(isNaN(mind)||mind<1)){toast('Geforderte Nennungen muessen eine Zahl ab 1 sein','err');return;}
+    if(loes){
+      neueFrage.loesung=loes;
+      const varianten=listeLesen('fq-varianten');
+      if(varianten.length)neueFrage.varianten=varianten;
+      if(mind>0){
+        if(!varianten.length){toast('Fuer eine Aufzaehlung bitte die gueltigen Begriffe bei "Auch als voll richtig" eintragen','err');return;}
+        neueFrage.mind_anzahl=mind;
+        neueFrage.teil_punkte=lesePunkte('fq-teilpunkte',Math.floor(punkte/2)||1);
+      }
+      const teilvar=listeLesen('fq-teilvar');
+      if(teilvar.length){
+        neueFrage.teil_varianten=teilvar;
+        neueFrage.teil_punkte=lesePunkte('fq-teilpunkte',Math.floor(punkte/2)||1);
+      }
+    }
+    tEdit.fragen.push(neueFrage);
+  }else{
+    const optionen=[];
+    for(let i=0;i<4;i++){optionen.push(document.getElementById('fq-o'+i).value.trim());}
+    const gefuellt=optionen.filter(function(o){return o!=='';});
+    if(gefuellt.length<2){toast('Mindestens 2 Antworten (A und B) noetig','err');return;}
+    neueFrage.optionen=optionen;
+    if(typ==='multi'){
+      const richtige=[];
+      for(let k=0;k<4;k++){const c=document.getElementById('fq-r'+k);if(c&&c.checked)richtige.push(k);}
+      if(!richtige.length){toast('Bitte mindestens eine richtige Antwort ankreuzen','err');return;}
+      for(let k=0;k<richtige.length;k++){
+        if(optionen[richtige[k]]===''){toast('Eine als richtig markierte Antwort ist leer','err');return;}
+      }
+      neueFrage.richtige=richtige;
+      neueFrage.teil_punkte=lesePunkte('fq-teilpunkte',Math.floor(punkte/2)||1);
+    }else{
+      const richtig=parseInt(document.getElementById('fq-richtig').value,10);
+      if(optionen[richtig]===''){toast('Die als richtig markierte Antwort ist leer','err');return;}
+      neueFrage.richtig=richtig;
+    }
+    tEdit.fragen.push(neueFrage);
+  }
+  fqBilder=[];
+  renderVerwTestsMitDaten();
+  toast('Frage hinzugefuegt','ok');
+}
+function delFrage(i){tEditLesen();tEdit.fragen.splice(i,1);renderVerwTestsMitDaten();}
+async function saveTest(){
+  tEditLesen();
+  if(!tEdit.titel.trim()){toast('Titel fehlt','err');return;}
+  if(!tEdit.fragen.length){toast('Mindestens eine Frage noetig','err');return;}
+  const werte={titel:tEdit.titel.trim(),kategorie:tEdit.kategorie.trim()||'Allgemein',beschreibung:tEdit.beschreibung.trim(),fragen:tEdit.fragen};
+  let res;
+  if(tEdit.id)res=await sb.from('ausbildung_tests').update(werte).eq('id',tEdit.id);
+  else{werte.aktiv=true;res=await sb.from('ausbildung_tests').insert(werte);}
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast(tEdit.id?'Test gespeichert':'Test angelegt','ok');
+  tEdit=leererTest();
+  renderVerwTests();
+}
+function neuTest(){tEdit=leererTest();fqBilder=[];renderVerwTestsMitDaten();}
+function editTest(id){
+  const t=AUSB_TESTS.find(function(x){return String(x.id)===String(id);});
+  if(!t)return;
+  tEdit={id:t.id,titel:t.titel||'',kategorie:t.kategorie||'',beschreibung:t.beschreibung||'',fragen:JSON.parse(JSON.stringify(t.fragen||[]))};
+  renderVerwTestsMitDaten();
+  const sc=document.querySelector('#ausb-screen .admin-content');if(sc)sc.scrollTop=0;
+}
+async function toggleTestAktiv(id){
+  const t=AUSB_TESTS.find(function(x){return String(x.id)===String(id);});
+  if(!t)return;
+  const res=await sb.from('ausbildung_tests').update({aktiv:!t.aktiv}).eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast(t.aktiv?'Deaktiviert':'Aktiviert','ok');renderVerwTests();
+}
+async function delTest(id){
+  if(!confirm('Diesen Test wirklich loeschen? Bereits vorhandene Abgaben bleiben erhalten.'))return;
+  const res=await sb.from('ausbildung_tests').delete().eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast('Geloescht','ok');
+  if(tEdit&&String(tEdit.id)===String(id))tEdit=leererTest();
+  renderVerwTests();
+}
+
+async function renderVerwAbg(){
+  const el=document.getElementById('verw-inhalt');
+  el.innerHTML='<div class="az-empty">Lade Abgaben...</div>';
+  await loadAusbAbgabenAlle();
+  let testOpts='<option value="">Alle Tests</option>';
+  const titelListe=[];
+  AUSB_ABG.forEach(function(a){const t=a.test_titel||'Test';if(titelListe.indexOf(t)<0)titelListe.push(t);});
+  titelListe.sort();
+  titelListe.forEach(function(t){testOpts+='<option value="'+escH(t)+'">'+escH(t)+'</option>';});
+  el.innerHTML=
+    '<div class="a-sec"><div class="a-sec-title">Abgaben ('+AUSB_ABG.length+')</div>'+
+    '<div class="row"><div class="fg w50"><label>Test</label><select id="abg-filter-test" onchange="filterVerwAbg()">'+testOpts+'</select></div>'+
+    '<div class="fg w50"><label>Status</label><select id="abg-filter-status" onchange="filterVerwAbg()"><option value="">Alle</option><option value="offen">Bewertung offen</option><option value="fertig">Bewertet</option></select></div></div>'+
+    '<div id="abg-liste"></div></div>';
+  filterVerwAbg();
+}
+function filterVerwAbg(){
+  const ftest=document.getElementById('abg-filter-test').value;
+  const fstatus=document.getElementById('abg-filter-status').value;
+  let items=AUSB_ABG.slice();
+  if(ftest)items=items.filter(function(a){return(a.test_titel||'Test')===ftest;});
+  if(fstatus==='offen')items=items.filter(function(a){return!a.bewertet;});
+  if(fstatus==='fertig')items=items.filter(function(a){return a.bewertet;});
+  const liste=document.getElementById('abg-liste');
+  if(!items.length){liste.innerHTML='<div class="az-empty">Keine Abgaben gefunden.</div>';return;}
+  let html='';
+  items.forEach(function(a){
+    html+='<div class="az-card">'+
+      '<div class="az-card-title">'+escH(a.mitarbeiter_name||'--')+' &middot; '+escH(a.test_titel||'Test')+'</div>'+
+      '<div class="az-card-sub">'+azFmtDT(a.abgegeben_am)+'</div>'+
+      '<div style="margin-top:8px">'+
+      '<span class="az-pill '+(a.bewertet?'ok':'warn')+'">'+(a.bewertet?'Bewertet':'Bewertung offen')+'</span>'+
+      '<span class="az-pill info">'+(a.punkte!=null?a.punkte:'-')+' / '+(a.max_punkte!=null?a.max_punkte:'-')+' Punkte</span>'+
+      '</div>'+
+      '<div style="margin-top:8px"><button class="btn" ontouchstart="toggleVerwAbg(\''+a.id+'\')" onclick="toggleVerwAbg(\''+a.id+'\')">Ansehen / Bewerten</button></div>'+
+      '<div id="vabg-det-'+a.id+'" style="display:none;margin-top:10px"></div>'+
+      '</div>';
+  });
+  liste.innerHTML=html;
+}
+function toggleVerwAbg(id){
+  const a=AUSB_ABG.find(function(x){return String(x.id)===String(id);});
+  const box=document.getElementById('vabg-det-'+id);
+  if(!a||!box)return;
+  if(box.style.display!=='none'){box.style.display='none';return;}
+  let html=abgDetailHTML(a);
+  html+='<div style="border-top:1px dashed var(--b);margin-top:10px;padding-top:10px">'+
+    '<div class="row"><div class="fg w50"><label>Punkte</label><input id="bw-pkt-'+a.id+'" inputmode="decimal" value="'+(a.punkte!=null?a.punkte:'')+'"></div>'+
+    '<div class="fg w50"><label>Max. Punkte</label><input value="'+(a.max_punkte!=null?a.max_punkte:'')+'" disabled></div></div>'+
+    '<div class="row"><div class="fg w100"><label>Kommentar an den Azubi</label><textarea id="bw-kom-'+a.id+'" style="min-height:70px">'+escH(a.kommentar||'')+'</textarea></div></div>'+
+    '<button class="btn btn-p" ontouchstart="saveBewertung(\''+a.id+'\')" onclick="saveBewertung(\''+a.id+'\')">Bewertung speichern</button>'+
+    '</div>';
+  box.innerHTML=html;
+  box.style.display='';
+}
+async function saveBewertung(id){
+  const pktRaw=document.getElementById('bw-pkt-'+id).value.replace(',','.').trim();
+  const pkt=pktRaw===''?null:parseFloat(pktRaw);
+  if(pkt===null||isNaN(pkt)){toast('Bitte Punkte eingeben','err');return;}
+  const kom=document.getElementById('bw-kom-'+id).value.trim();
+  const res=await sb.from('ausbildung_abgaben').update({punkte:pkt,kommentar:kom,bewertet:true}).eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast('Bewertung gespeichert','ok');
+  renderVerwAbg();
+}
+
+// ── Verwaltung: Berichtshefte (Ausbilder-Uebersicht) ──
+async function renderVerwBH(){
+  var el=document.getElementById('verw-inhalt');
+  el.innerHTML='<div class="az-empty">Lade Berichtshefte...</div>';
+  await loadBHalle();
+  // Namen fuer den Filter sammeln
+  var namen=[];
+  AUSB_BH.forEach(function(b){var n=b.mitarbeiter_name||'--';if(namen.indexOf(n)<0)namen.push(n);});
+  namen.sort();
+  var nameOpts='<option value="">Alle Azubis</option>';
+  namen.forEach(function(n){nameOpts+='<option value="'+escH(n)+'">'+escH(n)+'</option>';});
+  el.innerHTML='<div class="a-sec"><div class="a-sec-title">Berichtshefte ('+AUSB_BH.length+')</div>'+
+    '<div class="row"><div class="fg w50"><label>Azubi</label><select id="bh-filter-name" onchange="filterVerwBH()">'+nameOpts+'</select></div>'+
+    '<div class="fg w50"><label>Status</label><select id="bh-filter-status" onchange="filterVerwBH()"><option value="">Alle</option><option value="abgegeben">Abgegeben (offen)</option><option value="gezeichnet">Gegengezeichnet</option><option value="entwurf">Entwurf</option></select></div></div>'+
+    '<div id="bh-liste"></div></div>';
+  filterVerwBH();
+}
+function filterVerwBH(){
+  var fname=document.getElementById('bh-filter-name').value;
+  var fstatus=document.getElementById('bh-filter-status').value;
+  var items=AUSB_BH.slice();
+  if(fname)items=items.filter(function(b){return(b.mitarbeiter_name||'--')===fname;});
+  if(fstatus)items=items.filter(function(b){return(b.status||'entwurf')===fstatus;});
+  var liste=document.getElementById('bh-liste');
+  if(!items.length){liste.innerHTML='<div class="az-empty">Keine Berichtshefte gefunden.</div>';return;}
+  var html='';
+  items.forEach(function(b){
+    html+='<div class="bh-card">'+
+      '<div class="az-card-title">'+escH(b.mitarbeiter_name||'--')+' &middot; '+bhPeriodeLabel(b.periode_start)+'</div>'+
+      '<div style="margin-top:6px">'+bhStatusPill(b)+'</div>'+
+      '<div style="margin-top:8px"><button class="btn" ontouchstart="toggleVerwBH(\''+b.id+'\')" onclick="toggleVerwBH(\''+b.id+'\')">Ansehen</button></div>'+
+      '<div id="vbh-det-'+b.id+'" style="display:none;margin-top:10px"></div>'+
+      '</div>';
+  });
+  liste.innerHTML=html;
+}
+function toggleVerwBH(id){
+  var b=AUSB_BH.find(function(x){return String(x.id)===String(id);});
+  var box=document.getElementById('vbh-det-'+id);
+  if(!b||!box)return;
+  if(box.style.display!=='none'){box.style.display='none';return;}
+  var h='';
+  var tage=bhTageOf(b);
+  tage.forEach(function(woche,wi){
+    h+='<div class="bh-woche-titel">Woche '+(wi+1)+' &middot; ab '+azFmtD(woche.start)+'</div>';
+    woche.tage.forEach(function(t,ti){
+      var stLabel=(BH_STATUS.filter(function(s){return s[0]===t.status;})[0]||['','Betrieb'])[1];
+      var frei=(t.status!=='arbeit'&&t.status!=='schule'&&t.status!=='ulu');
+      h+='<div class="bh-tag"><div class="bh-tag-kopf"><span class="bh-tag-name">'+BH_TAGE[ti]+' <span class="az-pill">'+azFmtD(t.datum)+'</span></span>'+
+        '<span class="az-pill '+(frei?'warn':'info')+'">'+escH(stLabel)+'</span>'+
+        (t.wetter?'<span class="az-pill">'+escH(t.wetter)+'</span>':'')+'</div>'+
+        (frei?'':'<div class="az-muted" style="white-space:pre-wrap">'+escH(t.taetigkeit||'--')+'</div>')+
+        '</div>';
+    });
+  });
+  if(b.schule)h+='<div class="az-qbox"><div class="az-qnr">Berufsschule / Unterweisung</div><div class="az-muted" style="white-space:pre-wrap">'+escH(b.schule)+'</div></div>';
+  if(b.status==='entwurf'){
+    h+='<div class="az-muted"><i>Dieser Bericht ist noch ein Entwurf und wurde vom Azubi nicht abgegeben.</i></div>';
+  }else{
+    h+='<div style="border-top:1px dashed var(--b);margin-top:10px;padding-top:10px">'+
+      '<div class="row"><div class="fg w100"><label>Kommentar an den Azubi</label><textarea id="bhk-'+b.id+'" style="min-height:60px">'+escH(b.ausbilder_kommentar||'')+'</textarea></div></div>'+
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="btn" ontouchstart="bhKommentarSpeichern(\''+b.id+'\')" onclick="bhKommentarSpeichern(\''+b.id+'\')">Kommentar speichern</button>'+
+      (b.status!=='gezeichnet'?'<button class="btn btn-p" ontouchstart="bhGegenzeichnen(\''+b.id+'\')" onclick="bhGegenzeichnen(\''+b.id+'\')">Gegenzeichnen</button>':'')+
+      '</div></div>';
+  }
+  box.innerHTML=h;
+  box.style.display='';
+}
+async function bhKommentarSpeichern(id){
+  var kom=(document.getElementById('bhk-'+id)||{value:''}).value.trim();
+  var res=await sb.from('ausbildung_berichtsheft').update({ausbilder_kommentar:kom}).eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast('Kommentar gespeichert','ok');renderVerwBH();
+}
+async function bhGegenzeichnen(id){
+  if(!confirm('Diesen Bericht als gegengezeichnet markieren?'))return;
+  var kom=(document.getElementById('bhk-'+id)||{value:''}).value.trim();
+  var res=await sb.from('ausbildung_berichtsheft').update({status:'gezeichnet',ausbilder_kommentar:kom,gezeichnet_von:currentUser.name,gezeichnet_am:new Date().toISOString()}).eq('id',id);
+  if(res.error){toast('Fehler: '+res.error.message,'err');return;}
+  toast('Gegengezeichnet','ok');renderVerwBH();
 }
 </script>
 </body>
