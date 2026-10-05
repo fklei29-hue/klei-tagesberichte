@@ -2496,50 +2496,276 @@ function azConfirmText(liste,datum){
 
 async function renderAdminExp(){
   const el=document.getElementById('apanel-exp');
+  const heute=new Date();
+  const monat=heute.getFullYear()+'-'+('0'+(heute.getMonth()+1)).slice(-2);
+  const mg=expMonatsGrenzen(monat);
   el.innerHTML='<div class="a-sec"><div class="a-sec-title">Buchhaltungs-Export</div>'+
-    '<div class="row"><div class="fg w50"><label>Von</label><input type="date" id="exp-von"></div>'+
-    '<div class="fg w50"><label>Bis</label><input type="date" id="exp-bis"></div></div>'+
-    '<label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin-bottom:10px;cursor:pointer"><input type="checkbox" id="exp-nur-frei" checked style="width:16px;height:16px"> Nur von der Buchhaltung freigegebene Berichte exportieren</label>'+
+    '<div class="row"><div class="fg w33"><label>Monat</label><input type="month" id="exp-monat" value="'+monat+'" onchange="expMonatSetzen()"></div>'+
+    '<div class="fg w33"><label>Von</label><input type="date" id="exp-von" value="'+mg.von+'" onchange="expZeitraumGeaendert()"></div>'+
+    '<div class="fg w33"><label>Bis</label><input type="date" id="exp-bis" value="'+mg.bis+'" onchange="expZeitraumGeaendert()"></div></div>'+
+    '<div class="row"><div class="fg w50"><label>Projekt</label><select id="exp-f-proj" onchange="expAufstellungRender()"><option value="">Alle Projekte</option></select></div>'+
+    '<div class="fg w50"><label>Mitarbeiter</label><select id="exp-f-ma" onchange="expAufstellungRender()"><option value="">Alle Mitarbeiter</option></select></div></div>'+
+    '<label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin-bottom:10px;cursor:pointer"><input type="checkbox" id="exp-nur-frei" checked style="width:16px;height:16px" onchange="expZeitraumGeaendert()"> Nur von der Buchhaltung freigegebene Berichte exportieren</label>'+
     '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
     '<button class="btn btn-sky" ontouchstart="expBuchhaltungCSV()" onclick="expBuchhaltungCSV()">CSV Buchhaltung</button>'+
     '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button>'+
     '<button class="btn btn-sky" ontouchstart="expNKImport()" onclick="expNKImport()">DATAflor NK-Import (XML)</button></div>'+
+    '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">CSV Buchhaltung: eine Zeile je Mitarbeiter, Tag und Projekt (aus den Zeiten der Vorarbeiter-Berichte plus eigene Berichte), mit Fahrzeit. Die Filter Projekt und Mitarbeiter gelten fuer die Aufstellung unten und fuer die CSV Buchhaltung, nicht fuer die beiden DATAflor-Exporte.</div>'+
     '<div class="row" style="margin-top:8px"><div class="fg w50"><label>Standard-Lohnart (DATAflor)</label><input id="exp-lohnart" inputmode="numeric" value="1" placeholder="z.B. 1"></div>'+
     '<div class="fg w50" style="display:flex;align-items:flex-end"><label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin:0;cursor:pointer"><input type="checkbox" id="exp-nk-zeiten" checked style="width:16px;height:16px"> Von/Bis-Zeiten ausgeben</label></div></div>'+
     '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">NK-Import erzeugt eine schema-valide XML (DFNKImport) fuer den Digitalen Posteingang. Nur Berichte mit LV-Nummer werden verbucht; Zeilen mit Position gehen auf die Position, sonst als Taglohn. Lohnart und Personalnummern muessen im DATAflor BUSINESS existieren.</div></div>'+
-    '<div class="a-sec"><div class="a-sec-title">Statistik</div><div id="exp-stats"><div class="empty"><div class="spin"></div></div></div></div>';
-  loadExpStats();
+    '<div class="a-sec"><div class="a-sec-title">Aufstellung Stunden je Monat, Mitarbeiter und Projekt</div><div id="exp-stats"><div class="empty"><div class="spin"></div></div></div></div>';
+  expAufstellungLaden();
 }
 
-async function loadExpStats(){
-  const{data}=await sb.from(tblBerichte()).select('mitarbeiter_name,mitarbeiter_nr,netto_gesamt_h,netto_arbeit_h,datum,rolle').order('datum',{ascending:false}).limit(500);
-  if(!data){document.getElementById('exp-stats').innerHTML='<div style="color:var(--m);font-size:10px;padding:8px">Keine Daten</div>';return;}
-  const totalH=data.reduce((s,b)=>s+(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0)),0);
-  const maMap={};
-  data.forEach(b=>{const key=b.mitarbeiter_name+(b.mitarbeiter_nr?' #'+b.mitarbeiter_nr:'');if(!maMap[key])maMap[key]=0;maMap[key]+=(parseFloat(b.netto_gesamt_h||b.netto_arbeit_h||0));});
-  document.getElementById('exp-stats').innerHTML=
-    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px">'+
-    '<div class="sc"><div class="sv">'+data.length+'</div><div class="sl">Berichte</div></div>'+
-    '<div class="sc"><div class="sv">'+totalH.toFixed(0)+'h</div><div class="sl">Stunden</div></div></div>'+
-    Object.entries(maMap).sort((a,b)=>b[1]-a[1]).map(([name,h])=>
-      '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--b)">'+
-      '<span style="font-size:12px;color:var(--c)">'+name+'</span>'+
-      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--gl)">'+h.toFixed(1)+'h</span></div>'
-    ).join('');
+// ══════ BUCHHALTUNGS-EXPORT: Zeilen je Mitarbeiter (nicht je Bericht) ══════
+let _expZeilen=null;   // geladene Detailzeilen fuer den aktuellen Zeitraum
+let _expKey='';        // Zeitraum/Freigabe/Testmodus, zu dem _expZeilen gehoert
+let _expBusy=false;
+let _expLetzterExport=0;
+function expNorm(s){return String(s==null?'':s).toLowerCase().replace(/\s+/g,' ').trim();}
+function expZahl(n){n=Math.round((parseFloat(n)||0)*100)/100;return n.toFixed(2).replace('.',',');}
+function expCsvFeld(v){v=String(v==null?'':v).replace(/\r?\n/g,' ');if(/[;"]/.test(v))v='"'+v.replace(/"/g,'""')+'"';return v;}
+function expMonatsGrenzen(monat){
+  const m=String(monat||'').match(/^(\d{4})-(\d{2})$/);
+  if(!m)return null;
+  const j=parseInt(m[1],10),mo=parseInt(m[2],10);
+  if(mo<1||mo>12)return null;
+  const letzter=new Date(j,mo,0).getDate();
+  return {von:m[1]+'-'+m[2]+'-01',bis:m[1]+'-'+m[2]+'-'+('0'+letzter).slice(-2)};
 }
-
-async function expBuchhaltungCSV(){
+// Macht aus Berichten Abrechnungszeilen: je Mitarbeiter, Tag und Projekt eine Zeile.
+// VA-Berichte: jede Zeile der Zeiterfassung (zeit_rows) = ein Mitarbeiter, Fahrzeit steht in der Zeile.
+// Eigene Berichte (AR/WS, VA ohne Zeiten): eine Zeile aus dem Bericht, Fahrzeit aus fahrzeit_min + fahrt_status.
+function expLohnZeilen(berichte,maListe,projekte){
+  const nrNachName={};
+  (maListe||[]).forEach(function(m){const k=expNorm(m.name);if(k&&m.mitarbeiter_nr!=null&&m.mitarbeiter_nr!=='')nrNachName[k]=String(m.mitarbeiter_nr);});
+  function projName(id,nr){
+    const l=projekte||[];
+    for(let i=0;i<l.length;i++){if((id&&l[i].id===id)||(nr&&l[i].nr===nr))return l[i].name||'';}
+    return '';
+  }
+  const SATZ={fahrer:1,beifahrer:0.5,privat:0};
+  const zeilen=[];const inVA={};
+  (berichte||[]).forEach(function(b){
+    let zr=b.zeit_rows;
+    if(typeof zr==='string'){try{zr=JSON.parse(zr);}catch(e){console.error('Export: zeit_rows nicht lesbar, Bericht '+b.id,e);zr=[];}}
+    zr=Array.isArray(zr)?zr.filter(function(t){return t&&t.name;}):[];
+    const monat=String(b.datum||'').substring(0,7);
+    if(zr.length){
+      zr.forEach(function(t){
+        const k=expNorm(t.name);
+        let nr=(t.personalNr!=null&&t.personalNr!=='')?String(t.personalNr):(nrNachName[k]||'');
+        if(!nr&&k===expNorm(b.mitarbeiter_name)&&b.mitarbeiter_nr)nr=String(b.mitarbeiter_nr);
+        const art=t.fahrt||'fahrer';
+        const fzMin=nkNum(t.fahrzeitMin);
+        const arbeit=nkNum(t.nettoArbeit);
+        let fahrtH=(t.fahrtAnteil!=null&&t.fahrtAnteil!=='')?nkNum(t.fahrtAnteil):(fzMin/60)*(SATZ[art]!=null?SATZ[art]:1);
+        let gesamt=(t.gesamt!=null&&t.gesamt!=='')?nkNum(t.gesamt):(arbeit+fahrtH);
+        const pid=t.projektId||b.projekt_id||'';
+        const pnr=t.projektNr||b.projekt_nr||'';
+        inVA[String(b.datum)+'|'+k]=true;
+        zeilen.push({monat:monat,datum:b.datum,name:String(t.name).trim(),maNr:nr,projektId:pid,projektNr:pnr,projektName:projName(pid,pnr),
+          von:t.von||'',bis:t.bis||'',pauseMin:nkNum(t.pause),arbeitH:arbeit,fahrtArt:art,fahrzeitMin:fzMin,fahrtH:fahrtH,gesamtH:gesamt,
+          rolle:b.rolle||'',erfasstVon:b.mitarbeiter_name||'',eigen:false,hinweis:nr?'':'MA-Nr fehlt (Name nicht in Stammdaten)',
+          wetter:b.wetter||'',tae:t.tae||''});
+      });
+    }else{
+      const art=b.fahrt_status||'fahrer';
+      const fzMin=nkNum(b.fahrzeit_min);
+      const arbeit=nkNum(b.netto_arbeit_h);
+      const fahrtH=(fzMin/60)*(SATZ[art]!=null?SATZ[art]:1);
+      const g=nkNum(b.netto_gesamt_h);
+      zeilen.push({monat:monat,datum:b.datum,name:String(b.mitarbeiter_name||'').trim(),maNr:b.mitarbeiter_nr?String(b.mitarbeiter_nr):(nrNachName[expNorm(b.mitarbeiter_name)]||''),
+        projektId:b.projekt_id||'',projektNr:b.projekt_nr||'',projektName:projName(b.projekt_id,b.projekt_nr),
+        von:b.von||'',bis:b.bis||'',pauseMin:nkNum(b.pause_min),arbeitH:arbeit,fahrtArt:art,fahrzeitMin:fzMin,fahrtH:fahrtH,gesamtH:g>0?g:(arbeit+fahrtH),
+        rolle:b.rolle||'',erfasstVon:b.mitarbeiter_name||'',eigen:true,hinweis:'',
+        wetter:b.wetter||'',tae:Array.isArray(b.taetigkeiten)?b.taetigkeiten.join('|'):''});
+    }
+  });
+  // Doppelzaehlung sichtbar machen: eigener Bericht UND am selben Tag in einem VA-Bericht erfasst
+  zeilen.forEach(function(z){
+    if(z.eigen&&inVA[String(z.datum)+'|'+expNorm(z.name)])z.hinweis='Auch in VA-Bericht erfasst - Doppelzaehlung pruefen';
+    else if(z.eigen&&!z.maNr)z.hinweis='MA-Nr fehlt';
+  });
+  zeilen.sort(function(a,b){
+    return String(a.datum).localeCompare(String(b.datum))||expNorm(a.name).localeCompare(expNorm(b.name))||String(a.projektNr).localeCompare(String(b.projektNr));
+  });
+  return zeilen;
+}
+function expFilterZeilen(zeilen,projKey,maKey){
+  return (zeilen||[]).filter(function(z){
+    if(projKey&&(z.projektId||('nr:'+z.projektNr))!==projKey)return false;
+    if(maKey&&expNorm(z.name)!==maKey)return false;
+    return true;
+  });
+}
+// Summen je Monat + Mitarbeiter + Projekt
+function expSummen(zeilen){
+  const map={};const liste=[];
+  (zeilen||[]).forEach(function(z){
+    const k=z.monat+'|'+expNorm(z.name)+'|'+(z.projektId||('nr:'+z.projektNr));
+    let g=map[k];
+    if(!g){g=map[k]={monat:z.monat,name:z.name,maNr:z.maNr,projektNr:z.projektNr,projektName:z.projektName,tage:{},arbeitH:0,fahrtH:0,gesamtH:0};liste.push(g);}
+    if(!g.maNr&&z.maNr)g.maNr=z.maNr;
+    g.tage[z.datum]=true;g.arbeitH+=z.arbeitH;g.fahrtH+=z.fahrtH;g.gesamtH+=z.gesamtH;
+  });
+  liste.forEach(function(g){g.anzTage=Object.keys(g.tage).length;});
+  liste.sort(function(a,b){return a.monat.localeCompare(b.monat)||expNorm(a.name).localeCompare(expNorm(b.name))||String(a.projektNr).localeCompare(String(b.projektNr));});
+  return liste;
+}
+async function expLadeBerichte(von,bis,nurFrei){
+  const alle=[];
+  for(let start=0;;start+=1000){
+    let q=sb.from(tblBerichte()).select('id,datum,rolle,mitarbeiter_name,mitarbeiter_nr,projekt_id,projekt_nr,von,bis,pause_min,netto_arbeit_h,netto_gesamt_h,fahrzeit_min,fahrt_status,zeit_rows,wetter,taetigkeiten')
+      .order('datum',{ascending:true}).order('id',{ascending:true});
+    if(von)q=q.gte('datum',von);
+    if(bis)q=q.lte('datum',bis);
+    if(nurFrei)q=q.eq('bh_freigegeben',true);
+    const r=await q.range(start,start+999);
+    if(r.error)throw new Error(r.error.message||'Unbekannter Datenbankfehler');
+    const d=r.data||[];
+    for(let i=0;i<d.length;i++)alle.push(d[i]);
+    if(d.length<1000)break;
+  }
+  return alle;
+}
+// Liefert die Detailzeilen zum eingestellten Zeitraum (laedt nur neu, wenn sich Zeitraum/Freigabe geaendert hat)
+async function expHoleZeilen(){
   const von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
-  const nurFrei=document.getElementById('exp-nur-frei')?.checked;
-  let q=sb.from(tblBerichte()).select('*').order('datum').order('mitarbeiter_name');
-  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
-  if(nurFrei!==false)q=q.eq('bh_freigegeben',true);
-  const{data}=await q;
-  if(!data?.length){toast(nurFrei!==false?'Keine FREIGEGEBENEN Berichte im Zeitraum':'Keine Daten','err');return;}
-  const hdr='Datum;Mitarbeiter;MA-Nr;Projekt-Nr;Projekt-Name;Von;Bis;Pause-min;Netto-h;Fahrzeit-min;Gesamt-h;Wetter;Taetigkeiten;Rolle';
-  const rows=data.map(b=>{const proj=PROJEKTE.find(p=>p.id===b.projekt_id);return[b.datum,b.mitarbeiter_name,b.mitarbeiter_nr||'--',b.projekt_nr,proj?.name||'',b.von||'',b.bis||'',b.pause_min||30,b.netto_arbeit_h||'0',b.fahrzeit_min||0,b.netto_gesamt_h||b.netto_arbeit_h||'0',b.wetter||'',(b.taetigkeiten||[]).join('|'),b.rolle].join(';');});
-  dlFile('KLEI_Buchhaltung_'+(von||'')+'_'+(bis||new Date().toISOString().split('T')[0])+'.csv',[hdr,...rows].join('\n'),'text/csv;charset=utf-8');
-  toast('CSV exportiert - '+data.length+' Eintraege'+(nurFrei!==false?' (nur freigegebene)':''),'ok');
+  const nfEl=document.getElementById('exp-nur-frei');
+  const nurFrei=nfEl?nfEl.checked:true;
+  if(von&&bis&&von>bis)throw new Error('"Von" liegt nach "Bis"');
+  const key=von+'|'+bis+'|'+(nurFrei?1:0)+'|'+(TESTMODUS?1:0);
+  if(_expZeilen&&_expKey===key)return _expZeilen;
+  const ber=await expLadeBerichte(von,bis,nurFrei);
+  const mr=await sb.from('mitarbeiter').select('name,mitarbeiter_nr');
+  if(mr.error){console.error('Export: Mitarbeiter-Stammdaten nicht ladbar:',mr.error);toast('Mitarbeiternummern konnten nicht geladen werden: '+(mr.error.message||''),'err');}
+  _expZeilen=expLohnZeilen(ber,mr.data||[],PROJEKTE);
+  _expKey=key;
+  return _expZeilen;
+}
+function expMonatSetzen(){
+  const g=expMonatsGrenzen(document.getElementById('exp-monat').value);
+  if(!g){toast('Bitte einen Monat waehlen (Format JJJJ-MM)','err');return;}
+  document.getElementById('exp-von').value=g.von;
+  document.getElementById('exp-bis').value=g.bis;
+  expAufstellungLaden();
+}
+function expZeitraumGeaendert(){
+  // Von/Bis von Hand geaendert: Monatsfeld nur stehen lassen, wenn es noch genau passt
+  const mEl=document.getElementById('exp-monat');
+  const g=mEl?expMonatsGrenzen(mEl.value):null;
+  if(mEl&&g&&(g.von!==document.getElementById('exp-von').value||g.bis!==document.getElementById('exp-bis').value))mEl.value='';
+  expAufstellungLaden();
+}
+async function expAufstellungLaden(){
+  const ziel=document.getElementById('exp-stats');
+  if(!ziel)return;
+  if(_expBusy)return;
+  _expBusy=true;
+  ziel.innerHTML='<div class="empty"><div class="spin"></div></div>';
+  try{
+    await expHoleZeilen();
+    expFilterOptionen();
+    expAufstellungRender();
+  }catch(e){
+    console.error('Export-Aufstellung fehlgeschlagen:',e);
+    const z2=document.getElementById('exp-stats')||ziel; // Panel kann inzwischen neu aufgebaut sein
+    z2.innerHTML='<div style="color:var(--r);font-size:12px;padding:8px">Aufstellung konnte nicht geladen werden: '+_dfEsc(e.message||String(e))+'</div>';
+    toast('Aufstellung konnte nicht geladen werden: '+(e.message||String(e)),'err');
+  }finally{_expBusy=false;}
+}
+// Auswahllisten aus den tatsaechlich vorhandenen Zeilen aufbauen (so fehlen auch inaktive Projekte nicht)
+function expFilterOptionen(){
+  const pSel=document.getElementById('exp-f-proj'),mSel=document.getElementById('exp-f-ma');
+  if(!pSel||!mSel)return;
+  const pAlt=pSel.value,mAlt=mSel.value;
+  const pMap={},mMap={};
+  (_expZeilen||[]).forEach(function(z){
+    const pk=z.projektId||('nr:'+z.projektNr);
+    if(!pMap[pk])pMap[pk]=(z.projektNr?z.projektNr+' - ':'')+(z.projektName||(z.projektNr?'':'ohne Projekt'));
+    const mk=expNorm(z.name);
+    if(mk&&!mMap[mk])mMap[mk]=z.name+(z.maNr?' #'+z.maNr:'');
+  });
+  function opts(map,leer){
+    const keys=Object.keys(map).sort(function(a,b){return map[a].localeCompare(map[b]);});
+    return '<option value="">'+leer+'</option>'+keys.map(function(k){return '<option value="'+_dfEsc(k)+'">'+_dfEsc(map[k])+'</option>';}).join('');
+  }
+  pSel.innerHTML=opts(pMap,'Alle Projekte');
+  mSel.innerHTML=opts(mMap,'Alle Mitarbeiter');
+  if(pAlt&&pMap[pAlt])pSel.value=pAlt;
+  if(mAlt&&mMap[mAlt])mSel.value=mAlt;
+}
+function expAktFilter(){
+  const pSel=document.getElementById('exp-f-proj'),mSel=document.getElementById('exp-f-ma');
+  return expFilterZeilen(_expZeilen||[],pSel?pSel.value:'',mSel?mSel.value:'');
+}
+function expAufstellungRender(){
+  const ziel=document.getElementById('exp-stats');
+  if(!ziel)return;
+  if(!_expZeilen){ziel.innerHTML='<div style="color:var(--m);font-size:12px;padding:8px">Noch nichts geladen</div>';return;}
+  const z=expAktFilter();
+  if(!z.length){ziel.innerHTML='<div style="color:var(--m);font-size:12px;padding:8px">Keine Zeiten im Zeitraum mit diesen Filtern'+(document.getElementById('exp-nur-frei').checked?' (nur freigegebene Berichte)':'')+'</div>';return;}
+  const sum=expSummen(z);
+  let a=0,f=0,g=0;const ma={};let doppelt=0,ohneNr=0;
+  z.forEach(function(x){a+=x.arbeitH;f+=x.fahrtH;g+=x.gesamtH;ma[expNorm(x.name)]=true;if(x.hinweis.indexOf('Doppel')>=0)doppelt++;else if(x.hinweis)ohneNr++;});
+  const mono='font-family:\'IBM Plex Mono\',monospace;';
+  let html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">'+
+    '<div class="sc"><div class="sv">'+Object.keys(ma).length+'</div><div class="sl">Mitarbeiter</div></div>'+
+    '<div class="sc"><div class="sv">'+expZahl(a)+'</div><div class="sl">Arbeit h</div></div>'+
+    '<div class="sc"><div class="sv">'+expZahl(f)+'</div><div class="sl">Fahrt h</div></div>'+
+    '<div class="sc"><div class="sv">'+expZahl(g)+'</div><div class="sl">Gesamt h</div></div></div>';
+  if(doppelt||ohneNr){
+    html+='<div style="font-size:11px;color:var(--r);line-height:1.5;margin-bottom:10px">'+
+      (doppelt?doppelt+' Zeile(n): Mitarbeiter hat einen eigenen Bericht UND steht am selben Tag in einem Vorarbeiter-Bericht - bitte auf Doppelzaehlung pruefen. ':'')+
+      (ohneNr?ohneNr+' Zeile(n) ohne Mitarbeiternummer (Name nicht in den Stammdaten gefunden). ':'')+
+      'Die betroffenen Zeilen sind in der CSV in der Spalte "Hinweis" markiert.</div>';
+  }
+  const th='text-align:left;font-size:10px;color:var(--m);padding:6px 8px;border-bottom:1px solid var(--b);white-space:nowrap;';
+  const td='font-size:12px;color:var(--c);padding:6px 8px;border-bottom:1px solid var(--b);';
+  const tdn=td+mono+'text-align:right;white-space:nowrap;';
+  html+='<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse">'+
+    '<tr><th style="'+th+'">Monat</th><th style="'+th+'">Mitarbeiter</th><th style="'+th+'">MA-Nr</th><th style="'+th+'">Projekt</th>'+
+    '<th style="'+th+'text-align:right">Tage</th><th style="'+th+'text-align:right">Arbeit h</th><th style="'+th+'text-align:right">Fahrt h</th><th style="'+th+'text-align:right">Gesamt h</th></tr>';
+  sum.forEach(function(s){
+    html+='<tr><td style="'+td+mono+'white-space:nowrap">'+_dfEsc(s.monat)+'</td><td style="'+td+'">'+_dfEsc(s.name)+'</td><td style="'+td+mono+'">'+_dfEsc(s.maNr||'--')+'</td>'+
+      '<td style="'+td+'">'+_dfEsc((s.projektNr?s.projektNr+' ':'')+(s.projektName||''))+'</td>'+
+      '<td style="'+tdn+'">'+s.anzTage+'</td><td style="'+tdn+'">'+expZahl(s.arbeitH)+'</td><td style="'+tdn+'">'+expZahl(s.fahrtH)+'</td><td style="'+tdn+'font-weight:600">'+expZahl(s.gesamtH)+'</td></tr>';
+  });
+  html+='<tr><td colspan="5" style="'+td+'font-weight:700">Summe</td><td style="'+tdn+'font-weight:700">'+expZahl(a)+'</td><td style="'+tdn+'font-weight:700">'+expZahl(f)+'</td><td style="'+tdn+'font-weight:700">'+expZahl(g)+'</td></tr>';
+  html+='</table></div>';
+  ziel.innerHTML=html;
+}
+function expBuchhaltungCsvText(zeilen){
+  const hdr='Monat;Datum;Mitarbeiter;MA-Nr;Projekt-Nr;Projekt-Name;Von;Bis;Pause-min;Arbeit-h;Fahrt-Art;Fahrzeit-min;Fahrt-h;Gesamt-h;Rolle;Erfasst-von;Wetter;Taetigkeit;Hinweis';
+  const rows=zeilen.map(function(z){
+    return [z.monat,z.datum,z.name,z.maNr,z.projektNr,z.projektName,z.von,z.bis,Math.round(z.pauseMin),expZahl(z.arbeitH),z.fahrtArt,Math.round(z.fahrzeitMin),expZahl(z.fahrtH),expZahl(z.gesamtH),z.rolle,z.erfasstVon,z.wetter,z.tae,z.hinweis].map(expCsvFeld).join(';');
+  });
+  return [hdr].concat(rows).join('\r\n');
+}
+async function expBuchhaltungCSV(){
+  // ontouchstart + onclick feuern auf dem iPad beide - sonst entstuenden zwei Downloads
+  if(_expBusy||Date.now()-_expLetzterExport<1500)return;
+  _expLetzterExport=Date.now();
+  _expBusy=true;
+  try{
+    await expHoleZeilen();
+    expFilterOptionen();
+    const z=expAktFilter();
+    const nurFrei=document.getElementById('exp-nur-frei').checked;
+    if(!z.length){toast(nurFrei?'Keine FREIGEGEBENEN Zeiten im Zeitraum mit diesen Filtern':'Keine Daten im Zeitraum mit diesen Filtern','err');return;}
+    const von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
+    // BOM vorneweg, damit Excel Umlaute in Namen richtig liest
+    dlFile('KLEI_Buchhaltung_'+(von||'alle')+'_'+(bis||new Date().toISOString().split('T')[0])+'.csv','\ufeff'+expBuchhaltungCsvText(z),'text/csv;charset=utf-8');
+    toast('CSV exportiert - '+z.length+' Zeilen (je Mitarbeiter und Tag)'+(nurFrei?', nur freigegebene':''),'ok');
+  }catch(e){
+    console.error('CSV Buchhaltung fehlgeschlagen:',e);
+    toast('CSV-Export fehlgeschlagen: '+(e.message||String(e)),'err');
+  }finally{
+    _expBusy=false;
+    expAufstellungRender();
+  }
 }
 
 // DATAflor NK-Import (schema-valide gegen DFNKImport.xsd)
