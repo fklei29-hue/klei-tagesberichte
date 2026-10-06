@@ -546,19 +546,19 @@ body.wsd .content .et{font-family:'IBM Plex Sans',sans-serif;color:var(--zMut2);
   </div>
   <div class="ab-seg" id="admin-bereiche"></div>
   <div class="admin-tabs">
-    <div class="admin-tab act" id="atab-frei" ontouchstart="showAdminTab('frei')" onclick="showAdminTab('frei')">Freigabe</div>
-    <div class="admin-tab" id="atab-ma" ontouchstart="showAdminTab('ma')" onclick="showAdminTab('ma')">Mitarbeiter</div>
-    <div class="admin-tab" id="atab-proj" ontouchstart="showAdminTab('proj')" onclick="showAdminTab('proj')">Projekte</div>
-    <div class="admin-tab" id="atab-fz" ontouchstart="showAdminTab('fz')" onclick="showAdminTab('fz')">Fahrzeuge</div>
-    <div class="admin-tab" id="atab-email" ontouchstart="showAdminTab('email')" onclick="showAdminTab('email')">E-Mail</div>
-    <div class="admin-tab" id="atab-ber" ontouchstart="showAdminTab('ber')" onclick="showAdminTab('ber')">Berichte</div>
-    <div class="admin-tab" id="atab-abg" ontouchstart="showAdminTab('abg')" onclick="showAdminTab('abg')">Abgabe</div>
-    <div class="admin-tab" id="atab-ausw" ontouchstart="showAdminTab('ausw')" onclick="showAdminTab('ausw')">Auswertung</div>
-    <div class="admin-tab" id="atab-pfl" ontouchstart="showAdminTab('pfl')" onclick="showAdminTab('pfl')">Pflege</div>
-    <div class="admin-tab" id="atab-cock" ontouchstart="showAdminTab('cock')" onclick="showAdminTab('cock')">Cockpit</div>
-    <div class="admin-tab" id="atab-kalk" ontouchstart="showAdminTab('kalk')" onclick="showAdminTab('kalk')">Kalkulation</div>
-    <div class="admin-tab" id="atab-eint" ontouchstart="showAdminTab('eint')" onclick="showAdminTab('eint')">Einteilung</div>
-    <div class="admin-tab" id="atab-exp" ontouchstart="showAdminTab('exp')" onclick="showAdminTab('exp')">Export</div>
+    <div class="admin-tab act" id="atab-frei" ontouchstart="tsTap(event,this,function(){showAdminTab('frei')})" onclick="tsKlick(function(){showAdminTab('frei')})">Freigabe</div>
+    <div class="admin-tab" id="atab-ma" ontouchstart="tsTap(event,this,function(){showAdminTab('ma')})" onclick="tsKlick(function(){showAdminTab('ma')})">Mitarbeiter</div>
+    <div class="admin-tab" id="atab-proj" ontouchstart="tsTap(event,this,function(){showAdminTab('proj')})" onclick="tsKlick(function(){showAdminTab('proj')})">Projekte</div>
+    <div class="admin-tab" id="atab-fz" ontouchstart="tsTap(event,this,function(){showAdminTab('fz')})" onclick="tsKlick(function(){showAdminTab('fz')})">Fahrzeuge</div>
+    <div class="admin-tab" id="atab-email" ontouchstart="tsTap(event,this,function(){showAdminTab('email')})" onclick="tsKlick(function(){showAdminTab('email')})">E-Mail</div>
+    <div class="admin-tab" id="atab-ber" ontouchstart="tsTap(event,this,function(){showAdminTab('ber')})" onclick="tsKlick(function(){showAdminTab('ber')})">Berichte</div>
+    <div class="admin-tab" id="atab-abg" ontouchstart="tsTap(event,this,function(){showAdminTab('abg')})" onclick="tsKlick(function(){showAdminTab('abg')})">Abgabe</div>
+    <div class="admin-tab" id="atab-ausw" ontouchstart="tsTap(event,this,function(){showAdminTab('ausw')})" onclick="tsKlick(function(){showAdminTab('ausw')})">Auswertung</div>
+    <div class="admin-tab" id="atab-pfl" ontouchstart="tsTap(event,this,function(){showAdminTab('pfl')})" onclick="tsKlick(function(){showAdminTab('pfl')})">Pflege</div>
+    <div class="admin-tab" id="atab-cock" ontouchstart="tsTap(event,this,function(){showAdminTab('cock')})" onclick="tsKlick(function(){showAdminTab('cock')})">Cockpit</div>
+    <div class="admin-tab" id="atab-kalk" ontouchstart="tsTap(event,this,function(){showAdminTab('kalk')})" onclick="tsKlick(function(){showAdminTab('kalk')})">Kalkulation</div>
+    <div class="admin-tab" id="atab-eint" ontouchstart="tsTap(event,this,function(){showAdminTab('eint')})" onclick="tsKlick(function(){showAdminTab('eint')})">Einteilung</div>
+    <div class="admin-tab" id="atab-exp" ontouchstart="tsTap(event,this,function(){showAdminTab('exp')})" onclick="tsKlick(function(){showAdminTab('exp')})">Export</div>
   </div>
   <div class="admin-content">
     <div class="admin-panel act" id="apanel-frei"></div>
@@ -1180,7 +1180,7 @@ function adminBereichAnwenden(){
     else{
       seg.style.display='';
       seg.innerHTML=ADMIN_BEREICHE.map(function(bd){
-        return '<button class="ab-seg-btn'+(bd.key===adminBereichAkt?' act':'')+'" ontouchstart="adminBereichSetze(\''+bd.key+'\')" onclick="adminBereichSetze(\''+bd.key+'\')">'+bd.name+'</button>';
+        return '<button class="ab-seg-btn'+(bd.key===adminBereichAkt?' act':'')+'" '+tsAttr('adminBereichSetze(\''+bd.key+'\')')+'>'+bd.name+'</button>';
       }).join('');
     }
   }
@@ -1297,7 +1297,9 @@ function toggleFreiGroup(idx){const el=document.getElementById('freigroup-'+idx)
 function freiBerichtCard(b){
   const bl=b.abgenommen;const bh=b.bh_freigegeben;
   const pLabel=getProjektLabel(b.projekt_id||b.projekt_nr||'');
-  return '<div style="background:var(--s3);border:1px solid '+(bh?'var(--gd)':'var(--b)')+';border-radius:var(--rad);padding:10px;margin-bottom:6px">'+
+  const fw=fahrerWiderspruch(b.zeit_rows,b.mach_rows);
+  return '<div style="background:var(--s3);border:1px solid '+(fw?'var(--r)':(bh?'var(--gd)':'var(--b)'))+';border-radius:var(--rad);padding:10px;margin-bottom:6px">'+
+    (fw?'<div style="font-size:11.5px;font-weight:600;color:var(--r);line-height:1.45;margin-bottom:6px">Pruefen: '+_dfEsc(fw.text)+'</div>':'')+
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap">'+
     '<div style="flex:1;min-width:140px">'+
     '<div style="font-size:12px;font-weight:600;color:var(--c)">'+pLabel+'</div>'+
@@ -2510,7 +2512,7 @@ async function renderAdminExp(){
     '<button class="btn btn-sky" ontouchstart="expBuchhaltungCSV()" onclick="expBuchhaltungCSV()">CSV Buchhaltung</button>'+
     '<button class="btn btn-e" ontouchstart="expDFCSVAdmin()" onclick="expDFCSVAdmin()">Dataflor CSV</button>'+
     '<button class="btn btn-sky" ontouchstart="expNKImport()" onclick="expNKImport()">DATAflor NK-Import (XML)</button></div>'+
-    '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">CSV Buchhaltung: eine Zeile je Mitarbeiter, Tag und Projekt (aus den Zeiten der Vorarbeiter-Berichte plus eigene Berichte), mit Fahrzeit. Die Filter Projekt und Mitarbeiter gelten fuer die Aufstellung unten und fuer die CSV Buchhaltung, nicht fuer die beiden DATAflor-Exporte.</div>'+
+    '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">CSV Buchhaltung: eine Zeile je Mitarbeiter, Tag und Projekt (aus den Zeiten der Vorarbeiter-Berichte plus eigene Berichte), mit Fahrzeit. Die Filter Projekt und Mitarbeiter gelten fuer die Aufstellung unten, die CSV Buchhaltung und die Dataflor CSV, nicht fuer den NK-Import.</div>'+
     '<div class="row" style="margin-top:8px"><div class="fg w50"><label>Standard-Lohnart (DATAflor)</label><input id="exp-lohnart" inputmode="numeric" value="1" placeholder="z.B. 1"></div>'+
     '<div class="fg w50" style="display:flex;align-items:flex-end"><label style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--c);margin:0;cursor:pointer"><input type="checkbox" id="exp-nk-zeiten" checked style="width:16px;height:16px"> Von/Bis-Zeiten ausgeben</label></div></div>'+
     '<div style="font-size:10px;color:var(--m);line-height:1.5;margin-top:6px">NK-Import erzeugt eine schema-valide XML (DFNKImport) fuer den Digitalen Posteingang. Nur Berichte mit LV-Nummer werden verbucht; Zeilen mit Position gehen auf die Position, sonst als Taglohn. Lohnart und Personalnummern muessen im DATAflor BUSINESS existieren.</div></div>'+
@@ -2546,13 +2548,19 @@ function expLohnZeilen(berichte,maListe,projekte){
     return '';
   }
   const SATZ={fahrer:1,beifahrer:0.5,privat:0};
-  const zeilen=[];const inVA={};
+  const zeilen=[];const inVA={};const vaTag={};
   (berichte||[]).forEach(function(b){
     let zr=b.zeit_rows;
     if(typeof zr==='string'){try{zr=JSON.parse(zr);}catch(e){console.error('Export: zeit_rows nicht lesbar, Bericht '+b.id,e);zr=[];}}
     zr=Array.isArray(zr)?zr.filter(function(t){return t&&t.name;}):[];
     const monat=String(b.datum||'').substring(0,7);
     if(zr.length){
+      const vk=String(b.datum)+'|'+expNorm(b.mitarbeiter_name);
+      if(!vaTag[vk])vaTag[vk]={zeit:[],mach:[]};
+      let mr0=b.mach_rows;
+      if(typeof mr0==='string'){try{mr0=JSON.parse(mr0);}catch(e){console.error('Export: mach_rows nicht lesbar, Bericht '+b.id,e);mr0=[];}}
+      vaTag[vk].zeit=vaTag[vk].zeit.concat(zr);
+      vaTag[vk].mach=vaTag[vk].mach.concat(Array.isArray(mr0)?mr0:[]);
       zr.forEach(function(t){
         const k=expNorm(t.name);
         let nr=(t.personalNr!=null&&t.personalNr!=='')?String(t.personalNr):(nrNachName[k]||'');
@@ -2567,7 +2575,7 @@ function expLohnZeilen(berichte,maListe,projekte){
         inVA[String(b.datum)+'|'+k]=true;
         zeilen.push({monat:monat,datum:b.datum,name:String(t.name).trim(),maNr:nr,projektId:pid,projektNr:pnr,projektName:projName(pid,pnr),
           von:t.von||'',bis:t.bis||'',pauseMin:nkNum(t.pause),arbeitH:arbeit,fahrtArt:art,fahrzeitMin:fzMin,fahrtH:fahrtH,gesamtH:gesamt,
-          rolle:b.rolle||'',erfasstVon:b.mitarbeiter_name||'',eigen:false,hinweis:nr?'':'MA-Nr fehlt (Name nicht in Stammdaten)',
+          rolle:b.rolle||'',erfasstVon:b.mitarbeiter_name||'',eigen:false,vaKey:vk,hinweis:nr?'':'MA-Nr fehlt (Name nicht in Stammdaten)',
           wetter:b.wetter||'',tae:t.tae||''});
       });
     }else{
@@ -2588,10 +2596,43 @@ function expLohnZeilen(berichte,maListe,projekte){
     if(z.eigen&&inVA[String(z.datum)+'|'+expNorm(z.name)])z.hinweis='Auch in VA-Bericht erfasst - Doppelzaehlung pruefen';
     else if(z.eigen&&!z.maNr)z.hinweis='MA-Nr fehlt';
   });
+  // Fahrer-Widerspruch je Vorarbeiter und Tag: alle betroffenen Fahrer-Zeilen markieren
+  const fw={};
+  Object.keys(vaTag).forEach(function(vk){const w=fahrerWiderspruch(vaTag[vk].zeit,vaTag[vk].mach);if(w)fw[vk]=w;});
+  zeilen.forEach(function(z){
+    if(z.eigen||!z.vaKey||!fw[z.vaKey])return;
+    if(z.fahrtArt!=='fahrer'||z.fahrzeitMin<=0)return;
+    const txt='Fahrer-Widerspruch: '+fw[z.vaKey].text;
+    z.hinweis=z.hinweis?(z.hinweis+' | '+txt):txt;
+    z.fahrerFall=fw[z.vaKey].text;
+  });
   zeilen.sort(function(a,b){
     return String(a.datum).localeCompare(String(b.datum))||expNorm(a.name).localeCompare(expNorm(b.name))||String(a.projektNr).localeCompare(String(b.projektNr));
   });
   return zeilen;
+}
+// ══════ PLAUSIBILITAET: mehr Fahrer als Fahrzeuge ══════
+// Fahrer bekommen die volle Fahrzeit, Beifahrer die halbe. Stehen in einem Bericht mehr Personen als "Fahrer"
+// (mit Fahrzeit > 0) als Fahrzeuge unter Maschinen/Geraete, ist das ein Widerspruch, der geprueft werden muss.
+// Als Fahrzeug zaehlen: PKW (1055), LKW (1018, 1019), Transporter (2000).
+const FAHRZEUG_GERAETE=['1055','1018','1019','2000'];
+function fahrerWiderspruch(zeitRows,machRows){
+  let zr=zeitRows,mr=machRows;
+  if(typeof zr==='string'){try{zr=JSON.parse(zr);}catch(e){console.error('Fahrer-Pruefung: zeit_rows nicht lesbar',e);zr=[];}}
+  if(typeof mr==='string'){try{mr=JSON.parse(mr);}catch(e){console.error('Fahrer-Pruefung: mach_rows nicht lesbar',e);mr=[];}}
+  zr=Array.isArray(zr)?zr:[];mr=Array.isArray(mr)?mr:[];
+  const gesehen={};const fahrer=[];
+  zr.forEach(function(t){
+    if(!t||!t.name)return;
+    if((t.fahrt||'fahrer')!=='fahrer')return;
+    if(nkNum(t.fahrzeitMin)<=0)return;
+    const k=expNorm(t.name);
+    if(!gesehen[k]){gesehen[k]=true;fahrer.push(String(t.name).trim());}
+  });
+  let fzg=0;
+  mr.forEach(function(m){if(m&&FAHRZEUG_GERAETE.indexOf(String(m.geraetNr||''))>=0)fzg++;});
+  if(fahrer.length>=2&&fahrer.length>fzg)return {fahrer:fahrer,fahrzeuge:fzg,text:fahrer.length+' Fahrer ('+fahrer.join(', ')+'), aber '+(fzg===0?'kein Fahrzeug':(fzg+' Fahrzeug'+(fzg>1?'e':'')))+' im Bericht'};
+  return null;
 }
 function expFilterZeilen(zeilen,projKey,maKey){
   return (zeilen||[]).filter(function(z){
@@ -2617,7 +2658,7 @@ function expSummen(zeilen){
 async function expLadeBerichte(von,bis,nurFrei){
   const alle=[];
   for(let start=0;;start+=1000){
-    let q=sb.from(tblBerichte()).select('id,datum,rolle,mitarbeiter_name,mitarbeiter_nr,projekt_id,projekt_nr,von,bis,pause_min,netto_arbeit_h,netto_gesamt_h,fahrzeit_min,fahrt_status,zeit_rows,wetter,taetigkeiten')
+    let q=sb.from(tblBerichte()).select('id,datum,rolle,mitarbeiter_name,mitarbeiter_nr,projekt_id,projekt_nr,von,bis,pause_min,netto_arbeit_h,netto_gesamt_h,fahrzeit_min,fahrt_status,zeit_rows,mach_rows,wetter,taetigkeiten')
       .order('datum',{ascending:true}).order('id',{ascending:true});
     if(von)q=q.gte('datum',von);
     if(bis)q=q.lte('datum',bis);
@@ -2708,14 +2749,25 @@ function expAufstellungRender(){
   const z=expAktFilter();
   if(!z.length){ziel.innerHTML='<div style="color:var(--m);font-size:12px;padding:8px">Keine Zeiten im Zeitraum mit diesen Filtern'+(document.getElementById('exp-nur-frei').checked?' (nur freigegebene Berichte)':'')+'</div>';return;}
   const sum=expSummen(z);
-  let a=0,f=0,g=0;const ma={};let doppelt=0,ohneNr=0;
-  z.forEach(function(x){a+=x.arbeitH;f+=x.fahrtH;g+=x.gesamtH;ma[expNorm(x.name)]=true;if(x.hinweis.indexOf('Doppel')>=0)doppelt++;else if(x.hinweis)ohneNr++;});
+  let a=0,f=0,g=0;const ma={};let doppelt=0,ohneNr=0;const fFaelle={};const fListe=[];
+  z.forEach(function(x){
+    a+=x.arbeitH;f+=x.fahrtH;g+=x.gesamtH;ma[expNorm(x.name)]=true;
+    if(x.hinweis.indexOf('Doppel')>=0)doppelt++;
+    if(x.hinweis.indexOf('MA-Nr fehlt')>=0)ohneNr++;
+    if(x.fahrerFall&&!fFaelle[x.vaKey]){fFaelle[x.vaKey]=true;fListe.push(fmtD(x.datum)+' - Bericht von '+x.erfasstVon+': '+x.fahrerFall);}
+  });
   const mono='font-family:\'IBM Plex Mono\',monospace;';
   let html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">'+
     '<div class="sc"><div class="sv">'+Object.keys(ma).length+'</div><div class="sl">Mitarbeiter</div></div>'+
     '<div class="sc"><div class="sv">'+expZahl(a)+'</div><div class="sl">Arbeit h</div></div>'+
     '<div class="sc"><div class="sv">'+expZahl(f)+'</div><div class="sl">Fahrt h</div></div>'+
     '<div class="sc"><div class="sv">'+expZahl(g)+'</div><div class="sl">Gesamt h</div></div></div>';
+  if(fListe.length){
+    html+='<div style="background:var(--rg);border:1px solid var(--r);border-radius:var(--rad);padding:10px;margin-bottom:10px">'+
+      '<div style="font-size:12px;font-weight:700;color:var(--r);margin-bottom:4px">'+fListe.length+' Bericht(e) mit mehr Fahrern als Fahrzeugen - bitte pruefen</div>'+
+      fListe.map(function(t){return '<div style="font-size:11.5px;color:var(--c);line-height:1.5">'+_dfEsc(t)+'</div>';}).join('')+
+      '<div style="font-size:10.5px;color:var(--m);line-height:1.5;margin-top:4px">Fahrer bekommen die volle Fahrzeit, Beifahrer die halbe. Die Zeilen sind in der CSV in der Spalte "Hinweis" markiert.</div></div>';
+  }
   if(doppelt||ohneNr){
     html+='<div style="font-size:11px;color:var(--r);line-height:1.5;margin-bottom:10px">'+
       (doppelt?doppelt+' Zeile(n): Mitarbeiter hat einen eigenen Bericht UND steht am selben Tag in einem Vorarbeiter-Bericht - bitte auf Doppelzaehlung pruefen. ':'')+
@@ -2802,13 +2854,24 @@ async function expNKImport(){
   if(res.error){toast('Fehler beim Laden: '+res.error.message,'err');return;}
   var data=res.data||[];
   if(!data.length){toast(nurFrei?'Keine FREIGEGEBENEN Berichte im Zeitraum':'Keine Daten','err');return;}
+  if(data.length>=1000){toast('Zu viele Berichte im Zeitraum (1000 oder mehr) - bitte Zeitraum verkleinern, sonst fehlen Buchungen','err');return;}
+  var maRes=await sb.from('mitarbeiter').select('name,mitarbeiter_nr');
+  if(maRes.error){toast('Mitarbeiternummern konnten nicht geladen werden: '+maRes.error.message,'err');return;}
+  var nkNrNachName={};
+  (maRes.data||[]).forEach(function(m){var k=expNorm(m.name);if(k&&m.mitarbeiter_nr!=null&&m.mitarbeiter_nr!=='')nkNrNachName[k]=String(m.mitarbeiter_nr);});
   var lohn=[],uebersprungen=0;
   data.forEach(function(b){
     var zr=b.zeit_rows||[];
     var quelle=zr.length?zr:[null];
     quelle.forEach(function(t){
       var lvNr=(t&&t.projektNr)?t.projektNr:b.projekt_nr;
-      var persNr=(t&&t.personalNr)?t.personalNr:(b.mitarbeiter_nr||'');
+      // Zeile aus der Zeiterfassung: eigene Nummer des Mitarbeiters (Zeile -> Stammdaten). Die Nummer des
+      // Vorarbeiters gilt nur fuer seine eigene Zeile - sonst wuerden fremde Stunden auf ihn gebucht.
+      var persNr='';
+      if(t){
+        persNr=t.personalNr?String(t.personalNr):(nkNrNachName[expNorm(t.name)]||'');
+        if(!persNr&&expNorm(t.name)===expNorm(b.mitarbeiter_name))persNr=b.mitarbeiter_nr||'';
+      }else{persNr=b.mitarbeiter_nr||'';}
       if(!lvNr||!persNr){uebersprungen++;return;}
       var stunden=t?nkNum(t.nettoArbeit):nkNum(b.netto_arbeit_h);
       if(stunden<=0)return;
@@ -2826,18 +2889,31 @@ async function expNKImport(){
 }
 
 async function expDFCSVAdmin(){
-  const von=document.getElementById('exp-von').value,bis=document.getElementById('exp-bis').value;
-  const nurFrei=document.getElementById('exp-nur-frei')?.checked;
-  let q=sb.from(tblBerichte()).select('*').order('datum');
-  if(von)q=q.gte('datum',von);if(bis)q=q.lte('datum',bis);
-  if(nurFrei!==false)q=q.eq('bh_freigegeben',true); // Standard: nur von der Buchhaltung freigegebene
-  const{data}=await q;
-  if(!data?.length){toast(nurFrei!==false?'Keine FREIGEGEBENEN Berichte im Zeitraum':'Keine Daten','err');return;}
-  const hdr='Mandant;Datum;Projekt;Name;MA-Nr;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h';
-  const rows=[];
-  data.forEach(b=>{const zr=b.zeit_rows||[];if(zr.length){zr.forEach(t=>{if(t.name)rows.push(['001',b.datum,b.projekt_nr,t.name,b.mitarbeiter_nr||'',t.von||'',t.bis||'',(t.nettoArbeit||'0').replace(',','.'),t.fahrt||'fahrer',t.fahrzeitMin||0,(t.gesamt||'0').replace(',','.')].join(';'));});}else{rows.push(['001',b.datum,b.projekt_nr,b.mitarbeiter_name,b.mitarbeiter_nr||'',b.von||'',b.bis||'',b.netto_arbeit_h||'0','fahrer',b.fahrzeit_min||0,b.netto_gesamt_h||'0'].join(';'));}});
-  dlFile('KLEI_Dataflor_'+new Date().toISOString().split('T')[0]+'.csv',[hdr,...rows].join('\n'),'text/csv;charset=utf-8');
-  toast(rows.length+' Zeilen exportiert'+(nurFrei!==false?' (nur freigegebene)':''),'ok');
+  // Gleiche Zeilen wie die CSV Buchhaltung (je Mitarbeiter, Tag, Projekt) im bisherigen Dataflor-Spaltenformat.
+  // Vorher stand bei jedem Mitarbeiter die Nummer des Vorarbeiters und immer das Hauptprojekt.
+  if(_expBusy||Date.now()-_expLetzterExport<1500)return;
+  _expLetzterExport=Date.now();
+  _expBusy=true;
+  try{
+    await expHoleZeilen();
+    expFilterOptionen();
+    const z=expAktFilter();
+    const nurFrei=document.getElementById('exp-nur-frei').checked;
+    if(!z.length){toast(nurFrei?'Keine FREIGEGEBENEN Zeiten im Zeitraum mit diesen Filtern':'Keine Daten im Zeitraum mit diesen Filtern','err');return;}
+    const ohneNr=z.filter(function(x){return !x.maNr;}).length;
+    const hdr='Mandant;Datum;Projekt;Name;MA-Nr;Von;Bis;Arbeit_h;Fahrt;Fahrzeit_min;Gesamt_h';
+    const rows=z.map(function(x){
+      return ['001',x.datum,x.projektNr,x.name,x.maNr,x.von,x.bis,x.arbeitH.toFixed(2),x.fahrtArt,Math.round(x.fahrzeitMin),x.gesamtH.toFixed(2)].map(expCsvFeld).join(';');
+    });
+    dlFile('KLEI_Dataflor_'+new Date().toISOString().split('T')[0]+'.csv',[hdr].concat(rows).join('\n'),'text/csv;charset=utf-8');
+    toast(rows.length+' Zeilen exportiert'+(nurFrei?' (nur freigegebene)':'')+(ohneNr?' - ACHTUNG: '+ohneNr+' Zeile(n) ohne MA-Nr':''),ohneNr?'err':'ok');
+  }catch(e){
+    console.error('Dataflor CSV fehlgeschlagen:',e);
+    toast('Dataflor-Export fehlgeschlagen: '+(e.message||String(e)),'err');
+  }finally{
+    _expBusy=false;
+    expAufstellungRender();
+  }
 }
 
 // ══════ AUSWERTUNG (Admin) ══════
@@ -6325,7 +6401,7 @@ function masterPanelHTML(){
     '<div class="mr-grid">'+
     MASTER_ROLLEN.map(function(r){
       const an=(r.key===akt);
-      return '<button class="mr-btn'+(an?' act':'')+'" ontouchstart="masterSetzeRolle(\''+r.key+'\')" onclick="masterSetzeRolle(\''+r.key+'\')">'+
+      return '<button class="mr-btn'+(an?' act':'')+'" '+tsAttr('masterSetzeRolle(\''+r.key+'\')')+'>'+
         '<span class="mr-btn-n">'+r.name+'</span>'+
         '<span class="mr-btn-s">'+(an?'&#x2713; aktiv':(MASTER_ROLLEN_SUB[r.key]||''))+'</span></button>';
     }).join('')+'</div>'+
@@ -6338,9 +6414,9 @@ function masterPanelHTML(){
     '<div class="mr-card">'+
     '<div class="mr-title">Testmodus</div>'+
     '<div class="mr-row">'+
-    '<button class="mr-btn warn'+(TESTMODUS?' act':'')+'" ontouchstart="testmodusSetze(true)" onclick="testmodusSetze(true)">'+
+    '<button class="mr-btn warn'+(TESTMODUS?' act':'')+'" '+tsAttr('testmodusSetze(true)')+'>'+
       '<span class="mr-btn-n">Testmodus EIN</span><span class="mr-btn-s">'+(TESTMODUS?'&#x2713; aktiv':'Test-Tabelle, Test-Mail')+'</span></button>'+
-    '<button class="mr-btn'+(TESTMODUS?'':' act')+'" ontouchstart="testmodusSetze(false)" onclick="testmodusSetze(false)">'+
+    '<button class="mr-btn'+(TESTMODUS?'':' act')+'" '+tsAttr('testmodusSetze(false)')+'>'+
       '<span class="mr-btn-n">Testmodus AUS</span><span class="mr-btn-s">'+(TESTMODUS?'Echte Daten':'&#x2713; aktiv')+'</span></button>'+
     '</div>'+
     '<div class="mr-hint">'+
@@ -6423,6 +6499,38 @@ function modCheckboxLesen(prefix){
   MODULE_DEFS.forEach(d=>{const c=document.getElementById(prefix+'-'+d.key);if(c&&c.checked)module.push(d.key);});
   return module.length?module:['tagesberichte'];
 }
+// ══════ Antippen ohne Fehlausloesung beim Scrollen ══════
+// Bisher loeste ontouchstart sofort aus - also auch, wenn man nur scrollen wollte.
+// tsTap merkt sich die erste Beruehrung und loest erst beim Loslassen aus, und nur wenn der Finger
+// sich kaum bewegt hat. tsKlick ist der onclick-Teil (Maus) und ignoriert den Klick, den das iPad
+// nach einem Tipp zusaetzlich schickt - so wird nichts doppelt ausgefuehrt.
+let _tsLetzterTap=0;
+function tsTap(ev,el,fn){
+  const t0=ev&&ev.touches&&ev.touches[0];
+  if(!t0||!el)return;
+  const x=t0.clientX,y=t0.clientY;
+  let ok=true;
+  function bewegt(e){const t=e.touches&&e.touches[0];if(t&&(Math.abs(t.clientX-x)>10||Math.abs(t.clientY-y)>10))ok=false;}
+  function aufraeumen(){el.removeEventListener('touchmove',bewegt);el.removeEventListener('touchend',ende);el.removeEventListener('touchcancel',abbruch);}
+  function abbruch(){ok=false;aufraeumen();}
+  function ende(e){
+    aufraeumen();
+    if(!ok)return;
+    _tsLetzterTap=Date.now();
+    if(e&&e.cancelable)e.preventDefault();
+    fn();
+  }
+  el.addEventListener('touchmove',bewegt,{passive:true});
+  el.addEventListener('touchend',ende);
+  el.addEventListener('touchcancel',abbruch);
+}
+function tsKlick(fn){
+  if(Date.now()-_tsLetzterTap<700)return;
+  fn();
+}
+function tsAttr(aufruf){
+  return 'ontouchstart="tsTap(event,this,function(){'+aufruf+'})" onclick="tsKlick(function(){'+aufruf+'})"';
+}
 // Kacheln des Hauptmenues. Die Module (MODULE_DEFS, Freigabe je Mitarbeiter) bleiben unveraendert;
 // Controlling und Verwaltung sind KEINE eigenen Module, sondern Bereiche des Admin und haengen an der Rolle admin.
 const MENU_ICONS={
@@ -6454,7 +6562,7 @@ function menuKacheln(u){
   return liste;
 }
 function menuKachelHTML(k){
-  return '<div class="mk" ontouchstart="openModul(\''+k.key+'\')" onclick="openModul(\''+k.key+'\')">'+
+  return '<div class="mk" '+tsAttr('openModul(\''+k.key+'\')')+'>'+
     '<div class="mk-ic f-'+k.farbe+'">'+(MENU_ICONS[k.key]||'')+'</div>'+
     '<div class="mk-tx"><div class="mk-name">'+k.name+'</div><div class="mk-sub">'+k.sub+'</div></div>'+
     '<div class="mk-chev">&#8250;</div></div>';
